@@ -1,18 +1,3 @@
 ---
- 
-#ip's for ghetto pingsweep
-free_ip_table: ['172.16.101.123', '172.16.101.47', '172.16.101.72', '172.16.101.109', '172.16.101.150', '172.101.16.237']
- 
-#vcsa hostname of environment
-vcenter_hostname: "Hostname Here"
- 
-#Creds to the vcsa
-vcenter_username: "administrator@vsphere.local"
-vcenter_pass: "Password Here"
- 
-#Datacenter and Cluster name of the environment
-vcenter_datacenter: "Datacenter Name Here"
-vcenter_cluster: "Cluster Name here"
- 
-#Name of the vCenter VM
-vm_name: "vCenter VM Name Here"
+
+datastore: "TrueNAS-01"
