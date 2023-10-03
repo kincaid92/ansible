@@ -1,6 +1,6 @@
 ---
 
-  - name: Gather Physical NIC Config on ESXi Hosts
+  - name: Patch Dryrun
     shell: 'esxcli software vib update -d /vmfs/volumes/{{datastore}}/VMware-Tools-12.3.0-core-offline-depot-ESXi-all-22234872.zip --dry-run'
     register: dryoutput
 
