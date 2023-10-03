@@ -1,0 +1,15 @@
+---
+
+- name: Disable AllowTcpForwarding on the vCenter appliance
+  replace:
+    path: /etc/ssh/sshd_config
+    regexp: 'AllowTcpForwarding yes'
+    replace: 'AllowTcpForwarding no'
+
+- name: Restart SSHD for the forwarding changes to take effect
+  service:
+    name: sshd
+    state: restarted
+
+- name: Change shell back to appliancesh
+  shell: 'chsh -s /bin/appliancesh root'
