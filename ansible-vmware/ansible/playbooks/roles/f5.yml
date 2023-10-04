@@ -1,5 +1,1 @@
----
 
-- hosts: all
-  roles:
-    - f5_device
