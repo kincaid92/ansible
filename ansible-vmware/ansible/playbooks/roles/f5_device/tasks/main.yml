@@ -5,4 +5,4 @@
 
 - name: Print Device Info
   debug:
-    vat: f5out.stdout_lines
+    var: f5out.stdout_lines
