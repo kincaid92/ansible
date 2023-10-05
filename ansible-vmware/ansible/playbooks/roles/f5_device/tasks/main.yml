@@ -1,8 +1,0 @@
----
-- name: Gather F5 Device Info
-  shell: 'restcurl /shared/resolver/device-groups/cm-bigip-allBigIpDevices/devices/ | grep "hostname\|version"'
-  register: f5out
-
-- name: Print Device Info
-  debug:
-    var: f5out.stdout_lines
