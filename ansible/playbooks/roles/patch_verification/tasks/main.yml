@@ -6,4 +6,4 @@
 
 - name: Print Tools Version
   debug:
-    - var: toolsout.stdout_lines
+    var: toolsout.stdout_lines
