@@ -1,1 +1,9 @@
+---
 
+- name: Verify VMware Tools version
+  shell: "esxcli software vib list | grep tools"
+  register: toolsout
+
+- name: Print Tools Version
+  debug:
+    - var: toolsout.stdout_lines
