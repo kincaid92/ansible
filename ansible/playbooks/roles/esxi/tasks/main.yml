@@ -1,0 +1,36 @@
+---
+
+- name: Gather Physical NIC Config on ESXi Hosts
+  shell: 'esxcli network ip interface ipv4 get'
+  register: nicoutput
+
+- name: Verify Management Services on ESXi
+  shell: 'chkconfig -l | grep "hostd\|vpxa"'
+  register: Servicesoutput
+
+- name: Check DNS
+  shell: 'cat /etc/resolv.conf'
+  register: dnsoutput
+
+- name: Synchronize configuration
+  shell: 'vim-cmd hostsvc/firmware/sync_config'
+
+- name: Backup configuration and download it
+  shell: 'vim-cmd hostsvc/firmware/backup_config; hostname'
+  register: esxi_backup
+
+- name: Print NIC Config
+  debug:
+    var: nicoutput.stdout_lines
+
+- name: Print Host Service Status
+  debug:
+    var: Servicesoutput.stdout_lines
+
+- name: Print DNS Config
+  debug:
+    var: dnsoutput.stdout_lines
+
+- name: find backup
+  debug:
+    msg: "{{ esxi_backup.stdout_lines[0] | replace('*' ,esxi_backup.stdout_lines[1]) }}"

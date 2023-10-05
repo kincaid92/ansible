@@ -1,0 +1,5 @@
+---
+
+- hosts: vcsa
+  roles:
+          - cleanup
