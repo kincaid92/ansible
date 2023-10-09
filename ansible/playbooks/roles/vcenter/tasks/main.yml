@@ -7,3 +7,14 @@
   - name: Print dry run results
     debug:
       var: dryoutput.stdout_lines
+
+  - name: Sending an e-mail using Gmail SMTP servers
+    community.general.mail:
+      host: smtp.gmail.com
+      port: 587
+      username: {{ user }}
+      password: {{ pass }}
+      to: {{ recipient }}
+      subject: Ansible-report
+      body: dryoutput.stdout_lines
+    delegate_to: localhost
