@@ -12,9 +12,9 @@
     community.general.mail:
       host: smtp.gmail.com
       port: 587
-      username: {{ user }}
-      password: {{ pass }}
-      to: {{ recipient }}
+      username: "{{ user }}"
+      password: "{{ pass }}"
+      to: "{{ recipient }}"
       subject: Ansible-report
       body: dryoutput.stdout_lines
     delegate_to: localhost
