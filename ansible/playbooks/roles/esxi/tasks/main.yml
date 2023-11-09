@@ -12,12 +12,16 @@
   shell: 'cat /etc/resolv.conf'
   register: dnsoutput
 
-- name: Synchronize configuration
-  shell: 'vim-cmd hostsvc/firmware/sync_config'
+- name: Check Hosts File
+  shell: 'cat /etc/hosts'
+  register: hostsoutput
 
-- name: Backup configuration and download it
-  shell: 'vim-cmd hostsvc/firmware/backup_config; hostname'
-  register: esxi_backup
+# - name: Synchronize configuration
+#   shell: 'vim-cmd hostsvc/firmware/sync_config'
+
+# - name: Backup configuration and download it
+#   shell: 'vim-cmd hostsvc/firmware/backup_config; hostname'
+#   register: esxi_backup
 
 - name: Print NIC Config
   debug:
@@ -31,6 +35,10 @@
   debug:
     var: dnsoutput.stdout_lines
 
-- name: find backup
+- name: Print Hosts File
   debug:
-    msg: "{{ esxi_backup.stdout_lines[0] | replace('*' ,esxi_backup.stdout_lines[1]) }}"
+    var: hostsoutput.stdout_lines
+
+# - name: find backup
+#   debug:
+#     msg: "{{ esxi_backup.stdout_lines[0] | replace('*' ,esxi_backup.stdout_lines[1]) }}"
