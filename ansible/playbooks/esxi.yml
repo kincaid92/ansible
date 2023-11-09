@@ -1,5 +1,5 @@
 ---
 
-- hosts: nodes
+- hosts: all
   roles:
           - esxi
