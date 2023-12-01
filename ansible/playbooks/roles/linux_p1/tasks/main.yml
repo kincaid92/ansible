@@ -1,7 +1,7 @@
 ---
 
 - name: Date of Last Reboot
-  shell: 'last | head'
+  shell: 'last reboot | head'
   register: reboot
 
 - name: Date of Last Update
