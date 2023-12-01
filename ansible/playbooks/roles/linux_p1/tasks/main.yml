@@ -5,7 +5,7 @@
   register: reboot
 
 - name: Date of Last Update
-  shell: "rpm -qa -last | awk '{print $2 , $4 , $5}' | sort | uniq"
+  shell: "rpm -qa -last | awk '{print $2 , $4 , $5}' | sort -k3,3nr -k2,2M -k1,1 | uniq | head"
   register: update
 
 - name: Print Last Update
