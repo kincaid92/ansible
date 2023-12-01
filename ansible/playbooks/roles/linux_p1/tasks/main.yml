@@ -17,7 +17,7 @@
   register: Sec_Impact
 
 - name: Download Updates but do not Install
-  ansible.builtin.yum:
+  yum:
     name: 
       - ipmitool
     state: latest
