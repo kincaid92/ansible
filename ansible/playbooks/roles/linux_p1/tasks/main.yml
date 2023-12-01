@@ -17,6 +17,7 @@
   register: Sec_Impact
 
 - name: Available Updates
+  ignore_errors: true
   shell: yum check-update
   register: check_update
 
