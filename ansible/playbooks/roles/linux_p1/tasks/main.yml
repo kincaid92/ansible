@@ -17,8 +17,7 @@
   register: Sec_Impact
 
 - name: Download Updates but do not Install
-  gather_facts: true
-  ansible.builtin.yum:
+  yum:
     list: ipmitool
   register: stage_update
 
