@@ -17,11 +17,8 @@
   register: Sec_Impact
 
 - name: Download Updates but do not Install
-  yum:
-    name: 
-      - ipmitool
-    state: latest
-    download_only: true
+  ansible.builtin.yum:
+    list: ipmitool
   register: stage_update
 
 - name: Print Hostname & IP(s)
