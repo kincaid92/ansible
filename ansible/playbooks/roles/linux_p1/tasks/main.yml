@@ -16,8 +16,8 @@
   ansible.builtin.yum:
     name: '*'
     state: latest
-    check_mode: true
-    register: pendingupdate
+  check_mode: true
+  register: pendingupdate
 
 - name: Print Hostname & IP(s)
   debug:
