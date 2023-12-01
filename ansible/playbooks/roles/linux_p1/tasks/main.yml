@@ -12,6 +12,13 @@
   shell: hostname; ifconfig | sed -En 's/127.0.0.1//;s/.*inet (addr:)?(([0-9]*\.){3}[0-9]*).*/\2/p';
   register: ip
 
+- name: Upgrade all packages
+  ansible.builtin.yum:
+    name: '*'
+    state: latest
+    check_mode: true
+    register: pendingupdate
+
 - name: Print Hostname & IP(s)
   debug:
     var: ip.stdout_lines
@@ -23,3 +30,7 @@
 - name: Print Last Reboot
   debug:
     var: reboot.stdout_lines
+
+- name: Print Pending Updates
+  debug:
+    var: pendingupdate.stdout_lines
