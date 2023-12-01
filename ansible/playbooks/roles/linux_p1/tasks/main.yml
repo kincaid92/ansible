@@ -16,14 +16,6 @@
   shell: 'yum updateinfo'
   register: Sec_Impact
 
-- name: Download Updates but do not Install
-  yum:
-    name:
-      - ipmitool
-    state: latest
-    download_only: true
-  register: stage_update
-
 - name: Print Hostname & IP(s)
   debug:
     var: ip.stdout_lines
@@ -36,10 +28,6 @@
   debug:
     var: reboot.stdout_lines
 
-- name: Print Available Updates
-  debug:
-    var: stage_update
-
 - name: Print Security Impact
   debug:
-    var: Sec_Impact.stdout_lines
+    var: Sec_Impact.stdout_lines 
