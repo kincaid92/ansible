@@ -12,7 +12,7 @@
   shell: hostname; ifconfig | sed -En 's/127.0.0.1//;s/.*inet (addr:)?(([0-9]*\.){3}[0-9]*).*/\2/p';
   register: ip
 
-- name: Check Security Impact
+- name: Check Fixes
   shell: 'yum updateinfo'
   register: Sec_Impact
 
@@ -28,6 +28,6 @@
   debug:
     var: reboot.stdout_lines
 
-- name: Print Security Impact
+- name: Print Bug/Security Fixes
   debug:
     var: Sec_Impact.stdout_lines 
