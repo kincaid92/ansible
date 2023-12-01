@@ -16,10 +16,13 @@
   shell: 'yum updateinfo'
   register: Sec_Impact
 
-- name: Available Updates
-  ignore_errors: true
-  shell: yum check-update
-  register: check_update
+- name: Download Updates but do not Install
+  ansible.builtin.yum:
+    name: 
+      - ipmitool
+    state: latest
+    download_only: true
+  register: stage_update
 
 - name: Print Hostname & IP(s)
   debug:
@@ -35,7 +38,7 @@
 
 - name: Print Available Updates
   debug:
-    var: check_update.stdout_lines
+    var: stage_update.stdout_lines
 
 - name: Print Security Impact
   debug:
