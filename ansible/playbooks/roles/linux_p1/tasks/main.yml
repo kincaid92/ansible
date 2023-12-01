@@ -35,7 +35,7 @@
 
 - name: Print Available Updates
   debug:
-    var: stage_update.stdout_lines
+    var: stage_update
 
 - name: Print Security Impact
   debug:
