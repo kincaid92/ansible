@@ -9,7 +9,7 @@
   register: update
 
 - name: grab hostname and IP's
-  shell: "hostname; ifconfig | sed -En 's/127.0.0.1//;s/.*inet (addr:)?(([0-9]*\.){3}[0-9]*).*/\2/p'; "
+  shell: hostname; ifconfig | sed -En 's/127.0.0.1//;s/.*inet (addr:)?(([0-9]*\.){3}[0-9]*).*/\2/p';
   register: ip
 
 - name: Print Hostname & IP(s)
