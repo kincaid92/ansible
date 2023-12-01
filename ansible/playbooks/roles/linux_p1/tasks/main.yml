@@ -17,7 +17,7 @@
   register: Sec_Impact
 
 - name: Available Updates
-  shell: 'yum check-update'
+  shell: yum check-update
   register: check_update
 
 - name: Print Hostname & IP(s)
