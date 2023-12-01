@@ -18,7 +18,7 @@
 
 - name: Available Updates
   shell: 'yum check-update'
-  register: check-update
+  register: check_update
 
 - name: Print Hostname & IP(s)
   debug:
@@ -34,7 +34,7 @@
 
 - name: Print Available Updates
   debug:
-    var: check-update.stdout_lines
+    var: check_update.stdout_lines
 
 - name: Print Security Impact
   debug:
