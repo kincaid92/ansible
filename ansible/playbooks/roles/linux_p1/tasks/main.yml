@@ -13,6 +13,7 @@
   register: ip
 
 - name: Upgrade all packages
+  gather_facts: true
   ansible.builtin.yum:
     name: '*'
     state: latest
