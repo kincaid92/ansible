@@ -1,1 +1,17 @@
+---
 
+- name: Date of Last Reboot
+  shell: 'last | head'
+  register: reboot
+
+- name: Date of Last Update
+  shell: "rpm -qa -last | awk '{print $2 , $3 , $4 , $6}' | sort | uniq"
+  register: update
+
+- name: Print Last Update
+  debug:
+    var: update.stdout_lines
+
+- name: Print Last Reboot
+  debug:
+    var: reboot.stdout_lines
