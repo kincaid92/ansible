@@ -18,7 +18,10 @@
 
 - name: Download Updates but do not Install
   yum:
-    list: ipmitool
+    name:
+      - ipmitool
+    state: latest
+    download_only: true
   register: stage_update
 
 - name: Print Hostname & IP(s)
