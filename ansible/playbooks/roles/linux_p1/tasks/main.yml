@@ -31,3 +31,6 @@
 - name: Print Bug/Security Fixes
   debug:
     var: Sec_Impact.stdout_lines 
+
+- name: Distribution
+  debug: msg="{{ ansible_distribution }}"
