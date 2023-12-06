@@ -44,4 +44,4 @@
 
 - name: print facts
   debug:
-    var: ansible_facts[1]
+    var: ansible_facts
