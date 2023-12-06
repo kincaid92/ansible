@@ -36,7 +36,12 @@
   debug:
     var: Sec_Impact.stdout_lines 
 
-- name: check the CentOS version
+- name: Check for RedHat Based OS
   debug:
-    msg: "Found CentOS 7 or bigger"
+    msg: "Found CentOS 7 or Newer"
   when: ansible_facts['distribution'] == "CentOS" and ansible_facts['distribution_major_version'] == "7" 
+
+- name: Check for Debian Based OS
+  debug:
+    msg: "Found CentOS 7 or Newer"
+  when: ansible_facts['distribution'] == "Ubuntu" and ansible_facts['distribution_major_version'] == "20.04" 
