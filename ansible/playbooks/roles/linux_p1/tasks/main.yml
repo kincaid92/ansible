@@ -1,8 +1,8 @@
 ---
 
-- name: Store all available facts
-  debug:
-    var: ansible_facts
+# - name: Store all available facts
+#   debug:
+#     var: ansible_facts
 
 - name: Date of Last Reboot
   shell: 'last reboot | head'
