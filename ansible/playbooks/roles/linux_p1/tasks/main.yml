@@ -33,7 +33,6 @@
     var: Sec_Impact.stdout_lines 
 
 - name: check the CentOS version
-  gather_facts: true
   debug:
     msg: "Found CentOS 7 or bigger"
   when: ansible_facts['distribution'] == "CentOS" and ansible_facts['distribution_major_version'] == "7" 
