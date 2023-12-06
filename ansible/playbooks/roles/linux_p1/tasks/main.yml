@@ -1,15 +1,5 @@
 ---
 
-- name: Check for RedHat Based OS
-  debug:
-    msg: "Found CentOS 7 or Newer"
-  when: ansible_facts['distribution'] == "CentOS" and ansible_facts['distribution_major_version'] == "7" 
-
-- name: Check for Debian Based OS
-  debug:
-    msg: "Found CentOS 7 or Newer"
-  when: ansible_facts['distribution'] == "Ubuntu" and ansible_facts['distribution_major_version'] == "20.04" 
-
 - name: grab hostname and IP's
   shell: hostname; ifconfig | sed -En 's/127.0.0.1//;s/.*inet (addr:)?(([0-9]*\.){3}[0-9]*).*/\2/p';
   register: ip
@@ -27,6 +17,16 @@
   shell: 'yum updateinfo'
   when: ansible_facts['distribution'] == "CentOS" and ansible_facts['distribution_major_version'] == "7"
   register: Sec_Impact
+
+- name: Check for RedHat Based OS
+  debug:
+    msg: "Found CentOS 7 or Newer"
+  when: ansible_facts['distribution'] == "CentOS" and ansible_facts['distribution_major_version'] == "7" 
+
+- name: Check for Debian Based OS
+  debug:
+    msg: "Found CentOS 7 or Newer"
+  when: ansible_facts['distribution'] == "Ubuntu" and ansible_facts['distribution_major_version'] == "20.04" 
 
 - name: Print Hostname & IP(s)
   debug:
