@@ -1,5 +1,9 @@
 ---
 
+- name: Store all available facts
+  debug:
+    var: ansible_facts
+
 - name: Date of Last Reboot
   shell: 'last reboot | head'
   register: reboot
@@ -35,4 +39,4 @@
 - name: check the CentOS version
   debug:
     msg: "Found CentOS 7 or bigger"
-  when: ansible_facts['distribution'] == "CentOS" and ansible_facts['distribution_major_version'] == "7" 
+  when: ansible_facts['ansible_distribution'] == "CentOS" and ansible_facts['ansible_distribution_major_version'] == "7" 
