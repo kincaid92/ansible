@@ -10,6 +10,7 @@
 
 - name: Date of Last Update
   shell: "rpm -qa -last | awk '{print $2 , $4 , $5}' | sort -k3,3nr -k2,2M -k1,1 | uniq | head"
+  when: ansible_facts['distribution'] == "CentOS" and ansible_facts['distribution_major_version'] == "7"
   register: update
 
 - name: grab hostname and IP's
@@ -18,6 +19,7 @@
 
 - name: Check Fixes
   shell: 'yum updateinfo'
+  when: ansible_facts['distribution'] == "CentOS" and ansible_facts['distribution_major_version'] == "7"
   register: Sec_Impact
 
 - name: Print Hostname & IP(s)
