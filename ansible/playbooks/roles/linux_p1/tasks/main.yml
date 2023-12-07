@@ -10,7 +10,7 @@
 
 - name: Date of Last Update
   shell: "rpm -qa -last | awk '{print $2 , $4 , $5}' | sort -k3,3nr -k2,2M -k1,1 | uniq | head"
-  when: "{{ ubuntu }}"
+  when: ansible_facts['distribution'] == "CentOS"
   register: update
 
 - name: Check Fixes
@@ -41,10 +41,12 @@
 - name: Print Last Update
   debug:
     var: update.stdout_lines
+  when: ansible_facts['distribution'] == "CentOS"
 
 - name: Print apt Cache
   debug:
     var: cache_results
+  when: ansible_facts['distribution'] == "Ubuntu"
 
 - name: Print Last Reboot
   debug:
