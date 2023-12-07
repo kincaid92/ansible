@@ -7,7 +7,7 @@
 
 ## ANCHOR device uptime
 - name: Date of Last Reboot
-  shell: w | awk 'NR==1{print $2 , $3 , $4}'
+  shell: w #w | awk 'NR==1{print $2 , $3 , $4}'
   register: reboot
 
 ## ANCHOR last yum update
@@ -62,11 +62,11 @@
 
 - name: Print Last Reboot
   debug:
-    var: reboot.stdout_lines
+    var: reboot
 
 - name: Print apt Cache
   debug:
-    var: cache_results
+    var: cache_results[1]
   when: ansible_facts['distribution'] == "Ubuntu"
 
 - name: Print Bug/Security Fixes for CentOS
