@@ -6,10 +6,6 @@
   register: ip
 
 # ## ANCHOR device uptime
-# - name: Date of Last Reboot
-#   shell: cut -d ' ' -f1 /proc/uptime
-#   register: reboot
-
 - name: Set Uptime Fact
   set_fact:
     uptime_days: "{{ (ansible_facts['uptime_seconds'] | int / 86400) | round(0) }}"
@@ -17,38 +13,38 @@
 ## ANCHOR last yum update
 - name: Date of Last Update
   shell: "rpm -qa -last | awk '{print $2 , $4 , $5}' | sort -k3,3nr -k2,2M -k1,1 | uniq | head"
-  when: ansible_facts['distribution'] == "CentOS"
+  when: ansible_facts['pkg_mgr'] == "yum"
   register: update
 
 ## ANCHOR last apt update
 - name: Last Time apt/history.log was Modified
   shell: stat /var/log/apt/history.log | awk 'NR==6{print $1, $2}' | sed 's/Modify://g'
   register: apt_history
-  when: ansible_facts['distribution'] == "Ubuntu"
+  when: ansible_facts['pkg_mgr'] == "apt"
 
 ## ANCHOR yum updateinfo (security/bug fixes)
 - name: Check Fixes
   shell: 'yum updateinfo | grep "Update*" -A30'
-  when: ansible_facts['distribution'] == "CentOS"
+  when: ansible_facts['pkg_mgr'] == "yum"
   register: Sec_Impact
 
 ## ANCHOR update the apt cache, stage upgrade
 - name: Update apt Cache
   apt: 
     update_cache: yes
-  when: ansible_facts['distribution'] == "Ubuntu"
+  when: ansible_facts['pkg_mgr'] == "apt"
   register: cache_results
 
 ## ANCHOR everything below is printing data
 - name: Check for RedHat Based OS
   debug:
     msg: "Found RedHat-based Installation"
-  when: ansible_facts['distribution'] == "CentOS"
+  when: ansible_facts['pkg_mgr'] == "yum"
 
 - name: Check for Debian Based OS
   debug:
     msg: "Found Debian-based Installation"
-  when: ansible_facts['distribution'] == "Ubuntu"
+  when: ansible_facts['pkg_mgr'] == "apt"
 
 - name: Print Hostname & IP(s)
   debug:
@@ -57,12 +53,12 @@
 - name: Print Date of Last yum Usage
   debug:
     msg: "yum was last ran on {{ update.stdout_lines[0] }}."
-  when: ansible_facts['distribution'] == "CentOS"
+  when: ansible_facts['pkg_mgr'] == "yum"
 
 - name: Print Date of Last apt Usage
   debug:
     msg: "apt was last ran on{{ apt_history.stdout_lines[0] }}."
-  when: ansible_facts['distribution'] == "Ubuntu"
+  when: ansible_facts['pkg_mgr'] == "apt"
 
 - name: Print Last Reboot
   debug:
@@ -72,14 +68,14 @@
 - name: Print apt Success Check
   debug:
     msg: "The apt cache has successfully updated (equivalent of apt-get update)."
-  when: ansible_facts['distribution'] == "Ubuntu" and cache_results["cache_updated"] == true
+  when: ansible_facts['pkg_mgr'] == "apt" and cache_results["cache_updated"] == true
 
 - name: Print apt Failure Check
   debug:
     msg: "The apt cache has failed it's update. Please manually troubleshoot"
-  when: ansible_facts['distribution'] == "Ubuntu" and cache_results["cache_updated"] == false
+  when: ansible_facts['pkg_mgr'] == "apt" and cache_results["cache_updated"] == false
 
-- name: Print Bug/Security Fixes for CentOS
+- name: Print Bug/Security Fixes for yum
   debug:
     var: Sec_Impact.stdout_lines
-  when: ansible_facts['distribution'] == "CentOS"
+  when: ansible_facts['pkg_mgr'] == "yum"
