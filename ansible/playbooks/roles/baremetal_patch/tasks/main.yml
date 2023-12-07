@@ -73,7 +73,7 @@
     var: cache_results
   when: ansible_facts['distribution'] == "Ubuntu"
 
-- name: Print Bug/Security Fixes for CentOS
-  debug:
-    var: Sec_Impact.stdout_lines
-  when: ansible_facts['distribution'] == "CentOS"
+# - name: Print Bug/Security Fixes for CentOS
+  # debug:
+  #   var: Sec_Impact.stdout_lines
+  # when: ansible_facts['distribution'] == "CentOS"
