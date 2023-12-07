@@ -66,8 +66,8 @@
 
 - name: Print Last Reboot
   debug:
-    msg: "{{ uptime_days }} Days"
-  when: (uptime_days | int) > 1
+    msg: "Device has been online for {{ uptime_days }} days, this number is rounded to the nearest whole day."
+  when: (uptime_days | int) >= 0
 
 - name: Print apt Cache
   debug:
