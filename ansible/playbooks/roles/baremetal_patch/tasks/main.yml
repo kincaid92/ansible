@@ -48,7 +48,7 @@
 
 - name: Print Hostname & IP(s)
   debug:
-    var: "{{ ip.stdout_lines | items2dict }}"
+    var: ip.stdout_lines
 
 - name: Print Date of Last yum Usage
   debug:
