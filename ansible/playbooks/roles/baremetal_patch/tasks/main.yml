@@ -61,7 +61,7 @@
 
 - name: Print Date of Last apt Usage
   debug:
-    msg: "apt was last ran on {{ apt_history.stdout_lines }}."
+    msg: "apt was last ran on {{ apt_history.stdout_lines[0] }}."
   when: ansible_facts['distribution'] == "Ubuntu"
 
 - name: Print Last Reboot
