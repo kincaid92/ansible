@@ -66,7 +66,7 @@
 
 - name: Print Last Reboot
   debug:
-    msg: "Device has been online for {{ uptime_days }} days, this number is rounded to the nearest whole day."
+    msg: "The device {{ ansible_facts['nodename'] }} has been online for {{ uptime_days }} days, this number is rounded to the nearest whole day."
   when: (uptime_days | int) >= 0
 
 - name: Print apt Cache
