@@ -13,7 +13,7 @@
 
 - name: Set Uptime Fact
   set_fact:
-    uptime_days: "{{ (reboot.stdout | int / 86400) | round(0) }}"
+    uptime_days: "{{ (reboot.stdout | int / 86400) | round(3600) }}"
 
 ## ANCHOR last yum update
 - name: Date of Last Update
