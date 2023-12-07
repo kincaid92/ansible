@@ -56,7 +56,7 @@
 
 - name: Print Date of Last yum Usage
   debug:
-    var: update.stdout_lines
+    var: update
   when: ansible_facts['distribution'] == "CentOS"
 
 - name: Print Date of Last apt Usage
