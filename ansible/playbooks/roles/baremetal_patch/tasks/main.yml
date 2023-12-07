@@ -71,8 +71,8 @@
 
 - name: Print apt Cache
   debug:
-    msg: "The apt cache has successfully updated (equivilent of apt-get update)."
-  when: ansible_facts['distribution'] == "Ubuntu" and cache_results["cache_updated"] == true
+    msg: "The apt cache has successfully updated (equivalent of apt-get update)."
+  when: ansible_facts['distribution'] == "Ubuntu" and cache_results["cache_updated"] == false
 
 - name: Print Bug/Security Fixes for CentOS
   debug:
