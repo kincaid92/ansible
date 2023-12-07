@@ -61,7 +61,7 @@
 
 - name: Print Date of Last apt Usage
   debug:
-    msg: "apt was last ran on {{ apt_history.stdout_lines[0] }}."
+    msg: "apt was last ran on{{ apt_history.stdout_lines[0] }}."
   when: ansible_facts['distribution'] == "Ubuntu"
 
 - name: Print Last Reboot
@@ -71,7 +71,7 @@
 
 - name: Print apt Cache
   debug:
-    var: cache_results
+    var: cache_results | type_debug
   when: ansible_facts['distribution'] == "Ubuntu"
 
 - name: Print Bug/Security Fixes for CentOS
