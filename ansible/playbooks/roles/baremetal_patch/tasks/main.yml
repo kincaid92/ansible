@@ -56,12 +56,12 @@
 
 - name: Print Date of Last yum Usage
   debug:
-    msg: "yum was last ran on {{ update.stdout_lines[0] }}"
+    msg: "yum was last ran on {{ update.stdout_lines[0] }}."
   when: ansible_facts['distribution'] == "CentOS"
 
 - name: Print Date of Last apt Usage
   debug:
-    var: apt_history
+    msg: "apt was last ran on {{ apt_history.stdout_lines }}."
   when: ansible_facts['distribution'] == "Ubuntu"
 
 - name: Print Last Reboot
