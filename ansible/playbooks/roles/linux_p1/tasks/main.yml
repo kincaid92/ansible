@@ -44,7 +44,7 @@
 
 - name: Print apt Cache
   debug:
-    var: cache_results.stdout_lines
+    var: cache_results
 
 - name: Print Last Reboot
   debug:
@@ -52,4 +52,5 @@
 
 - name: Print Bug/Security Fixes
   debug:
-    var: Sec_Impact.stdout_lines 
+    var: Sec_Impact.stdout_lines
+  when: ansible_facts['distribution'] == "CentOS"
