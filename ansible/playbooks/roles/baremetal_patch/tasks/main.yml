@@ -46,13 +46,9 @@
     msg: "Found Debian-based Installation"
   when: ansible_facts['distribution'] == "Ubuntu"
 
-- name: Set IP Variable
-  set_fact:
-    myvar: "{{ ip.stdout_lines | to_nice_yaml }}"
-
 - name: Print Hostname & IP(s)
   debug:
-    var: "{{ ip }}"
+    var: "{{ ip.stdout_lines | to_nice_yaml }}"
 
 - name: Print Date of Last yum Usage
   debug:
@@ -73,7 +69,7 @@
     var: cache_results
   when: ansible_facts['distribution'] == "Ubuntu"
 
-# - name: Print Bug/Security Fixes for CentOS
-  # debug:
-  #   var: Sec_Impact.stdout_lines
-  # when: ansible_facts['distribution'] == "CentOS"
+- name: Print Bug/Security Fixes for CentOS
+  debug:
+    var: Sec_Impact.stdout_lines
+  when: ansible_facts['distribution'] == "CentOS"
