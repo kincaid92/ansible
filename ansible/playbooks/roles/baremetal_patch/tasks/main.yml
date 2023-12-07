@@ -48,7 +48,7 @@
 
 - name: Print Hostname & IP(s)
   debug:
-    var: ip.stdout_lines
+    var: ip.stdout
 
 - name: Print Date of Last yum Usage
   debug:
@@ -60,16 +60,16 @@
     var: apt_history.stdout_lines
   when: ansible_facts['distribution'] == "Ubuntu"
 
+- name: Print Last Reboot
+  debug:
+    var: reboot.stdout_lines
+
 - name: Print apt Cache
   debug:
     var: cache_results
   when: ansible_facts['distribution'] == "Ubuntu"
 
-- name: Print Last Reboot
-  debug:
-    var: reboot.stdout_lines
-
-- name: Print Bug/Security Fixes
+- name: Print Bug/Security Fixes for CentOS
   debug:
     var: Sec_Impact.stdout_lines
   when: ansible_facts['distribution'] == "CentOS"
