@@ -3,4 +3,4 @@
  - hosts: all
    gather_facts: true
    roles:
-    - linux_p1
+    - baremetal_patch
