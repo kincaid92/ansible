@@ -48,7 +48,7 @@
 
 - name: Print Hostname & IP(s)
   debug:
-    var: "{{ ip.stdout_lines | to_nice_yaml }}"
+    var: "{{ ip | to_nice_yaml }}"
 
 - name: Print Date of Last yum Usage
   debug:
