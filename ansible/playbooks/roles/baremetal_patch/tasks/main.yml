@@ -66,7 +66,8 @@
 
 - name: Print Last Reboot
   debug:
-    var: uptime_days
+    msg: "  Days"
+  when: (uptime_days | int) > 1
 
 - name: Print apt Cache
   debug:
