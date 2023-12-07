@@ -7,8 +7,13 @@
 
 ## ANCHOR device uptime
 - name: Date of Last Reboot
-  shell: w #w | awk 'NR==1{print $2 , $3 , $4}'
+  shell: cut -d ' ' -f1 /proc/uptime
+  #shell: w #w | awk 'NR==1{print $2 , $3 , $4}'
   register: reboot
+
+- name: Set Uptime Fact
+  set_fact:
+    uptime_days: "{{ (reboot.stdout | int / 86400) | round(0) }}"
 
 ## ANCHOR last yum update
 - name: Date of Last Update
@@ -62,7 +67,7 @@
 
 - name: Print Last Reboot
   debug:
-    var: reboot["start"]
+    var: uptime_days
 
 - name: Print apt Cache
   debug:
