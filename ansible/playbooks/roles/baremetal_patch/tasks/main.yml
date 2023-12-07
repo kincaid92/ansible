@@ -71,7 +71,7 @@
 
 - name: Print apt Cache
   debug:
-    var: cache_results["cache_updated"]
+    var: cache_results
   when: ansible_facts['distribution'] == "Ubuntu"
 
 - name: Print Bug/Security Fixes for CentOS
