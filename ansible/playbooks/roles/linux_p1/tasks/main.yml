@@ -10,23 +10,29 @@
 
 - name: Date of Last Update
   shell: "rpm -qa -last | awk '{print $2 , $4 , $5}' | sort -k3,3nr -k2,2M -k1,1 | uniq | head"
-  when: ansible_facts['distribution'] == "CentOS" and ansible_facts['distribution_major_version'] == "7"
+  when: ansible_facts['distribution'] == "CentOS"
   register: update
 
 - name: Check Fixes
   shell: 'yum updateinfo'
-  when: ansible_facts['distribution'] == "CentOS" and ansible_facts['distribution_major_version'] == "7"
+  when: ansible_facts['distribution'] == "CentOS"
   register: Sec_Impact
+
+- name: Update apt Cache
+  apt: 
+    update_cache: yes
+  when: ansible_facts['distribution'] == Ubuntu
+  register: cache_results
 
 - name: Check for RedHat Based OS
   debug:
-    msg: "Found CentOS 7 or Newer"
-  when: ansible_facts['distribution'] == "CentOS" and ansible_facts['distribution_major_version'] == "7" 
+    msg: "Found RedHat-based Installation"
+  when: ansible_facts['distribution'] == "CentOS"
 
 - name: Check for Debian Based OS
   debug:
-    msg: "Found CentOS 7 or Newer"
-  when: ansible_facts['distribution'] == "Ubuntu" and ansible_facts['distribution_major_version'] == "20.04" 
+    msg: "Found Debian-based Installation"
+  when: ansible_facts['distribution'] == "Ubuntu"
 
 - name: Print Hostname & IP(s)
   debug:
@@ -35,6 +41,10 @@
 - name: Print Last Update
   debug:
     var: update.stdout_lines
+
+- name: Print apt Cache
+  debug:
+    var: cache_results.stdout_lines
 
 - name: Print Last Reboot
   debug:
