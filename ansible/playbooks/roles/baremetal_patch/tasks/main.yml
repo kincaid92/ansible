@@ -24,7 +24,7 @@
 
 ## ANCHOR yum updateinfo (security/bug fixes)
 - name: Check Fixes
-  shell: 'yum updateinfo'
+  shell: 'yum updateinfo | grep "Update*" -A30'
   when: ansible_facts['distribution'] == "CentOS"
   register: Sec_Impact
 
