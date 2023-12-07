@@ -52,7 +52,7 @@
 
 - name: Print Hostname & IP(s)
   debug:
-    var: ip.stdout_lines
+    var: ip
 
 - name: Print Date of Last yum Usage
   debug:
