@@ -1,0 +1,75 @@
+---
+
+## ANCHOR hostname & IP
+- name: grab hostname and IP's
+  shell: hostname; ifconfig | sed -En 's/127.0.0.1//;s/.*inet (addr:)?(([0-9]*\.){3}[0-9]*).*/\2/p';
+  register: ip
+
+## ANCHOR device uptime
+- name: Date of Last Reboot
+  shell: w | awk 'NR==1{print $2 , $3 , $4}'
+  register: reboot
+
+## ANCHOR last yum update
+- name: Date of Last Update
+  shell: "rpm -qa -last | awk '{print $2 , $4 , $5}' | sort -k3,3nr -k2,2M -k1,1 | uniq | head"
+  when: ansible_facts['distribution'] == "CentOS"
+  register: update
+
+## ANCHOR last apt update
+- name: Last Time apt/history.log was Modified
+  shell: stat /var/log/apt/history.log | awk 'NR==6{print $1, $2}'
+  register: apt_history
+  when: ansible_facts['distribution'] == "Ubuntu"
+
+## ANCHOR yum updateinfo (security/bug fixes)
+- name: Check Fixes
+  shell: 'yum updateinfo'
+  when: ansible_facts['distribution'] == "CentOS"
+  register: Sec_Impact
+
+## ANCHOR update the apt cache, stage upgrade
+- name: Update apt Cache
+  apt: 
+    update_cache: yes
+  when: ansible_facts['distribution'] == "Ubuntu"
+  register: cache_results
+
+## ANCHOR everything below is printing data
+- name: Check for RedHat Based OS
+  debug:
+    msg: "Found RedHat-based Installation"
+  when: ansible_facts['distribution'] == "CentOS"
+
+- name: Check for Debian Based OS
+  debug:
+    msg: "Found Debian-based Installation"
+  when: ansible_facts['distribution'] == "Ubuntu"
+
+- name: Print Hostname & IP(s)
+  debug:
+    var: ip.stdout_lines
+
+- name: Print Date of Last yum Usage
+  debug:
+    var: update.stdout_lines
+  when: ansible_facts['distribution'] == "CentOS"
+
+- name: Print Date of Last apt Usage
+  debug:
+    var: apt_history.stdout_lines
+  when: ansible_facts['distribution'] == "Ubuntu"
+
+- name: Print apt Cache
+  debug:
+    var: cache_results
+  when: ansible_facts['distribution'] == "Ubuntu"
+
+- name: Print Last Reboot
+  debug:
+    var: reboot.stdout_lines
+
+- name: Print Bug/Security Fixes
+  debug:
+    var: Sec_Impact.stdout_lines
+  when: ansible_facts['distribution'] == "CentOS"
