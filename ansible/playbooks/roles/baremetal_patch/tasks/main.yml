@@ -62,11 +62,11 @@
 
 - name: Print Last Reboot
   debug:
-    var: reboot
+    var: reboot["start"]
 
 - name: Print apt Cache
   debug:
-    var: cache_results[1]
+    var: cache_results["cache_updated"]
   when: ansible_facts['distribution'] == "Ubuntu"
 
 - name: Print Bug/Security Fixes for CentOS
