@@ -46,9 +46,13 @@
     msg: "Found Debian-based Installation"
   when: ansible_facts['distribution'] == "Ubuntu"
 
+- name: Set IP Variable
+  set_fact:
+    myvar: "{{ ip.stdout_lines | to_nice_yaml }}"
+
 - name: Print Hostname & IP(s)
   debug:
-    var: "{{ ip.stdout_lines | from_json}}"
+    var: "{{ ip }}"
 
 - name: Print Date of Last yum Usage
   debug:
