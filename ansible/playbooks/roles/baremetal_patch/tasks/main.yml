@@ -69,9 +69,14 @@
     msg: "The device {{ ansible_facts['nodename'] }} has been online for {{ uptime_days }} days, this number is rounded to the nearest whole day."
   when: (uptime_days | int) >= 0
 
-- name: Print apt Cache
+- name: Print apt Success
   debug:
     msg: "The apt cache has successfully updated (equivalent of apt-get update)."
+  when: ansible_facts['distribution'] == "Ubuntu" and cache_results["cache_updated"] == true
+
+- name: Print apt Failure
+  debug:
+    msg: "The apt cache has failed it's update. Please manually troubleshoot"
   when: ansible_facts['distribution'] == "Ubuntu" and cache_results["cache_updated"] == false
 
 - name: Print Bug/Security Fixes for CentOS
