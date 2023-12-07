@@ -71,8 +71,8 @@
 
 - name: Print apt Cache
   debug:
-    var: cache_results | type_debug
-  when: ansible_facts['distribution'] == "Ubuntu"
+    msg: "The apt cache has successfully updated."
+  when: ansible_facts['distribution'] == "Ubuntu" and cache_results["cache_updated"] == true
 
 - name: Print Bug/Security Fixes for CentOS
   debug:
