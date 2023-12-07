@@ -56,7 +56,7 @@
 
 - name: Print Date of Last yum Usage
   debug:
-    var: update
+    msg: "yum was last ran on {{ update.stdout_lines["0"] }}"
   when: ansible_facts['distribution'] == "CentOS"
 
 - name: Print Date of Last apt Usage
