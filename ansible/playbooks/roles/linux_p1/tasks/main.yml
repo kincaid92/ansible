@@ -1,55 +1,59 @@
 ---
 
-- name: grab hostname and IP's
-  shell: hostname; ifconfig | sed -En 's/127.0.0.1//;s/.*inet (addr:)?(([0-9]*\.){3}[0-9]*).*/\2/p';
-  register: ip
+- name: Print all available facts
+  ansible.builtin.debug:
+    var: ansible_facts
 
-- name: Date of Last Reboot
-  shell: w | awk 'NR==1{print $2 , $3 , $4}'
-  register: reboot
+# - name: grab hostname and IP's
+#   shell: hostname; ifconfig | sed -En 's/127.0.0.1//;s/.*inet (addr:)?(([0-9]*\.){3}[0-9]*).*/\2/p';
+#   register: ip
 
-- name: Date of Last Update
-  shell: "rpm -qa -last | awk '{print $2 , $4 , $5}' | sort -k3,3nr -k2,2M -k1,1 | uniq | head"
-  when: ansible_facts['distribution'] == "CentOS"
-  register: update
+# - name: Date of Last Reboot
+#   shell: w | awk 'NR==1{print $2 , $3 , $4}'
+#   register: reboot
 
-- name: Check Fixes
-  shell: 'yum updateinfo'
-  when: ansible_facts['distribution'] == "CentOS"
-  register: Sec_Impact
+# - name: Date of Last Update
+#   shell: "rpm -qa -last | awk '{print $2 , $4 , $5}' | sort -k3,3nr -k2,2M -k1,1 | uniq | head"
+#   when: ansible_facts['distribution'] == "CentOS"
+#   register: update
 
-- name: Update apt Cache
-  apt: 
-    update_cache: yes
-  when: ansible_facts['distribution'] == Ubuntu
-  register: cache_results
+# - name: Check Fixes
+#   shell: 'yum updateinfo'
+#   when: ansible_facts['distribution'] == "CentOS"
+#   register: Sec_Impact
 
-- name: Check for RedHat Based OS
-  debug:
-    msg: "Found RedHat-based Installation"
-  when: ansible_facts['distribution'] == "CentOS"
+# - name: Update apt Cache
+#   apt: 
+#     update_cache: yes
+#   when: ansible_facts['distribution'] == Ubuntu
+#   register: cache_results
 
-- name: Check for Debian Based OS
-  debug:
-    msg: "Found Debian-based Installation"
-  when: ansible_facts['distribution'] == "Ubuntu"
+# - name: Check for RedHat Based OS
+#   debug:
+#     msg: "Found RedHat-based Installation"
+#   when: ansible_facts['distribution'] == "CentOS"
 
-- name: Print Hostname & IP(s)
-  debug:
-    var: ip.stdout_lines
+# - name: Check for Debian Based OS
+#   debug:
+#     msg: "Found Debian-based Installation"
+#   when: ansible_facts['distribution'] == "Ubuntu"
 
-- name: Print Last Update
-  debug:
-    var: update.stdout_lines
+# - name: Print Hostname & IP(s)
+#   debug:
+#     var: ip.stdout_lines
 
-- name: Print apt Cache
-  debug:
-    var: cache_results.stdout_lines
+# - name: Print Last Update
+#   debug:
+#     var: update.stdout_lines
 
-- name: Print Last Reboot
-  debug:
-    var: reboot.stdout_lines
+# - name: Print apt Cache
+#   debug:
+#     var: cache_results.stdout_lines
 
-- name: Print Bug/Security Fixes
-  debug:
-    var: Sec_Impact.stdout_lines 
+# - name: Print Last Reboot
+#   debug:
+#     var: reboot.stdout_lines
+
+# - name: Print Bug/Security Fixes
+#   debug:
+#     var: Sec_Impact.stdout_lines 
