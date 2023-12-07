@@ -22,7 +22,7 @@
 
 ## ANCHOR last apt update
 - name: Last Time apt/history.log was Modified
-  shell: stat /var/log/apt/history.log | awk 'NR==6{print $1, $2}' | sed 's/Modify://g''
+  shell: stat /var/log/apt/history.log | awk 'NR==6{print $1, $2}' | sed 's/Modify://g'
   register: apt_history
   when: ansible_facts['distribution'] == "Ubuntu"
 
