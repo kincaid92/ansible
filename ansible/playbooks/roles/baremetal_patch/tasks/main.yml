@@ -52,9 +52,8 @@
 - name: Print Hostname & IP(s)
   debug:
     msg:
-    - "{{ ip.changed }}"
-    - "{{ ip.cmd }}"
-    - "{{ ip.stdout_lines }}"
+    - "Command: {{ ip.cmd }}"
+    - "Results: {{ ip.stdout_lines }}"
 
 - name: Print Date of Last yum Usage
   debug:
