@@ -41,6 +41,44 @@
   register: cache_results
 
 ## ANCHOR everything below is printing data
+
+- name: Print Hostname & IP(s)
+  debug:
+    msg:
+    - "Command - {{ ip.cmd }}"
+    - "Results - {{ ip.stdout_lines }}"
+  register: jsonoutput
+
+- name: write json locally
+  copy:
+    content: "{{ jsonoutput | to_nice_json }}"
+    dest: "/tmp/master.json"
+
+- name: clean up our json data
+  replace: 
+    path: /tmp/master.json
+    regexp: "msg"
+    replace: "Value"
+
+- name: clean up our json data again
+  lineinfile: 
+    path: /tmp/master.json
+    regexp: '"changed": false,'
+    state: absent 
+
+- name: clean up our json data again and again
+  lineinfile: 
+    path: /tmp/master.json
+    regexp: '"failed": false,'
+    state: absent 
+
+- name: clean up our json data again and again and again SMILE
+  lineinfile: 
+    path: /tmp/master.json
+    insertbefore: '{'
+    line: '"IP(s) & Hostname": '
+    firstmatch: yes 
+
 - name: Check for RedHat Based OS
   debug:
     msg: "Found RedHat-based Installation"
@@ -131,42 +169,6 @@
   when: ansible_facts['pkg_mgr'] == "apt"
   
 
-- name: Print Hostname & IP(s)
-  debug:
-    msg:
-    - "Command - {{ ip.cmd }}"
-    - "Results - {{ ip.stdout_lines }}"
-  register: jsonoutput
-
-- name: write json locally
-  copy:
-    content: "{{ jsonoutput | to_nice_json }}"
-    dest: "/tmp/master.json"
-
-- name: clean up our json data
-  replace: 
-    path: /tmp/master.json
-    regexp: "msg"
-    replace: "Value"
-
-- name: clean up our json data again
-  lineinfile: 
-    path: /tmp/master.json
-    regexp: '"changed": false,'
-    state: absent 
-
-- name: clean up our json data again and again
-  lineinfile: 
-    path: /tmp/master.json
-    regexp: '"failed": false,'
-    state: absent 
-
-- name: clean up our json data again and again and again SMILE
-  lineinfile: 
-    path: /tmp/master.json
-    insertbefore: '{'
-    line: '"IP(s) & Hostname": '
-    firstmatch: yes 
 
 
 - name: Print Date of Last yum Usage
