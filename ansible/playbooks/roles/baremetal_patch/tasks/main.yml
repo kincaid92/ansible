@@ -67,9 +67,9 @@
   debug:
     var: list_uptime
     msg:
-    - "{{ item.stdout_lines }}"
-    - "{{ item.changed }}"
-    - "{{ item.cmd }}"
+    - "{{ item }}"
+    # - "{{ item.changed }}"
+    # - "{{ item.cmd }}"
   loop: "{{ uptime_days | dict2items }}"
   #when: (uptime_days | int) >= 0
 
