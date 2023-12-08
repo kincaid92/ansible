@@ -121,15 +121,15 @@
     replace: ' '
   delegate_to: localhost
 
-# - name: Remove all backslashes in a file
-#   replace:
-#     path: /tmp/master.json
-#     regexp: '(\",)+'
-#     replace: '",'
-#   delegate_to: localhost
+- name: Remove all backslashes in a file
+  lineinfile:
+    path: /tmp/master.json
+    search_string: '" \\'
+    state: absent
+  delegate_to: localhost
 
 - name: grab json file locally
-  shell: cat /tmp/master.json | sed '/\\/d'
+  shell: cat /tmp/master.json | sed 's/\\//g'
   register: hello
   delegate_to: localhost
 
