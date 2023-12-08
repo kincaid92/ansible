@@ -83,12 +83,9 @@
   lineinfile: 
     path: /tmp/output1.json
     insertbefore: '{'
-    line: '"please god": '
+    line: '"IP(s) & Hostname": '
     firstmatch: yes 
 
-- name: get ip results
-  debug:
-    var: ip
 
 - name: Print Date of Last yum Usage
   debug:
