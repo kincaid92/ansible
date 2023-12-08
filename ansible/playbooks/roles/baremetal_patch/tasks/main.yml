@@ -45,14 +45,14 @@
 - name: Print Hostname & IP(s)
   debug:
     var: ip
-  register: jsonoutput
+  #register: jsonoutput
 
-# - name: Print Hostname & IP(s)
-#   debug:
-#     msg:
-#     - "Command - {{ ip.cmd }}"
-#     - "Results - {{ ip.stdout_lines }}"
-#   register: jsonoutput
+- name: Print Hostname & IP(s)
+  debug:
+    msg:
+    - "Command - {{ ip.cmd }}"
+    - "Results - {{ ip.stdout_lines }}"
+  register: jsonoutput
 
 - name: write json locally
   copy:
