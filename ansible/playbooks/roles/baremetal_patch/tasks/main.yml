@@ -65,7 +65,7 @@
 
 - name: Print Last Reboot
   debug:
-    var: "{{ uptime_days.values() | list}}"
+    var: "{{ uptime_days }}"
     # msg:
     # - "{{ item.key }}"
     # - "{{ item.changed }}"
