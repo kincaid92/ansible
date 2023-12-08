@@ -2,7 +2,5 @@
 
  - hosts: all
    gather_facts: true
-   environment:
-    ANSIBLE_STDOUT_CALLBACK: json
    roles:
     - baremetal_patch
