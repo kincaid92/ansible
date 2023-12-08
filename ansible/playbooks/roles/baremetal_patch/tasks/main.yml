@@ -58,14 +58,14 @@
   copy:
     content: "{{ jsonoutput | to_nice_json }}"
     dest: "/tmp/master.json"
-  #delegate_to: localhost
+  delegate_to: localhost
 
 - name: Check for RedHat Based OS
   debug:
     msg: "Found RedHat-based Installation"
   #when: ansible_facts['pkg_mgr'] == "yum"
   register: redhat_found
-  #delegate_to: localhost
+  delegate_to: localhost
   
 
 - name: add redhat to master.json
@@ -74,14 +74,14 @@
     line: "{{ redhat_found | to_nice_json }}"
     create: yes
   #when: ansible_facts['pkg_mgr'] == "yum"
-  #delegate_to: localhost
+  delegate_to: localhost
   
 - name: Check for Debian Based OS
   debug:
     msg: "Found Debian-based Installation"
   #when: ansible_facts['pkg_mgr'] == "apt"
   register: debian_found
-  #delegate_to: localhost
+  delegate_to: localhost
 
 - name: add debian to master.json
   lineinfile:
@@ -89,7 +89,7 @@
     line: "{{ debian_found | to_nice_json }}"
     create: yes
   #when: ansible_facts['pkg_mgr'] == "apt"
-  #elegate_to: localhost
+  delegate_to: localhost
 
 - name: grab date of last yum usage
   lineinfile:
@@ -97,7 +97,7 @@
     line: "{{ update | to_nice_json }}"
     create: yes
   #when: ansible_facts['pkg_mgr'] == "yum"
-  #delegate_to: localhost
+  delegate_to: localhost
 
 - name: grab date of last apt usage
   lineinfile:
@@ -105,14 +105,20 @@
     line: "{{ apt_history | to_nice_json }}"
     create: yes
   #when: ansible_facts['pkg_mgr'] == "apt"
-  #delegate_to: localhost
+  delegate_to: localhost
 
 - name: grab uptime
   lineinfile:
     path: /tmp/master.json
     line: "{{ uptime_days | to_nice_json }}"
     create: yes
-  #delegate_to: localhost
+  delegate_to: localhost
+
+- name: try to copy it to remote host to grab
+  copy:
+    src: /tmp/master.json
+    dest: /tmp/master.json
+    remote_src: yes
 
 # - name: cleaning time
 #   replace: 
