@@ -121,7 +121,7 @@
 
 - name: print the file
   debug:
-    var: hello 
+    var: hello.stdout_lines
   delegate_to: localhost
   
 
