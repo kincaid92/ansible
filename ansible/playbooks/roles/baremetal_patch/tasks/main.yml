@@ -66,8 +66,10 @@
 - name: Print Last Reboot
   debug:
     msg:
-    - "{{ item }}"
-  loop: "{{ uptime_days }}"
+    - "{{ item.stdout_lines }}"
+    - "{{ item.changed }}"
+    - "{{ item.cmd }}"
+  loop: "{{ lookup('dict', uptime_days) }}"
   #when: (uptime_days | int) >= 0
 
 # - name: Print Last Reboot
