@@ -136,9 +136,13 @@
 
 - name: print the file
   debug:
-    var: master
+    var: master.stdout_lines
   delegate_to: localhost
 
+- name: print the file
+  debug:
+    var: cleaned
+  delegate_to: localhost
 
 # - name: Print apt Success Check
 #   debug:
