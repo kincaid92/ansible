@@ -63,7 +63,7 @@
     path: /tmp/master.json
     line: "{{ redhat_found | to_nice_json }}"
     create: yes
-  when: ansible_facts['pkg_mgr'] == "yum"
+  #when: ansible_facts['pkg_mgr'] == "yum"
   
 - name: Check for Debian Based OS
   debug:
@@ -76,7 +76,7 @@
     path: /tmp/master.json
     line: "{{ debian_found | to_nice_json }}"
     create: yes
-  when: ansible_facts['pkg_mgr'] == "apt"
+  #when: ansible_facts['pkg_mgr'] == "apt"
 
 - name: grab date of last yum usage
   lineinfile:
