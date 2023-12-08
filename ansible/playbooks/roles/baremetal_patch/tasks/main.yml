@@ -57,7 +57,7 @@
 - name: write json locally
   copy:
     content: "{{ jsonoutput }}"
-    dest: "/tmp/master.json"
+    dest: "/tmp/master.txt"
   delegate_to: localhost
 
 - name: Check for RedHat Based OS
@@ -68,9 +68,9 @@
   delegate_to: localhost
   
 
-- name: add redhat to master.json
+- name: add redhat to master.txt
   lineinfile:
-    path: /tmp/master.json
+    path: /tmp/master.txt
     line: "{{ redhat_found }}"
     create: yes
   #when: ansible_facts['pkg_mgr'] == "yum"
@@ -83,9 +83,9 @@
   register: debian_found
   delegate_to: localhost
 
-- name: add debian to master.json
+- name: add debian to master.txt
   lineinfile:
-    path: /tmp/master.json
+    path: /tmp/master.txt
     line: "{{ debian_found }}"
     create: yes
   #when: ansible_facts['pkg_mgr'] == "apt"
@@ -93,7 +93,7 @@
 
 - name: grab date of last yum usage
   lineinfile:
-    path: /tmp/master.json
+    path: /tmp/master.txt
     line: "{{ update }}"
     create: yes
   #when: ansible_facts['pkg_mgr'] == "yum"
@@ -101,7 +101,7 @@
 
 - name: grab date of last apt usage
   lineinfile:
-    path: /tmp/master.json
+    path: /tmp/master.txt
     line: "{{ apt_history }}"
     create: yes
   #when: ansible_facts['pkg_mgr'] == "apt"
@@ -109,27 +109,27 @@
 
 - name: grab uptime
   lineinfile:
-    path: /tmp/master.json
+    path: /tmp/master.txt
     line: "{{ uptime_days }}"
     create: yes
   delegate_to: localhost
 
 # - name: cleaning time
 #   replace: 
-#     path: /tmp/master.json
+#     path: /tmp/master.txt
 #     regexp: '^\s+|\s+$'
 #     replace: ' '
 #   delegate_to: localhost
 
 # - name: cleaning time part 2
 #   replace: 
-#     path: /tmp/master.json
+#     path: /tmp/master.txt
 #     regexp: '\\\\|\\\\"|,'
 #     replace: ''
 #   delegate_to: localhost
 
 - name: register master var
-  shell: cat /tmp/master.json
+  shell: cat /tmp/master.txt
   register: master
   delegate_to: localhost
 
