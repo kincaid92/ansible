@@ -120,6 +120,7 @@
     dest: /tmp/master.json
     remote_src: yes
     mode: preserve
+  delegate_to: localhost
 # - name: cleaning time
 #   replace: 
 #     path: /tmp/master.json
