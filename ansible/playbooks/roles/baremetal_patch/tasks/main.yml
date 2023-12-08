@@ -62,7 +62,7 @@
   lineinfile:
     path: /tmp/master.json
     line: "{{ redhat_found | to_nice_json }}"
-    state: present
+    create: yes
   when: ansible_facts['pkg_mgr'] == "yum"
   
 
