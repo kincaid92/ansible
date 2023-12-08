@@ -65,8 +65,8 @@
 
 - name: Print Last Reboot
   debug:
-    var: uptime_days | type_debug
-  when: (uptime_days | int) >= 0
+    var: uptime_days
+  #when: (uptime_days | int) >= 0
 
 # - name: Print Last Reboot
 #   debug:
