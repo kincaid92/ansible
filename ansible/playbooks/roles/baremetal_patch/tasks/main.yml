@@ -121,7 +121,8 @@
 
 - name: print the file
   debug:
-    var: hello | unique
+    var: hello 
+  delegate_to: localhost
   
 
 
