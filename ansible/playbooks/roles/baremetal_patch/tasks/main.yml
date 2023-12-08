@@ -67,7 +67,7 @@
   debug:
     var: list_uptime
     msg:
-    - "{{ item }}"
+    - "{{ item.key }}"
     # - "{{ item.changed }}"
     # - "{{ item.cmd }}"
   loop: "{{ uptime_days | dict2items }}"
