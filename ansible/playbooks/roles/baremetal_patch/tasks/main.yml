@@ -58,7 +58,7 @@
 
 - name: please god work
   debug:
-    var: jsonoutput
+    var: jsonoutput.results
 
 - name: Print Date of Last yum Usage
   debug:
