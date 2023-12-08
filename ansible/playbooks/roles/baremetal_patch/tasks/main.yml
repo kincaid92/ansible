@@ -65,7 +65,6 @@
 
 - name: Print Last Reboot
   debug:
-    var: list_uptime
     msg:
     - "{{ item.key }}"
     # - "{{ item.changed }}"
