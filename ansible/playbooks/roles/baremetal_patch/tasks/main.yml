@@ -52,8 +52,13 @@
 - name: Print Hostname & IP(s)
   debug:
     msg:
-    - "Command: {{ ip.cmd }}"
-    - "Results: {{ ip.stdout_lines }}"
+    - "Command - {{ ip.cmd }}"
+    - "Results - {{ ip.stdout_lines }}"
+  register: jsonoutput
+
+- name: please god work
+  debug:
+    var: jsonoutput
 
 - name: Print Date of Last yum Usage
   debug:
