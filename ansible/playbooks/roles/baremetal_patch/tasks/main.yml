@@ -47,40 +47,40 @@
   when: ansible_facts['pkg_mgr'] == "yum"
   register: redhat_found
 
-# - name: write json for redhat being found
-#   copy:
-#     content: "{{ redhat_found | to_nice_json }}"
-#     dest: "/tmp/redhat.json"
-#   when: ansible_facts['pkg_mgr'] == "yum"
+- name: write json for redhat being found
+  copy:
+    content: "{{ redhat_found | to_nice_json }}"
+    dest: "/tmp/redhat.json"
+  when: ansible_facts['pkg_mgr'] == "yum"
   
-# - name: clean up our redhat json data
-#   replace: 
-#     path: /tmp/redhat.json
-#     regexp: "msg"
-#     replace: "Message"
-#   when: ansible_facts['pkg_mgr'] == "yum"
+- name: clean up our redhat json data
+  replace: 
+    path: /tmp/redhat.json
+    regexp: "msg"
+    replace: "Message"
+  when: ansible_facts['pkg_mgr'] == "yum"
   
-# - name: clean up our redhat json data again
-#   lineinfile: 
-#     path: /tmp/redhat.json
-#     regexp: '"changed": false,'
-#     state: absent 
-#   when: ansible_facts['pkg_mgr'] == "yum"
+- name: clean up our redhat json data again
+  lineinfile: 
+    path: /tmp/redhat.json
+    regexp: '"changed": false,'
+    state: absent 
+  when: ansible_facts['pkg_mgr'] == "yum"
   
-# - name: clean up our redhat json data again and again
-#   lineinfile: 
-#     path: /tmp/redhat.json
-#     regexp: '"failed": false,'
-#     state: absent 
-#   when: ansible_facts['pkg_mgr'] == "yum"
+- name: clean up our redhat json data again and again
+  lineinfile: 
+    path: /tmp/redhat.json
+    regexp: '"failed": false,'
+    state: absent 
+  when: ansible_facts['pkg_mgr'] == "yum"
   
-# - name: clean up our redhat json data again and again and again SMILE
-#   lineinfile: 
-#     path: /tmp/redhat.json
-#     insertbefore: '{'
-#     line: '"RedHat Found": '
-#     firstmatch: yes 
-#   when: ansible_facts['pkg_mgr'] == "yum"
+- name: clean up our redhat json data again and again and again SMILE
+  lineinfile: 
+    path: /tmp/redhat.json
+    insertbefore: '{'
+    line: '"RedHat Found": '
+    firstmatch: yes 
+  when: ansible_facts['pkg_mgr'] == "yum"
 
 - name: Check for Debian Based OS
   debug:
@@ -88,40 +88,46 @@
   when: ansible_facts['pkg_mgr'] == "apt"
   register: debian_found
 
-# - name: write json for debian being found
-#   copy:
-#     content: "{{ debian_found | to_nice_json }}"
-#     dest: "/tmp/debian.json"
-#   when: ansible_facts['pkg_mgr'] == "apt"
+- name: write json for debian being found
+  copy:
+    content: "{{ debian_found | to_nice_json }}"
+    dest: "/tmp/debian.json"
+  when: ansible_facts['pkg_mgr'] == "apt"
   
-# - name: clean up our debian json data
-#   replace: 
-#     path: /tmp/debian.json
-#     regexp: "msg"
-#     replace: "Message"
-#   when: ansible_facts['pkg_mgr'] == "apt"
+- name: clean up our debian json data
+  replace: 
+    path: /tmp/debian.json
+    regexp: "msg"
+    replace: "Message"
+  when: ansible_facts['pkg_mgr'] == "apt"
   
-# - name: clean up our debian json data again
-#   lineinfile: 
-#     path: /tmp/debian.json
-#     regexp: '"changed": false,'
-#     state: absent 
-#   when: ansible_facts['pkg_mgr'] == "apt"
+- name: clean up our debian json data again
+  lineinfile: 
+    path: /tmp/debian.json
+    regexp: '"changed": false,'
+    state: absent 
+  when: ansible_facts['pkg_mgr'] == "apt"
   
-# - name: clean up our debian json data again and again
-#   lineinfile: 
-#     path: /tmp/debian.json
-#     regexp: '"failed": false,'
-#     state: absent 
-#   when: ansible_facts['pkg_mgr'] == "apt"
+- name: clean up our debian json data again and again
+  lineinfile: 
+    path: /tmp/debian.json
+    regexp: '"failed": false,'
+    state: absent 
+  when: ansible_facts['pkg_mgr'] == "apt"
   
-# - name: clean up our debian json data again and again and again SMILE
-#   lineinfile: 
-#     path: /tmp/debian.json
-#     insertbefore: '{'
-#     line: '"Debian Found": '
-#     firstmatch: yes 
-#   when: ansible_facts['pkg_mgr'] == "apt"
+- name: clean up our debian json data again and again and again SMILE
+  lineinfile: 
+    path: /tmp/debian.json
+    insertbefore: '{'
+    line: '"Debian Found": '
+    firstmatch: yes 
+  when: ansible_facts['pkg_mgr'] == "apt"
+
+- name: Add debian to master json
+  blockinfile:
+    path: /tmp/master.json
+    append_newline: yes
+    block: " {{ lookup('file', /tmp/debian.json)}}"
 
 - name: Print Hostname & IP(s)
   debug:
@@ -130,39 +136,36 @@
     - "Results - {{ ip.stdout_lines }}"
   register: jsonoutput
 
-# - name: write json locally
-#   copy:
-#     content: "{{ jsonoutput | to_nice_json }}"
-#     dest: "/tmp/output1.json"
+- name: write json locally
+  copy:
+    content: "{{ jsonoutput | to_nice_json }}"
+    dest: "/tmp/master.json"
 
-# - name: clean up our json data
-#   replace: 
-#     path: /tmp/output1.json
-#     regexp: "msg"
-#     replace: "Value"
+- name: clean up our json data
+  replace: 
+    path: /tmp/master.json
+    regexp: "msg"
+    replace: "Value"
 
-# - name: clean up our json data again
-#   lineinfile: 
-#     path: /tmp/output1.json
-#     regexp: '"changed": false,'
-#     state: absent 
+- name: clean up our json data again
+  lineinfile: 
+    path: /tmp/master.json
+    regexp: '"changed": false,'
+    state: absent 
 
-# - name: clean up our json data again and again
-#   lineinfile: 
-#     path: /tmp/output1.json
-#     regexp: '"failed": false,'
-#     state: absent 
+- name: clean up our json data again and again
+  lineinfile: 
+    path: /tmp/master.json
+    regexp: '"failed": false,'
+    state: absent 
 
-# - name: clean up our json data again and again and again SMILE
-#   lineinfile: 
-#     path: /tmp/output1.json
-#     insertbefore: '{'
-#     line: '"IP(s) & Hostname": '
-#     firstmatch: yes 
+- name: clean up our json data again and again and again SMILE
+  lineinfile: 
+    path: /tmp/master.json
+    insertbefore: '{'
+    line: '"IP(s) & Hostname": '
+    firstmatch: yes 
 
-# - name: Add to RedHat json
-#   blockinfile:
-#     path: /tmp/redhat.json
 
 - name: Print Date of Last yum Usage
   debug:
