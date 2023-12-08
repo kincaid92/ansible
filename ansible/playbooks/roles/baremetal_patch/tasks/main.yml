@@ -66,10 +66,10 @@
 - name: Print Last Reboot
   debug:
     msg:
-    - "{{ item.key }}"
+    - "{{ item.key }} : {{ item.value }}"
     # - "{{ item.changed }}"
     # - "{{ item.cmd }}"
-  loop: "{{ uptime_days | dict2items }}"
+  loop: "{{ uptime_days | dict2items(key_name='key', value_name='value') }}"
   #when: (uptime_days | int) >= 0
 
 # - name: Print Last Reboot
