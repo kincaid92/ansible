@@ -49,7 +49,7 @@
     - "Results - {{ ip.stdout_lines }}"
   register: jsonoutput
 
-- name: write json locally
+- name: Create the Master JSON
   copy:
     content: "{{ jsonoutput | to_nice_json }}"
     dest: "/tmp/master.json"
@@ -164,7 +164,6 @@
 - name: Add debian to master json
   blockinfile:
     path: /tmp/master.json
-    append_newline: yes
     block: "{{ lookup('file', '/tmp/debian.json') }}"
   when: ansible_facts['pkg_mgr'] == "apt"
   
