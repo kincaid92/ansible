@@ -121,16 +121,18 @@
     replace: ' '
   delegate_to: localhost
 
-# - name: grab json file locally
-#   shell: cat /tmp/master.json
-#   register: hello
-#   delegate_to: localhost
+- name: cleaning time part 2
+  replace: 
+    path: /tmp/master.json
+    regexp: '\\\\|\\\\"|,'
+    replace: ''
+  delegate_to: localhost
+
 
 - name: print the file
   debug:
     msg: "{{ lookup('file', '/tmp/master.json') }}"
   delegate_to: localhost
-  
 
 
 # - name: Print apt Success Check
