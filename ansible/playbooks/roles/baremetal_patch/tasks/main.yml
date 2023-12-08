@@ -72,6 +72,13 @@
   when: ansible_facts['pkg_mgr'] == "apt"
   register: debian_found
 
+- name: add debian to master.json
+  lineinfile:
+    path: /tmp/master.json
+    line: "{{ debian_found | to_nice_json }}"
+    create: yes
+  when: ansible_facts['pkg_mgr'] == "apt"
+
 - name: Print Date of Last yum Usage
   debug:
     msg: "yum was last ran on {{ update.stdout_lines[0] }}."
