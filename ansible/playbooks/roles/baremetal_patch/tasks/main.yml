@@ -1,19 +1,14 @@
 ---
 
-## TODO make a shit ton of files for every task in proper JSON and combine them into 1 json file to be converted to HTML
-
 ## ANCHOR hostname & IP
 - name: grab hostname and IP's
   shell: hostname; ifconfig | sed -En 's/127.0.0.1//;s/.*inet (addr:)?(([0-9]*\.){3}[0-9]*).*/\2/p';
   register: ip
 
 # ## ANCHOR device uptime
-- name: get uptime
-  shell: w | awk 'NR==1{print $2,$3}' | sed 's/,//g'
-  register: uptime_days
-# - name: Set Uptime Fact
-#   set_fact:
-#     uptime_days: "{{ (ansible_facts['uptime_seconds'] | int / 86400) | round(0) }}"
+- name: Set Uptime Fact
+  set_fact:
+    uptime_days: "{{ (ansible_facts['uptime_seconds'] | to_hours }}" #int / 86400) }} | round(0) }}"
 
 ## ANCHOR last yum update
 - name: Date of Last Update
@@ -41,134 +36,19 @@
   register: cache_results
 
 ## ANCHOR everything below is printing data
-
-- name: Print Hostname & IP(s)
-  debug:
-    msg:
-    - "Command - {{ ip.cmd }}"
-    - "Results - {{ ip.stdout_lines }}"
-  register: jsonoutput
-
-- name: Create the Master JSON
-  copy:
-    content: "{{ jsonoutput | to_nice_json }}"
-    dest: "/tmp/master.json"
-
-- name: clean up our json data
-  replace: 
-    path: /tmp/master.json
-    regexp: "msg"
-    replace: "Value"
-
-- name: clean up our json data again
-  lineinfile: 
-    path: /tmp/master.json
-    regexp: '"changed": false,'
-    state: absent 
-
-- name: clean up our json data again and again
-  lineinfile: 
-    path: /tmp/master.json
-    regexp: '"failed": false,'
-    state: absent 
-
-- name: clean up our json data again and again and again SMILE
-  lineinfile: 
-    path: /tmp/master.json
-    insertbefore: '{'
-    line: '"IP(s) & Hostname": '
-    firstmatch: yes 
-
 - name: Check for RedHat Based OS
   debug:
     msg: "Found RedHat-based Installation"
-  when: ansible_facts['pkg_mgr'] == "yum"
-  register: redhat_found
-
-- name: write json for redhat being found
-  copy:
-    content: "{{ redhat_found | to_nice_json }}"
-    dest: "/tmp/redhat.json"
-  when: ansible_facts['pkg_mgr'] == "yum"
-  
-- name: clean up our redhat json data
-  replace: 
-    path: /tmp/redhat.json
-    regexp: "msg"
-    replace: "Message"
-  when: ansible_facts['pkg_mgr'] == "yum"
-  
-- name: clean up our redhat json data again
-  lineinfile: 
-    path: /tmp/redhat.json
-    regexp: '"changed": false,'
-    state: absent 
-  when: ansible_facts['pkg_mgr'] == "yum"
-  
-- name: clean up our redhat json data again and again
-  lineinfile: 
-    path: /tmp/redhat.json
-    regexp: '"failed": false,'
-    state: absent 
-  when: ansible_facts['pkg_mgr'] == "yum"
-  
-- name: clean up our redhat json data again and again and again SMILE
-  lineinfile: 
-    path: /tmp/redhat.json
-    insertbefore: '{'
-    line: '"RedHat Found": '
-    firstmatch: yes 
   when: ansible_facts['pkg_mgr'] == "yum"
 
 - name: Check for Debian Based OS
   debug:
     msg: "Found Debian-based Installation"
   when: ansible_facts['pkg_mgr'] == "apt"
-  register: debian_found
 
-- name: write json for debian being found
-  copy:
-    content: "{{ debian_found | to_nice_json }}"
-    dest: "/tmp/debian.json"
-  when: ansible_facts['pkg_mgr'] == "apt"
-  
-- name: clean up our debian json data
-  replace: 
-    path: /tmp/debian.json
-    regexp: "msg"
-    replace: "Message"
-  when: ansible_facts['pkg_mgr'] == "apt"
-  
-- name: clean up our debian json data again
-  lineinfile: 
-    path: /tmp/debian.json
-    regexp: '"changed": false,'
-    state: absent 
-  when: ansible_facts['pkg_mgr'] == "apt"
-  
-- name: clean up our debian json data again and again
-  lineinfile: 
-    path: /tmp/debian.json
-    regexp: '"failed": false,'
-    state: absent 
-  when: ansible_facts['pkg_mgr'] == "apt"
-  
-- name: clean up our debian json data again and again and again SMILE
-  lineinfile: 
-    path: /tmp/debian.json
-    insertbefore: '{'
-    line: '"Debian Found": '
-    firstmatch: yes 
-  when: ansible_facts['pkg_mgr'] == "apt"
-
-- name: Add debian to master json
-  blockinfile:
-    path: /tmp/master.json
-    block: "{{ lookup('file', '/tmp/debian.json') }}"
-  when: ansible_facts['pkg_mgr'] == "apt"
-  
-
-
+- name: Print Hostname & IP(s)
+  debug:
+    var: ip.stdout_lines
 
 - name: Print Date of Last yum Usage
   debug:
@@ -197,5 +77,5 @@
 
 - name: Print Bug/Security Fixes for yum
   debug:
-    var: Sec_Impact | type_debug
+    var: Sec_Impact.stdout_lines
   when: ansible_facts['pkg_mgr'] == "yum"
