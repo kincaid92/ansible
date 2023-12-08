@@ -124,8 +124,8 @@
 - name: cleaning time part 2
   replace: 
     path: /tmp/master.json
-    regexp: '\\\\\\\\|\\\\\\"|,'
-    replace: ' '
+    regexp: '\\\\\\\\|\\\\\\"'
+    replace: ''
   delegate_to: localhost
 
 - name: grab json file locally
