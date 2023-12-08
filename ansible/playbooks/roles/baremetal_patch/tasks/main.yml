@@ -63,18 +63,14 @@
     msg: "apt was last ran on{{ apt_history.stdout_lines[0] }}."
   when: ansible_facts['pkg_mgr'] == "apt"
 
-- name: convert dict to list
-  set_fact:
-    list_uptime: "{{ uptime_days | list }}"
-
 - name: Print Last Reboot
   debug:
     var: list_uptime
-  #   msg:
-  #   - "{{ item.stdout_lines }}"
-  #   - "{{ item.changed }}"
-  #   - "{{ item.cmd }}"
-  # loop: "{{ lookup('dict', uptime_days) }}"
+    msg:
+    - "{{ item.stdout_lines }}"
+    - "{{ item.changed }}"
+    - "{{ item.cmd }}"
+  loop: "{{ uptime_days | dict2items }}"
   #when: (uptime_days | int) >= 0
 
 # - name: Print Last Reboot
