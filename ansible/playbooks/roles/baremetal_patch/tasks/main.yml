@@ -128,9 +128,14 @@
 #     replace: ''
 #   delegate_to: localhost
 
+- name: register master var
+  shell: cat /tmp/master.json
+  register: master
+  delegate_to: localhost
+
 - name: print the file
   debug:
-    msg: "{{ lookup('file', '/tmp/master.json') }}"
+    var: master
   delegate_to: localhost
 
 
