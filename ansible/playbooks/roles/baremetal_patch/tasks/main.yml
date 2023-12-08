@@ -124,6 +124,7 @@
     path: /tmp/master.json
     regexp: '\s*\n\s*'
     state: absent 
+  delegate_to: localhost
 
 - name: print the file
   debug:
