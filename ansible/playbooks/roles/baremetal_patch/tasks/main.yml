@@ -122,7 +122,7 @@
   delegate_to: localhost
 
 - name: Remove all backslashes in a file
-  ansible.builtin.replace:
+  replace:
     path: /tmp/master.json
     regexp: '(\",)+'
     replace: '",'
