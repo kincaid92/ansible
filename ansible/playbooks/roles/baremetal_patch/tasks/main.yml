@@ -8,7 +8,7 @@
 # ## ANCHOR device uptime
 - name: get uptime
   shell: w
-  register: update
+  register: uptime_days
 # - name: Set Uptime Fact
 #   set_fact:
 #     uptime_days: "{{ (ansible_facts['uptime_seconds'] | int / 86400) | round(0) }}"
