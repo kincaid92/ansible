@@ -65,7 +65,7 @@
 
 - name: Print Last Reboot
   debug:
-    var: uptime_days.stdout_lines | to_nice_json
+    var: uptime_days
   #when: (uptime_days | int) >= 0
 
 # - name: Print Last Reboot
