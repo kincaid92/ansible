@@ -119,7 +119,7 @@
     src: /tmp/master.json
     dest: /tmp/master.json
     remote_src: yes
-
+    mode: preserve
 # - name: cleaning time
 #   replace: 
 #     path: /tmp/master.json
