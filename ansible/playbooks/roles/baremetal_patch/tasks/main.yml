@@ -72,7 +72,6 @@
     path: /tmp/output1.json
     regexp: 
     - '"changed": false,'
-    - '"failed": false,'
     state: absent 
 
 - name: Print Date of Last yum Usage
