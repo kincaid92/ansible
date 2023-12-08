@@ -6,9 +6,12 @@
   register: ip
 
 # ## ANCHOR device uptime
-- name: Set Uptime Fact
-  set_fact:
-    uptime_days: "{{ (ansible_facts['uptime_seconds'] | int / 86400) | round(0) }}"
+- name: get uptime
+  shell: w
+  register: update
+# - name: Set Uptime Fact
+#   set_fact:
+#     uptime_days: "{{ (ansible_facts['uptime_seconds'] | int / 86400) | round(0) }}"
 
 ## ANCHOR last yum update
 - name: Date of Last Update
