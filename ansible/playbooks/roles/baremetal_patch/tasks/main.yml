@@ -62,7 +62,7 @@
 
 - name: Print Last Reboot
   debug:
-    var: uptime_days
+    var: uptime_days | type_debug
   when: (uptime_days | int) >= 0
 
 # - name: Print Last Reboot
@@ -82,5 +82,5 @@
 
 - name: Print Bug/Security Fixes for yum
   debug:
-    var: Sec_Impact
+    var: Sec_Impact | type_debug
   when: ansible_facts['pkg_mgr'] == "yum"
