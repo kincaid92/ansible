@@ -65,7 +65,6 @@
     create: yes
   when: ansible_facts['pkg_mgr'] == "yum"
   
-
 - name: Check for Debian Based OS
   debug:
     msg: "Found Debian-based Installation"
@@ -79,32 +78,39 @@
     create: yes
   when: ansible_facts['pkg_mgr'] == "apt"
 
-- name: Print Date of Last yum Usage
-  debug:
-    msg: "yum was last ran on {{ update.stdout_lines[0] }}."
+- name: grab date of last yum usage
+  lineinfile:
+    path: /tmp/master.json
+    line: "{{ update | to_pretty_json }}"
+    create: yes
   when: ansible_facts['pkg_mgr'] == "yum"
 
-- name: Print Date of Last apt Usage
-  debug:
-    msg: "apt was last ran on{{ apt_history.stdout_lines[0] }}."
+- name: grab date of last apt usage
+  lineinfile:
+    path: /tmp/master.json
+    line: "{{ apt_history | to_pretty_json }}"
+    create: yes
   when: ansible_facts['pkg_mgr'] == "apt"
 
-- name: Print Last Reboot
-  debug:
-    msg: "The device {{ ansible_facts['nodename'] }} has been online for {{ uptime_days }} days, this number is rounded to the nearest whole day."
-  when: (uptime_days | int) >= 0
+- name: grab uptime
+  lineinfile:
+    path: /tmp/master.json
+    line: "{{ uptime_days | to_pretty_json }}"
+    create: yes
 
-- name: Print apt Success Check
-  debug:
-    msg: "The apt cache has successfully updated (equivalent of apt-get update)."
-  when: ansible_facts['pkg_mgr'] == "apt" and cache_results["cache_updated"] == true
 
-- name: Print apt Failure Check
-  debug:
-    msg: "The apt cache has failed it's update. Please manually troubleshoot"
-  when: ansible_facts['pkg_mgr'] == "apt" and cache_results["cache_updated"] == false
 
-- name: Print Bug/Security Fixes for yum
-  debug:
-    var: Sec_Impact | type_debug
-  when: ansible_facts['pkg_mgr'] == "yum"
+# - name: Print apt Success Check
+#   debug:
+#     msg: "The apt cache has successfully updated (equivalent of apt-get update)."
+#   when: ansible_facts['pkg_mgr'] == "apt" and cache_results["cache_updated"] == true
+
+# - name: Print apt Failure Check
+#   debug:
+#     msg: "The apt cache has failed it's update. Please manually troubleshoot"
+#   when: ansible_facts['pkg_mgr'] == "apt" and cache_results["cache_updated"] == false
+
+# - name: Print Bug/Security Fixes for yum
+#   debug:
+#     var: Sec_Impact | type_debug
+#   when: ansible_facts['pkg_mgr'] == "yum"
