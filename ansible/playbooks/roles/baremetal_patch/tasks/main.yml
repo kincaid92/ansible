@@ -70,7 +70,9 @@
 - name: clean up our json data
   lineinfile: 
     path: /tmp/output1.json
-    regexp: '"changed": false,'
+    regexp: 
+    - '"changed": false,'
+    - '"failed": false,'
     state: absent 
 
 - name: Print Date of Last yum Usage
