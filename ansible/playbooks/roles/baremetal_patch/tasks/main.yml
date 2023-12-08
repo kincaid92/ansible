@@ -62,6 +62,8 @@
   lineinfile:
     path: /tmp/master.json
     line: "{{ redhat_found | to_nice_json}}"
+  when: ansible_facts['pkg_mgr'] == "yum"
+  
 
 - name: Check for Debian Based OS
   debug:
