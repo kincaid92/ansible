@@ -42,17 +42,17 @@
 
 ## ANCHOR everything below is printing data
 
-# - name: Print Hostname & IP(s)
-#   debug:
-#     var: ip | to_nice_json
-#   register: jsonoutput
-
 - name: Print Hostname & IP(s)
   debug:
-    msg:
-    - "Command - {{ ip.cmd }}"
-    - "Results - {{ ip.stdout_lines }}"
+    var: ip | to_nice_json
   register: jsonoutput
+
+# - name: Print Hostname & IP(s)
+#   debug:
+#     msg:
+#     - "Command - {{ ip.cmd }}"
+#     - "Results - {{ ip.stdout_lines }}"
+#   register: jsonoutput
 
 - name: write json locally
   copy:
