@@ -127,7 +127,7 @@
   blockinfile:
     path: /tmp/master.json
     append_newline: yes
-    block: " {{ lookup('file', /tmp/debian.json)}}"
+    block: " {{ lookup('file', '/tmp/debian.json)' }}"
 
 - name: Print Hostname & IP(s)
   debug:
