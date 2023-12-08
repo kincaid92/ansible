@@ -81,21 +81,21 @@
 - name: grab date of last yum usage
   lineinfile:
     path: /tmp/master.json
-    line: "{{ update | to_pretty_json }}"
+    line: "{{ update | to_nice_json }}"
     create: yes
   when: ansible_facts['pkg_mgr'] == "yum"
 
 - name: grab date of last apt usage
   lineinfile:
     path: /tmp/master.json
-    line: "{{ apt_history | to_pretty_json }}"
+    line: "{{ apt_history | to_nice_json }}"
     create: yes
   when: ansible_facts['pkg_mgr'] == "apt"
 
 - name: grab uptime
   lineinfile:
     path: /tmp/master.json
-    line: "{{ uptime_days | to_pretty_json }}"
+    line: "{{ uptime_days | to_nice_json }}"
     create: yes
 
 
