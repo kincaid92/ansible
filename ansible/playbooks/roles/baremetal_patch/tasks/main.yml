@@ -47,6 +47,13 @@
     var: ip | to_nice_json
   register: jsonoutput
 
+# - name: Print Hostname & IP(s)
+#   debug:
+#     msg:
+#     - "Command - {{ ip.cmd }}"
+#     - "Results - {{ ip.stdout_lines }}"
+#   register: jsonoutput
+
 - name: write json locally
   copy:
     content: "{{ jsonoutput | to_nice_json }}"
@@ -55,7 +62,7 @@
 - name: Check for RedHat Based OS
   debug:
     msg: "Found RedHat-based Installation"
-  when: ansible_facts['pkg_mgr'] == "yum"
+  #when: ansible_facts['pkg_mgr'] == "yum"
   register: redhat_found
 
 - name: add redhat to master.json
@@ -68,7 +75,7 @@
 - name: Check for Debian Based OS
   debug:
     msg: "Found Debian-based Installation"
-  when: ansible_facts['pkg_mgr'] == "apt"
+  #when: ansible_facts['pkg_mgr'] == "apt"
   register: debian_found
 
 - name: add debian to master.json
@@ -83,14 +90,14 @@
     path: /tmp/master.json
     line: "{{ update | to_nice_json }}"
     create: yes
-  when: ansible_facts['pkg_mgr'] == "yum"
+  #when: ansible_facts['pkg_mgr'] == "yum"
 
 - name: grab date of last apt usage
   lineinfile:
     path: /tmp/master.json
     line: "{{ apt_history | to_nice_json }}"
     create: yes
-  when: ansible_facts['pkg_mgr'] == "apt"
+  #when: ansible_facts['pkg_mgr'] == "apt"
 
 - name: grab uptime
   lineinfile:
