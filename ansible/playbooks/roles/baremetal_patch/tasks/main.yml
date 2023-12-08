@@ -124,7 +124,7 @@
 - name: cleaning time part 2
   replace: 
     path: /tmp/master.txt
-    regexp: '\\\\|\\\\"|,'
+    regexp: '\\\\'
     replace: ''
   delegate_to: localhost
   register: cleaned
