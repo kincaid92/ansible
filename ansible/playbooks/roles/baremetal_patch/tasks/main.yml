@@ -44,7 +44,7 @@
 
 - name: Print Hostname & IP(s)
   debug:
-    var: ip | to_nice_json
+    var: ip
   register: jsonoutput
 
 # - name: Print Hostname & IP(s)
