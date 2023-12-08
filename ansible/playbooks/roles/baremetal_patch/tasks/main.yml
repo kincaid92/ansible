@@ -65,7 +65,7 @@
 
 - name: Print Last Reboot
   debug:
-    var: uptime_days
+    var: uptime_days.stdout_lines
     # msg:
     # - "{{ item.key }}"
     # - "{{ item.changed }}"
