@@ -58,7 +58,7 @@
   copy:
     content: "{{ jsonoutput }}"
     dest: "/tmp/master.txt"
-  delegate_to: localhost
+  delegate_to: 172.16.101.183
 
 - name: Check for RedHat Based OS
   debug:
@@ -121,13 +121,13 @@
 #     replace: ' '
 #   delegate_to: localhost
 
-- name: cleaning time part 2
-  replace: 
-    path: /tmp/master.txt
-    regexp: '\\\\'
-    replace: ''
-  delegate_to: localhost
-  register: cleaned
+# - name: cleaning time part 2
+#   replace: 
+#     path: /tmp/master.txt
+#     regexp: '\\\\'
+#     replace: ''
+#   delegate_to: localhost
+#   register: cleaned
 
 - name: register master var
   shell: cat /tmp/master.txt
@@ -136,13 +136,13 @@
 
 - name: print the file
   debug:
-    var: master.stdout_lines | to_nice_json
+    var: master.stdout_lines
   delegate_to: localhost
 
-- name: print the file
-  debug:
-    var: cleaned
-  delegate_to: localhost
+# - name: print the file
+#   debug:
+#     var: cleaned
+#   delegate_to: localhost
 
 # - name: Print apt Success Check
 #   debug:
