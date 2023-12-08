@@ -7,7 +7,7 @@
 
 # ## ANCHOR device uptime
 - name: get uptime
-  shell: w
+  shell: w | awk 'NR==1{print $2,$3}' | sed 's/,//g'
   register: uptime_days
 # - name: Set Uptime Fact
 #   set_fact:
