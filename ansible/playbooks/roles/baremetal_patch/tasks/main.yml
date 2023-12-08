@@ -77,5 +77,5 @@
 
 - name: Print Bug/Security Fixes for yum
   debug:
-    var: Sec_Impact.stdout_lines
+    var: Sec_Impact.stdout_lines | to_json
   when: ansible_facts['pkg_mgr'] == "yum"
