@@ -122,7 +122,7 @@
 - name: cleaning time
   lineinfile: 
     path: /tmp/master.json
-    regexp: '\\\\'
+    regexp: '\s*\n\s*'
     state: absent 
 
 - name: print the file
