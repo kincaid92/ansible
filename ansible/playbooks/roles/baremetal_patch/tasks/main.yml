@@ -66,6 +66,15 @@
     dest: "/tmp/output.json"
   delegate_to: localhost
 
+- name: see if out file exists smile
+  shell: cat /tmp/output.json
+  register: smile
+  delegate_to: localhost
+
+- name: smile smile
+  debug:
+    var: smile
+
 - name: Print Date of Last yum Usage
   debug:
     msg: "yum was last ran on {{ update.stdout_lines[0] }}."
