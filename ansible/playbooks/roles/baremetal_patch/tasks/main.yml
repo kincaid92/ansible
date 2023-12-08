@@ -114,12 +114,12 @@
     create: yes
   delegate_to: localhost
 
-- name: cleaning time
-  replace: 
-    path: /tmp/master.json
-    regexp: '\s*\n\s*'
-    replace: ' '
-  delegate_to: localhost
+# - name: cleaning time
+#   replace: 
+#     path: /tmp/master.json
+#     regexp: '\s*\n\s*'
+#     replace: ' '
+#   delegate_to: localhost
 
 - name: cleaning time part 2
   replace: 
