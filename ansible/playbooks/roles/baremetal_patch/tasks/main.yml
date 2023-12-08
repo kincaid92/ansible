@@ -63,11 +63,11 @@
 - name: write json locally
   copy:
     content: "{{ jsonoutput.msg }}"
-    dest: "/tmp/output.json"
+    dest: "/tmp/output1.json"
   delegate_to: localhost
 
 - name: see if out file exists smile
-  shell: cat /tmp/output.json
+  shell: cat /tmp/output1.json
   register: smile
   delegate_to: localhost
 
