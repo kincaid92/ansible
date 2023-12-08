@@ -118,6 +118,10 @@
   shell: cat /tmp/master.json
   register: hello
   delegate_to: localhost
+
+- name: print the file
+  debug:
+    var: hello
   
 
 
