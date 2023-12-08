@@ -80,10 +80,47 @@
     insertbefore: '{'
     line: '"RedHat Found": '
     firstmatch: yes 
+  when: ansible_facts['pkg_mgr'] == "yum"
 
 - name: Check for Debian Based OS
   debug:
     msg: "Found Debian-based Installation"
+  when: ansible_facts['pkg_mgr'] == "apt"
+  register: debian_found
+
+- name: write json for debian being found
+  copy:
+    content: "{{ debian_found | to_nice_json }}"
+    dest: "/tmp/debian.json"
+  when: ansible_facts['pkg_mgr'] == "apt"
+  
+- name: clean up our debian json data
+  replace: 
+    path: /tmp/debian.json
+    regexp: "msg"
+    replace: "Message"
+  when: ansible_facts['pkg_mgr'] == "apt"
+  
+- name: clean up our debian json data again
+  lineinfile: 
+    path: /tmp/debian.json
+    regexp: '"changed": false,'
+    state: absent 
+  when: ansible_facts['pkg_mgr'] == "apt"
+  
+- name: clean up our debian json data again and again
+  lineinfile: 
+    path: /tmp/debian.json
+    regexp: '"failed": false,'
+    state: absent 
+  when: ansible_facts['pkg_mgr'] == "apt"
+  
+- name: clean up our debian json data again and again and again SMILE
+  lineinfile: 
+    path: /tmp/debian.json
+    insertbefore: '{'
+    line: '"Debian Found": '
+    firstmatch: yes 
   when: ansible_facts['pkg_mgr'] == "apt"
 
 - name: Print Hostname & IP(s)
