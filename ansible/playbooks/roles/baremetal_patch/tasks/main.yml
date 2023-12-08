@@ -44,7 +44,7 @@
 
 - name: Print Hostname & IP(s)
   debug:
-    var: ip | to_nice_json
+    var: ip
   register: jsonoutput
 
 # - name: Print Hostname & IP(s)
@@ -56,7 +56,7 @@
 
 - name: write json locally
   copy:
-    content: "{{ jsonoutput | to_nice_json }}"
+    content: "{{ jsonoutput }}"
     dest: "/tmp/master.json"
   delegate_to: localhost
 
@@ -71,7 +71,7 @@
 - name: add redhat to master.json
   lineinfile:
     path: /tmp/master.json
-    line: "{{ redhat_found | to_nice_json }}"
+    line: "{{ redhat_found }}"
     create: yes
   #when: ansible_facts['pkg_mgr'] == "yum"
   delegate_to: localhost
@@ -86,7 +86,7 @@
 - name: add debian to master.json
   lineinfile:
     path: /tmp/master.json
-    line: "{{ debian_found | to_nice_json }}"
+    line: "{{ debian_found }}"
     create: yes
   #when: ansible_facts['pkg_mgr'] == "apt"
   delegate_to: localhost
@@ -94,7 +94,7 @@
 - name: grab date of last yum usage
   lineinfile:
     path: /tmp/master.json
-    line: "{{ update | to_nice_json }}"
+    line: "{{ update }}"
     create: yes
   #when: ansible_facts['pkg_mgr'] == "yum"
   delegate_to: localhost
@@ -102,7 +102,7 @@
 - name: grab date of last apt usage
   lineinfile:
     path: /tmp/master.json
-    line: "{{ apt_history | to_nice_json }}"
+    line: "{{ apt_history }}"
     create: yes
   #when: ansible_facts['pkg_mgr'] == "apt"
   delegate_to: localhost
@@ -110,24 +110,23 @@
 - name: grab uptime
   lineinfile:
     path: /tmp/master.json
-    line: "{{ uptime_days | to_nice_json }}"
+    line: "{{ uptime_days }}"
     create: yes
   delegate_to: localhost
 
-- name: cleaning time
-  replace: 
-    path: /tmp/master.json
-    regexp: '^\s+|\s+$'
-    replace: ' '
-  delegate_to: localhost
+# - name: cleaning time
+#   replace: 
+#     path: /tmp/master.json
+#     regexp: '^\s+|\s+$'
+#     replace: ' '
+#   delegate_to: localhost
 
-- name: cleaning time part 2
-  replace: 
-    path: /tmp/master.json
-    regexp: '\\\\|\\\\"|,'
-    replace: ''
-  delegate_to: localhost
-
+# - name: cleaning time part 2
+#   replace: 
+#     path: /tmp/master.json
+#     regexp: '\\\\|\\\\"|,'
+#     replace: ''
+#   delegate_to: localhost
 
 - name: print the file
   debug:
