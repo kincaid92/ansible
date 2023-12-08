@@ -128,8 +128,8 @@
 
 - name: print the file
   debug:
-    msg: "{{ item.changed }}"
-  loop: "{{ hello.stdout_lines }}"
+    msg: "{{ item }}"
+  loop: "{{ hello }}"
   delegate_to: localhost
   
 
