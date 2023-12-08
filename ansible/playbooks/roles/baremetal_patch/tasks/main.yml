@@ -121,11 +121,11 @@
     replace: ' '
   delegate_to: localhost
 
-- name: cleaning time part 2
-  replace: 
-    path: /tmp/master.json
-    regexp: '\\\\\\\\|\\\\\\"|,'
-    replace: ''
+- name: Remove all backslashes in a file
+  ansible.builtin.replace:
+    path: /path/to/your/file.txt  # Replace with your file path
+    regexp: '\\\\'  # RegEx pattern for backslash
+    replace: ''  # Replace with nothing
   delegate_to: localhost
 
 - name: grab json file locally
