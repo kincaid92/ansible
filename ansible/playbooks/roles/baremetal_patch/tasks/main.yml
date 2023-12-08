@@ -10,8 +10,8 @@
 - name: combine host facts
   set_fact:
     device:
-      - ansible_facts["nodename"]
-      - ansible_facts["all_ipv4_addresses"]
+      - "{{ ansible_facts["nodename"] }}"
+      - "{{ ansible_facts["all_ipv4_addresses"] }}"
 
 # ## ANCHOR device uptime
 - name: get uptime
