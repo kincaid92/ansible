@@ -48,7 +48,7 @@
 
 - name: Print Hostname & IP(s)
   debug:
-    var: ip.stdout_lines
+    var: ip
 
 - name: Print Date of Last yum Usage
   debug:
@@ -62,8 +62,13 @@
 
 - name: Print Last Reboot
   debug:
-    msg: "The device {{ ansible_facts['nodename'] }} has been online for {{ uptime_days }} days, this number is rounded to the nearest whole day."
+    var: uptime_days
   when: (uptime_days | int) >= 0
+
+# - name: Print Last Reboot
+#   debug:
+#     msg: "The device {{ ansible_facts['nodename'] }} has been online for {{ uptime_days }} days, this number is rounded to the nearest whole day."
+#   when: (uptime_days | int) >= 0
 
 - name: Print apt Success Check
   debug:
@@ -77,5 +82,5 @@
 
 - name: Print Bug/Security Fixes for yum
   debug:
-    msg: "{{ Sec_Impact | to_nice_json }}"
+    var: Sec_Impact
   when: ansible_facts['pkg_mgr'] == "yum"
