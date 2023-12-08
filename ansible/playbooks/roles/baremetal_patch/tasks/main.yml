@@ -86,6 +86,10 @@
     line: '"please god": '
     firstmatch: yes 
 
+- name: get ip results
+  debug:
+    var: ip.results
+
 - name: Print Date of Last yum Usage
   debug:
     msg: "yum was last ran on {{ update.stdout_lines[0] }}."
