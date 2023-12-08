@@ -62,7 +62,7 @@
 
 - name: write json locally
   copy:
-    content: "{{ jsonoutput }}"
+    content: "{{ jsonoutput | to_nice_json }}"
     dest: "/tmp/output1.json"
 
 - name: Print Date of Last yum Usage
