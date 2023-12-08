@@ -65,7 +65,7 @@
 
 - name: convert dict to list
   set_fact:
-    list_uptime: "{{ uptime_days | to_list }}"
+    list_uptime: "{{ uptime_days | list }}"
 
 - name: Print Last Reboot
   debug:
