@@ -123,9 +123,9 @@
 
 - name: Remove all backslashes in a file
   ansible.builtin.replace:
-    path: /tmp/master.json  # Replace with your file path
-    regexp: '\\\\'  # RegEx pattern for backslash
-    replace: ''  # Replace with nothing
+    path: /tmp/master.json
+    regexp: '(\",)+'
+    replace: '",'
   delegate_to: localhost
 
 - name: grab json file locally
