@@ -58,6 +58,11 @@
   when: ansible_facts['pkg_mgr'] == "yum"
   register: redhat_found
 
+- name: add redhat to master.json
+  lineinfile:
+    path: /tmp/master.json
+    line: "{{ redhat_found | to_nice_json}}"
+
 - name: Check for Debian Based OS
   debug:
     msg: "Found Debian-based Installation"
