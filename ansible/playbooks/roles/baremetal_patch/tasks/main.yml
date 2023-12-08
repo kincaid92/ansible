@@ -114,29 +114,22 @@
     create: yes
   delegate_to: localhost
 
-- name: try to copy it to remote host to grab
-  copy:
-    src: /tmp/master.json
-    dest: /tmp/master.json
-    remote_src: yes
-    mode: preserve
+- name: cleaning time
+  replace: 
+    path: /tmp/master.json
+    regexp: '^\s+|\s+$'
+    replace: ' '
   delegate_to: localhost
-# - name: cleaning time
-#   replace: 
-#     path: /tmp/master.json
-#     regexp: '^\s+|\s+$'
-#     replace: ' '
-#   delegate_to: localhost
 
 # - name: grab json file locally
 #   shell: cat /tmp/master.json
 #   register: hello
 #   delegate_to: localhost
 
-# - name: print the file
-#   debug:
-#     msg: "{{ hello.stdout_lines}}"
-#   delegate_to: localhost
+- name: print the file
+  debug:
+    msg: "{{ lookup('file', '/tmp/master.json') }}"
+  delegate_to: localhost
   
 
 
