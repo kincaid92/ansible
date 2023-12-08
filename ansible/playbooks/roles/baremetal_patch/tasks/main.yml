@@ -48,10 +48,10 @@
 
 ## ANCHOR everything below is printing data
 
-# - name: Print Hostname & IP(s)
-#   debug:
-#     var: ip
-#   register: jsonoutput
+- name: Print Hostname & IP(s)
+  debug:
+    var: device
+  register: jsonoutput
 
 # - name: Print Hostname & IP(s)
 #   debug:
@@ -62,7 +62,7 @@
 
 - name: write json locally
   copy:
-    content: "{{ device | to_nice_json }}"
+    content: "{{ jsonoutput | to_nice_json }}"
     dest: "/tmp/master.json"
   delegate_to: 172.16.101.183
 
