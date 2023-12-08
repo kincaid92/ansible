@@ -119,6 +119,12 @@
   register: hello
   delegate_to: localhost
 
+- name: cleaning time
+  lineinfile: 
+    path: /tmp/master.json
+    regexp: '\'
+    state: absent 
+
 - name: print the file
   debug:
     var: hello.stdout_lines
