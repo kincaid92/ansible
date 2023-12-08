@@ -114,16 +114,16 @@
     create: yes
   delegate_to: localhost
 
-- name: grab json file locally
-  shell: cat /tmp/master.json
-  register: hello
-  delegate_to: localhost
-
 - name: cleaning time
   lineinfile: 
     path: /tmp/master.json
     regexp: '\s*\n\s*'
     state: absent 
+  delegate_to: localhost
+
+- name: grab json file locally
+  shell: cat /tmp/master.json
+  register: hello
   delegate_to: localhost
 
 - name: print the file
