@@ -115,14 +115,14 @@
   delegate_to: localhost
 
 - name: cleaning time
-  lineinfile: 
+  replace: 
     path: /tmp/master.json
     regexp: '\s*\n\s*'
     replace: ' '
   delegate_to: localhost
 
 - name: cleaning time part 2
-  lineinfile: 
+  replace: 
     path: /tmp/master.json
     regexp: '\\\\\"'
     replace: '\"'
