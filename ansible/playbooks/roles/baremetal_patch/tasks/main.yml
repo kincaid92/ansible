@@ -51,7 +51,35 @@
   copy:
     content: "{{ redhat_found | to_nice_json }}"
     dest: "/tmp/redhat.json"
-
+  when: ansible_facts['pkg_mgr'] == "yum"
+  
+- name: clean up our redhat json data
+  replace: 
+    path: /tmp/redhat.json
+    regexp: "msg"
+    replace: "Message"
+  when: ansible_facts['pkg_mgr'] == "yum"
+  
+- name: clean up our redhat json data again
+  lineinfile: 
+    path: /tmp/redhat.json
+    regexp: '"changed": false,'
+    state: absent 
+  when: ansible_facts['pkg_mgr'] == "yum"
+  
+- name: clean up our redhat json data again and again
+  lineinfile: 
+    path: /tmp/redhat.json
+    regexp: '"failed": false,'
+    state: absent 
+  when: ansible_facts['pkg_mgr'] == "yum"
+  
+- name: clean up our redhat json data again and again and again SMILE
+  lineinfile: 
+    path: /tmp/redhat.json
+    insertbefore: '{'
+    line: '"RedHat Found": '
+    firstmatch: yes 
 
 - name: Check for Debian Based OS
   debug:
