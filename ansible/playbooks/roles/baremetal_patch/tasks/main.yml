@@ -121,7 +121,7 @@
 
 - name: print the file
   debug:
-    var: hello
+    var: hello | to_nice_json
   
 
 
