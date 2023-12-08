@@ -65,7 +65,13 @@
   replace: 
     path: /tmp/output1.json
     regexp: "msg"
-    replace: ""
+    replace:
+
+# - name: clean up our json data
+#   replace: 
+#     path: /tmp/output1.json
+#     regexp: '"changed": false,"'
+#     replace: 
 
 - name: Print Date of Last yum Usage
   debug:
