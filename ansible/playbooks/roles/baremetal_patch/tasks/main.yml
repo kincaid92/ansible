@@ -136,7 +136,7 @@
 
 - name: print the file
   debug:
-    var: master.stdout_lines
+    var: master.stdout_lines | to_nice_json
   delegate_to: localhost
 
 - name: print the file
