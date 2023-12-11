@@ -58,7 +58,7 @@
       IP Addresses: "{{ ansible_all_ipv4_addresses }}"
       Device Uptime: "{{ uptime_days.stdout_lines }} Days"
       Last yum update: "{{ (update.stdout_lines if 'update' in vars and ansible_facts['pkg_mgr'] == 'yum' and update.changed else []) }}"
-      Yum Security/Bug Fixes: "{{ Sec_Impact }}"
+      Yum Security/Bug Fixes: "{{ (Sec_Impact.stdout_lines if 'Sec_Impact' in vars and ansible_facts['pkg_mgr'] == 'yum' else [] }}"
       Last apt update: "{{ (apt_history.stdout_lines if 'apt_history' in vars and ansible_facts['pkg_mgr'] == 'apt' and apt_history.changed else []) }}"
 
 
