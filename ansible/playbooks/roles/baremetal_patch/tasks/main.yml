@@ -145,15 +145,7 @@
 - name: begin parsing our JSON file
   lineinfile:
     path: /tmp/master.json
-    regexp: '"stderr_lines"*'
-    state: absent
-  delegate_to: 172.16.101.183
-
-
-- name: begin parsing our JSON file
-  lineinfile:
-    path: /tmp/master.json
-    regexp: '"stdout"*'
+    regexp: '"stdout": *'
     state: absent
   delegate_to: 172.16.101.183
 
