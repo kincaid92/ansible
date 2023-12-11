@@ -87,10 +87,10 @@
 
 
 - name: begin parsing our JSON file
-  lineinfile:
+  replace:
     path: /tmp/master.json
-    regexp: '"failed"*'
-    state: absent
+    regexp: '^"failed".*$'
+    replace: ''
   delegate_to: 172.16.101.183
 
 
