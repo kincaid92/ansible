@@ -168,7 +168,7 @@
 
 - name: Create JSON output
   template:
-    src: your_template.j2
+    src: /home/cat/template.j2
     dest: /home/cat/out.json
   delegate_to: 172.16.101.183
 
