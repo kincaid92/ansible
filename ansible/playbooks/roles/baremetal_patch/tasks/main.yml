@@ -156,6 +156,13 @@
     line: '"agile-openstack.chi03.singlehop.net": {'
   delegate_to: 172.16.101.183
 
+- name: begin parsing our JSON file
+  lineinfile:
+    path: /tmp/master.json
+    regexp: 'dcops8 {'
+    line: '"dcops8": {'
+  delegate_to: 172.16.101.183
+
 # - name: Print apt Success Check
 #   debug:
 #     msg: "The apt cache has successfully updated (equivalent of apt-get update)."
