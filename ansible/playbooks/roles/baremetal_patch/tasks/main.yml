@@ -7,11 +7,7 @@
 #     var: ansible_facts
 
 ## ANCHOR hostname & IP
-# - name: grab hostname and IP's
-#   shell: hostname; ifconfig | sed -En 's/127.0.0.1//;s/.*inet (addr:)?(([0-9]*\.){3}[0-9]*).*/\2/p';
-#   register: ip
-
-- name: combine host facts
+- name: Grab Host Facts
   set_fact:
     device:
       hostname: "{{ ansible_facts['nodename'] }}"
@@ -55,60 +51,16 @@
   register: cache_results
 
 ## ANCHOR everything below is printing data
-
-# - name: Print Hostname & IP(s)
-#   debug:
-#     var: device
-#   register: jsonoutput
-
 - name: Aggregate host facts
   set_fact:
     all_devices: "{{ all_devices + [hostvars[item].device] }}"
   loop: "{{ ansible_play_hosts_all }}"
-
-# - name: Print Hostname & IP(s)
-#   debug:
-#     msg:
-#     - "Command - {{ ip.cmd }}"
-#     - "Results - {{ ip.stdout_lines }}"
-#   register: jsonoutput
 
 - name: write json locally
   copy:
     content: "{{ all_devices | to_nice_json }}"
     dest: "/tmp/master.json"
   delegate_to: 172.16.101.183
-
-# - name: Check for RedHat Based OS
-#   debug:
-#     msg: "Found RedHat-based Installation"
-#   #when: ansible_facts['pkg_mgr'] == "yum"
-#   register: redhat_found
-#   delegate_to: 172.16.101.183
-  
-
-# - name: add redhat to master.json
-#   lineinfile:
-#     path: /tmp/master.json
-#     line: "{{ redhat_found | to_nice_json }}"
-#     create: yes
-#   #when: ansible_facts['pkg_mgr'] == "yum"
-#   delegate_to: 172.16.101.183
-  
-# - name: Check for Debian Based OS
-#   debug:
-#     msg: "Found Debian-based Installation"
-#   #when: ansible_facts['pkg_mgr'] == "apt"
-#   register: debian_found
-#   delegate_to: 172.16.101.183
-
-# - name: add debian to master.json
-#   lineinfile:
-#     path: /tmp/master.json
-#     line: "{{ debian_found | to_nice_json }}"
-#     create: yes
-#   #when: ansible_facts['pkg_mgr'] == "apt"
-#   delegate_to: 172.16.101.183
 
 - name: grab date of last yum usage
   lineinfile:
@@ -131,6 +83,15 @@
     path: /tmp/master.json
     line: "{{ uptime_days | to_nice_json }}"
     create: yes
+  delegate_to: 172.16.101.183
+
+
+- name: begin parsing our JSON file
+  lineinfile:
+    path: /tmp/master.json
+    line: 
+      - "end*"
+    state: absent
   delegate_to: 172.16.101.183
 
 
