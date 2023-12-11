@@ -170,6 +170,7 @@
   template:
     src: /home/cat/template.j2
     dest: /home/cat/out.json
+    remote_src: yes
   delegate_to: 172.16.101.183
 
 # - name: Print apt Success Check
