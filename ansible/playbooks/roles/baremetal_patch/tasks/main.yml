@@ -97,7 +97,7 @@
               item: {
                 'hostname': hostvars[item].ansible_nodename,
                 'ip_addresses': hostvars[item].ansible_all_ipv4_addresses,
-                'Last yum update': (update.stdout_lines if yum_history is defined and yum_history.changed else [N\A]),
+                'Last yum update': (update.stdout_lines if update is defined and update.changed else [N\A]),
                 'Last apt update': (apt_history.stdout_lines if apt_history is defined and apt_history.changed else [N\A])
               }
             })
