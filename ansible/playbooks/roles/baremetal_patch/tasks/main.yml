@@ -59,7 +59,7 @@
 
 - name: Aggregate host facts
   set_fact:
-    all_devices: "{{ hostvars | json_query('*.device') }}"
+    all_devices: "{{ hostvars }}"
 
 # - name: Print Hostname & IP(s)
 #   debug:
