@@ -112,14 +112,25 @@
     line: '}'
   delegate_to: 172.16.101.183
 
+- name: create our python file
+  blockinfile:
+    path: /tmp/convert.py
+    block: |
+      from json2html import *
+      input = {
+
+      }
+
+      print(json2html.convert(json = input))
+    create: yes
+  delegate_to: 172.16.101.183
+
 - name: take our json output to create html file
-  shell: sed -i '3r /tmp/master.json' /home/cat/test.py
+  shell: sed -i '3r /tmp/master.json' /tmp/convert.py
   delegate_to: 172.16.101.183
   register: htmlout
 
-- name: grab html
-  debug:
-    var: htmlout
+
 
 
 # - name: Print apt Success Check
