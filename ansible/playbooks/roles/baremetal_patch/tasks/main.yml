@@ -78,6 +78,10 @@
   #when: ansible_facts['pkg_mgr'] == "apt"
   delegate_to: 172.16.101.183
 
+- name: test
+  debug:
+    var: "{{ all_devices }}"
+
 - name: grab uptime
   lineinfile:
     path: /tmp/master.json
