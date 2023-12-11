@@ -69,7 +69,7 @@
     host_data: >-
       {
         "FQDN": "{{ ansible_nodename }}",
-        "IP Addresses": "{{ ansible_all_ipv4_addresses | join(', ') }}",
+        "IP Addresses": "{{ ansible_all_ipv4_addresses }}",
         "Device Uptime": "{{ uptime_days.stdout_lines[0] }} Days"
         {% if ansible_facts['pkg_mgr'] == 'yum' %}
         , "Last yum update": "{{ update.stdout_lines | default([]) | join(', ') }}",
@@ -90,14 +90,14 @@
     dest: "/tmp/master.json"
   delegate_to: 172.16.101.183
 
-- name: manually retmove some things
+- name: manually remove some things
   replace:
     path: /tmp/master.json
     regexp: 'Updates Information Summary: updates,'
     replace: ''
   delegate_to: 172.16.101.183
 
-- name: manually retmove some things
+- name: manually remove some things
   replace:
     path: /tmp/master.json
     regexp: ', updateinfo summary done'
