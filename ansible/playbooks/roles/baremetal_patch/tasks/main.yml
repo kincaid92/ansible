@@ -79,8 +79,6 @@
         {% endif %}
       }
 
-
-
 - name: Combine data from all hosts
   set_fact:
     aggregated_data: "{{ aggregated_data | default({}) | combine({ item: hostvars[item].host_data }) }}"
@@ -91,6 +89,14 @@
     content: "{{ aggregated_data | to_nice_json }}"
     dest: "/tmp/master.json"
   delegate_to: 172.16.101.183
+
+- name: manually retmove some things
+  replace:
+    path: /tmp/master.json
+    regexp: 'Updates Information Summary: updates,'
+    line: ''
+  delegate_to: 172.16.101.183
+
   
 # - name: Print apt Success Check
 #   debug:
