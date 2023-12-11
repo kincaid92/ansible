@@ -90,7 +90,7 @@
   replace:
     path: /tmp/master.json
     regexp: |
-      "failed": false,|"delta":*|Yet another pattern
+      "failed"*|"delta":*|Yet another pattern
   delegate_to: 172.16.101.183
 
 
