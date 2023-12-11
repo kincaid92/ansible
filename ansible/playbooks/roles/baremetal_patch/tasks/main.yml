@@ -54,7 +54,7 @@
 
 - name: Print Hostname & IP(s)
   debug:
-    var: device
+    var: device.stdout_lines
   register: jsonoutput
 
 # - name: Print Hostname & IP(s)
