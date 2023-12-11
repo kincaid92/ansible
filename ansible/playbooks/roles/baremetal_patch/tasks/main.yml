@@ -54,117 +54,117 @@
 
 
 
-- name: Aggregate host facts
-  set_fact:
-    all_devices: "{{ all_devices + [hostvars[item].device] }}"
-  loop: "{{ ansible_play_hosts_all }}"
+# - name: Aggregate host facts
+#   set_fact:
+#     all_devices: "{{ all_devices + [hostvars[item].device] }}"
+#   loop: "{{ ansible_play_hosts_all }}"
 
-- name: write json locally
-  copy:
-    content: "{{ all_devices | to_nice_json }}"
-    dest: "/tmp/master.json"
-  delegate_to: 172.16.101.183
+# - name: write json locally
+#   copy:
+#     content: "{{ all_devices | to_nice_json }}"
+#     dest: "/tmp/master.json"
+#   delegate_to: 172.16.101.183
 
-- name: grab date of last yum usage
-  lineinfile:
-    path: /tmp/master.json
-    line: "{{ ansible_facts['nodename'] }} {{ update | to_nice_json }}"
-    create: yes
-  #when: ansible_facts['pkg_mgr'] == "yum"
-  delegate_to: 172.16.101.183
+# - name: grab date of last yum usage
+#   lineinfile:
+#     path: /tmp/master.json
+#     line: "{{ ansible_facts['nodename'] }} {{ update | to_nice_json }}"
+#     create: yes
+#   #when: ansible_facts['pkg_mgr'] == "yum"
+#   delegate_to: 172.16.101.183
 
-- name: grab date of last apt usage
-  lineinfile:
-    path: /tmp/master.json
-    line: "{{ ansible_facts['nodename'] }} {{ apt_history | to_nice_json }}"
-    create: yes
-  #when: ansible_facts['pkg_mgr'] == "apt"
-  delegate_to: 172.16.101.183
+# - name: grab date of last apt usage
+#   lineinfile:
+#     path: /tmp/master.json
+#     line: "{{ ansible_facts['nodename'] }} {{ apt_history | to_nice_json }}"
+#     create: yes
+#   #when: ansible_facts['pkg_mgr'] == "apt"
+#   delegate_to: 172.16.101.183
 
-- name: grab uptime
-  lineinfile:
-    path: /tmp/master.json
-    line: "{{ ansible_facts['nodename'] }} {{ uptime_days | to_nice_json }}"
-    create: yes
-  delegate_to: 172.16.101.183
+# - name: grab uptime
+#   lineinfile:
+#     path: /tmp/master.json
+#     line: "{{ ansible_facts['nodename'] }} {{ uptime_days | to_nice_json }}"
+#     create: yes
+#   delegate_to: 172.16.101.183
 
 
-- name: begin parsing our JSON file
-  lineinfile:
-    path: /tmp/master.json
-    regexp: '"failed"*'
-    state: absent
-  delegate_to: 172.16.101.183
+# - name: begin parsing our JSON file
+#   lineinfile:
+#     path: /tmp/master.json
+#     regexp: '"failed"*'
+#     state: absent
+#   delegate_to: 172.16.101.183
 
-- name: begin parsing our JSON file
-  lineinfile:
-    path: /tmp/master.json
-    regexp: '"changed":*'
-    state: absent
-  delegate_to: 172.16.101.183
+# - name: begin parsing our JSON file
+#   lineinfile:
+#     path: /tmp/master.json
+#     regexp: '"changed":*'
+#     state: absent
+#   delegate_to: 172.16.101.183
 
-- name: begin parsing our JSON file
-  lineinfile:
-    path: /tmp/master.json
-    regexp: '"delta"*'
-    state: absent
-  delegate_to: 172.16.101.183
+# - name: begin parsing our JSON file
+#   lineinfile:
+#     path: /tmp/master.json
+#     regexp: '"delta"*'
+#     state: absent
+#   delegate_to: 172.16.101.183
 
-- name: begin parsing our JSON file
-  lineinfile:
-    path: /tmp/master.json
-    regexp: '"end"*'
-    state: absent
-  delegate_to: 172.16.101.183
+# - name: begin parsing our JSON file
+#   lineinfile:
+#     path: /tmp/master.json
+#     regexp: '"end"*'
+#     state: absent
+#   delegate_to: 172.16.101.183
 
-- name: begin parsing our JSON file
-  lineinfile:
-    path: /tmp/master.json
-    regexp: '"msg"*'
-    state: absent
-  delegate_to: 172.16.101.183
+# - name: begin parsing our JSON file
+#   lineinfile:
+#     path: /tmp/master.json
+#     regexp: '"msg"*'
+#     state: absent
+#   delegate_to: 172.16.101.183
 
-- name: begin parsing our JSON file
-  lineinfile:
-    path: /tmp/master.json
-    regexp: '"rc"*'
-    state: absent
-  delegate_to: 172.16.101.183
+# - name: begin parsing our JSON file
+#   lineinfile:
+#     path: /tmp/master.json
+#     regexp: '"rc"*'
+#     state: absent
+#   delegate_to: 172.16.101.183
 
-- name: begin parsing our JSON file
-  lineinfile:
-    path: /tmp/master.json
-    regexp: '"start"*'
-    state: absent
-  delegate_to: 172.16.101.183
+# - name: begin parsing our JSON file
+#   lineinfile:
+#     path: /tmp/master.json
+#     regexp: '"start"*'
+#     state: absent
+#   delegate_to: 172.16.101.183
 
-- name: begin parsing our JSON file
-  lineinfile:
-    path: /tmp/master.json
-    regexp: '"stderr"*'
-    state: absent
-  delegate_to: 172.16.101.183
+# - name: begin parsing our JSON file
+#   lineinfile:
+#     path: /tmp/master.json
+#     regexp: '"stderr"*'
+#     state: absent
+#   delegate_to: 172.16.101.183
 
-- name: begin parsing our JSON file
-  lineinfile:
-    path: /tmp/master.json
-    regexp: '"stdout": *'
-    state: absent
-  delegate_to: 172.16.101.183
+# - name: begin parsing our JSON file
+#   lineinfile:
+#     path: /tmp/master.json
+#     regexp: '"stdout": *'
+#     state: absent
+#   delegate_to: 172.16.101.183
 
-- name: begin parsing our JSON file
-  lineinfile:
-    path: /tmp/master.json
-    regexp: 'agile-openstack.chi03.singlehop.net {'
-    line: '"agile-openstack.chi03.singlehop.net": {'
-  delegate_to: 172.16.101.183
+# - name: begin parsing our JSON file
+#   lineinfile:
+#     path: /tmp/master.json
+#     regexp: 'agile-openstack.chi03.singlehop.net {'
+#     line: '"agile-openstack.chi03.singlehop.net": {'
+#   delegate_to: 172.16.101.183
 
-- name: begin parsing our JSON file
-  lineinfile:
-    path: /tmp/master.json
-    regexp: 'dcops8 {'
-    line: '"dcops8": {'
-  delegate_to: 172.16.101.183
+# - name: begin parsing our JSON file
+#   lineinfile:
+#     path: /tmp/master.json
+#     regexp: 'dcops8 {'
+#     line: '"dcops8": {'
+#   delegate_to: 172.16.101.183
 
 - name: Set facts for Host1 and Host2 data
   set_fact:
@@ -186,6 +186,13 @@
 - name: Output the data structure
   debug:
     var: hosts_data
+
+- name: write json locally
+  copy:
+    content: "{{ hosts_data | to_nice_json }}"
+    dest: "/tmp/master.json"
+  delegate_to: 172.16.101.183
+  
 # - name: Print apt Success Check
 #   debug:
 #     msg: "The apt cache has successfully updated (equivalent of apt-get update)."
