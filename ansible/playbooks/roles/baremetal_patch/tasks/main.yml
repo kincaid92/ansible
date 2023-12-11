@@ -14,9 +14,13 @@
 - name: combine host facts
   set_fact:
     device:
-      - "{{ ansible_facts['nodename'] }}"
-      - "{{ ansible_facts['all_ipv4_addresses'] }}"
+      hostname: "{{ ansible_facts['nodename'] }}"
+      ip_addresses: "{{ ansible_facts['all_ipv4_addresses'] }}"
 
+- name: Initialize an empty list for storing results
+  set_fact:
+    all_devices: []
+    
 # ## ANCHOR device uptime
 - name: get uptime
   shell: w | awk 'NR==1{print $2,$3}' | sed 's/,//g'
@@ -59,7 +63,8 @@
 
 - name: Aggregate host facts
   set_fact:
-    all_devices: "{{ hostvars }}"
+    all_devices: "{{ all_devices + [hostvars[item].device] }}"
+  loop: "{{ ansible_play_hosts_all }}"
 
 # - name: Print Hostname & IP(s)
 #   debug:
