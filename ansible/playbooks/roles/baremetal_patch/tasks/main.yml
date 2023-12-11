@@ -73,14 +73,10 @@
 - name: grab date of last apt usage
   lineinfile:
     path: /tmp/master.json
-    line: "{{ ansible_facts['nodename'] }} {{ apt_history | to_nice_json }}"
+    line: "{{ ansible_facts['nodename'] }} + {{ apt_history | to_nice_json }}"
     create: yes
   #when: ansible_facts['pkg_mgr'] == "apt"
   delegate_to: 172.16.101.183
-
-- name: test
-  debug:
-    var: "{{ ansible_play_hosts_all }}"
 
 - name: grab uptime
   lineinfile:
