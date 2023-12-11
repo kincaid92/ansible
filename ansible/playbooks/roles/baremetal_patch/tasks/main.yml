@@ -89,7 +89,8 @@
 - name: begin parsing our JSON file
   lineinfile:
     path: /tmp/master.json
-    line: '"failed": false,'
+    regexp: 
+      - '"failed": false,'
     state: absent
   delegate_to: 172.16.101.183
 
