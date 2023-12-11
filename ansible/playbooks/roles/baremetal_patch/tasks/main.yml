@@ -2,9 +2,6 @@
 
 ## TODO make a shit ton of files for every task in proper JSON and combine them into 1 json file to be converted to HTML
 
-# - name: Print all available facts
-#   ansible.builtin.debug:
-#     var: ansible_facts
 
 ## ANCHOR hostname & IP
 - name: Grab Host Facts
@@ -21,9 +18,6 @@
 - name: get uptime
   shell: w | awk 'NR==1{print $2,$3}' | sed 's/,//g'
   register: uptime_days
-# - name: Set Uptime Fact
-#   set_fact:
-#     uptime_days: "{{ (ansible_facts['uptime_seconds'] | int / 86400) | round(0) }}"
 
 ## ANCHOR last yum update
 - name: Date of Last Update
@@ -51,19 +45,6 @@
   register: cache_results
 
 ## ANCHOR everything below is printing data
-# - name: Store host-specific data
-#   set_fact:
-#     host_data: 
-#       FQDN: "{{ ansible_nodename }}"
-#       IP Addresses: "{{ ansible_all_ipv4_addresses }}"
-#       Device Uptime: "{{ uptime_days.stdout_lines }} Days"
-#       {% if ansible_facts['pkg_mgr'] == 'yum' %}
-#       Last yum update: "{{ (update.stdout_lines if 'update' in vars and ansible_facts['pkg_mgr'] == 'yum' and update.changed else []) }}"
-#       Yum Security/Bug Fixes: "{{ (Sec_Impact.stdout_lines if 'Sec_Impact' in vars and ansible_facts['pkg_mgr'] == 'yum' else []) }}"
-#       {% elif ansible_facts['pkg_mgr'] == 'apt' %}
-#       Last apt update: "{{ (apt_history.stdout_lines if 'apt_history' in vars and ansible_facts['pkg_mgr'] == 'apt' and apt_history.changed else []) }}"
-#       {% endif %}
-
 - name: Store host-specific data
   set_fact:
     host_data: 
@@ -73,8 +54,6 @@
       Last Yum Update: "{{ update.stdout_lines | default([]) if ansible_facts['pkg_mgr'] == 'yum' else omit }}"
       Yum Security Bug Fixes: "{{ Sec_Impact.stdout_lines | default([]) if ansible_facts['pkg_mgr'] == 'yum' else omit }}"
       Last Apt Update: "{{ apt_history.stdout_lines | default([]) if ansible_facts['pkg_mgr'] == 'apt' else omit }}"
-
-
 
 - name: Combine data from all hosts
   set_fact:
@@ -115,6 +94,10 @@
     replace: ''
   delegate_to: 172.16.101.183
 
+- name: last bit of cleaning
+  shell: sed -i '1d;$d' /tmp/master.json
+  delegate_to: 172.16.101.183
+
 # - name: Print apt Success Check
 #   debug:
 #     msg: "The apt cache has successfully updated (equivalent of apt-get update)."
@@ -124,8 +107,3 @@
 #   debug:
 #     msg: "The apt cache has failed it's update. Please manually troubleshoot"
 #   when: ansible_facts['pkg_mgr'] == "apt" and cache_results["cache_updated"] == false
-
-# - name: Print Bug/Security Fixes for yum
-#   debug:
-#     var: Sec_Impact | type_debug
-#   when: ansible_facts['pkg_mgr'] == "yum"
