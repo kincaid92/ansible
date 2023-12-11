@@ -27,7 +27,7 @@
 
 ## ANCHOR last yum update
 - name: Date of Last Update
-  shell: "rpm -qa -last | awk '{print $2 , $4 , $5}' | sort -k3,3nr -k2,2M -k1,1 | uniq | head"
+  shell: "rpm -qa -last | awk 'NR==1{print $2 , $4 , $5}' | sort -k3,3nr -k2,2M -k1,1 | uniq | head"
   when: ansible_facts['pkg_mgr'] == "yum"
   register: update
 
@@ -97,7 +97,13 @@
     replace: ''
   delegate_to: 172.16.101.183
 
-  
+- name: manually retmove some things
+  replace:
+    path: /tmp/master.json
+    regexp: ', updateinfo summary done'
+    replace: ''
+  delegate_to: 172.16.101.183
+
 # - name: Print apt Success Check
 #   debug:
 #     msg: "The apt cache has successfully updated (equivalent of apt-get update)."
