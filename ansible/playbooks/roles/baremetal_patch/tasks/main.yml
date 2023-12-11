@@ -112,7 +112,7 @@
 
 - name: Output the data structure
   debug:
-    var: apt_history
+    var: update.stdout_lines
 
 - name: write json locally
   copy:
