@@ -87,12 +87,75 @@
 
 
 - name: begin parsing our JSON file
-  replace:
+  lineinfile:
     path: /tmp/master.json
-    regexp: '^"failed".*$'
-    replace: ''
+    regexp: '"failed"*'
+    state: absent
   delegate_to: 172.16.101.183
 
+- name: begin parsing our JSON file
+  lineinfile:
+    path: /tmp/master.json
+    regexp: '"changed":*'
+    state: absent
+  delegate_to: 172.16.101.183
+
+- name: begin parsing our JSON file
+  lineinfile:
+    path: /tmp/master.json
+    regexp: '"delta"*'
+    state: absent
+  delegate_to: 172.16.101.183
+
+- name: begin parsing our JSON file
+  lineinfile:
+    path: /tmp/master.json
+    regexp: '"end"*'
+    state: absent
+  delegate_to: 172.16.101.183
+
+- name: begin parsing our JSON file
+  lineinfile:
+    path: /tmp/master.json
+    regexp: '"msg"*'
+    state: absent
+  delegate_to: 172.16.101.183
+
+- name: begin parsing our JSON file
+  lineinfile:
+    path: /tmp/master.json
+    regexp: '"rc"*'
+    state: absent
+  delegate_to: 172.16.101.183
+
+- name: begin parsing our JSON file
+  lineinfile:
+    path: /tmp/master.json
+    regexp: '"start"*'
+    state: absent
+  delegate_to: 172.16.101.183
+
+- name: begin parsing our JSON file
+  lineinfile:
+    path: /tmp/master.json
+    regexp: '"stderr"*'
+    state: absent
+  delegate_to: 172.16.101.183
+
+- name: begin parsing our JSON file
+  lineinfile:
+    path: /tmp/master.json
+    regexp: '"stderr_lines"*'
+    state: absent
+  delegate_to: 172.16.101.183
+
+
+- name: begin parsing our JSON file
+  lineinfile:
+    path: /tmp/master.json
+    regexp: '"stdout"*'
+    state: absent
+  delegate_to: 172.16.101.183
 
 # - name: Print apt Success Check
 #   debug:
