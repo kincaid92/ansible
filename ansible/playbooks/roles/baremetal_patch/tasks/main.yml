@@ -113,7 +113,7 @@
   delegate_to: 172.16.101.183
 
 - name: take our json output to create html file
-  shell: sed -i '3r /tmp/master.json' test.py
+  shell: sed -i '3r /tmp/master.json' /home/cat/test.py
   delegate_to: 172.16.101.183
   register: htmlout
 
