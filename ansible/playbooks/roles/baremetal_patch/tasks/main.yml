@@ -73,9 +73,9 @@
         "Device Uptime": "{{ uptime_days.stdout_lines[0] }} Days"
         {% if ansible_facts['pkg_mgr'] == 'yum' %}
         , "Last yum update": "{{ update.stdout_lines | default([]) | join(', ') }}",
-        "Yum Security/Bug Fixes": "{{ Sec_Impact.stdout_lines | default([]) | join(', ') }}"
+        "Yum Security/Bug Fixes": "{{ Sec_Impact.stdout_lines | default([]) | join('\n') }}"
         {% elif ansible_facts['pkg_mgr'] == 'apt' %}
-        , "Last apt update": "{{ apt_history.stdout_lines | default([]) | join(', ') }}"
+        , "Last apt update": "{{ apt_history.stdout_lines | default([]) | join(',') }}"
         {% endif %}
       }
 
