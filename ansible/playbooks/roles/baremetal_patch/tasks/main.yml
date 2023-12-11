@@ -37,11 +37,11 @@
   register: apt_history
   when: ansible_facts['pkg_mgr'] == "apt"
 
-# ## ANCHOR yum updateinfo (security/bug fixes)
-# - name: Check Fixes
-#   shell: 'yum updateinfo | grep "Update*" -A30'
-#   when: ansible_facts['pkg_mgr'] == "yum"
-#   register: Sec_Impact
+## ANCHOR yum updateinfo (security/bug fixes)
+- name: Check Fixes
+  shell: 'yum updateinfo | grep "Update*" -A30'
+  when: ansible_facts['pkg_mgr'] == "yum"
+  register: Sec_Impact
 
 ## ANCHOR update the apt cache, stage upgrade
 - name: Update apt Cache
@@ -54,20 +54,18 @@
 - name: Store host-specific data
   set_fact:
     host_data: 
-      hostname: "{{ ansible_nodename }}"
-      ip_addresses: "{{ ansible_all_ipv4_addresses }}"
-      Device_Uptime: "{{ uptime_days.stdout_lines }} Days"
+      FQDN: "{{ ansible_nodename }}"
+      IP Addresses: "{{ ansible_all_ipv4_addresses }}"
+      Device Uptime: "{{ uptime_days.stdout_lines }} Days"
       Last yum update: "{{ (update.stdout_lines if 'update' in vars and ansible_facts['pkg_mgr'] == 'yum' and update.changed else []) }}"
+      Yum Security/Bug Fixes: "{{ Sec_impact.stdout_lines }}"
       Last apt update: "{{ (apt_history.stdout_lines if 'apt_history' in vars and ansible_facts['pkg_mgr'] == 'apt' and apt_history.changed else []) }}"
+
 
 - name: Combine data from all hosts
   set_fact:
     aggregated_data: "{{ aggregated_data | default({}) | combine({ item: hostvars[item].host_data }) }}"
   loop: "{{ ansible_play_hosts_all }}"
-
-- name: Output the data structure
-  debug:
-    var: aggregated_data
 
 - name: write json locally
   copy:
