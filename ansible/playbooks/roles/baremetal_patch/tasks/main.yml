@@ -91,17 +91,17 @@
 
 - name: Set facts for Host1 and Host2 data
   set_fact:
-        hosts_data: >
-          {{
-            hosts_data | default({}) | combine({
-              item: {
-                'hostname': hostvars[item].ansible_nodename,
-                'ip_addresses': hostvars[item].ansible_all_ipv4_addresses,
-                'Last yum update': (update.stdout_lines if update is defined and update.changed else [N\A]),
-                'Last apt update': (apt_history.stdout_lines if apt_history is defined and apt_history.changed else [N\A])
-              }
-            })
-          }}
+    hosts_data: >
+      {{
+        hosts_data | default({}) | combine({
+          item: {
+            'hostname': hostvars[item].ansible_hostname,
+            'ip_addresses': hostvars[item].ansible_all_ipv4_addresses,
+            'Last yum update': (yum_update.stdout_lines if yum_update is defined else []),
+            'Last apt update': (apt_update.stdout_lines if apt_update is defined else [])
+          }
+        })
+      }}
   loop: "{{ ansible_play_hosts }}"
   when: ansible_facts['pkg_mgr'] in ['yum', 'apt']
 
