@@ -88,34 +88,24 @@
 #     create: yes
 #   delegate_to: 172.16.101.183
 
-- name: Debug package manager
-  debug:
-    msg: "Package manager for {{ inventory_hostname }} is {{ ansible_facts['pkg_mgr'] }}"
 
-
-- name: Set facts for Host data
+- name: Store host-specific data
   set_fact:
-    hosts_data: >
-      {{
-        hosts_data | default({}) | combine({
-          inventory_hostname: {
-            'hostname': ansible_hostname,
-            'ip_addresses': ansible_all_ipv4_addresses,
-            'Last yum update': (yum_history.stdout_lines if yum_history is defined and yum_history.changed else []),
-            'Last apt update': (apt_history.stdout_lines if apt_history is defined and apt_history.changed else [])
-          }
-        })
-      }}
-
+    host_data: {
+      'hostname': ansible_hostname,
+      'ip_addresses': ansible_all_ipv4_addresses,
+      'Last yum update': (update.stdout_lines if 'update' in vars and ansible_facts['pkg_mgr'] == 'yum' and update.changed else []),
+      'Last apt update': (apt_history.stdout_lines if 'apt_history' in vars and ansible_facts['pkg_mgr'] == 'apt' and apt_history.changed else [])
+    }
 
 - name: Output the data structure
   debug:
     var: hosts_data
 
-    - name: Combine data from all hosts
-      set_fact:
-        aggregated_data: "{{ aggregated_data | default({}) | combine({ item: hostvars[item].host_data }) }}"
-      loop: "{{ ansible_play_hosts_all }}"
+- name: Combine data from all hosts
+  set_fact:
+    aggregated_data: "{{ aggregated_data | default({}) | combine({ item: hostvars[item].host_data }) }}"
+  loop: "{{ ansible_play_hosts_all }}"
 
 - name: write json locally
   copy:
