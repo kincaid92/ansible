@@ -90,7 +90,7 @@
   lineinfile:
     path: /tmp/master.json
     line: 
-      - "end*"
+      - "end"
     state: absent
   delegate_to: 172.16.101.183
 
