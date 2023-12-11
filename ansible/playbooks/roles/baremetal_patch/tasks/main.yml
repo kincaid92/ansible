@@ -2,9 +2,9 @@
 
 ## TODO make a shit ton of files for every task in proper JSON and combine them into 1 json file to be converted to HTML
 
-- name: Print all available facts
-  ansible.builtin.debug:
-    var: ansible_facts
+# - name: Print all available facts
+#   ansible.builtin.debug:
+#     var: ansible_facts
 
 ## ANCHOR hostname & IP
 # - name: grab hostname and IP's
