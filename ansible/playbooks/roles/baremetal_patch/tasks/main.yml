@@ -37,11 +37,11 @@
   register: apt_history
   when: ansible_facts['pkg_mgr'] == "apt"
 
-## ANCHOR yum updateinfo (security/bug fixes)
-- name: Check Fixes
-  shell: 'yum updateinfo | grep "Update*" -A30'
-  when: ansible_facts['pkg_mgr'] == "yum"
-  register: Sec_Impact
+# ## ANCHOR yum updateinfo (security/bug fixes)
+# - name: Check Fixes
+#   shell: 'yum updateinfo | grep "Update*" -A30'
+#   when: ansible_facts['pkg_mgr'] == "yum"
+#   register: Sec_Impact
 
 ## ANCHOR update the apt cache, stage upgrade
 - name: Update apt Cache
@@ -65,7 +65,7 @@
 - name: grab date of last yum usage
   lineinfile:
     path: /tmp/master.json
-    line: "{{ update | to_nice_json }}"
+    line: "{{ ansible_facts['nodename'] }} {{ update | to_nice_json }}"
     create: yes
   #when: ansible_facts['pkg_mgr'] == "yum"
   delegate_to: 172.16.101.183
@@ -73,7 +73,7 @@
 - name: grab date of last apt usage
   lineinfile:
     path: /tmp/master.json
-    line: "{{ ansible_facts['nodename'] }} + {{ apt_history | to_nice_json }}"
+    line: "{{ ansible_facts['nodename'] }} {{ apt_history | to_nice_json }}"
     create: yes
   #when: ansible_facts['pkg_mgr'] == "apt"
   delegate_to: 172.16.101.183
@@ -81,7 +81,7 @@
 - name: grab uptime
   lineinfile:
     path: /tmp/master.json
-    line: "{{ uptime_days | to_nice_json }}"
+    line: "{{ ansible_facts['nodename'] }} {{ uptime_days | to_nice_json }}"
     create: yes
   delegate_to: 172.16.101.183
 
