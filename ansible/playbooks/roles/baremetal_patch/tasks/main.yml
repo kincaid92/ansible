@@ -101,6 +101,20 @@
     replace: ''
   delegate_to: 172.16.101.183
 
+- name: manually remove some things
+  replace:
+    path: /tmp/master.json
+    regexp: '"",'
+    replace: ''
+  delegate_to: 172.16.101.183
+
+- name: manually remove some things
+  replace:
+    path: /tmp/master.json
+    regexp: '""'
+    replace: ''
+  delegate_to: 172.16.101.183
+
 # - name: Print apt Success Check
 #   debug:
 #     msg: "The apt cache has successfully updated (equivalent of apt-get update)."
