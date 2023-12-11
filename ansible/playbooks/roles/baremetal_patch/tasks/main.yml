@@ -98,6 +98,15 @@
   shell: sed -i 's/^@//;$d' /tmp/master.json
   delegate_to: 172.16.101.183
 
+- name: last bit of cleaning
+  shell: sed -i '1s/^{//' /tmp/master.json
+  delegate_to: 172.16.101.183
+
+- name: last bit of cleaning
+  shell: sed -i '$s/}]$//' /tmp/master.json
+  delegate_to: 172.16.101.183
+
+
 # - name: Print apt Success Check
 #   debug:
 #     msg: "The apt cache has successfully updated (equivalent of apt-get update)."
