@@ -91,17 +91,17 @@
 
 - name: Set facts for Host1 and Host2 data
   set_fact:
-    hosts_data: >
-      {{
-        hosts_data | default({}) | combine({
-          inventory_hostname: {
-            'hostname': ansible_nodename,
-            'ip_addresses': ansible_all_ipv4_addresses,
-            'Last yum update': (update.stdout_lines if yum_history is defined and yum_history.changed else []),
-            'Last apt update': (apt_history.stdout_lines if apt_history is defined and apt_history.changed else [])
-          }
-        })
-      }}
+        hosts_data: >
+          {{
+            hosts_data | default({}) | combine({
+              item: {
+                'hostname': hostvars[item].ansible_nodename,
+                'ip_addresses': hostvars[item].ansible_all_ipv4_addresses,
+                'Last yum update': (update.stdout_lines if yum_history is defined and yum_history.changed else [N\A]),
+                'Last apt update': (apt_history.stdout_lines if apt_history is defined and apt_history.changed else [N\A])
+              }
+            })
+          }}
   loop: "{{ ansible_play_hosts }}"
   when: ansible_facts['pkg_mgr'] in ['yum', 'apt']
 
@@ -109,10 +109,6 @@
 - name: Output the data structure
   debug:
     var: hosts_data
-
-- name: Output the data structure
-  debug:
-    var: update.stdout_lines
 
 - name: write json locally
   copy:
