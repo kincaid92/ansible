@@ -94,7 +94,7 @@
   replace:
     path: /tmp/master.json
     regexp: 'Updates Information Summary: updates,'
-    line: ''
+    replace: ''
   delegate_to: 172.16.101.183
 
   
