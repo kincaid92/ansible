@@ -95,12 +95,12 @@
 
 - name: Store host-specific data
   set_fact:
-    host_data: {
-      'hostname': ansible_hostname,
-      'ip_addresses': ansible_all_ipv4_addresses,
-      'Last yum update': (update.stdout_lines if 'update' in vars and ansible_facts['pkg_mgr'] == 'yum' and update.changed else []),
-      'Last apt update': (apt_history.stdout_lines if 'apt_history' in vars and ansible_facts['pkg_mgr'] == 'apt' and apt_history.changed else [])
-    }
+    host_data: 
+      hostname: "{{ ansible_hostname }}"
+      ip_addresses: "{{ ansible_all_ipv4_addresses }}"
+      Last yum update: "{{ (update.stdout_lines if 'update' in vars and ansible_facts['pkg_mgr'] == 'yum' and update.changed else []) }}"
+      Last apt update: "{{ (apt_history.stdout_lines if 'apt_history' in vars and ansible_facts['pkg_mgr'] == 'apt' and apt_history.changed else []) }}"
+
 
 - name: Output the data structure
   debug:
