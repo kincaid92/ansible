@@ -110,6 +110,10 @@
   debug:
     var: hosts_data
 
+- name: Output the data structure
+  debug:
+    var: apt_history
+
 - name: write json locally
   copy:
     content: "{{ hosts_data | to_nice_json }}"
