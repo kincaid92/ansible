@@ -112,12 +112,7 @@
     line: '}'
   delegate_to: 172.16.101.183
 
-- name: migrate the info to python script
-  blockinfile:
-    path: /home/cat/test.py
-    insertafter: 'input = {'
-    block: '{{ lookup('ansible.builtin.file', './tmp/master.json') }}'
-  delegate_to: 172.16.101.183
+
 
 
 # - name: Print apt Success Check
