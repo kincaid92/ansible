@@ -125,10 +125,11 @@
     create: yes
   delegate_to: 172.16.101.183
 
-# - name: take our json output to create html file
-#   shell: sed -i '3r /tmp/master.json' /tmp/convert.py
-#   delegate_to: 172.16.101.183
-#   register: htmlout
+- name: take our json output to create html file
+  shell: sed -i '3r /tmp/master.json' /tmp/convert.py
+  delegate_to: 172.16.101.183
+  run_once: true
+  register: htmlout
 
 
 
