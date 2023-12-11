@@ -7,15 +7,15 @@
 #     var: ansible_facts
 
 ## ANCHOR hostname & IP
-# - name: grab hostname and IP's
-#   shell: hostname; ifconfig | sed -En 's/127.0.0.1//;s/.*inet (addr:)?(([0-9]*\.){3}[0-9]*).*/\2/p';
-#   register: ip
+- name: grab hostname and IP's
+  shell: hostname; ifconfig | sed -En 's/127.0.0.1//;s/.*inet (addr:)?(([0-9]*\.){3}[0-9]*).*/\2/p';
+  register: ip
 
-- name: combine host facts
-  set_fact:
-    device:
-      - "{{ ansible_facts['nodename'] }}"
-      - "{{ ansible_facts['all_ipv4_addresses'] }}"
+# - name: combine host facts
+#   set_fact:
+#     device:
+#       - "{{ ansible_facts['nodename'] }}"
+#       - "{{ ansible_facts['all_ipv4_addresses'] }}"
 
 # ## ANCHOR device uptime
 - name: get uptime
@@ -54,7 +54,7 @@
 
 - name: Print Hostname & IP(s)
   debug:
-    var: device.stdout_lines
+    var: ip
   register: jsonoutput
 
 # - name: Print Hostname & IP(s)
