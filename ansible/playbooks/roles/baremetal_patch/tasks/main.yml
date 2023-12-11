@@ -44,7 +44,7 @@
   when: ansible_facts['pkg_mgr'] == "apt"
   register: cache_results
 
-## ANCHOR everything below is printing data
+## ANCHOR set facts for gathering our json data
 - name: Store host-specific data
   set_fact:
     host_data: 
@@ -102,7 +102,7 @@
   shell: sed -i '1s/^{//' /tmp/master.json
   delegate_to: 172.16.101.183
 
-- name: last bit of cleaning
+- name: last bit of cleaning for real this time
   shell: sed -i '$s/}]$//' /tmp/master.json
   delegate_to: 172.16.101.183
 
@@ -125,22 +125,8 @@
     create: yes
   delegate_to: 172.16.101.183
 
-- name: take our json output to create html file
+- name: migrate json data to python file to convert to html
   shell: sed -i '3r /tmp/master.json' /tmp/convert.py
   delegate_to: 172.16.101.183
   run_once: true
-  register: htmlout
 
-
-
-
-
-# - name: Print apt Success Check
-#   debug:
-#     msg: "The apt cache has successfully updated (equivalent of apt-get update)."
-#   when: ansible_facts['pkg_mgr'] == "apt" and cache_results["cache_updated"] == true
-
-# - name: Print apt Failure Check
-#   debug:
-#     msg: "The apt cache has failed it's update. Please manually troubleshoot"
-#   when: ansible_facts['pkg_mgr'] == "apt" and cache_results["cache_updated"] == false
