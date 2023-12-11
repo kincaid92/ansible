@@ -4,7 +4,7 @@
 
 
 ## ANCHOR hostname & IP
-- name: Grab Host Facts
+- name: Grab hostname/ip
   set_fact:
     device:
       hostname: "{{ ansible_facts['nodename'] }}"
