@@ -51,50 +51,12 @@
   register: cache_results
 
 ## ANCHOR everything below is printing data
-
-
-
-# - name: Aggregate host facts
-#   set_fact:
-#     all_devices: "{{ all_devices + [hostvars[item].device] }}"
-#   loop: "{{ ansible_play_hosts_all }}"
-
-# - name: write json locally
-#   copy:
-#     content: "{{ all_devices | to_nice_json }}"
-#     dest: "/tmp/master.json"
-#   delegate_to: 172.16.101.183
-
-# - name: grab date of last yum usage
-#   lineinfile:
-#     path: /tmp/master.json
-#     line: "{{ ansible_facts['nodename'] }} {{ update | to_nice_json }}"
-#     create: yes
-#   #when: ansible_facts['pkg_mgr'] == "yum"
-#   delegate_to: 172.16.101.183
-
-# - name: grab date of last apt usage
-#   lineinfile:
-#     path: /tmp/master.json
-#     line: "{{ ansible_facts['nodename'] }} {{ apt_history | to_nice_json }}"
-#     create: yes
-#   #when: ansible_facts['pkg_mgr'] == "apt"
-#   delegate_to: 172.16.101.183
-
-# - name: grab uptime
-#   lineinfile:
-#     path: /tmp/master.json
-#     line: "{{ ansible_facts['nodename'] }} {{ uptime_days | to_nice_json }}"
-#     create: yes
-#   delegate_to: 172.16.101.183
-
-
 - name: Store host-specific data
   set_fact:
     host_data: 
       hostname: "{{ ansible_hostname }}"
       ip_addresses: "{{ ansible_all_ipv4_addresses }}"
-      Device_Uptime: "{{ uptime_days }}"
+      Device_Uptime: "{{ uptime_days.stdout_lines }}"
       Last yum update: "{{ (update.stdout_lines if 'update' in vars and ansible_facts['pkg_mgr'] == 'yum' and update.changed else []) }}"
       Last apt update: "{{ (apt_history.stdout_lines if 'apt_history' in vars and ansible_facts['pkg_mgr'] == 'apt' and apt_history.changed else []) }}"
 
