@@ -95,7 +95,7 @@
   delegate_to: 172.16.101.183
 
 - name: last bit of cleaning
-  shell: tac /tmp/master.json | sed '1s/^{//' | tac > /tmp/master1 && mv /tmp/master1 /tmp/master.json
+  shell: sed -i '$d' /tmp/master.json
   delegate_to: 172.16.101.183
 
 - name: last bit of cleaning
