@@ -166,12 +166,26 @@
     line: '"dcops8": {'
   delegate_to: 172.16.101.183
 
-- name: Create JSON output
-  template:
-    src: /opt/ansible/temp.j2
-    dest: /home/cat/out.json
-  delegate_to: 172.16.101.183
+- name: Set facts for Host1 and Host2 data
+  set_fact:
+    hosts_data: >
+      {{
+        hosts_data | default({}) | combine({
+          item: {
+            'hostname': hostvars[item].ansible_hostname,
+            'ip_addresses': hostvars[item].ansible_all_ipv4_addresses,
+            'Last yum update': (yum_update.stdout_lines if yum_update is defined else []),
+            'Last apt update': (apt_update.stdout_lines if apt_update is defined else [])
+          }
+        })
+      }}
+  loop: "{{ ansible_play_hosts }}"
+  when: ansible_facts['pkg_mgr'] in ['yum', 'apt']
 
+
+- name: Output the data structure
+  debug:
+    var: hosts_data
 # - name: Print apt Success Check
 #   debug:
 #     msg: "The apt cache has successfully updated (equivalent of apt-get update)."
