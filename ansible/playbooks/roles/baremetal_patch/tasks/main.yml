@@ -80,7 +80,7 @@
 
 - name: test
   debug:
-    var: "{{ all_devices }}"
+    var: "{{ ansible_play_hosts_all }}"
 
 - name: grab uptime
   lineinfile:
