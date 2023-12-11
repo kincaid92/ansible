@@ -94,11 +94,11 @@
     hosts_data: >
       {{
         hosts_data | default({}) | combine({
-          item: {
-            'hostname': hostvars[item].ansible_nodename,
-            'ip_addresses': hostvars[item].ansible_all_ipv4_addresses,
-            'Last yum update': (update if yum_update is defined else []),
-            'Last apt update': (apt_history if apt_update is defined else [])
+          inventory_hostname: {
+            'hostname': ansible_nodename,
+            'ip_addresses': ansible_all_ipv4_addresses,
+            'Last yum update': (update.stdout_lines if yum_history is defined and yum_history.changed else []),
+            'Last apt update': (apt_history.stdout_lines if apt_history is defined and apt_history.changed else [])
           }
         })
       }}
