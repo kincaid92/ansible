@@ -89,90 +89,13 @@
 #   delegate_to: 172.16.101.183
 
 
-# - name: begin parsing our JSON file
-#   lineinfile:
-#     path: /tmp/master.json
-#     regexp: '"failed"*'
-#     state: absent
-#   delegate_to: 172.16.101.183
-
-# - name: begin parsing our JSON file
-#   lineinfile:
-#     path: /tmp/master.json
-#     regexp: '"changed":*'
-#     state: absent
-#   delegate_to: 172.16.101.183
-
-# - name: begin parsing our JSON file
-#   lineinfile:
-#     path: /tmp/master.json
-#     regexp: '"delta"*'
-#     state: absent
-#   delegate_to: 172.16.101.183
-
-# - name: begin parsing our JSON file
-#   lineinfile:
-#     path: /tmp/master.json
-#     regexp: '"end"*'
-#     state: absent
-#   delegate_to: 172.16.101.183
-
-# - name: begin parsing our JSON file
-#   lineinfile:
-#     path: /tmp/master.json
-#     regexp: '"msg"*'
-#     state: absent
-#   delegate_to: 172.16.101.183
-
-# - name: begin parsing our JSON file
-#   lineinfile:
-#     path: /tmp/master.json
-#     regexp: '"rc"*'
-#     state: absent
-#   delegate_to: 172.16.101.183
-
-# - name: begin parsing our JSON file
-#   lineinfile:
-#     path: /tmp/master.json
-#     regexp: '"start"*'
-#     state: absent
-#   delegate_to: 172.16.101.183
-
-# - name: begin parsing our JSON file
-#   lineinfile:
-#     path: /tmp/master.json
-#     regexp: '"stderr"*'
-#     state: absent
-#   delegate_to: 172.16.101.183
-
-# - name: begin parsing our JSON file
-#   lineinfile:
-#     path: /tmp/master.json
-#     regexp: '"stdout": *'
-#     state: absent
-#   delegate_to: 172.16.101.183
-
-# - name: begin parsing our JSON file
-#   lineinfile:
-#     path: /tmp/master.json
-#     regexp: 'agile-openstack.chi03.singlehop.net {'
-#     line: '"agile-openstack.chi03.singlehop.net": {'
-#   delegate_to: 172.16.101.183
-
-# - name: begin parsing our JSON file
-#   lineinfile:
-#     path: /tmp/master.json
-#     regexp: 'dcops8 {'
-#     line: '"dcops8": {'
-#   delegate_to: 172.16.101.183
-
 - name: Set facts for Host1 and Host2 data
   set_fact:
     hosts_data: >
       {{
         hosts_data | default({}) | combine({
           item: {
-            'hostname': hostvars[item].ansible_hostname,
+            'hostname': hostvars[item].ansible_nodename,
             'ip_addresses': hostvars[item].ansible_all_ipv4_addresses,
             'Last yum update': (yum_update.stdout_lines if yum_update is defined else []),
             'Last apt update': (apt_update.stdout_lines if apt_update is defined else [])
@@ -189,10 +112,10 @@
 
 - name: write json locally
   copy:
-    content: "{{ hosts_data }}"
+    content: "{{ hosts_data | to_nice_json }}"
     dest: "/tmp/master.json"
   delegate_to: 172.16.101.183
-
+  
 # - name: Print apt Success Check
 #   debug:
 #     msg: "The apt cache has successfully updated (equivalent of apt-get update)."
