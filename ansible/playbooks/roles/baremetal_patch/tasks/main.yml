@@ -69,15 +69,16 @@
     host_data: >-
       {
         "FQDN": "{{ ansible_nodename }}",
-        "IP Addresses": "{{ ansible_all_ipv4_addresses }}",
-        "Device Uptime": "{{ uptime_days.stdout_lines }} Days"
+        "IP Addresses": "{{ ansible_all_ipv4_addresses | join(', ') }}",
+        "Device Uptime": "{{ uptime_days.stdout_lines[0] }} Days"
         {% if ansible_facts['pkg_mgr'] == 'yum' %}
-        , "Last yum update": "{{ update.stdout_lines if 'update' in vars and update.changed else [] }}",
-        "Yum Security/Bug Fixes": "{{ Sec_Impact.stdout_lines if 'Sec_Impact' in vars else [] }}"
+        , "Last yum update": "{{ update.stdout_lines | default([]) | join(', ') }}",
+        "Yum Security/Bug Fixes": "{{ Sec_Impact.stdout_lines | default([]) | join(', ') }}"
         {% elif ansible_facts['pkg_mgr'] == 'apt' %}
-        , "Last apt update": "{{ apt_history.stdout_lines if 'apt_history' in vars and apt_history.changed else [] }}"
+        , "Last apt update": "{{ apt_history.stdout_lines | default([]) | join(', ') }}"
         {% endif %}
       }
+
 
 
 - name: Combine data from all hosts
