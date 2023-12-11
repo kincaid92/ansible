@@ -51,6 +51,9 @@
   register: cache_results
 
 ## ANCHOR everything below is printing data
+
+
+
 - name: Aggregate host facts
   set_fact:
     all_devices: "{{ all_devices + [hostvars[item].device] }}"
@@ -161,6 +164,12 @@
     path: /tmp/master.json
     regexp: 'dcops8 {'
     line: '"dcops8": {'
+  delegate_to: 172.16.101.183
+
+- name: Create JSON output
+  template:
+    src: your_template.j2
+    dest: /home/cat/out.json
   delegate_to: 172.16.101.183
 
 # - name: Print apt Success Check
