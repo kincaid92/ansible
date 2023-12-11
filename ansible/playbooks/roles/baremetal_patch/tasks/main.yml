@@ -189,10 +189,10 @@
 
 - name: write json locally
   copy:
-    content: "{{ hosts_data | to_nice_json }}"
+    content: "{{ hosts_data }}"
     dest: "/tmp/master.json"
   delegate_to: 172.16.101.183
-  
+
 # - name: Print apt Success Check
 #   debug:
 #     msg: "The apt cache has successfully updated (equivalent of apt-get update)."
