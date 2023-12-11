@@ -66,18 +66,15 @@
 
 - name: Store host-specific data
   set_fact:
-    host_data: >-
-      {
-        "FQDN": "{{ ansible_nodename }}",
-        "IP Addresses": "{{ ansible_all_ipv4_addresses }}",
-        "Device Uptime": "{{ uptime_days.stdout_lines[0] }} Days"
-        {% if ansible_facts['pkg_mgr'] == 'yum' %}
-        , "Last yum update": "{{ update.stdout_lines | default([]) }}",
-        "Yum Security/Bug Fixes": "{{ Sec_Impact.stdout_lines }}"
-        {% elif ansible_facts['pkg_mgr'] == 'apt' %}
-        , "Last apt update": "{{ apt_history.stdout_lines | default([]) }}"
-        {% endif %}
-      }
+    host_data: 
+      FQDN: "{{ ansible_nodename }}"
+      IP_Addresses: "{{ ansible_all_ipv4_addresses }}"
+      Device_Uptime: "{{ uptime_days.stdout_lines[0] }} Days"
+      Last_yum_update: "{{ update.stdout_lines | default([]) if ansible_facts['pkg_mgr'] == 'yum' else omit }}"
+      Yum_Security_Bug_Fixes: "{{ Sec_Impact.stdout_lines | default([]) if ansible_facts['pkg_mgr'] == 'yum' else omit }}"
+      Last_apt_update: "{{ apt_history.stdout_lines | default([]) if ansible_facts['pkg_mgr'] == 'apt' else omit }}"
+
+
 
 - name: Combine data from all hosts
   set_fact:
