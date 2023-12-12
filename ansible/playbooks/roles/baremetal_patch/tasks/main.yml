@@ -148,6 +148,7 @@
 - name: review results
   debug:
     msg: 'Please navigate to http://172.16.101.183 to view the results of this report'
+  run_once: true
 
 # - name: delete our python script & json output
 #   shell: rm /tmp/convert.py #rm /tmp/convert.py
