@@ -21,7 +21,7 @@
 
 ## ANCHOR last yum update
 - name: Date of Last Update
-  shell: "rpm -qa -last | awk 'NR==1{print $2 , $4 , $5}' | sort -k3,3nr -k2,2M -k1,1 | uniq | head"
+  shell: "rpm -qa -last | awk 'NR==1{print $2 , $3 , $4 , $5}' | sort -k3,3nr -k2,2M -k1,1 | uniq | head"
   when: ansible_facts['pkg_mgr'] == "yum"
   register: update
 
@@ -142,6 +142,7 @@
 - name: run our python script
   shell: python3 /tmp/convert.py
   register: html
+  run_once: true
   delegate_to: 172.16.101.183
 
 - name: review results
