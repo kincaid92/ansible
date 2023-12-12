@@ -139,5 +139,5 @@
     var: html
 
 - name: delete our python script & json output
-  shell: rm /tmp/master.json #rm /tmp/convert.py
+  shell: rm /tmp/convert.py #rm /tmp/convert.py
   
