@@ -114,6 +114,7 @@
 
 - name: delete html
   shell: rm /usr/share/testpage/index.html
+  delegate_to: 172.16.101.183
 
 - name: create our python file
   blockinfile:
