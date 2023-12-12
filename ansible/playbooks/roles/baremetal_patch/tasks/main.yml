@@ -144,7 +144,6 @@
   register: html
   delegate_to: 172.16.101.183
 
-
 - name: review results
   debug:
     msg: 'Please navigate to http://172.16.101.183 to view the results of this report'
