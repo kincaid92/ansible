@@ -1,7 +1,5 @@
 ---
-
-## TODO make a shit ton of files for every task in proper JSON and combine them into 1 json file to be converted to HTML
-
+## TODO send htmlout to db, write frontend to serve html report
 
 ## ANCHOR hostname & IP
 - name: Grab hostname/ip
@@ -83,16 +81,16 @@
 - name: manually remove some things
   replace:
     path: /tmp/master.json
-    regexp: '"",'
+    regexp: '""*'
     replace: ''
   delegate_to: 172.16.101.183
 
-- name: manually remove some things
-  replace:
-    path: /tmp/master.json
-    regexp: '""'
-    replace: ''
-  delegate_to: 172.16.101.183
+# - name: manually remove some things
+#   replace:
+#     path: /tmp/master.json
+#     regexp: '""'
+#     replace: ''
+#   delegate_to: 172.16.101.183
 
 - name: last bit of cleaning
   shell: sed -i '$d' /tmp/master.json
@@ -149,8 +147,3 @@
   debug:
     msg: 'Please navigate to http://172.16.101.183 to view the results of this report'
   run_once: true
-
-# - name: delete our python script & json output
-#   shell: rm /tmp/convert.py #rm /tmp/convert.py
-#   delegate_to: 172.16.101.183
-  
