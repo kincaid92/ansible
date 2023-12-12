@@ -112,6 +112,9 @@
     line: '}'
   delegate_to: 172.16.101.183
 
+- name: delete html
+  shell: rm /usr/share/testpage/index.html
+
 - name: create our python file
   blockinfile:
     path: /tmp/convert.py
@@ -121,7 +124,7 @@
 
       }
       out = json2html.convert(json = input)
-      htmlout = '/tmp/index.html'
+      htmlout = '/usr/share/testpage/index.html'
       with open(htmlout, 'w') as htmlfile:
           htmlfile.write(str(out))
           print('Done')
