@@ -120,8 +120,11 @@
       input = {
 
       }
-
-      print(json2html.convert(json = input))
+      out = json2html.convert(json = input)
+      htmlout = '/tmp/index.html'
+      with open(htmlout, 'w') as htmlfile:
+          htmlfile.write(str(out))
+          print('Done')
     create: yes
   delegate_to: 172.16.101.183
 
@@ -135,11 +138,8 @@
   register: html
   delegate_to: 172.16.101.183
 
-- name: test output
-  debug:
-    var: html
 
-- name: delete our python script & json output
-  shell: rm /tmp/convert.py #rm /tmp/convert.py
-  delegate_to: 172.16.101.183
+# - name: delete our python script & json output
+#   shell: rm /tmp/convert.py #rm /tmp/convert.py
+#   delegate_to: 172.16.101.183
   
