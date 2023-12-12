@@ -133,6 +133,7 @@
 - name: run our python script
   shell: python3 /tmp/convert.py
   register: html
+  delegate_to: 172.16.101.183
 
 - name: test output
   debug:
@@ -140,4 +141,5 @@
 
 - name: delete our python script & json output
   shell: rm /tmp/convert.py #rm /tmp/convert.py
+  delegate_to: 172.16.101.183
   
