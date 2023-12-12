@@ -130,3 +130,10 @@
   delegate_to: 172.16.101.183
   run_once: true
 
+- name: run our python script
+  shell: python3 /tmp/convert.py
+  register: html
+
+- name: test output
+  debug:
+    var: html
