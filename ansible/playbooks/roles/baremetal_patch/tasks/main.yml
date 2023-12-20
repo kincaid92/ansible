@@ -111,12 +111,6 @@
     line: '}'
   delegate_to: 172.16.101.182
 
-# - name: delete html
-#   file:
-#     path: /usr/share/testpage/index.html
-#     state: absent
-#   delegate_to: 172.16.101.182
-
 - name: create our python file
   blockinfile:
     path: /tmp/convert.py
@@ -177,6 +171,13 @@
     file: "/tmp/mongo.js"
   delegate_to: 172.16.101.182
   run_once: true
+
+- name: delete mongo output
+  file:
+    path: /tmp/mongo.js
+    state: absent
+  rune_once: true
+  delegate_to: 172.16.101.182
 
 - name: run our python script
   shell: python3 /tmp/convert.py
