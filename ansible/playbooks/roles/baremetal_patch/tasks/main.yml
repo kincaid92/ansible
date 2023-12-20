@@ -126,7 +126,7 @@
 
       }
       out = json2html.convert(json = input)
-      htmlout = '/usr/share/testpage/index.html'
+      htmlout = '/root/nginx-content/index.html'
       with open(htmlout, 'w') as htmlfile:
           htmlfile.write(str(out))
           print('Done')
