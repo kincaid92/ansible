@@ -177,7 +177,7 @@
 
 - name: debug
   debug:
-    var: "{{ mongo_user.stdout_lines }}"
+    var: "{{ mongo_user.stdout }}"
   
 
 # - name: debug
