@@ -153,6 +153,13 @@
   delegate_to: 172.16.101.182
   run_once: true
 
+- name: cleanup mongo input
+  lineinfile: 
+    path: /tmp/mongo.js
+    line: "# END ANSIBLE MANAGED BLOCK"
+    state: absent
+  delegate_to: 172.16.101.182
+
 - name: send output to mongo
   community.mongodb.mongodb_shell:
     login_host: 10.42.0.245
