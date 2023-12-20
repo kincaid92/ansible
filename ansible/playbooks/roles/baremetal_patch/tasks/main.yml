@@ -169,7 +169,7 @@
 
 - name: print
   debug:
-    var: "{{ smile }}"
+    var: smile
 
 # - name: grab mongo user
 #   shell: kubectl -n mongo get secrets mongodb-sec -ogo-template='{{ index .data {{smile | string}} | base64decode}}'
