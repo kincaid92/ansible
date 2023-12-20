@@ -170,19 +170,20 @@
   delegate_to: 172.16.101.182
   register: mongo_user
 
-# - name: grab mongo pw
-#   shell: kubectl -n mongo get secrets mongodb-sec -ogo-template='{{ index .data "mongo-password" | base64decode}}'
-#   register: mongo-pw
-#   delegate_to: 172.16.101.182
+- name: grab mongo user
+  shell: >
+    kubectl -n mongo get secrets mongodb-sec 
+    -o go-template='{{ "{{" }} index .data "mongo-password" | base64decode {{ "}}" }}'
+  delegate_to: 172.16.101.182
+  register: mongo_pw
 
 - name: debug
   debug:
     var: "{{ mongo_user.stdout }}"
   
-
-# - name: debug
-#   debug:
-#     var: mongo-pw
+- name: debug
+  debug:
+    var: "{{ mongo-pw.stdout }}"
 
 # - name: send output to mongo
 #   community.mongodb.mongodb_shell:
