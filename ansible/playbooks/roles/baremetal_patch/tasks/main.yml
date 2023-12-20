@@ -163,13 +163,13 @@
   delegate_to: 172.16.101.182
   run_once: true
 
-- name: grab mongo creds
-  shell: kubectl -n mongo get secrets mongodb-sec -ogo-template='{{ index .data "mongo-username" | base64decode}}'
+- name: grab mongo user
+  shell: "kubectl -n mongo get secrets mongodb-sec -ogo-template='{{ index .data "mongo-username" | base64decode}}'"
   register: mongo-user
   delegate_to: 172.16.101.182
 
-- name: grab mongo creds
-  shell: kubectl -n mongo get secrets mongodb-sec -ogo-template='{{ index .data "mongo-password" | base64decode}}'
+- name: grab mongo pw
+  shell: "kubectl -n mongo get secrets mongodb-sec -ogo-template='{{ index .data "mongo-password" | base64decode}}'"
   register: mongo-pw
   delegate_to: 172.16.101.182
 
