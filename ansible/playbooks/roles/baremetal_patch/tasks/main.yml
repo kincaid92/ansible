@@ -133,10 +133,32 @@
     create: yes
   delegate_to: 172.16.101.182
 
+- name: create mongo input
+  blockinfile:
+    path: /tmp/mongo.js
+    block: |
+      db.reports.insert({
+
+      })
+    create: yes
+  delegate_to: 172.16.101.182
+
 - name: migrate json data to python file to convert to html
   shell: sed -i '3r /tmp/master.json' /tmp/convert.py
   delegate_to: 172.16.101.182
   run_once: true
+
+- name: migrate json data to mongo input
+  shell: sed -i '2r /tmp/master.json' /tmp/mongo.js
+  delegate_to: 172.16.101.182
+  run_once: true
+
+- name: send output to mongo
+  mongodb_shell:
+    login_user: admin
+    login_passsword: password
+    file: /tmp/mongo.js
+  delegate_to: 172.16.101.182
 
 - name: run our python script
   shell: python3 /tmp/convert.py
