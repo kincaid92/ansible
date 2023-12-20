@@ -165,7 +165,7 @@
 
 - name: grab mongo user
   shell: kubectl -n mongo get secrets mongodb-sec -ogo-template='{{ '{{' }} index .data \"mongo-password\" | base64decode {{ '}}' }}'
-  register: mongo-user
+  register: mongo_ser
   delegate_to: 172.16.101.182
 
 # - name: grab mongo pw
@@ -175,7 +175,7 @@
 
 - name: debug
   debug:
-    var: "{{ mongo-user }}"
+    var: "{{ mongo_user }}"
 
 # - name: debug
 #   debug:
