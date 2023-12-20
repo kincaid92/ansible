@@ -183,7 +183,7 @@
 
 - name: debug
   debug:
-    var: mongo-user
+    var: "{{ mongo-user }}"
 
 # - name: debug
 #   debug:
