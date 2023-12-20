@@ -176,7 +176,6 @@
   file:
     path: /tmp/mongo.js
     state: absent
-  rune_once: true
   delegate_to: 172.16.101.182
 
 - name: run our python script
