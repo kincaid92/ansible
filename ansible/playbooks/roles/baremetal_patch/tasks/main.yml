@@ -169,21 +169,21 @@
 
 - name: print
   debug:
-    var: smile
+    var: "{{ smile }}"
 
-# - name: grab mongo user
-#   shell: kubectl -n mongo get secrets mongodb-sec -ogo-template='{{ index .data {{smile | string}} | base64decode}}'
-#   register: mongo-user
-#   delegate_to: 172.16.101.182
+- name: grab mongo user
+  shell: kubectl -n mongo get secrets mongodb-sec -ogo-template='{{ '{{' }} index .data \"mongo-password\" | base64decode {{ '}}' }}'
+  register: mongo-user
+  delegate_to: 172.16.101.182
 
 # - name: grab mongo pw
 #   shell: kubectl -n mongo get secrets mongodb-sec -ogo-template='{{ index .data "mongo-password" | base64decode}}'
 #   register: mongo-pw
 #   delegate_to: 172.16.101.182
 
-# - name: debug
-#   debug:
-#     var: mongo-user
+- name: debug
+  debug:
+    var: mongo-user
 
 # - name: debug
 #   debug:
