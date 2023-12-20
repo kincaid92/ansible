@@ -177,34 +177,34 @@
   delegate_to: 172.16.101.182
   register: mongo_pw
 
-- name: debug
-  debug:
-    var: mongo_user.stdout
+# - name: debug
+#   debug:
+#     var: mongo_user.stdout
   
-- name: debug
-  debug:
-    var: mongo_pw.stdout
+# - name: debug
+#   debug:
+#     var: mongo_pw.stdout
 
-# - name: send output to mongo
-#   community.mongodb.mongodb_shell:
-#     login_host: 10.42.0.245
-#     login_user: "{{ mongo-user }}"
-#     login_password: "{{ mongo-pw }}"
-#     file: "/tmp/mongo.js"
-#   delegate_to: 172.16.101.182
-#   run_once: true
+- name: send output to mongo
+  community.mongodb.mongodb_shell:
+    login_host: 10.42.0.245
+    login_user: mongo_user.stdout
+    login_password: mongo_pw.stdout
+    file: "/tmp/mongo.js"
+  delegate_to: 172.16.101.182
+  run_once: true
 
-# - name: delete mongo output
-#   file:
-#     path: /tmp/mongo.js
-#     state: absent
-#   delegate_to: 172.16.101.182
+- name: delete mongo output
+  file:
+    path: /tmp/mongo.js
+    state: absent
+  delegate_to: 172.16.101.182
 
-# - name: run our python script
-#   shell: python3 /tmp/convert.py
-#   register: html
-#   run_once: true
-#   delegate_to: 172.16.101.182
+- name: run our python script
+  shell: python3 /tmp/convert.py
+  register: html
+  run_once: true
+  delegate_to: 172.16.101.182
 
 - name: review results
   debug:
