@@ -163,11 +163,21 @@
   delegate_to: 172.16.101.182
   run_once: true
 
+- name: grab mongo creds:
+  shell: kubectl -n mongo get secrets mongodb-sec -ogo-template='{{ index .data "mongo-username" | base64decode}}'
+  register: mongo-user
+  delegate_to: 172.16.101.182
+
+- name: grab mongo creds:
+  shell: kubectl -n mongo get secrets mongodb-sec -ogo-template='{{ index .data "mongo-password" | base64decode}}'
+  register: mongo-pw
+  delegate_to: 172.16.101.182
+
 - name: send output to mongo
   community.mongodb.mongodb_shell:
     login_host: 10.42.0.245
-    login_user: "admin"
-    login_password: "password"
+    login_user: "{{ mongo-user }}"
+    login_password: "{{ mongo-pw }}"
     file: "/tmp/mongo.js"
   delegate_to: 172.16.101.182
   run_once: true
