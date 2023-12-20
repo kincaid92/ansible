@@ -1,13 +1,7 @@
 ---
-## TODO send htmlout to db, write frontend to serve html report
+## TODO write frontend to serve html report
 
-## ANCHOR hostname & IP
-# - name: Grab hostname/ip
-#   set_fact:
-#     device:
-#       hostname: "{{ ansible_facts['nodename'] }}"
-#       ip_addresses: "{{ ansible_facts['all_ipv4_addresses'] }}"
-
+## ANCHOR init empty list
 - name: Initialize an empty list for storing results
   set_fact:
     all_devices: []
