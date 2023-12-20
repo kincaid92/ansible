@@ -168,7 +168,7 @@
     smile: mongo-username
 
 - name: grab mongo user
-  shell: kubectl -n mongo get secrets mongodb-sec -ogo-template='{{ index .data {{smile | str}} | base64decode}}'
+  shell: kubectl -n mongo get secrets mongodb-sec -ogo-template='{{ index .data {{smile | string}} | base64decode}}'
   register: mongo-user
   delegate_to: 172.16.101.182
 
