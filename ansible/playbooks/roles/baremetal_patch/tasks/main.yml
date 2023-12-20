@@ -11,7 +11,7 @@
 - name: Initialize an empty list for storing results
   set_fact:
     all_devices: []
-    
+
 # ## ANCHOR device uptime
 - name: get uptime
   shell: w | awk 'NR==1{print $2,$3}' | sed 's/,//g'
@@ -63,59 +63,59 @@
   copy:
     content: "{{ aggregated_data | to_nice_json }}"
     dest: "/tmp/master.json"
-  delegate_to: 172.16.101.183
+  delegate_to: 172.16.101.182
 
 - name: manually remove some things
   replace:
     path: /tmp/master.json
     regexp: 'Updates Information Summary: updates'
     replace: ''
-  delegate_to: 172.16.101.183
+  delegate_to: 172.16.101.182
 
 - name: manually remove some things
   replace:
     path: /tmp/master.json
     regexp: 'updateinfo summary done'
     replace: ''
-  delegate_to: 172.16.101.183
+  delegate_to: 172.16.101.182
 
 - name: manually remove some things
   replace:
     path: /tmp/master.json
     regexp: '"",'
     replace: ''
-  delegate_to: 172.16.101.183
+  delegate_to: 172.16.101.182
 
 - name: manually remove some things
   replace:
     path: /tmp/master.json
     regexp: '""'
     replace: ''
-  delegate_to: 172.16.101.183
+  delegate_to: 172.16.101.182
 
 - name: last bit of cleaning
   shell: sed -i '$d' /tmp/master.json
-  delegate_to: 172.16.101.183
+  delegate_to: 172.16.101.182
 
 - name: last bit of cleaning
   shell: sed -i '1s/^{//' /tmp/master.json
-  delegate_to: 172.16.101.183
+  delegate_to: 172.16.101.182
 
 - name: last bit of cleaning for real this time
   shell: sed -i '$s/}]$//' /tmp/master.json
-  delegate_to: 172.16.101.183
+  delegate_to: 172.16.101.182
 
 - name: damage control
   lineinfile:
     path: /tmp/master.json
     line: '}'
-  delegate_to: 172.16.101.183
+  delegate_to: 172.16.101.182
 
 - name: delete html
   file:
     path: /usr/share/testpage/index.html
     state: absent
-  delegate_to: 172.16.101.183
+  delegate_to: 172.16.101.182
 
 - name: create our python file
   blockinfile:
@@ -131,20 +131,20 @@
           htmlfile.write(str(out))
           print('Done')
     create: yes
-  delegate_to: 172.16.101.183
+  delegate_to: 172.16.101.182
 
 - name: migrate json data to python file to convert to html
   shell: sed -i '3r /tmp/master.json' /tmp/convert.py
-  delegate_to: 172.16.101.183
+  delegate_to: 172.16.101.182
   run_once: true
 
 - name: run our python script
   shell: python3 /tmp/convert.py
   register: html
   run_once: true
-  delegate_to: 172.16.101.183
+  delegate_to: 172.16.101.182
 
 - name: review results
   debug:
-    msg: 'Please navigate to http://172.16.101.183 to view the results of this report'
+    msg: 'Please navigate to http://172.16.101.182 to view the results of this report'
   run_once: true
