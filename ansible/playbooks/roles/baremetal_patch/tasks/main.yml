@@ -179,11 +179,11 @@
 
 - name: debug
   debug:
-    var: "{{ mongo_user.stdout }}"
+    var: "{{ mongo_user }}"
   
 - name: debug
   debug:
-    var: "{{ mongo_pw.stdout }}"
+    var: "{{ mongo_pw }}"
 
 # - name: send output to mongo
 #   community.mongodb.mongodb_shell:
