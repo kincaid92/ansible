@@ -159,6 +159,7 @@
     line: "# BEGIN ANSIBLE MANAGED BLOCK"
     state: absent
   delegate_to: 172.16.101.182
+  run_once: true
 
 - name: cleanup mongo input
   lineinfile: 
@@ -166,6 +167,7 @@
     line: "# END ANSIBLE MANAGED BLOCK"
     state: absent
   delegate_to: 172.16.101.182
+  run_once: true
 
 - name: send output to mongo
   community.mongodb.mongodb_shell:
@@ -174,6 +176,7 @@
     login_password: "password"
     file: "/tmp/mongo.js"
   delegate_to: 172.16.101.182
+  run_once: true
 
 - name: run our python script
   shell: python3 /tmp/convert.py
