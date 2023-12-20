@@ -156,6 +156,13 @@
 - name: cleanup mongo input
   lineinfile: 
     path: /tmp/mongo.js
+    line: "# BEGIN ANSIBLE MANAGED BLOCK"
+    state: absent
+  delegate_to: 172.16.101.182
+
+- name: cleanup mongo input
+  lineinfile: 
+    path: /tmp/mongo.js
     line: "# END ANSIBLE MANAGED BLOCK"
     state: absent
   delegate_to: 172.16.101.182
