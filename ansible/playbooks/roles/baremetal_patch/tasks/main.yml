@@ -163,14 +163,6 @@
   delegate_to: 172.16.101.182
   run_once: true
 
-- name: pls
-  set_fact:
-    smile: kubectl -n mongo get secrets mongodb-sec -ogo-template='{{ index .data "mongo-password" | base64decode}}'
-
-- name: print
-  debug:
-    var: "{{ smile }}"
-
 - name: grab mongo user
   shell: kubectl -n mongo get secrets mongodb-sec -ogo-template='{{ '{{' }} index .data \"mongo-password\" | base64decode {{ '}}' }}'
   register: mongo-user
