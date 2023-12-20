@@ -111,11 +111,11 @@
     line: '}'
   delegate_to: 172.16.101.182
 
-- name: delete html
-  file:
-    path: /usr/share/testpage/index.html
-    state: absent
-  delegate_to: 172.16.101.182
+# - name: delete html
+#   file:
+#     path: /usr/share/testpage/index.html
+#     state: absent
+#   delegate_to: 172.16.101.182
 
 - name: create our python file
   blockinfile:
@@ -138,11 +138,11 @@
   delegate_to: 172.16.101.182
   run_once: true
 
-- name: run our python script
-  shell: python3 /tmp/convert.py
-  register: html
-  run_once: true
-  delegate_to: 172.16.101.182
+# - name: run our python script
+#   shell: python3 /tmp/convert.py
+#   register: html
+#   run_once: true
+#   delegate_to: 172.16.101.182
 
 - name: review results
   debug:
