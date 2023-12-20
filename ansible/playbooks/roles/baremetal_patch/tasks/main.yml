@@ -183,7 +183,7 @@
   
 - name: debug
   debug:
-    var: "{{ mongo_pw }}"
+    var: mongo_pw
 
 # - name: send output to mongo
 #   community.mongodb.mongodb_shell:
