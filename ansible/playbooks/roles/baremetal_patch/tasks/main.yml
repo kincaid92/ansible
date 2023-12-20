@@ -154,7 +154,7 @@
   run_once: true
 
 - name: send output to mongo
-  mongodb_shell:
+  community.mongodb.mongodb_shell:
     login_user: admin
     login_passsword: password
     file: /tmp/mongo.js
