@@ -156,7 +156,7 @@
 - name: send output to mongo
   community.mongodb.mongodb_shell:
     login_user: "admin"
-    login_passsword: "password"
+    login_password: "password"
     file: "/tmp/mongo.js"
   delegate_to: 172.16.101.182
 
