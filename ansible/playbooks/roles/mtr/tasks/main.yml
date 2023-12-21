@@ -12,6 +12,7 @@
 - name: string search
   debug:
     msg: "{{ dest }} is within SingleHop ASN"
+  when: "'Singlehop' in whois.results else omit"
 
 - name: test
   debug:
