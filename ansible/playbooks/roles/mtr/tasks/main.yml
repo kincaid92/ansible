@@ -1,7 +1,7 @@
 ---
 
 - name: whois lookup
-  shell: dig +short "{{ dest}}".origin.asn.cymru.com TXT | awk 'NR==1{print $1}' | sed 's/\///g'
+  shell: dig +short "{{ dest}}".origin.asn.cymru.com TXT | awk 'NR==1{print $1}' | sed 's/\\\\//g'
   register: hi
 
 - name: test
