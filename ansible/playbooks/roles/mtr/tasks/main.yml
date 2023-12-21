@@ -1,0 +1,9 @@
+---
+
+- name: test var inject
+  shell: ping {{ ip }}
+  register: test
+
+- name: out
+  debug: 
+    var: test
