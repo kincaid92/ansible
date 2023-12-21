@@ -1,5 +1,9 @@
 ---
 
+- name: traceroute to google
+  shell: traceroute "{{ IP }}"
+  register: ipout
+
 - name: out
   debug: 
-    msg: "{{ injected_var }}"
+    var: ipout.stdout_lines
