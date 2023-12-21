@@ -9,7 +9,7 @@
     ips: ["{{source}}", "{{dest}}"]
 
 - name: whois lookup
-  shell: whois "{{ item.stdout_lines }}" | grep OrgName
+  shell: whois "{{ item }}" | grep OrgName
   loop: "{{ ips }}"
   register: whois
   delegate_to: 172.16.101.182
@@ -24,5 +24,5 @@
 
 - name: test
   debug:
-    var: whois.results
+    var: "{{ whois.results | map(attribute='stdout_lines') | list }}"
   
