@@ -9,7 +9,7 @@
     ips: ["{{source}}", "{{dest}}"]
 
 - name: whois lookup
-  shell: whois "{{ item }}" | grep OrgName
+  shell: whois "{{ item.stdout_lines }}" | grep OrgName
   loop: "{{ ips }}"
   register: whois
   delegate_to: 172.16.101.182
