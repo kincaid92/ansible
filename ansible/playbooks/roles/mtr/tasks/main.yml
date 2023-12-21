@@ -4,17 +4,24 @@
 #   shell: dig +short "{{ dest | reverse}}".origin.asn.cymru.com TXT | awk 'NR==1{print $1}'
 #   register: hi
 
-- name: whois lookup
-  shell: whois "{{ dest }}" | grep OrgName
-  register: whois
-  delegate_to: 172.16.101.182
+- name: craft list
+  set_fact:
+    ips: ["{{source}}", "{{dest}}"]
 
-- name: Determine the location of the ASN
-  debug:
-    msg: "{{ dest }} is {{ 'within' if whois.stdout is search('SingleHop') else 'outside of' }} the SingleHop ASN"
+# - name: whois lookup
+#   shell: whois "{{ dest }}" | grep OrgName
+#   register: whois
+#   delegate_to: 172.16.101.182
 
 
-# - name: test
+
+
+# - name: string search
 #   debug:
-#     var: whois.stdout
+#     msg: "{{ dest }} is {{ 'within' if whois.stdout is search('SingleHop') else 'outside of' }} the SingleHop ASN"
+
+
+- name: test
+  debug:
+    var: ips.stdout_lines
   
