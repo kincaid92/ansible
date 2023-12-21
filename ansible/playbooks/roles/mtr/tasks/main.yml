@@ -8,10 +8,11 @@
   set_fact:
     ips: ["{{source}}", "{{dest}}"]
 
-# - name: whois lookup
-#   shell: whois "{{ dest }}" | grep OrgName
-#   register: whois
-#   delegate_to: 172.16.101.182
+- name: whois lookup
+  shell: whois "{{ item }}" | grep OrgName
+  loop: ips
+  register: whois
+  delegate_to: 172.16.101.182
 
 
 
@@ -23,5 +24,5 @@
 
 - name: test
   debug:
-    var: ips
+    var: whois
   
