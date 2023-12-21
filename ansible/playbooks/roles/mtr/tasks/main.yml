@@ -23,5 +23,5 @@
 
 - name: test
   debug:
-    var: ips.stdout_lines
+    var: ips
   
