@@ -11,7 +11,7 @@
 - name: whois lookup
   shell: whois "{{ item }}" | grep OrgName
   loop: "{{ ips }}"
-  register: whois
+  register: whois_results
   delegate_to: 172.16.101.182
 
 # - name: test
