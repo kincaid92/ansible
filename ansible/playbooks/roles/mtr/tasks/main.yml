@@ -1,9 +1,5 @@
 ---
 
-# - name: whois lookup
-#   shell: dig +short "{{ dest | reverse}}".origin.asn.cymru.com TXT | awk 'NR==1{print $1}'
-#   register: hi
-
 - name: craft list
   set_fact:
     ips: ["{{source}}", "{{dest}}"]
@@ -12,20 +8,12 @@
   shell: whois "{{ item }}" | grep OrgName
   loop: "{{ ips }}"
   register: whois_results
+  run_once: true
   delegate_to: 172.16.101.182
 
-# - name: test
-#   debug:
-#     var: "{{ whois['results'] }}"
-  
 - name: Determine location from whois data
   debug:
     msg: "{{ item.item }} is {{ 'within' if 'SingleHop' in item.stdout else 'outside of' }} the SingleHop ASN"
   loop: "{{ whois_results.results }}"
   loop_control:
     label: "{{ item.item }}"
-
-# - name: string search
-#   debug:
-#     msg: "{{ dest }} is {{ 'within' if whois.stdout is search('SingleHop') else 'outside of' }} the SingleHop ASN"
-
