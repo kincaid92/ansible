@@ -6,4 +6,4 @@
 
 - name: test
   debug:
-    var: dest.stdout_lines
+    var: hi.stdout_lines
