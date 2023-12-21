@@ -17,10 +17,12 @@
 
 
 
-- name: string search
+# - name: string search
+#   debug:
+#     msg: "{{ dest }} is {{ 'within' if whois.stdout is search('SingleHop') else 'outside of' }} the SingleHop ASN"
+
+
+- name: test
   debug:
-    msg: "{{ whois.results.stdout }} is {{ 'within' if whois.stdout is search('SingleHop') else 'outside of' }} the SingleHop ASN"
-
-
-
+    var: whois.results
   
