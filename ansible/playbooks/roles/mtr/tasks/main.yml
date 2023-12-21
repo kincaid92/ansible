@@ -9,12 +9,12 @@
   register: whois
   delegate_to: 172.16.101.182
 
-# - name: string search
-#   debug:
-#     msg: "{{ dest }} is within SingleHop ASN"
-#   when: "{{ whois.stdout is search('SingleHop') }}"
-
-- name: test
+- name: string search
   debug:
-    var: whois.stdout
+    msg: "{{ dest }} is within SingleHop ASN"
+  when: "{{ whois.stdout is search('SingleHop') }}"
+
+# - name: test
+#   debug:
+#     var: whois.stdout
   
