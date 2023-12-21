@@ -2,4 +2,4 @@
 
 - name: out
   debug: 
-    msg: "{{ injected var }}"
+    msg: "{{ injected_var }}"
