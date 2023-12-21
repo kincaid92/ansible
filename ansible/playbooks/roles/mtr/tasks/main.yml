@@ -12,12 +12,12 @@
 - name: string search
   debug:
     msg: "{{ dest }} is within SingleHop ASN"
-  when: "whois.stdout is search('SingleHop')"
+  when: "whois.stdout is search('SingleHop') else omit"
 
 - name: string search
   debug:
     msg: "{{ dest }} is outside of the SingleHop ASN"
-  when: "whois.stdout not search('SingleHop')"
+  when: "whois.stdout not search('SingleHop') else omit"
 
 # - name: test
 #   debug:
