@@ -17,7 +17,7 @@
 - name: string search
   debug:
     msg: "{{ dest }} is outside of the SingleHop ASN"
-  when: "whois.stdout not search('SingleHop') "
+  when: "whois.stdout is not search('SingleHop') "
 
 # - name: test
 #   debug:
