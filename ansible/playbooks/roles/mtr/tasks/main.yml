@@ -16,4 +16,4 @@
 
 - name: test
   debug:
-    var: whois.stdout_lines["OrgName"]
+    var: whois.stdout_lines
