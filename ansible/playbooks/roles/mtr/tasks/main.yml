@@ -9,15 +9,10 @@
   register: whois
   delegate_to: 172.16.101.182
 
-- name: string search
+- name: Determine the location of the ASN
   debug:
-    msg: "{{ dest }} is within SingleHop ASN"
-  when: "whois.stdout is search('SingleHop') "
+    msg: "{{ dest }} is {{ 'within' if whois.stdout is search('SingleHop') else 'outside of' }} the SingleHop ASN"
 
-- name: string search
-  debug:
-    msg: "{{ dest }} is outside of the SingleHop ASN"
-  when: "whois.stdout is not search('SingleHop') "
 
 # - name: test
 #   debug:
