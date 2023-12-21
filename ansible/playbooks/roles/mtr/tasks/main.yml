@@ -1,9 +1,9 @@
 ---
 
-- name: traceroute to google
-  shell: traceroute "{{ IP }}"
-  register: ipout
+- name: whois lookup
+  shell: dig +short "{{ dest}}".origin.asn.cymru.com TXT
+  register: hi
 
-- name: out
-  debug: 
-    var: ipout.stdout_lines
+- name: test
+  debug:
+    var: test.stdout_lines
