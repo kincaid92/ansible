@@ -17,4 +17,5 @@
 - name: test
   debug:
     var: whois.stdout_lines
+  delegate_to: 172.16.101.182
   
