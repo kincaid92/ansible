@@ -42,7 +42,7 @@
   loop: "{{ ips.results }}"
   loop_control:
     label: "{{ item.item }}"
-  when: "{{ item.item }} is not {{ 'within' if 'Singlehop' in ansible_all_ipv4_addresses }}"
+  when: "{{ item.item }} is not {{ 'within' ansible_all_ipv4_addresses }}"
   register: mtrout
 
 
