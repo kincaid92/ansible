@@ -18,3 +18,8 @@
   loop_control:
     label: "{{ item.item }}"
   run_once: true
+
+- name: check for mtr package 
+  apt:
+    name: mtr
+    state: present
