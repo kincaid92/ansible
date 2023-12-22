@@ -49,12 +49,12 @@
 #       MTR results for {{ item.item }}:
 #       {{ item.stdout_lines | join('\n') }}
 #   loop: "{{ mtrout.results }}"
-#   when: item.stdout_lines is defined and item.rc == 0
+  # when: item.stdout_lines is defined and item.rc == 0
 
 - name: Write MTR results to a file on the remote host
   copy:
     content: "{{ item.stdout }}"
     dest: "/tmp/mtr_results_{{ item.item }}.txt"
   loop: "{{ mtrout.results }}"
-  when: item.rc == 0 and 'stdout_lines' in item
+  when: item.stdout_lines is defined and item.rc == 0
   delegate_to: 172.16.101.182
