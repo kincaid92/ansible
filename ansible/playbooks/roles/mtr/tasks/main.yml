@@ -4,8 +4,14 @@
   set_fact:
     ips: ["{{source}}", "{{dest}}"]
 
+- name: declare some vars
+  set_fact:
+    whois_command: whois
+    mtr_command: mtr -rw
+    org_filter: OrgName
+
 - name: whois lookup
-  shell: whois "{{ item }}" | grep OrgName
+  shell: "{{ whois_command }} '{{ item }}' | grep {{ org_filter }}"
   loop: "{{ ips }}"
   register: whois_results
   run_once: true
@@ -19,16 +25,16 @@
     label: "{{ item.item }}"
   run_once: true
 
-- name: Ensure MTR is installed
-  package:
-    name: mtr
-    state: present
-  when: ansible_facts['pkg_mgr'] in ['apt', 'yum', 'dnf']
+# - name: Ensure MTR is installed
+#   package:
+#     name: mtr
+#     state: present
+#   when: ansible_facts['pkg_mgr'] in ['apt', 'yum', 'dnf']
 
-- name: run mtr 
-  shell: mtr -rw "{{ dest }}"
-  register: mtrout
+# - name: run mtr 
+#   shell: mtr -rw "{{ dest }}"
+#   register: mtrout
 
-- name: mtr results 
-  debug:
-    var: mtrout.stdout_lines
+# - name: mtr results 
+#   debug:
+#     var: mtrout.stdout_lines
