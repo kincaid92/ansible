@@ -59,5 +59,10 @@
   when: item.stdout_lines is defined and item.rc == 0
   delegate_to: 172.16.101.182
 
-# - name: combine the files
-#   shell:
+- name: combine the files
+  shell: cat mtr_results*
+  register: finalmtr
+
+- name: get output
+  debug:
+    var: finalmtr.stdout_lines
