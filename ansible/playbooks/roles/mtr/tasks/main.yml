@@ -43,9 +43,6 @@
     label: "{{ item }}"
 
 
-- name: Show MTR results for each IP (Individually)
+- name: Show MTR results for each IP (Test)
   debug:
-    msg: "MTR results for {{ item.1 }}:\n{{ item.0 | join('\n') }}"
-  loop: "{{ mtrout['results'] | map(attribute='stdout_lines') | zip(mtrout['results'] | map(attribute='item')) | list }}"
-  loop_control:
-    label: "{{ item.1 }}"
+    msg: "{{ mtrout.results | map(attribute='stdout_lines') | list }}"
