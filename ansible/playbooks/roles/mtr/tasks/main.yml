@@ -43,7 +43,13 @@
   #   label: "{{ item }}"
 
 
-- name: Show MTR results for each IP (Test)
+- name: Show MTR results for each IP (More Readable)
   debug:
-    msg: "{{ item.stdout_lines | join('\n') | default('No output or MTR command failed') }}"
+    msg: |
+      MTR results for {{ item.item | default('Skipped IP') }}:
+      {% if item.stdout_lines %}
+      {{ item.stdout_lines | join('\n') }}
+      {% else %}
+      No output or MTR command failed
+      {% endif %}
   loop: "{{ mtrout.results }}"
