@@ -25,7 +25,7 @@
     state: present
   when: ansible_facts['pkg_mgr'] == 'apt'
 
-- name: check for mtr package for apt
+- name: check for mtr package for yum/dnf
   yum:
     name: mtr
     state: latest
