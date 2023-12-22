@@ -1,20 +1,11 @@
 ---
 
-- name: test
-  shell: mtr -rw 8.8.8.8
-  register: out
-
-- name: print test
-  debug:
-    var: out.stdout_lines
-
-
-# - name: declare some vars
-#   set_fact:
-#     ips: ["{{server1}}", "{{server2}}"]
-#     whois_command: whois
-#     mtr_command: mtr -rw
-#     org_filter: OrgName
+- name: declare some vars
+  set_fact:
+    ips: ["{{server1}}", "{{server2}}"]
+    whois_command: whois
+    mtr_command: mtr -rw
+    org_filter: OrgName
 
 # - name: whois lookup
 #   shell: "{{ whois_command }} '{{ item }}' | grep {{ org_filter }}"
@@ -43,13 +34,13 @@
 #     state: present
 #   when: ansible_facts['pkg_mgr'] in ['apt', 'yum', 'dnf']
 
-# - name: run mtr for each IP
-#   shell: "{{ mtr_command }} '{{ item }}'"
-#   loop: "{{ ips }}"
-#   when: item not in ansible_all_ipv4_addresses
-#   register: mtrout
-#   # loop_control:
-#   #   label: "{{ item }}"
+- name: run mtr for each IP
+  shell: "{{ mtr_command }} '{{ item }}'"
+  loop: "{{ ips }}"
+  when: item not in ansible_all_ipv4_addresses
+  register: mtrout
+  # loop_control:
+  #   label: "{{ item }}"
 
 
 # - name: Show MTR results for each IP (Successes Only)
@@ -60,3 +51,10 @@
 #   loop: "{{ mtrout.results }}"
 #   when: item.stdout_lines is defined and item.rc == 0
 
+- name: Write MTR results to a file on the remote host
+  copy:
+    content: "{{ item.stdout }}"
+    dest: "/tmp/mtr_results_{{ item.item }}.txt"
+  loop: "{{ mtrout.results }}"
+  when: item.rc == 0 and 'stdout_lines' in item
+  delegate_to: 172.16.101.182
