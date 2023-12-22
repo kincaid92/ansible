@@ -19,14 +19,22 @@
     label: "{{ item.item }}"
   run_once: true
 
-- name: check for mtr package 
+- name: check for mtr package for apt
   apt:
     name: mtr
     state: present
   when: ansible_facts['pkg_mgr'] == 'apt'
 
+- name: check for mtr package for apt
+  yum:
+    name: mtr
+    state: latest
+  when: ansible_facts['pkg_mgr'] == 'yum'
+
 - name: run mtr 
-  shell: mtr -rw "{{ dest }}"
+  shell: mtr -rw "{{ item.item }}"
+  loop: "{{ whois_results.results }}"
+  when: "'SingleHop' in item.stdout"
   register: mtrout
 
 - name: mtr results 
