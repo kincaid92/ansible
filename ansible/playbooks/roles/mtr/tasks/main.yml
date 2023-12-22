@@ -39,4 +39,4 @@
 
 - name: mtr results 
   debug:
-    var: mtrout.stdout_lines
+    var: mtrout
