@@ -23,3 +23,12 @@
   apt:
     name: mtr
     state: present
+  when: ansible_facts['pkg_mgr'] == 'apt'
+
+- name: run mtr 
+  shell: mtr -rw "{{ source }}"
+  register: mtrout
+
+- name: mtr results 
+  debug:
+    var: mtrout.stdout_lines
