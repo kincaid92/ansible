@@ -47,4 +47,3 @@
   debug:
     msg: "{{ item.stdout_lines }}"
   loop: "{{ mtrout.results }}"
-  when: item.rc == 0
