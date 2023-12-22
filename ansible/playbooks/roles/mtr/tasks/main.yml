@@ -60,7 +60,7 @@
   delegate_to: 172.16.101.182
 
 - name: combine the files
-  shell: cat /tmp/mtr_results*
+  shell: for file in /tmp/mtr_result*; do cat "$file"; echo ""; done
   register: finalmtr
   delegate_to: 172.16.101.182
 
