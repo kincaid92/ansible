@@ -67,3 +67,4 @@
 - name: get output
   debug:
     var: finalmtr.stdout_lines
+  run_once: true
