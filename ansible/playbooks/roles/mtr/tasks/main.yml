@@ -71,6 +71,8 @@
 
 - name: cleanup files
   file:
-    path: /tmp/mtr_results*
+    path: "/tmp/mtr_results_{{ item.item }}.txt"
     state: absent
+  loop: "{{ mtrout.results }}"
+  when: item.stdout_lines is defined and item.rc == 0
   delegate_to: 172.16.101.182
