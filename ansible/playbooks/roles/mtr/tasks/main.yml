@@ -26,7 +26,7 @@
   when: ansible_facts['pkg_mgr'] == 'apt'
 
 - name: run mtr 
-  shell: mtr -rw "{{ source }}"
+  shell: mtr -rw "{{ dest }}"
   register: mtrout
 
 - name: mtr results 
