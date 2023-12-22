@@ -11,6 +11,7 @@
   shell: "{{ whois_command }} '{{ item }}' | grep {{ org_filter }}"
   loop: "{{ ips }}"
   register: whois_results
+  async: 10
   run_once: true
   delegate_to: 172.16.101.182
 
