@@ -48,7 +48,8 @@
 
 - name: Show MTR results for each IP
   debug:
-    msg: "MTR results for {{ item.item }}"
+    msg: "MTR results for {{ item.item }}: {{ item.stdout_lines }}"
   loop: "{{ mtrout.results }}"
+  when: item.rc == 0  # Only show results if the command was successful
   loop_control:
     label: "{{ item.item }}"
