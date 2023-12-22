@@ -28,7 +28,7 @@
 
 - name: check item
   debug:
-    var: "{{ item }}"
+    var: "{{ item.item }}"
   loop: "{{ whois_results.results }}"
   
 
