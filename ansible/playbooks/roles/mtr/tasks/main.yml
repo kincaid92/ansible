@@ -25,16 +25,27 @@
     label: "{{ item.item }}"
   run_once: true
 
-# - name: Ensure MTR is installed
-#   package:
-#     name: mtr
-#     state: present
-#   when: ansible_facts['pkg_mgr'] in ['apt', 'yum', 'dnf']
+- name: create mtr command
+  set_fact:
+    mtr_cmd: "{{ mtr_command }} '{{ item }}'"
+  loop: "{{ ips }}"
 
-# - name: run mtr 
-#   shell: mtr -rw "{{ dest }}"
-#   register: mtrout
+- name: Ensure MTR is installed
+  package:
+    name: mtr
+    state: present
+  when: ansible_facts['pkg_mgr'] in ['apt', 'yum', 'dnf']
 
-# - name: mtr results 
-#   debug:
-#     var: mtrout.stdout_lines
+- name: run mtr for each IP
+  shell: "{{ mtr_command }} '{{ item }}'"
+  loop: "{{ ips }}"
+  register: mtrout
+  loop_control:
+    label: "{{ item }}"
+
+- name: Show MTR results for each IP
+  debug:
+    msg: "MTR results for {{ item.item }}: {{ item.stdout_lines }}"
+  loop: "{{ mtrout.results }}"
+  loop_control:
+    label: "{{ item.item }}"
