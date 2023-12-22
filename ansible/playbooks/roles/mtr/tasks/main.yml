@@ -60,8 +60,9 @@
   delegate_to: 172.16.101.182
 
 - name: combine the files
-  shell: cat mtr_results*
+  shell: cat /tmp/mtr_results*
   register: finalmtr
+  delegate_to: 172.16.101.182
 
 - name: get output
   debug:
