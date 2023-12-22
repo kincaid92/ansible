@@ -30,8 +30,6 @@
   debug:
     var: "{{ item.item }}"
   loop: "{{ whois_results.results }}"
-  
-
 
 # - name: Ensure MTR is installed
 #   package:
@@ -39,16 +37,18 @@
 #     state: present
 #   when: ansible_facts['pkg_mgr'] in ['apt', 'yum', 'dnf']
 
-# - name: run mtr for each IP
-#   shell: "{{ mtr_command }} '{{ item }}'"
-#   loop: "{{ ips }}"
-#   register: mtrout
-#   loop_control:
-#     label: "{{ item }}"
+- name: run mtr for each IP
+  shell: "{{ mtr_command }} '{{ item.item }}'"
+  loop: "{{ whois_results.results }}"
+  loop_control:
+    label: "{{ item.item }}"
+  when: "{{ item.item }} is not {{ 'within' if 'Singlehop' in ansible_all_ipv4_addresses }}"
+  register: mtrout
 
-# - name: Show MTR results for each IP
-#   debug:
-#     msg: "MTR results for {{ item.item }}: {{ item.stdout_lines }}"
-#   loop: "{{ mtrout.results }}"
-#   loop_control:
-#     label: "{{ item.item }}"
+
+- name: Show MTR results for each IP
+  debug:
+    msg: "MTR results for {{ item.item }}: {{ item.stdout_lines }}"
+  loop: "{{ mtrout.results }}"
+  loop_control:
+    label: "{{ item.item }}"
