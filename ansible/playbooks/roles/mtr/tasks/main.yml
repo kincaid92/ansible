@@ -7,49 +7,24 @@
     mtr_command: mtr -rw
     org_filter: OrgName
 
-# - name: whois lookup
-#   shell: "{{ whois_command }} '{{ item }}' | grep {{ org_filter }}"
-#   loop: "{{ ips }}"
-#   register: whois_results
-#   run_once: true
-#   delegate_to: 172.16.101.182
+- name: whois lookup
+  shell: "{{ whois_command }} '{{ item }}' | grep {{ org_filter }}"
+  loop: "{{ ips }}"
+  register: whois_results
+  run_once: true
+  delegate_to: 172.16.101.182
 
-# - name: Determine location from whois data
-#   debug:
-#     msg: "{{ item.item }} is {{ 'within' if 'SingleHop' in item.stdout else 'outside of' }} the SingleHop ASN"
-#   loop: "{{ whois_results.results }}"
-#   loop_control:
-#     label: "{{ item.item }}"
-#   run_once: true
-
-
-# - name: check item
-#   debug:
-#     var: "{{ item.item }}"
-#   loop: "{{ whois_results.results }}"
-
-# - name: Ensure MTR is installed
-#   package:
-#     name: mtr
-#     state: present
-#   when: ansible_facts['pkg_mgr'] in ['apt', 'yum', 'dnf']
+- name: Ensure MTR is installed
+  package:
+    name: mtr
+    state: present
+  when: ansible_facts['pkg_mgr'] in ['apt', 'yum', 'dnf']
 
 - name: run mtr for each IP
   shell: "{{ mtr_command }} '{{ item }}'"
   loop: "{{ ips }}"
   when: item not in ansible_all_ipv4_addresses
   register: mtrout
-  # loop_control:
-  #   label: "{{ item }}"
-
-
-# - name: Show MTR results for each IP (Successes Only)
-#   debug:
-#     msg: |
-#       MTR results for {{ item.item }}:
-#       {{ item.stdout_lines | join('\n') }}
-#   loop: "{{ mtrout.results }}"
-  # when: item.stdout_lines is defined and item.rc == 0
 
 - name: Write MTR results to files on the remote host
   copy:
@@ -63,6 +38,14 @@
   shell: for file in /tmp/mtr_result*; do cat "$file"; echo ""; done
   register: finalmtr
   delegate_to: 172.16.101.182
+
+- name: Determine location from whois data
+  debug:
+    msg: "{{ item.item }} is {{ 'within' if 'SingleHop' in item.stdout else 'outside of' }} the SingleHop ASN"
+  loop: "{{ whois_results.results }}"
+  loop_control:
+    label: "{{ item.item }}"
+  run_once: true
 
 - name: get output
   debug:
