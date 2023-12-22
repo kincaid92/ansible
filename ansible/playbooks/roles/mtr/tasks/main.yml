@@ -1,11 +1,20 @@
 ---
 
-- name: declare some vars
-  set_fact:
-    ips: ["{{server1}}", "{{server2}}"]
-    whois_command: whois
-    mtr_command: mtr -rw
-    org_filter: OrgName
+- name: test
+  shell: mtr -rw 8.8.8.8
+  register: out
+
+- name: print test
+  debug:
+    var: out.stdout_lines
+
+
+# - name: declare some vars
+#   set_fact:
+#     ips: ["{{server1}}", "{{server2}}"]
+#     whois_command: whois
+#     mtr_command: mtr -rw
+#     org_filter: OrgName
 
 # - name: whois lookup
 #   shell: "{{ whois_command }} '{{ item }}' | grep {{ org_filter }}"
@@ -34,26 +43,13 @@
 #     state: present
 #   when: ansible_facts['pkg_mgr'] in ['apt', 'yum', 'dnf']
 
-- name: run mtr for each IP
-  shell: "{{ mtr_command }} '{{ item }}'"
-  loop: "{{ ips }}"
-  when: item not in ansible_all_ipv4_addresses
-  register: mtrout
-  # loop_control:
-  #   label: "{{ item }}"
-
-
-- name: Format and display MTR results
-  shell: "{{ item.cmd }} | col -b"  # 'col -b' removes backspaces and might help with formatting
-  loop: "{{ mtrout.results }}"
-  when: item.stdout is defined and item.rc == 0
-  register: formatted_mtr_results
-
-- name: Show formatted MTR results
-  debug:
-    msg: "{{ item.stdout }}"
-  loop: "{{ formatted_mtr_results.results }}"
-  when: item.stdout is defined and item.rc == 0
+# - name: run mtr for each IP
+#   shell: "{{ mtr_command }} '{{ item }}'"
+#   loop: "{{ ips }}"
+#   when: item not in ansible_all_ipv4_addresses
+#   register: mtrout
+#   # loop_control:
+#   #   label: "{{ item }}"
 
 
 # - name: Show MTR results for each IP (Successes Only)
