@@ -34,4 +34,6 @@
 
 - name: mtr results 
   debug:
-    var: mtrout.results.stdout_lines
+    msg: "{{ item.stdout_lines }}"
+  loop: "{{ mtrout.results }}"
+  when: item.stdout is defined and item.stdout_lines is defined
