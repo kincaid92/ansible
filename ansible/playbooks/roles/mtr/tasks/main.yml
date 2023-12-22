@@ -38,12 +38,12 @@
 #   when: ansible_facts['pkg_mgr'] in ['apt', 'yum', 'dnf']
 
 - name: run mtr for each IP
-  shell: "{{ mtr_command }} '{{ item.item }}'"
-  loop: "{{ ips.results }}"
-  loop_control:
-    label: "{{ item.item }}"
-  when: "{{ item.item }} is not {{ 'within' ansible_all_ipv4_addresses }}"
+  shell: "{{ mtr_command }} '{{ item }}'"
+  loop: "{{ ips }}"
+  when: item not in ansible_all_ipv4_addresses
   register: mtrout
+  loop_control:
+    label: "{{ item }}"
 
 
 - name: Show MTR results for each IP
