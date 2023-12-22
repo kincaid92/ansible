@@ -68,3 +68,9 @@
   debug:
     var: finalmtr.stdout_lines
   run_once: true
+
+- name: cleanup files
+  file:
+    path: /tmp/mtr_results*
+    state: absent
+  delegate_to: 172.16.101.182
