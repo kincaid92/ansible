@@ -26,14 +26,9 @@
   when: ansible_facts['pkg_mgr'] in ['apt', 'yum', 'dnf']
 
 - name: run mtr 
-  shell: mtr -rw "{{ item.item }}"
-  loop: "{{ whois_results.results }}"
-  when: "'SingleHop' in item.stdout"
+  shell: mtr -rw "{{ dest }}"
   register: mtrout
-  ignore_errors: true
 
 - name: mtr results 
   debug:
-    msg: "{{ item.stdout_lines }}"
-  loop: "{{ mtrout.results }}"
-  when: item.stdout is defined and item.stdout_lines is defined
+    var: mtrout.stdout_lines
