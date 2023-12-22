@@ -7,20 +7,20 @@
     mtr_command: mtr -rw
     org_filter: OrgName
 
-- name: whois lookup
-  shell: "{{ whois_command }} '{{ item }}' | grep {{ org_filter }}"
-  loop: "{{ ips }}"
-  register: whois_results
-  run_once: true
-  delegate_to: 172.16.101.182
+# - name: whois lookup
+#   shell: "{{ whois_command }} '{{ item }}' | grep {{ org_filter }}"
+#   loop: "{{ ips }}"
+#   register: whois_results
+#   run_once: true
+#   delegate_to: 172.16.101.182
 
-- name: Determine location from whois data
-  debug:
-    msg: "{{ item.item }} is {{ 'within' if 'SingleHop' in item.stdout else 'outside of' }} the SingleHop ASN"
-  loop: "{{ whois_results.results }}"
-  loop_control:
-    label: "{{ item.item }}"
-  run_once: true
+# - name: Determine location from whois data
+#   debug:
+#     msg: "{{ item.item }} is {{ 'within' if 'SingleHop' in item.stdout else 'outside of' }} the SingleHop ASN"
+#   loop: "{{ whois_results.results }}"
+#   loop_control:
+#     label: "{{ item.item }}"
+#   run_once: true
 
 
 # - name: check item
