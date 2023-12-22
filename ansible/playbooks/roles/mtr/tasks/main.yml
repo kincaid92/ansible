@@ -26,10 +26,10 @@
   run_once: true
 
 
-- name: check item
-  debug:
-    var: "{{ item.item }}"
-  loop: "{{ whois_results.results }}"
+# - name: check item
+#   debug:
+#     var: "{{ item.item }}"
+#   loop: "{{ whois_results.results }}"
 
 # - name: Ensure MTR is installed
 #   package:
