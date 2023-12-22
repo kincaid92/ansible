@@ -39,8 +39,8 @@
   loop: "{{ ips }}"
   when: item not in ansible_all_ipv4_addresses
   register: mtrout
-  loop_control:
-    label: "{{ item }}"
+  # loop_control:
+  #   label: "{{ item }}"
 
 
 - name: Show MTR results for each IP (Test)
