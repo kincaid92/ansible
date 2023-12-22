@@ -45,5 +45,4 @@
 
 - name: Show MTR results for each IP (Test)
   debug:
-    msg: "{{ item.stdout_lines }}"
-  loop: "{{ mtrout.results }}"
+    msg: "{{ mtrout.stdout_lines }}"
