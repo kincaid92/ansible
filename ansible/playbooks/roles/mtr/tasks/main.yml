@@ -51,14 +51,13 @@
 #   loop: "{{ mtrout.results }}"
   # when: item.stdout_lines is defined and item.rc == 0
 
-- name: aggregate the mtr results
-  set_fact:
-    combined_mtr: "{{ combined_mtr | default('') }}MTR results for {{ item.item }}:\n{{ item.stdout }}\n\n "
+- name: Write MTR results to files on the remote host
+  copy:
+    content: "{{ item.stdout }}"
+    dest: "/tmp/mtr_results_{{ item.item }}.txt"
   loop: "{{ mtrout.results }}"
   when: item.stdout_lines is defined and item.rc == 0
-
-- name: Write MTR results to a file on the remote host
-  copy:
-    content: "{{ combined_mtr }}"
-    dest: "/tmp/mtr_results.txt"
   delegate_to: 172.16.101.182
+
+# - name: combine the files
+#   shell:
