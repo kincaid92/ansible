@@ -1,6 +1,7 @@
 ---
 ## TODO write frontend to serve html report
 
+## ANCHOR BEGIN
 ## ANCHOR init empty list
 - name: Initialize an empty list for storing results
   set_fact:
@@ -42,23 +43,27 @@
   set_fact:
     host_data: 
       FQDN: "{{ ansible_nodename }}"
+      FQDN: "{{ ansible_pkg_mgr }}"
       IP Addresses: "{{ ansible_all_ipv4_addresses }}"
       Device Uptime: "{{ uptime_days.stdout_lines[0] }} Days"
       Last Yum Update: "{{ update.stdout_lines | default([]) if ansible_facts['pkg_mgr'] == 'yum' else omit }}"
       Yum Security/Bug Fixes: "{{ Sec_Impact.stdout_lines | default([]) if ansible_facts['pkg_mgr'] == 'yum' else omit }}"
       Last Apt Update: "{{ apt_history.stdout_lines | default([]) if ansible_facts['pkg_mgr'] == 'apt' else omit }}"
 
+## ANCHOR aggregate the data
 - name: Combine data from all hosts
   set_fact:
     aggregated_data: "{{ aggregated_data | default({}) | combine({ item: hostvars[item].host_data }) }}"
   loop: "{{ ansible_play_hosts_all }}"
 
+## ANCHOR Write our output in JSON
 - name: write json locally
   copy:
     content: "{{ aggregated_data | to_nice_json }}"
     dest: "/tmp/master.json"
   delegate_to: 172.16.101.182
 
+## ANCHOR parse our JSON output to make it valid
 - name: manually remove some things
   replace:
     path: /tmp/master.json
@@ -105,6 +110,7 @@
     line: '}'
   delegate_to: 172.16.101.182
 
+## ANCHOR create python script to convert JSON -> HTML
 - name: create our python file
   blockinfile:
     path: /tmp/convert.py
@@ -121,6 +127,7 @@
     create: yes
   delegate_to: 172.16.101.182
 
+## ANCHOR create JS script to send our JSON to MongoDB
 - name: create mongo input
   blockinfile:
     path: /tmp/mongo.js
@@ -141,6 +148,7 @@
   delegate_to: 172.16.101.182
   run_once: true
 
+## ANCHOR parse mongo JS script
 - name: cleanup mongo input
   lineinfile: 
     path: /tmp/mongo.js
@@ -157,6 +165,7 @@
   delegate_to: 172.16.101.182
   run_once: true
 
+## ANCHOR grab mongo creds via kube secrets
 - name: grab mongo user
   shell: >
     kubectl -n mongo get secrets mongodb-sec 
@@ -173,6 +182,7 @@
   run_once: true
   register: mongo_pw
 
+## ANCHOR insert our JSON output into MongoDB
 - name: send output to mongo
   community.mongodb.mongodb_shell:
     login_host: 10.42.0.245
@@ -188,12 +198,14 @@
     state: absent
   delegate_to: 172.16.101.182
 
+## ANCHOR convert the JSON to HTML
 - name: run our python script
   shell: python3 /tmp/convert.py
   register: html
   run_once: true
   delegate_to: 172.16.101.182
 
+## ANCHOR END
 - name: review results
   debug:
     msg: 'Please navigate to http://172.16.101.182:31505/ to view the results of this report'
