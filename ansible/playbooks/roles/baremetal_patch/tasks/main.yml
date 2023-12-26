@@ -43,7 +43,7 @@
   set_fact:
     host_data: 
       FQDN: "{{ ansible_nodename }}"
-      FQDN: "{{ ansible_pkg_mgr }}"
+      Package Manager: "{{ ansible_pkg_mgr }}"
       IP Addresses: "{{ ansible_all_ipv4_addresses }}"
       Device Uptime: "{{ uptime_days.stdout_lines[0] }} Days"
       Last Yum Update: "{{ update.stdout_lines | default([]) if ansible_facts['pkg_mgr'] == 'yum' else omit }}"
