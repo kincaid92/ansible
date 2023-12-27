@@ -69,7 +69,7 @@
   loop:
     - 'Updates Information Summary: updates'
     - 'updateinfo summary done'
-    - '"", '
+    - '"",'
     - '""'
   delegate_to: 172.16.101.182
   # run_once: true
@@ -187,10 +187,14 @@
   run_once: true
   register: mongo_pw
 
+- name: grab mongo IP
+  shell: kubectl get pod mongo-stateful-0 -o wide | awk 'NR==2{print $6}'
+  register: mongodb_IP
+
 ## ANCHOR insert our JSON output into MongoDB
 - name: send output to mongo
   community.mongodb.mongodb_shell:
-    login_host: 10.42.0.207
+    login_host: "{{ mongodb_IP }}"
     login_user: "{{ mongo_user.stdout }}"
     login_password: "{{ mongo_pw.stdout }}"
     file: "/tmp/mongo.js"
