@@ -60,33 +60,47 @@
   delegate_to: 172.16.101.182
 
 ## ANCHOR parse our JSON output to make it valid
-- name: manually remove some things
-  replace:
-    path: /tmp/master.json
-    regexp: 'Updates Information Summary: updates'
-    replace: ''
-  delegate_to: 172.16.101.182
 
-- name: manually remove some things
-  replace:
-    path: /tmp/master.json
-    regexp: 'updateinfo summary done'
+- name: cleanup mongo input
+  replace: 
+    path: "/tmp/master.json"
+    regexp: "{{ item }}"
     replace: ''
+  loop:
+    - "Updates Information Summary: updates"
+    - "updateinfo summary done"
+    - '"", '
+    - '""'
   delegate_to: 172.16.101.182
+  # run_once: true
 
-- name: manually remove some things
-  replace:
-    path: /tmp/master.json
-    regexp: '"",'
-    replace: ''
-  delegate_to: 172.16.101.182
+# - name: manually remove some things
+#   replace:
+#     path: /tmp/master.json
+#     regexp: 'Updates Information Summary: updates'
+#     replace: ''
+#   delegate_to: 172.16.101.182
 
-- name: manually remove some things
-  replace:
-    path: /tmp/master.json
-    regexp: '""'
-    replace: ''
-  delegate_to: 172.16.101.182
+# - name: manually remove some things
+#   replace:
+#     path: /tmp/master.json
+#     regexp: 'updateinfo summary done'
+#     replace: ''
+#   delegate_to: 172.16.101.182
+
+# - name: manually remove some things
+#   replace:
+#     path: /tmp/master.json
+#     regexp: '"",'
+#     replace: ''
+#   delegate_to: 172.16.101.182
+
+# - name: manually remove some things
+#   replace:
+#     path: /tmp/master.json
+#     regexp: '""'
+#     replace: ''
+#   delegate_to: 172.16.101.182
 
 - name: last bit of cleaning
   shell: sed -i '$d' /tmp/master.json
