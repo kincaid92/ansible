@@ -220,17 +220,12 @@
 ## ANCHOR get rid of markers in html file
 - name: cleanup markers
   lineinfile: 
-    path: /root/nginx-content/index.html
-    line: "# BEGIN ANSIBLE MANAGED BLOCK"
+    path: "/root/nginx-content/index.html"
+    line: "{{ item }}"
     state: absent
-  delegate_to: 172.16.101.182
-  run_once: true
-
-- name: cleanup markers
-  lineinfile: 
-    path: /root/nginx-content/index.html
-    line: "# END ANSIBLE MANAGED BLOCK"
-    state: absent
+  loop:
+    - "# BEGIN ANSIBLE MANAGED BLOCK"
+    - "# END ANSIBLE MANAGED BLOCK"
   delegate_to: 172.16.101.182
   run_once: true
 
