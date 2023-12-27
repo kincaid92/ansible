@@ -217,6 +217,23 @@
       </head>
   delegate_to: 172.16.101.182
 
+## ANCHOR get rid of markers in html file
+- name: cleanup markers
+  lineinfile: 
+    path: /root/nginx-content/index.html
+    line: "# BEGIN ANSIBLE MANAGED BLOCK"
+    state: absent
+  delegate_to: 172.16.101.182
+  run_once: true
+
+- name: cleanup markers
+  lineinfile: 
+    path: /root/nginx-content/index.html
+    line: "# END ANSIBLE MANAGED BLOCK"
+    state: absent
+  delegate_to: 172.16.101.182
+  run_once: true
+
 ## ANCHOR END
 - name: review results
   debug:
