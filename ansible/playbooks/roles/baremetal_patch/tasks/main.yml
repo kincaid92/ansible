@@ -67,8 +67,8 @@
     regexp: "{{ item }}"
     replace: ''
   loop:
-    - "Updates Information Summary: updates"
-    - "updateinfo summary done"
+    - 'Updates Information Summary: updates'
+    - 'updateinfo summary done'
     - '"", '
     - '""'
   delegate_to: 172.16.101.182
