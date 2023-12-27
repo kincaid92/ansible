@@ -2,12 +2,7 @@
 ## TODO write frontend to serve html report
 
 ## ANCHOR BEGIN
-## ANCHOR init empty list
-- name: Initialize an empty list for storing results
-  set_fact:
-    all_devices: []
-
-# ## ANCHOR device uptime
+## ANCHOR device uptime
 - name: get uptime
   shell: w | awk 'NR==1{print $2,$3}' | sed 's/,//g'
   register: uptime_days
@@ -152,17 +147,12 @@
 ## ANCHOR parse mongo JS script
 - name: cleanup mongo input
   lineinfile: 
-    path: /tmp/mongo.js
-    line: "# BEGIN ANSIBLE MANAGED BLOCK"
+    path: "/tmp/mongo.js"
+    line: "{{ item }}"
     state: absent
-  delegate_to: 172.16.101.182
-  run_once: true
-
-- name: cleanup mongo input
-  lineinfile: 
-    path: /tmp/mongo.js
-    line: "# END ANSIBLE MANAGED BLOCK"
-    state: absent
+  loop:
+    - "# BEGIN ANSIBLE MANAGED BLOCK"
+    - "# END ANSIBLE MANAGED BLOCK"
   delegate_to: 172.16.101.182
   run_once: true
 
