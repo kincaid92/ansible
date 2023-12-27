@@ -61,7 +61,7 @@
 
 ## ANCHOR parse our JSON output to make it valid
 
-- name: cleanup mongo input
+- name: cleanup json file
   replace: 
     path: "/tmp/master.json"
     regexp: "{{ item }}"
@@ -190,7 +190,7 @@
 ## ANCHOR insert our JSON output into MongoDB
 - name: send output to mongo
   community.mongodb.mongodb_shell:
-    login_host: 10.42.0.245
+    login_host: 10.42.0.246
     login_user: "{{ mongo_user.stdout }}"
     login_password: "{{ mongo_pw.stdout }}"
     file: "/tmp/mongo.js"
