@@ -2,6 +2,14 @@
 ## TODO write frontend to serve html report
 
 ## ANCHOR BEGIN
+
+- name: delete mongo output
+  file:
+    path: /tmp/mongo.js
+    state: absent
+  delegate_to: 172.16.101.182
+  ignore_errors: true
+
 ## ANCHOR device uptime
 - name: get uptime
   shell: w | awk 'NR==1{print $2,$3}' | sed 's/,//g'
@@ -39,7 +47,6 @@
     host_data: 
       FQDN: "{{ ansible_nodename }}"
       Package Manager: "{{ ansible_pkg_mgr }}"
-      Operating System: "{{ ansible_distribution }} {{ ansible_distribution_version }}"
       IP Addresses: "{{ ansible_all_ipv4_addresses }}"
       Device Uptime: "{{ uptime_days.stdout_lines[0] }} Days"
       Last Yum Update: "{{ update.stdout_lines | default([]) if ansible_facts['pkg_mgr'] == 'yum' else omit }}"
@@ -140,7 +147,7 @@
   shell: >
     kubectl -n mongo get secrets mongodb-sec 
     -o go-template='{{ "{{" }} index .data "mongo-username" | base64decode {{ "}}" }}'
-  delegate_to: 172.16.101.182
+  delegate_to: 172.16.101.182 
   run_once: true
   register: mongo_user
 
