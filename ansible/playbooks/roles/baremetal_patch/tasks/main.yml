@@ -190,7 +190,7 @@
 ## ANCHOR insert our JSON output into MongoDB
 - name: send output to mongo
   community.mongodb.mongodb_shell:
-    login_host: 10.42.0.246
+    login_host: 10.42.0.247
     login_user: "{{ mongo_user.stdout }}"
     login_password: "{{ mongo_pw.stdout }}"
     file: "/tmp/mongo.js"
