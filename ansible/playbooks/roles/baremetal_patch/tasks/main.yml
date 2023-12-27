@@ -192,7 +192,6 @@
   delegate_to: 172.16.101.182
   run_once: true
   register: mongodb_IP
-  
 
 ## ANCHOR insert our JSON output into MongoDB
 - name: send output to mongo
