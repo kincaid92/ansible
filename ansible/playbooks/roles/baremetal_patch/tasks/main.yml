@@ -2,7 +2,6 @@
 ## TODO write frontend to serve html report
 
 ## ANCHOR BEGIN
-
 - name: delete mongo output
   file:
     path: /tmp/mongo.js
