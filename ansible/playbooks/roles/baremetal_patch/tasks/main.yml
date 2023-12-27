@@ -81,20 +81,7 @@
     - sed -i '$s/}]$//' /tmp/master.json
   delegate_to: 172.16.101.182
 
-
-# - name: last bit of cleaning
-#   shell: sed -i '$d' /tmp/master.json
-#   delegate_to: 172.16.101.182
-
-# - name: last bit of cleaning
-#   shell: sed -i '1s/^{//' /tmp/master.json
-#   delegate_to: 172.16.101.182
-
-# - name: last bit of cleaning for real this time
-#   shell: sed -i '$s/}]$//' /tmp/master.json
-#   delegate_to: 172.16.101.182
-
-- name: damage control
+- name: add final bracket to master.json
   lineinfile:
     path: /tmp/master.json
     line: '}'
