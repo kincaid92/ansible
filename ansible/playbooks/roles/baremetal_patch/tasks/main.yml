@@ -206,6 +206,17 @@
   run_once: true
   delegate_to: 172.16.101.182
 
+## ANCHOR give our HTML a css stylesheet
+- name: css style
+  blockinfile:
+    path: /root/nginx-content/index.html
+    insertbefore: "<table b"
+    block: |
+      <head>
+        <link rel="stylesheet" type="text/css" href="style.css">
+      </head>
+  delegate_to: 172.16.101.182
+
 ## ANCHOR END
 - name: review results
   debug:
