@@ -80,6 +80,7 @@
     regexp: "}"
     replace: '},'
   delegate_to: 172.16.101.182
+  run_once: true
 
 # - name: manually remove some things
 #   replace:
