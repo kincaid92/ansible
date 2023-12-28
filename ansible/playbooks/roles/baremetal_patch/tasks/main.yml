@@ -160,7 +160,7 @@
   register: mongo_pw
 
 - name: grab mongo IP
-  shell: kubectl get pod mongo-stateful-0 -o wide | awk 'NR==2{print $6}'
+  shell: kubectl get pod mongo-stateful-0 -o wide | awk 'NR==2{print $6}' -n mongo
   delegate_to: 172.16.101.182
   run_once: true
   register: mongodb_IP
