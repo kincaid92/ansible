@@ -1,2 +1,17 @@
 ---
 
+- name: add a nat rule
+  paloaltonetworks.panos.panos_nat_rule2:
+    provider: '{{ provider }}'
+    name: 'myRule'
+    description: 'Made by Ansible'
+    nat_type: 'ipv4'
+    from_zones: ['INSIDE-PA-203']
+    to_zones: ['OUTSIDE']
+    to_interface: 'any'
+    service: 'any'
+    source_addresses: ['vbr']
+    destination_addresses: ['any']
+    source_translation_type: 'static-ip'
+    source_translation_address_type: 'vbr-nat'
+    source_translation_interface: 'any'
