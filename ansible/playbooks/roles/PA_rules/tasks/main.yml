@@ -1,10 +1,14 @@
 ---
 
-- name: Get facts
-  paloaltonetworks.panos.panos_facts:
-    provider: '{{ palo_provider }}'
-  register: test
+- name: pip
+  become: true
+  shell: pip install pan-python
 
-- name: debug
-  debug:
-    var: test.stdout_lines
+# - name: Get facts
+#   paloaltonetworks.panos.panos_facts:
+#     provider: '{{ palo_provider }}'
+#   register: test
+
+# - name: debug
+#   debug:
+#     var: test.stdout_lines
