@@ -2,7 +2,6 @@
 
 - name: add a nat rule
   paloaltonetworks.panos.panos_nat_rule2:
-    provider: 'LUFRPT02OXYrMXJ0cm9FVVI0MlkwS0xzV28rTGg5cDQ9dHB5K2xNZFNIQUlZeDJNdmp3YVRyYUoxeTBITFd2Q0ZtWmMxMkY3TEd6ZTdPRHU4OGVFdDdzbVVsMzdGZ3IweA=='    
     name: 'myRule'
     description: 'Made by Ansible'
     nat_type: 'ipv4'
