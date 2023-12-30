@@ -1,7 +1,7 @@
 ---
 
 - name: get id of awx
-  shell: hostname
+  shell: pwd
   register: hi
 
 - name: debug
