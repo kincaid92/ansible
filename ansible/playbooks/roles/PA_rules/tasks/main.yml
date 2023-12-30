@@ -3,7 +3,7 @@
 - name: Get facts
   paloaltonetworks.panos.panos_op:
     provider: '{{ palo_provider }}'
-    cmd: 'show system info'
+    cmd: 'show interface ethernet1/1'
   register: test
   
 - name: debug
