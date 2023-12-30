@@ -1,15 +1,8 @@
 ---
 
-- name: Get running nat-policy
-  paloaltonetworks.panos.panos_op:
+- name: Create object 'Test-One'
+  paloaltonetworks.panos.panos_address_object:
     provider: '{{ palo_provider }}'
-    cmd: 'show running nat-policy'
-  register: nat_policy_raw
-
-- name: Convert NAT policy string to structured data
-  set_fact:
-    nat_policy_lines: "{{ nat_policy_raw.stdout }}"
-
-- name: Display each NAT policy
-  debug:
-    var: nat_policy_lines 
+    name: 'Test-One'
+    value: '1.1.1.1'
+    description: 'made by ansible'
