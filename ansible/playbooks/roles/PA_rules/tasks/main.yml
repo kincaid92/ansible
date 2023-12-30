@@ -18,5 +18,5 @@
 
 - name: Display each NAT policy
   debug:
-    var: item
-  loop: "{{ nat_policies | to_nice_json }}"
+    var: item | to_nice_json
+  loop: "{{ nat_policies }}"
