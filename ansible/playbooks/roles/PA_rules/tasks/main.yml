@@ -1,10 +1,19 @@
 ---
 
-- name: Get facts
-  paloaltonetworks.panos.panos_facts:
-    provider: '{{ palo_provider }}'
-  register: test
+- name: get id of awx
+  shell: id
+  register: hi
 
 - name: debug
   debug:
-    var: test.stdout_lines
+    var: hi.stdout
+
+
+# - name: Get facts
+#   paloaltonetworks.panos.panos_facts:
+#     provider: '{{ palo_provider }}'
+#   register: test
+
+# - name: debug
+#   debug:
+#     var: test.stdout_lines
