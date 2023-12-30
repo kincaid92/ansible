@@ -12,4 +12,4 @@
 
 - name: Display each NAT policy
   debug:
-    var: nat_policy_lines | from_json
+    var: nat_policy_lines
