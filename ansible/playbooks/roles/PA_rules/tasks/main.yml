@@ -14,7 +14,7 @@
   set_fact:
     nat_policies: "{{ nat_policies | default([]) + [item] }}"
   loop: "{{ nat_policy_lines }}"
-  when: item | regex_search('^\"VM1-PA-')  # Adjust this regex based on the actual format of your policies
+  #when: item | regex_search('^\"VM1-PA-')  # Adjust this regex based on the actual format of your policies
 
 - name: Display each NAT policy
   debug:
