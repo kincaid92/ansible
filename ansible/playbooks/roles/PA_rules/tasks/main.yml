@@ -7,19 +7,6 @@
   register: test
 
 
-- name: Store host-specific data
-  set_fact:
-    host_data: 
-      results: "{{ test.stdout_lines }}"
-
-## ANCHOR aggregate the data
-- name: Combine data from all hosts
-  set_fact:
-    aggregated_data: "{{ aggregated_data | default({}) | combine({ item: hostvars[item].host_data }) }}"
-  loop: "{{ ansible_play_hosts_all }}"
-  
-- name: write json locally
-  copy:
-    content: "{{ aggregated_data | to_nice_json }}"
-    dest: "/tmp/master2.json"
-  delegate_to: 172.16.101.182
+- name: print
+  debug:
+    var: "{{ test }}"
