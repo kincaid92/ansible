@@ -9,4 +9,4 @@
 
 - name: print
   debug:
-    var: "{{ test }}"
+    var: test
