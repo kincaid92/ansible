@@ -7,4 +7,4 @@
 
 - name: debug
   debug:
-    var: test.stdout_lines
+    var: test
