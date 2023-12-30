@@ -6,6 +6,18 @@
     cmd: 'show running nat-policy'
   register: test
   
+- name: Store host-specific data
+  set_fact:
+    host_data: 
+      IP Addresses: "{{ test }}"
+
+## ANCHOR aggregate the data
+- name: Combine data from all hosts
+  set_fact:
+    aggregated_data: "{{ aggregated_data | default({}) | combine({ item: hostvars[item].host_data }) }}"
+  loop: "{{ ansible_play_hosts_all }}"
+
 - name: debug
   debug:
-    var: test
+    var: "{{ item.value }}"
+  loop: "{{ aggregated_data | dict2items }}"
