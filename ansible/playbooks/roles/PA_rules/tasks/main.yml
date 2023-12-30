@@ -10,13 +10,7 @@
   set_fact:
     nat_policy_lines: "{{ nat_policy_raw.stdout_lines | list }}"
 
-- name: Process each NAT policy entry
-  set_fact:
-    nat_policies: "{{ nat_policies | default([]) + [item] }}"
-  loop: "{{ nat_policy_lines }}"
-  #when: item | regex_search('^\"VM1-PA-')  # Adjust this regex based on the actual format of your policies
-
 - name: Display each NAT policy
   debug:
-    var: item | to_nice_json
-  loop: "{{ nat_policies }}"
+    var: item 
+  loop: "{{ nat_policy_lines }}"
