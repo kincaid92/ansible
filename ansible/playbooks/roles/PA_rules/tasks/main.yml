@@ -8,8 +8,8 @@
 
 - name: Convert NAT policy string to structured data
   set_fact:
-    nat_policy_lines: "{{ nat_policy_raw }}"
+    nat_policy_lines: "{{ nat_policy_raw.stdout }}"
 
 - name: Display each NAT policy
   debug:
-    var: nat_policy_lines
+    var: nat_policy_lines | from_json
