@@ -4,7 +4,7 @@
   paloaltonetworks.panos.panos_facts:
     provider: '{{ palo_provider }}'
   register: test
-
+  
 - name: debug
   debug:
     var: test
