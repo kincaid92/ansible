@@ -1,10 +1,11 @@
 ---
 
 - name: Get facts
-  paloaltonetworks.panos.panos_facts:
+  paloaltonetworks.panos.panos_op:
     provider: '{{ palo_provider }}'
+    cmd: 'show running nat-policy'
   register: test
   
 - name: debug
   debug:
-    var: test
+    var: test.stdout_lines
