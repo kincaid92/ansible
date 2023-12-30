@@ -18,6 +18,8 @@
     aggregated_data: "{{ aggregated_data | default({}) | combine({ item: hostvars[item].host_data }) }}"
   loop: "{{ ansible_play_hosts_all }}"
   
-- name: debug
-  debug:
-    var: "{{ aggregated_data }}"
+- name: write json locally
+  copy:
+    content: "{{ aggregated_data | to_nice_json }}"
+    dest: "/tmp/master2.json"
+  delegate_to: 172.16.101.182
