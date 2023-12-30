@@ -1,8 +1,9 @@
 ---
 
 - name: Get facts
-  paloaltonetworks.panos.panos_facts:
+  paloaltonetworks.panos.panos_type_cmd:
     provider: '{{ palo_provider }}'
+    cmd: 'show system info'
   register: test
   
 - name: debug
