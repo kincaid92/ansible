@@ -1,7 +1,7 @@
 ---
 
 - name: get id of awx
-  shell: ls /var/lib/awx/venv/
+  shell: ls
   register: hi
 
 - name: debug
