@@ -1,7 +1,7 @@
 ---
 
 - name: get id of awx
-  shell: id
+  shell: cat /var/lib/awx/hi
   register: hi
 
 - name: debug
