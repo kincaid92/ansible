@@ -1,12 +1,10 @@
 ---
 
 - name: Get facts
-  paloaltonetworks.panos.panos_op:
+  paloaltonetworks.panos.panos_facts:
     provider: '{{ palo_provider }}'
-    cmd: 'show interface ethernet1/1'
   register: test
-
-
-- name: print
+  
+- name: debug
   debug:
     var: test
