@@ -8,4 +8,4 @@
   
 - name: debug
   debug:
-    var: test
+    var: test.stdout_lines
