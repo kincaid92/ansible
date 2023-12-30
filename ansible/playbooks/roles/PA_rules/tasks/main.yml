@@ -10,7 +10,7 @@
 - name: Store host-specific data
   set_fact:
     host_data: 
-      results: {{ test.stdout_lines }}
+      results: "{{ test.stdout_lines }}"
 
 ## ANCHOR aggregate the data
 - name: Combine data from all hosts
