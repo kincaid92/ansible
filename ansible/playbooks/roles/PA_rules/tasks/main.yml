@@ -5,7 +5,19 @@
     provider: '{{ palo_provider }}'
     cmd: 'show interface ethernet1/1'
   register: test
+
+
+- name: Store host-specific data
+  set_fact:
+    host_data: 
+      results: {{ test.stdout_lines }}
+
+## ANCHOR aggregate the data
+- name: Combine data from all hosts
+  set_fact:
+    aggregated_data: "{{ aggregated_data | default({}) | combine({ item: hostvars[item].host_data }) }}"
+  loop: "{{ ansible_play_hosts_all }}"
   
 - name: debug
   debug:
-    var: test.stdout_lines
+    var: "{{ aggregated_data | to_nice_json }}"
