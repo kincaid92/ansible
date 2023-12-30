@@ -20,4 +20,4 @@
   
 - name: debug
   debug:
-    var: "{{ aggregated_data | to_nice_json }}"
+    var: "{{ aggregated_data }}"
