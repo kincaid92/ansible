@@ -1,23 +1,29 @@
 ---
 
-- name: Get facts
+- name: Get running nat-policy
   paloaltonetworks.panos.panos_op:
     provider: '{{ palo_provider }}'
     cmd: 'show running nat-policy'
-  register: test
-  
-- name: Store host-specific data
-  set_fact:
-    host_data: 
-      IP Addresses: "{{ test }}"
+  register: nat_policy_raw
 
-## ANCHOR aggregate the data
-- name: Combine data from all hosts
+- name: Parse NAT Policy stdout to JSON
   set_fact:
-    aggregated_data: "{{ aggregated_data | default({}) | combine({ item: hostvars[item].host_data }) }}"
-  loop: "{{ ansible_play_hosts_all }}"
+    nat_policy_json: "{{ nat_policy_raw.stdout | from_json }}"
 
-- name: debug
+- name: Extract NAT policy details
+  set_fact:
+    nat_details: "{{ nat_policy_json.response.result.member }}"
+
+- name: Display NAT details in structured format
   debug:
-    var: "{{ item.value }}"
-  loop: "{{ aggregated_data | dict2items }}"
+    msg: |
+      NAT Type: {{ item.nat-type }}
+      From Zone: {{ item.from }}
+      Source: {{ item.source }}
+      To Zone: {{ item.to }}
+      To Interface: {{ item.to-interface }}
+      Destination: {{ item.destination }}
+      Service: {{ item.service }}
+      Translate To: {{ item.translate-to }}
+      Terminal: {{ item.terminal }}
+  loop: "{{ nat_details }}"
