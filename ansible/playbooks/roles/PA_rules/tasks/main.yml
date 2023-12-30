@@ -6,24 +6,17 @@
     cmd: 'show running nat-policy'
   register: nat_policy_raw
 
-- name: Parse NAT Policy stdout to JSON
+- name: Convert NAT policy string to structured data
   set_fact:
-    nat_policy_json: "{{ nat_policy_raw.stdout | from_json }}"
+    nat_policy_lines: "{{ nat_policy_raw.stdout_lines | list }}"
 
-- name: Extract NAT policy details
+- name: Process each NAT policy entry
   set_fact:
-    nat_details: "{{ nat_policy_json.response.result.member }}"
+    nat_policies: "{{ nat_policies | default([]) + [item] }}"
+  loop: "{{ nat_policy_lines }}"
+  when: item | regex_search('^\"VM1-PA-')  # Adjust this regex based on the actual format of your policies
 
-- name: Display NAT details in structured format
+- name: Display each NAT policy
   debug:
-    msg: |
-      NAT Type: {{ item.nat-type }}
-      From Zone: {{ item.from }}
-      Source: {{ item.source }}
-      To Zone: {{ item.to }}
-      To Interface: {{ item.to-interface }}
-      Destination: {{ item.destination }}
-      Service: {{ item.service }}
-      Translate To: {{ item.translate-to }}
-      Terminal: {{ item.terminal }}
-  loop: "{{ nat_details }}"
+    var: item
+  loop: "{{ nat_policies }}"
