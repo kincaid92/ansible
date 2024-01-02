@@ -51,7 +51,7 @@
     source_translation_static_bi_directional: true
   when: gather == false
   
-- name: commit candidate configs on firewall
+- name: commit changes on PA
   paloaltonetworks.panos.panos_commit_firewall:
     provider: '{{ palo_provider }}'
   when: commit == true and gather == false
