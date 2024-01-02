@@ -4,5 +4,8 @@
   paloaltonetworks.panos.panos_address_object:
     provider: '{{ palo_provider }}'
     name: 'Test-One'
-    value: '1.1.1.1'
+    value: '{{ item }}'
     description: 'made by ansible'
+  loop:
+    - '1.1.1.1'
+    - '2.2.2.2'
