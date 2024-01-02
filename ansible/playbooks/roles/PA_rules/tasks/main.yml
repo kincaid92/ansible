@@ -6,11 +6,18 @@
 #     listing: true
 #   register: res1
 
-- name: Retrieve address group object 'Prod'
-  paloaltonetworks.panos.panos_object_facts:
+# - name: Retrieve address group object 'Prod'
+#   paloaltonetworks.panos.panos_object_facts:
+#     provider: '{{ palo_provider }}'
+#     name_regex: '.*V.*'
+#     object_type: 'address'
+#   register: result
+
+
+- name: Create object 'Test-One'
+  paloaltonetworks.panos.panos_address_object:
     provider: '{{ palo_provider }}'
-    name_regex: '.*V.*'
-    object_type: 'address'
+    state: gathered
   register: result
 
 - debug:
