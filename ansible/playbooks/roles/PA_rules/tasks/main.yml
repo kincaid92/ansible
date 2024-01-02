@@ -1,49 +1,49 @@
 ---
 
-- name: Get a list of all NAT rules
-  paloaltonetworks.panos.panos_nat_rule_facts:
+# - name: Get a list of all NAT rules
+#   paloaltonetworks.panos.panos_nat_rule_facts:
+#     provider: '{{ palo_provider }}'
+#     listing: true
+#   register: res1
+
+# - debug:
+#     msg: '{{ res1.listing }}'
+
+- name: commit var
+  set_fact:
+    commit: false
+
+- name: Create object 'Test-One'
+  paloaltonetworks.panos.panos_address_object:
     provider: '{{ palo_provider }}'
-    listing: true
-  register: res1
+    name: '{{ object_name }}'
+    value: '{{ source_ip }}'
+    description: 'made by ansible'
 
-- debug:
-    msg: '{{ res1.listing }}'
+- name: Create object 'Test-One-NAT'
+  paloaltonetworks.panos.panos_address_object:
+    provider: '{{ palo_provider }}'
+    name: '{{ object_name }}-NAT'
+    value: '{{ NAT_ip }}'
+    description: 'made by ansible'
 
-# - name: commit var
-#   set_fact:
-#     commit: false
+- name: add a nat rule
+  paloaltonetworks.panos.panos_nat_rule2:
+    provider: '{{ palo_provider }}'
+    name: '{{ object_name }} OUTSIDE'
+    description: 'Made by Ansible'
+    nat_type: 'ipv4'
+    from_zones: ['{{ source_zone }}']
+    to_zones: ['{{ dest_zone }}']
+    to_interface: 'any'
+    service: 'any'
+    source_addresses: ['{{ object_name }}']
+    destination_addresses: ['any']
+    source_translation_type: 'static-ip'
+    source_translation_static_translated_address: '{{ object_name }}-NAT'
+    source_translation_static_bi_directional: true
 
-# - name: Create object 'Test-One'
-#   paloaltonetworks.panos.panos_address_object:
-#     provider: '{{ palo_provider }}'
-#     name: '{{ object_name }}'
-#     value: '{{ source_ip }}'
-#     description: 'made by ansible'
-
-# - name: Create object 'Test-One-NAT'
-#   paloaltonetworks.panos.panos_address_object:
-#     provider: '{{ palo_provider }}'
-#     name: '{{ object_name }}-NAT'
-#     value: '{{ NAT_ip }}'
-#     description: 'made by ansible'
-
-# - name: add a nat rule
-#   paloaltonetworks.panos.panos_nat_rule2:
-#     provider: '{{ palo_provider }}'
-#     name: '{{ object_name }} OUTSIDE'
-#     description: 'Made by Ansible'
-#     nat_type: 'ipv4'
-#     from_zones: ['{{ source_zone }}']
-#     to_zones: ['{{ dest_zone }}']
-#     to_interface: 'any'
-#     service: 'any'
-#     source_addresses: ['{{ object_name }}']
-#     destination_addresses: ['any']
-#     source_translation_type: 'static-ip'
-#     source_translation_static_translated_address: '{{ object_name }}-NAT'
-#     source_translation_static_bi_directional: true
-
-# - name: commit candidate configs on firewall
-#   paloaltonetworks.panos.panos_commit_firewall:
-#     provider: '{{ palo_provider }}'
-#   when: commit == true
+- name: commit candidate configs on firewall
+  paloaltonetworks.panos.panos_commit_firewall:
+    provider: '{{ palo_provider }}'
+  when: commit == true
