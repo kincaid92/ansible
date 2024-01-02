@@ -24,8 +24,8 @@
     name: '{{ object_name }} OUTSIDE'
     description: 'Made by Ansible'
     nat_type: 'ipv4'
-    from_zones: ['INSIDE-PA-203']
-    to_zones: ['OUTSIDE']
+    from_zones: ['{{ source_zone }}']
+    to_zones: ['{{ dest_zone }}']
     to_interface: 'any'
     service: 'any'
     source_addresses: ['{{ object_name }}']
