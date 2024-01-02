@@ -9,6 +9,7 @@
 - name: Retrieve address group object 'Prod'
   paloaltonetworks.panos.panos_object_facts:
     provider: '{{ palo_provider }}'
+    name_regex: '.*V.*'
     object_type: 'address'
   register: result
 
