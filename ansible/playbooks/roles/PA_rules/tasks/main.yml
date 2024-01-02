@@ -36,5 +36,5 @@
 
 - name: commit candidate configs on firewall
   paloaltonetworks.panos.panos_commit_firewall:
-    provider: '{{ credentials }}'
+    provider: '{{ palo_provider }}'
   when: commit == true
