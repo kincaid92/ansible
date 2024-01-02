@@ -1,22 +1,31 @@
 ---
+- name: Create object 'Test-One'
+  paloaltonetworks.panos.panos_address_object:
+    provider: '{{ palo_provider }}'
+    name: 'Test-One'
+    value: '172.16.203.15/32'
+    description: 'made by ansible'
 
-- name: Change user password
-  user:
-    name: root
-    update_password: always
-    password: "toor | password_hash('sha512')"
+- name: Create object 'Test-One-NAT'
+  paloaltonetworks.panos.panos_address_object:
+    provider: '{{ palo_provider }}'
+    name: 'Test-One-NAT'
+    value: '198.20.64.242/32'
+    description: 'made by ansible'
 
 
-# - name: Create object 'Test-One'
-#   paloaltonetworks.panos.panos_address_object:
-#     provider: '{{ palo_provider }}'
-#     name: 'Test-One'
-#     value: '172.16.203.15/32'
-#     description: 'made by ansible'
-
-# - name: Create object 'Test-One-NAT'
-#   paloaltonetworks.panos.panos_address_object:
-#     provider: '{{ palo_provider }}'
-#     name: 'Test-One-NAT'
-#     value: '198.20.64.242/32'
-#     description: 'made by ansible'
+- name: add a nat rule
+  paloaltonetworks.panos.panos_nat_rule2:
+    provider: '{{ provider }}'
+    name: 'vbr-nat'
+    description: 'Made by Ansible'
+    nat_type: 'ipv4'
+    from_zones: ['INSIDE-PA-203']
+    to_zones: ['OUTSIDE']
+    to_interface: 'any'
+    service: 'any'
+    source_addresses: ['Test-One']
+    destination_addresses: ['any']
+    source_translation_type: 'static-ip'
+    source_translation_translated_addresses: 'Test-One-NAT'
+    source_translation_static_bi_directional: true
