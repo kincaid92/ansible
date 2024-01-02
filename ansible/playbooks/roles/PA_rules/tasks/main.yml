@@ -1,6 +1,6 @@
 ---
 
-- name: commit var
+- name: vars
   set_fact:
     commit: false
     gather: true
