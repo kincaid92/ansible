@@ -22,7 +22,7 @@
   register: result
 
 - debug:
-    msg: '{{ result }}'
+    msg: '{{ result.gathered }}'
 
 # - name: commit var
 #   set_fact:
