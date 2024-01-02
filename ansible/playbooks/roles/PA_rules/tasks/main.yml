@@ -1,7 +1,7 @@
 ---
 
 - name: commit var
-  set_facts:
+  set_fact:
     commit: false
 
 - name: Create object 'Test-One'
