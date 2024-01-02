@@ -3,7 +3,7 @@
 - name: Create object 'Test-One'
   paloaltonetworks.panos.panos_address_object:
     provider: '{{ palo_provider }}'
-    name: 'Test-One'
+    name: '{{ item }}'
     value: '{{ item }}'
     description: 'made by ansible'
   loop:
