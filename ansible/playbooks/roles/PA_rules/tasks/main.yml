@@ -27,5 +27,5 @@
     source_addresses: ['Test-One']
     destination_addresses: ['any']
     source_translation_type: 'static-ip'
-    source_translation_translated_addresses: ['Test-One-NAT']
+    source_translation_static_translated_address: ['Test-One-NAT']
     source_translation_static_bi_directional: true
