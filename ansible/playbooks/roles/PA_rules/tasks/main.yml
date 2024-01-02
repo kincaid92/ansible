@@ -1,18 +1,10 @@
 ---
 
-# - name: Change user password
-#   user:
-#     name: root
-#     update_password: always
-#     password: "toor"
-
-- name: djhsuo
-  shell: hostname
-  register: out
-
-- name: debug
-  debug:
-    var: out.stdout
+- name: Change user password
+  user:
+    name: root
+    update_password: always
+    password: "toor | password_hash('sha512')"
 
 
 # - name: Create object 'Test-One'
