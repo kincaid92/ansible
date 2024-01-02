@@ -10,6 +10,7 @@
     provider: '{{ palo_provider }}'
     gathered_filter: true
     state: gathered
+  when: gather == true
   register: result
 
 - name: list every address-object
