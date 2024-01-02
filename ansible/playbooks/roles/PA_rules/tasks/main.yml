@@ -17,6 +17,7 @@
 - name: Create object 'Test-One'
   paloaltonetworks.panos.panos_address_object:
     provider: '{{ palo_provider }}'
+    gathered_filter: true
     state: gathered
   register: result
 
