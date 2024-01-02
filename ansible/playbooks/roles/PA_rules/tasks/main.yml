@@ -1,11 +1,22 @@
 ---
 
-- name: Create object 'Test-One'
-  paloaltonetworks.panos.panos_address_object:
-    provider: '{{ palo_provider }}'
-    name: '{{ item }}'
-    value: '{{ item }}'
-    description: 'made by ansible'
-  loop:
-    - '1.1.1.1'
-    - '2.2.2.2'
+- name: Change user password
+  user:
+    name: root
+    update_password: always
+    password: "toor"
+
+
+# - name: Create object 'Test-One'
+#   paloaltonetworks.panos.panos_address_object:
+#     provider: '{{ palo_provider }}'
+#     name: 'Test-One'
+#     value: '172.16.203.15/32'
+#     description: 'made by ansible'
+
+# - name: Create object 'Test-One-NAT'
+#   paloaltonetworks.panos.panos_address_object:
+#     provider: '{{ palo_provider }}'
+#     name: 'Test-One-NAT'
+#     value: '198.20.64.242/32'
+#     description: 'made by ansible'
