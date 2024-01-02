@@ -14,7 +14,7 @@
   register: result
 
 - debug:
-    msg: '{{ result.listing }}'
+    msg: '{{ result }}'
 
 # - name: commit var
 #   set_fact:
