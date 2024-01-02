@@ -1,5 +1,9 @@
 ---
 
+- name: commit var
+  set_facts:
+    commit: false
+
 - name: Create object 'Test-One'
   paloaltonetworks.panos.panos_address_object:
     provider: '{{ palo_provider }}'
@@ -29,3 +33,8 @@
     source_translation_type: 'static-ip'
     source_translation_static_translated_address: '{{ object_name }}-NAT'
     source_translation_static_bi_directional: true
+
+- name: commit candidate configs on firewall
+  paloaltonetworks.panos.panos_commit_firewall:
+    provider: '{{ credentials }}'
+  when: commit == true
