@@ -1,5 +1,13 @@
 ---
 
+## ANCHOR ensure mongo.js doesn't exist
+- name: delete mongo output
+  file:
+    path: /tmp/mongo.js
+    state: absent
+  delegate_to: 172.16.101.182
+  ignore_errors: true
+
 ## ANCHOR create python script to convert JSON -> HTML
 - name: create our python file
   blockinfile:

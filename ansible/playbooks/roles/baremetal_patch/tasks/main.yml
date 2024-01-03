@@ -8,12 +8,7 @@
     stage_update:
     upgrade:
 
-- name: delete mongo output
-  file:
-    path: /tmp/mongo.js
-    state: absent
-  delegate_to: 172.16.101.182
-  ignore_errors: true
+
 
 ## ANCHOR device uptime
 - name: get uptime
