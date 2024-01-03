@@ -8,3 +8,5 @@
     - patch_parsing
     - patch_mongo
     - patch_execute
+    - patch_cleanup
+    - patch_END
