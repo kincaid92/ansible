@@ -1,0 +1,48 @@
+---
+
+- name: cleanup master.json
+  replace: 
+    path: "/tmp/master.json"
+    regexp: "{{ item }}"
+    replace: ''
+  loop:
+    - 'Updates Information Summary: updates'
+    - 'updateinfo summary done'
+    - '"",'
+    - '""'
+  delegate_to: 172.16.101.182
+
+- name: sed commands for master.json
+  shell: "{{ item }}"
+  loop:
+    - sed -i '$d' /tmp/master.json
+    - sed -i '1s/^{//' /tmp/master.json
+    - sed -i '$s/}]$//' /tmp/master.json
+  delegate_to: 172.16.101.182
+
+- name: add final bracket to master.json
+  lineinfile:
+    path: /tmp/master.json
+    line: '}'
+  delegate_to: 172.16.101.182
+
+- name: shell commands to migrate master.json
+  shell: "{{ item }}"
+  loop:
+    - "sed -i '3r /tmp/master.json' /tmp/convert.py"
+    - "sed -i '2r /tmp/master.json' /tmp/mongo.js"
+  delegate_to: 172.16.101.182
+  run_once: true
+
+## ANCHOR parse mongo JS script
+- name: cleanup mongo input
+  lineinfile: 
+    path: "/tmp/mongo.js"
+    line: "{{ item }}"
+    state: absent
+  loop:
+    - "# BEGIN ANSIBLE MANAGED BLOCK"
+    - "# END ANSIBLE MANAGED BLOCK"
+  delegate_to: 172.16.101.182
+  run_once: true
+

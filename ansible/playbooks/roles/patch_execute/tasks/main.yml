@@ -1,0 +1,47 @@
+---
+
+## ANCHOR convert the JSON to HTML
+- name: run our python script
+  shell: python3 /tmp/convert.py
+  register: html
+  run_once: true
+  delegate_to: 172.16.101.182
+
+  ## ANCHOR insert our JSON output into MongoDB
+- name: send output to mongo
+  community.mongodb.mongodb_shell:
+    login_host: "{{ mongodb_IP.stdout }}"
+    login_user: "{{ mongo_user.stdout }}"
+    login_password: "{{ mongo_pw.stdout }}"
+    file: "/tmp/mongo.js"
+  delegate_to: 172.16.101.182
+  run_once: true
+
+  ## ANCHOR give our HTML a css stylesheet
+- name: css style
+  blockinfile:
+    path: /root/nginx-content/index.html
+    insertbefore: "<table b"
+    block: |
+      <head>
+        <link rel="stylesheet" type="text/css" href="style.css">
+      </head>
+  delegate_to: 172.16.101.182
+
+## ANCHOR get rid of markers in html file
+- name: cleanup markers
+  lineinfile: 
+    path: "/root/nginx-content/index.html"
+    line: "{{ item }}"
+    state: absent
+  loop:
+    - "# BEGIN ANSIBLE MANAGED BLOCK"
+    - "# END ANSIBLE MANAGED BLOCK"
+  delegate_to: 172.16.101.182
+  run_once: true
+
+## ANCHOR END
+- name: review results
+  debug:
+    msg: 'Please navigate to http://172.16.101.182:31505/ to view the results of this report'
+  run_once: true

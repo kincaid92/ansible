@@ -5,3 +5,6 @@
    roles:
     - patch_scripts
     - baremetal_patch
+    - patch_parsing
+    - patch_mongo
+    - patch_execute
