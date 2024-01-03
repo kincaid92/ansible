@@ -1,5 +1,6 @@
 ---
 
+## ANCHOR parse our JSON output to make it valid
 - name: cleanup master.json
   replace: 
     path: "/tmp/master.json"
