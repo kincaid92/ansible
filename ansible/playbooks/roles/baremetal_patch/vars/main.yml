@@ -1,3 +1,0 @@
----
-
-ubuntu: "ansible_facts['distribution'] == 'CentOS'"
