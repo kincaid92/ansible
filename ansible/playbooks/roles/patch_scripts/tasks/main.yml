@@ -1,0 +1,29 @@
+---
+
+## ANCHOR create python script to convert JSON -> HTML
+- name: create our python file
+  blockinfile:
+    path: /tmp/convert.py
+    block: |
+      from json2html import *
+      input = {
+
+      }
+      out = json2html.convert(json = input)
+      htmlout = '/root/nginx-content/index.html'
+      with open(htmlout, 'w') as htmlfile:
+          htmlfile.write(str(out))
+          print('Done')
+    create: yes
+  delegate_to: 172.16.101.182
+
+## ANCHOR create JS script to send our JSON to MongoDB
+- name: create mongo input
+  blockinfile:
+    path: /tmp/mongo.js
+    block: |
+      db.reports.insert({
+
+      })
+    create: yes
+  delegate_to: 172.16.101.182

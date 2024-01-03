@@ -3,4 +3,5 @@
  - hosts: all
    gather_facts: true
    roles:
+    - patch_scripts
     - baremetal_patch

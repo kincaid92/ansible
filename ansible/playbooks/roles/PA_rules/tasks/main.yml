@@ -1,5 +1,8 @@
 ---
 
+## TODO add secure way to grab pa API token & store it for use
+## TODO add a AWX user to the PA and only commit changes made by said user
+
 - name: grab api token from secrets
   shell: do the thing
   register: token
