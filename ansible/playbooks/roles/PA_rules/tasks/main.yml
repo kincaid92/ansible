@@ -1,9 +1,17 @@
 ---
 
+- name: grab api token from secrets
+  shell: do the thing
+  register: token
+
+
 - name: vars
   set_fact:
     commit: false
     gather: true
+    palo_provider:
+      ip_address: 
+      api_key: "{{ token.stdout }}"
 
 - name: gather every address-object
   paloaltonetworks.panos.panos_address_object:

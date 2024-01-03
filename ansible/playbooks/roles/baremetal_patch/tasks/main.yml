@@ -2,6 +2,12 @@
 ## TODO write frontend to serve html report
 
 ## ANCHOR BEGIN
+
+- name: create conditionals
+  set_fact:
+    stage_update:
+    upgrade:
+
 - name: delete mongo output
   file:
     path: /tmp/mongo.js
@@ -37,7 +43,7 @@
 - name: Update apt Cache
   apt: 
     update_cache: yes
-  when: ansible_facts['pkg_mgr'] == "apt"
+  when: ansible_facts['pkg_mgr'] == "apt" and stage_update == true
   register: cache_results
 
 ## ANCHOR set facts for displaying our json data
