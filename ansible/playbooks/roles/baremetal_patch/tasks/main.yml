@@ -46,6 +46,12 @@
   when: ansible_facts['pkg_mgr'] == "apt" and stage_update == true
   register: cache_results
 
+- name: upgrade system
+  apt: 
+    upgrade: '{{ upgrade_choice }}'
+  when: ansible_facts['pkg_mgr'] == "apt" and upgrade == true
+  register: upgrade_results
+
 ## ANCHOR set facts for displaying our json data
 - name: Store host-specific data
   set_fact:
@@ -58,6 +64,7 @@
       Last Yum Update: "{{ update.stdout_lines | default([]) if ansible_facts['pkg_mgr'] == 'yum' else omit }}"
       Yum Security/Bug Fixes: "{{ Sec_Impact.stdout_lines | default([]) if ansible_facts['pkg_mgr'] == 'yum' else omit }}"
       Last Apt Update: "{{ apt_history.stdout_lines | default([]) if ansible_facts['pkg_mgr'] == 'apt' else omit }}"
+      Apt Upgrade: "{{ upgrade_results.stdout_lines | default([]) if ansible_facts['pkg_mgr'] == 'apt' and upgrade == true else omit }}"
 
 ## ANCHOR aggregate the data
 - name: Combine data from all hosts
