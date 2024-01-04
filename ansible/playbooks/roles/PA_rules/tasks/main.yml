@@ -19,67 +19,61 @@
   run_once: true
   register: token_key
 
-- debug:
-    var: token_ip.stdout
+- name: vars
+  set_fact:
+    commit: false
+    gather: true
+    palo_provider:
+      ip_address: "{{ token_ip.stdout }}"
+      api_key: "{{ token_key.stdout }}"
 
-- debug:
-    var: token_key.stdout
+- name: gather every address-object
+  paloaltonetworks.panos.panos_address_object:
+    provider: '{{ palo_provider }}'
+    gathered_filter: true
+    state: gathered
+  when: gather == true
+  register: result
 
-# - name: vars
-#   set_fact:
-#     commit: false
-#     gather: true
-#     palo_provider:
-#       ip_address: 
-#       api_key: "{{ token.stdout }}"
+- name: list every address-object
+  debug:
+    msg: '{{ result.gathered }}'
+  when: gather == true
 
-# - name: gather every address-object
-#   paloaltonetworks.panos.panos_address_object:
-#     provider: '{{ palo_provider }}'
-#     gathered_filter: true
-#     state: gathered
-#   when: gather == true
-#   register: result
+- name: Create object 'Test-One'
+  paloaltonetworks.panos.panos_address_object:
+    provider: '{{ palo_provider }}'
+    name: '{{ object_name }}'
+    value: '{{ source_ip }}'
+    description: 'made by ansible'
+  when: gather == false
 
-# - name: list every address-object
-#   debug:
-#     msg: '{{ result.gathered }}'
-#   when: gather == true
-
-# - name: Create object 'Test-One'
-#   paloaltonetworks.panos.panos_address_object:
-#     provider: '{{ palo_provider }}'
-#     name: '{{ object_name }}'
-#     value: '{{ source_ip }}'
-#     description: 'made by ansible'
-#   when: gather == false
-
-# - name: Create object 'Test-One-NAT'
-#   paloaltonetworks.panos.panos_address_object:
-#     provider: '{{ palo_provider }}'
-#     name: '{{ object_name }}-NAT'
-#     value: '{{ NAT_ip }}'
-#     description: 'made by ansible'
-#   when: gather == false
+- name: Create object 'Test-One-NAT'
+  paloaltonetworks.panos.panos_address_object:
+    provider: '{{ palo_provider }}'
+    name: '{{ object_name }}-NAT'
+    value: '{{ NAT_ip }}'
+    description: 'made by ansible'
+  when: gather == false
   
-# - name: add a nat rule
-#   paloaltonetworks.panos.panos_nat_rule2:
-#     provider: '{{ palo_provider }}'
-#     name: '{{ object_name }} OUTSIDE'
-#     description: 'Made by Ansible'
-#     nat_type: 'ipv4'
-#     from_zones: ['{{ source_zone }}']
-#     to_zones: ['{{ dest_zone }}']
-#     to_interface: 'any'
-#     service: 'any'
-#     source_addresses: ['{{ object_name }}']
-#     destination_addresses: ['any']
-#     source_translation_type: 'static-ip'
-#     source_translation_static_translated_address: '{{ object_name }}-NAT'
-#     source_translation_static_bi_directional: true
-#   when: gather == false
+- name: add a nat rule
+  paloaltonetworks.panos.panos_nat_rule2:
+    provider: '{{ palo_provider }}'
+    name: '{{ object_name }} OUTSIDE'
+    description: 'Made by Ansible'
+    nat_type: 'ipv4'
+    from_zones: ['{{ source_zone }}']
+    to_zones: ['{{ dest_zone }}']
+    to_interface: 'any'
+    service: 'any'
+    source_addresses: ['{{ object_name }}']
+    destination_addresses: ['any']
+    source_translation_type: 'static-ip'
+    source_translation_static_translated_address: '{{ object_name }}-NAT'
+    source_translation_static_bi_directional: true
+  when: gather == false
   
-# - name: commit changes on PA
-#   paloaltonetworks.panos.panos_commit_firewall:
-#     provider: '{{ palo_provider }}'
-#   when: commit == true and gather == false
+- name: commit changes on PA
+  paloaltonetworks.panos.panos_commit_firewall:
+    provider: '{{ palo_provider }}'
+  when: commit == true and gather == false
