@@ -4,4 +4,4 @@
   gather_facts: true
   roles:
     - PA_secrets
-    - PA_rules
+    - PA_nat
