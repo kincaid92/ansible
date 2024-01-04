@@ -29,22 +29,22 @@
     description: 'made by ansible'
   when: gather == false
   
-- name: add a nat rule
-  paloaltonetworks.panos.panos_nat_rule2:
-    provider: '{{ palo_provider }}'
-    name: '{{ object_name }} OUTSIDE'
-    description: 'Made by Ansible'
-    nat_type: 'ipv4'
-    from_zones: ['{{ source_zone }}']
-    to_zones: ['{{ dest_zone }}']
-    to_interface: 'any'
-    service: 'any'
-    source_addresses: ['{{ object_name }}']
-    destination_addresses: ['any']
-    source_translation_type: 'static-ip'
-    source_translation_static_translated_address: '{{ object_name }}-NAT'
-    source_translation_static_bi_directional: true
-  when: gather == false
+# - name: add a nat rule
+#   paloaltonetworks.panos.panos_nat_rule2:
+#     provider: '{{ palo_provider }}'
+#     name: '{{ object_name }} OUTSIDE'
+#     description: 'Made by Ansible'
+#     nat_type: 'ipv4'
+#     from_zones: ['{{ source_zone }}']
+#     to_zones: ['{{ dest_zone }}']
+#     to_interface: 'any'
+#     service: 'any'
+#     source_addresses: ['{{ object_name }}']
+#     destination_addresses: ['any']
+#     source_translation_type: 'static-ip'
+#     source_translation_static_translated_address: '{{ object_name }}-NAT'
+#     source_translation_static_bi_directional: true
+#   when: gather == false
   
 - name: commit changes on PA
   paloaltonetworks.panos.panos_commit_firewall:
