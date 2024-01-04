@@ -9,10 +9,21 @@
     -o go-template='{{ "{{" }} index .data "pa-ip" | base64decode {{ "}}" }}'
   delegate_to: 172.16.101.182 
   run_once: true
-  register: token
+  register: token_ip
+
+- name: grab api token from secrets
+  shell: >
+    kubectl -n secrets get secrets pa-sec 
+    -o go-template='{{ "{{" }} index .data "pa-key" | base64decode {{ "}}" }}'
+  delegate_to: 172.16.101.182 
+  run_once: true
+  register: token_key
 
 - debug:
-    var: token.stdout
+    var: token_ip.stdout
+
+- debug:
+    var: token_key.stdout
 
 # - name: vars
 #   set_fact:
