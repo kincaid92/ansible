@@ -29,7 +29,7 @@
     msg: '{{ address_result.gathered }}'
   when: gather == true
 
-- name: list every address-object
+- name: list every NAT policy
   debug:
     msg: '{{ nat_result.gathered }}'
   when: gather == true
