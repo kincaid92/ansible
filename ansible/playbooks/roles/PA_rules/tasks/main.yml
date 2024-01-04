@@ -12,7 +12,7 @@
   register: token
 
 - debug:
-    msg: token.stdout
+    var: token.stdout
 
 # - name: vars
 #   set_fact:
