@@ -3,4 +3,5 @@
 - hosts: localhost
   gather_facts: true
   roles:
+    - PA_secrets
     - PA_rules
