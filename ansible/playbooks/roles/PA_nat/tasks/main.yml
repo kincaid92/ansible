@@ -8,30 +8,9 @@
       ip_address: "{{ token_ip.stdout }}"
       api_key: "{{ token_key.stdout }}"
 
-- name: gather every address-object
-  paloaltonetworks.panos.panos_address_object:
-    provider: '{{ palo_provider }}'
-    gathered_filter: true
-    state: gathered
-  when: gather == true
-  register: address_result
-
-- name: gather every NAT policy
-  paloaltonetworks.panos.panos_nat_rule2:
-    provider: '{{ palo_provider }}'
-    gathered_filter: true
-    state: gathered
-  when: gather == true
-  register: nat_result
-
-- name: list every address-object
-  debug:
-    msg: '{{ address_result.gathered }}'
-  when: gather == true
-
-- name: list every NAT policy
-  debug:
-    msg: '{{ nat_result.gathered }}'
+- name: enable gathering
+  include_role:
+    name: PA_gathering
   when: gather == true
 
 - name: Create internal object
