@@ -14,7 +14,7 @@
   loop: "{{ ips }}"
   register: whois_results
   run_once: true
-  delegate_to: 172.16.101.182
+  delegate_to: 172.16.101.183
 
 ## ANCHOR Check if MTR is installed, if not, install it
 - name: Ensure MTR is installed
@@ -37,12 +37,12 @@
     dest: "/tmp/mtr_results_{{ item.item }}.txt"
   loop: "{{ mtrout.results }}"
   when: item.stdout_lines is defined and item.rc == 0 
-  delegate_to: 172.16.101.182
+  delegate_to: 172.16.101.183
 
 - name: combine the files
   shell: for file in /tmp/mtr_result*; do cat "$file"; echo ""; done
   register: finalmtr
-  delegate_to: 172.16.101.182
+  delegate_to: 172.16.101.183
 
 ## ANCHOR Which IP is in our ASN
 - name: Determine location from whois data
@@ -64,4 +64,4 @@
     state: absent
   loop: "{{ mtrout.results }}"
   when: item.stdout_lines is defined and item.rc == 0
-  delegate_to: 172.16.101.182
+  delegate_to: 172.16.101.183
