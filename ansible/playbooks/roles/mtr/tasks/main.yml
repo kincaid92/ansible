@@ -7,8 +7,6 @@
     whois_command: whois
     mtr_command: mtr -rw
     org_filter: OrgName
-    install_mtr:
-    perform_mtr:
 
 ## ANCHOR perform whois lookup
 - name: whois lookup
@@ -23,13 +21,13 @@
   package:
     name: mtr
     state: present
-  when: ansible_facts['pkg_mgr'] in ['apt', 'yum', 'dnf'] and install_mtr == true
+  when: ansible_facts['pkg_mgr'] in ['apt', 'yum', 'dnf']
 
 ## ANCHOR Run an MTR against the 2 servers
 - name: run mtr for each IP
   shell: "{{ mtr_command }} '{{ item }}'"
   loop: "{{ ips }}"
-  when: item not in ansible_all_ipv4_addresses and perform_mtr == true
+  when: item not in ansible_all_ipv4_addresses 
   register: mtrout
 
 ## ANCHOR Handle results
@@ -38,13 +36,12 @@
     content: "{{ item.stdout }}"
     dest: "/tmp/mtr_results_{{ item.item }}.txt"
   loop: "{{ mtrout.results }}"
-  when: item.stdout_lines is defined and item.rc == 0 and perform_mtr == true
+  when: item.stdout_lines is defined and item.rc == 0 
   delegate_to: 172.16.101.182
 
 - name: combine the files
   shell: for file in /tmp/mtr_result*; do cat "$file"; echo ""; done
   register: finalmtr
-  when: perform_mtr == true
   delegate_to: 172.16.101.182
 
 ## ANCHOR Which IP is in our ASN
@@ -59,7 +56,6 @@
 - name: get output
   debug:
     var: finalmtr.stdout_lines
-  when: perform_mtr == true
   run_once: true
 
 - name: cleanup files
@@ -67,5 +63,5 @@
     path: "/tmp/mtr_results_{{ item.item }}.txt"
     state: absent
   loop: "{{ mtrout.results }}"
-  when: item.stdout_lines is defined and item.rc == 0 and perform_mtr == true
+  when: item.stdout_lines is defined and item.rc == 0
   delegate_to: 172.16.101.182
