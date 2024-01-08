@@ -1,17 +1,5 @@
 ---
 
-
-## ANCHOR Create vars
-- name: declare some vars
-  set_fact:
-    ips: ["{{server1}}", "{{server2}}"]
-    whois_command: whois
-    mtr_command: mtr -rw
-    org_filter: OrgName
-    gather:
-    install_mtr:
-    perform_mtr:
-
 ## ANCHOR perform whois lookup
 - name: whois lookup
   shell: "{{ whois_command }} '{{ item }}' | grep '{{ org_filter }}'"
