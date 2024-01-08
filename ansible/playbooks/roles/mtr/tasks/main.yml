@@ -38,7 +38,7 @@
     content: "{{ item.stdout }}"
     dest: "/tmp/mtr_results_{{ item.item }}.txt"
   loop: "{{ mtrout.results }}"
-  when: item.stdout_lines is defined and item.rc == 0 perform_mtr == true
+  when: item.stdout_lines is defined and item.rc == 0 and perform_mtr == true
   delegate_to: 172.16.101.182
 
 - name: combine the files
