@@ -6,7 +6,7 @@
   loop: "{{ ips }}"
   register: whois_results
   run_once: true
-  delegate_to: 216.104.47.26
+  delegate_to: 172.16.101.183
 
   ## ANCHOR Which IP is in our ASN
 - name: Determine location from whois data
