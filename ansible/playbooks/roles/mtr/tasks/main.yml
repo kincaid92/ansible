@@ -7,8 +7,8 @@
     whois_command: whois
     mtr_command: mtr -rw
     org_filter: OrgName
-    install_mtr: false
-    perform_mtr: false
+    install_mtr:
+    perform_mtr:
 
 ## ANCHOR perform whois lookup
 - name: whois lookup
