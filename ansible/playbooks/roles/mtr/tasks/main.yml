@@ -10,12 +10,10 @@
 
 ## ANCHOR perform whois lookup
 - name: whois lookup
-  shell: "{{ whois_command }} '{{ item }}' | grep '{{ org_filter }}'"
+  shell: "{{ whois_command }} '{{ item }}' & sleep 3 ; kill $! | grep '{{ org_filter }}'"
   loop: "{{ ips }}"
   register: whois_results
   run_once: true
-  async: 15
-  poll: 5
   delegate_to: 172.16.101.183
 
 ## ANCHOR Check if MTR is installed, if not, install it
