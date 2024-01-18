@@ -5,8 +5,8 @@
 
 - name: create conditionals
   set_fact:
-    stage_update:
-    upgrade:
+    stage_update: # bool
+    upgrade: # bool
 
 ## ANCHOR device uptime
 - name: get uptime
