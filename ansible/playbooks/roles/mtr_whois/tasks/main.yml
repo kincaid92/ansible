@@ -1,5 +1,10 @@
 ---
 
+## ANCHOR package facts
+- name: Gather the package facts
+  ansible.builtin.package_facts:
+    manager: auto
+
 ## ANCHOR perform whois lookup
 - name: whois lookup
   shell: "{{ whois_command }} '{{ item }}' | grep '{{ org_filter }}'"
