@@ -8,7 +8,13 @@
   run_once: true
   delegate_to: 172.16.101.183
 
-  ## ANCHOR Which IP is in our ASN
+## ANCHOR check if mtr is installed
+- name: Check whether a package called foobar is installed
+  ansible.builtin.debug:
+    msg: "{{ ansible_facts.packages['mtr'] | length }} versions of foobar are installed!"
+  when: "'mtr' in ansible_facts.packages"
+
+## ANCHOR Which IP is in our ASN
 - name: Determine location from whois data
   debug:
     msg: "{{ item.item }} is {{ 'within' if 'SingleHop' in item.stdout else 'outside of' }} the SingleHop(AS32475) ASN"
