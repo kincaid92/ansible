@@ -16,7 +16,7 @@
 ## ANCHOR check if mtr is installed
 - name: Check whether a package called foobar is installed
   ansible.builtin.debug:
-    msg: "{{ ansible_facts.packages['mtr'] | length }} versions of foobar are installed!"
+    msg: "{{ ansible_facts.packages['mtr'] | length }} versions of mtr are installed!"
   when: "'mtr' in ansible_facts.packages"
 
 ## ANCHOR Which IP is in our ASN
