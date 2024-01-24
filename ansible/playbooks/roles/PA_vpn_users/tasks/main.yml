@@ -7,7 +7,8 @@
 - name: Show the address object.
   paloaltonetworks.panos.panos_op:
     provider: '{{ palo_provider }}'
-    cmd: 'show shared local-user-database'
+    cmd: show system info
+    # cmd: 'show shared local-user-database'
 #   register: hi
 
 # - name: show user db
