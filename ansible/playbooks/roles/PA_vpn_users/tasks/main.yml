@@ -9,8 +9,8 @@
     provider: '{{ palo_provider }}'
     cmd: 'show'
     xpath: |
-      /config/devices/entry[@name='localhost.localdomain']
-      /vsys/entry[@name='vsys1']/shared/local-user-database
+      /devices/entry[@name='localhost.localdomain']
+      /vsys/entry[@name='vsys1']/config/shared/local-user-database
 #   register: hi
 
 
