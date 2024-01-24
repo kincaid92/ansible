@@ -16,7 +16,7 @@
 - name: request password hash
   paloaltonetworks.panos.panos_op:
     provider: '{{ palo_provider }}'
-    cmd: request password-hash password '{{ password }}'
+    cmd: request password-hash password '{{password}}'
   register: user_pw
 
 - name: show hash
