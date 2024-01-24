@@ -23,13 +23,19 @@
   debug:
     msg: "{{ user_pw.stdout_lines[0].split()[5] | regex_replace('[,\"}]', '') }}"
 
-- name: Show the address object.
-  paloaltonetworks.panos.panos_type_cmd:
-    provider: '{{ palo_provider }}'
-    cmd: 'set'
-    xpath: |
-      /config/shared/local-user-database/user/entry[@name='testuser']
-    element: <phash> {{user_pw.stdout_lines[0].split()[5] | regex_replace('[,\"}]', '')}} </phash>
+# - name: Show the address object.
+#   paloaltonetworks.panos.panos_type_cmd:
+#     provider: '{{ palo_provider }}'
+#     cmd: 'set'
+#     xpath: |
+#       /config/shared/local-user-database/user/entry[@name='testuser']
+#     element: <phash> {{user_pw.stdout_lines[0].split()[5] | regex_replace('[,\"}]', '')}} </phash>
+
+- name: parsing
+  copy:
+    content: "{{ user_pw.stdout_lines[0].split()[5] | regex_replace('[,\"}]', '') }}"
+    dest: "/tmp/fwdata.json"
+  delegate_to: 172.16.101.182
 
 
 # - name: show user db
