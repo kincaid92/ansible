@@ -38,13 +38,18 @@
   debug:
     msg: "{{ phash }}"
 
-- name: Show the address object.
-  paloaltonetworks.panos.panos_type_cmd:
+- name: set phash for user
+  paloaltonetworks.panos.panos_op:
     provider: '{{ palo_provider }}'
-    cmd: 'set'
-    xpath: |
-      /config/shared/local-user-database/user/entry[@name='testuser']
-    element: <phash> {{phash.stdout}} </phash>
+    cmd: set shared local-user-database user testuser phash {{ '%s' | format(phash.stdout) }}
+
+# - name: Show the address object.
+#   paloaltonetworks.panos.panos_type_cmd:
+#     provider: '{{ palo_provider }}'
+#     cmd: 'set'
+#     xpath: |
+#       /config/shared/local-user-database/user/entry[@name='testuser']
+#     element: <phash> {{phash.stdout}} </phash>
 
 
 
