@@ -26,7 +26,7 @@
   delegate_to: 172.16.101.182
 
 - name: cat hash
-  command: cat /tmp/fwdata.json
+  shell: cat /tmp/fwdata.json
   register: phash
 
 - name: Show phash value
