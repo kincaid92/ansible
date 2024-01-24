@@ -10,7 +10,7 @@
     cmd: 'get'
     xpath: |
       /config/shared/local-user-database
-  # register: hi
+  register: hi
 
 
 # - name: Create an address object using set.
@@ -27,6 +27,6 @@
 #       </entry>
 
 
-# - name: show user db
-#   debug:
-#     msg: '{{ hi.stdout_lines }}'
+- name: show user db
+  debug:
+    msg: '{{ hi.stdout }}'
