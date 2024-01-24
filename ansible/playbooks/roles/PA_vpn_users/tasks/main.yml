@@ -11,7 +11,7 @@
     xpath: |
       /config/devices/entry[@name='fw1.chg1.inap-lab']
       /vsys/entry[@name='vsys1']
-      /Device/Local User Database/Users
+      /device/local user database/users
 #   register: hi
 
 # - name: show user db
