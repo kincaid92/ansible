@@ -7,11 +7,15 @@
 - name: get user db.
   paloaltonetworks.panos.panos_type_cmd:
     provider: '{{ palo_provider }}'
-    cmd: 'show'
     xpath: |
       /config/devices/entry[@name='fw1.chg1.inap-lab']
       /vsys/entry[@name='vsys1']
-      /address/entry[@name='VM1-PA-Linux']
+      /address
+    element: |
+      <entry name="sales-block">
+        <ip-netmask>192.168.55.0/24</ip-netmask>
+        <description>Address CIDR for sales org</description>
+      </entry>
 #   register: hi
 
 # - name: show user db
