@@ -21,7 +21,7 @@
 
 - name: Show phash value
   debug:
-    msg: "{{ user_pw.stdout | regex_search('\\$5\\$[a-zA-Z0-9]+\\$[a-zA-Z0-9./]+;') }}"
+    msg: "{{ user_pw.stdout_lines[0].split()[5] | regex_replace(('[,\"}]', '')) }}"
 
 # - name: Show the address object.
 #   paloaltonetworks.panos.panos_type_cmd:
