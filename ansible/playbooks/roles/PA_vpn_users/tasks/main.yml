@@ -11,7 +11,7 @@
     xpath: |
       /config/devices/entry[@name='localhost.localdomain']
       /vsys/entry[@name='vsys1']
-      /users
+      /authentication-profile
 #   register: hi
 
 # - name: show user db
