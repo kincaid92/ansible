@@ -9,8 +9,8 @@
     provider: '{{ palo_provider }}'
     cmd: show system info
     # cmd: 'show shared local-user-database'
-#   register: hi
+  register: hi
 
-# - name: show user db
-#   debug:
-#     msg: '{{ hi.stdout_lines }}'
+- name: show user db
+  debug:
+    msg: '{{ hi.stdout_lines }}'
