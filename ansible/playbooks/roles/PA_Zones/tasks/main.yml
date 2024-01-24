@@ -5,7 +5,7 @@
       api_key: "{{ token_key.stdout }}"
 
 
-- name: delete the DMZ zone
+- name: gather zones
   paloaltonetworks.panos.panos_interface:
     provider: '{{ palo_provider }}'
     gathered_filter: true
