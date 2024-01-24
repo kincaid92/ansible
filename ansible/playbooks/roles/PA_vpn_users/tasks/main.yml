@@ -21,7 +21,7 @@
 
 - name: show hash
   debug:
-    msg: '{{ user_pw.response.result.phash }}'
+    msg: '{{ user_pw.stdout_lines[0].split()[3] }}'
 
 # - name: Show the address object.
 #   paloaltonetworks.panos.panos_type_cmd:
