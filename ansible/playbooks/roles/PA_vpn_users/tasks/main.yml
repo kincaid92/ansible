@@ -30,15 +30,13 @@
   debug:
     msg: "{{ host_data.hash }}"
 
-
-
 - name: Show the address object.
   paloaltonetworks.panos.panos_type_cmd:
     provider: '{{ palo_provider }}'
     cmd: 'set'
     xpath: |
       /config/shared/local-user-database/user/entry[@name='testuser']
-    element: <phash> {{host_data.hash}} </phash>
+    element: <phash> {{host_data.hash | string }} </phash>
 
 
 
