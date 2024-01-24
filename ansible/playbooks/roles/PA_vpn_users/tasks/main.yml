@@ -11,7 +11,7 @@
     xpath: |
       /config/devices/entry[@name='fw1.chg1.inap-lab']
       /vsys/entry[@name='vsys1']
-      /authentication-profile
+      /address/entry[@name='VM1-PA-Linux']
 #   register: hi
 
 # - name: show user db
