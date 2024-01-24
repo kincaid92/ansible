@@ -28,7 +28,7 @@
 
 - name: Show phash value
   debug:
-    msg: "{{ host_data.hash }}"
+    msg: "{{ host_data.hash | string }}"
 
 - name: Show the address object.
   paloaltonetworks.panos.panos_type_cmd:
