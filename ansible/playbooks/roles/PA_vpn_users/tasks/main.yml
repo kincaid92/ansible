@@ -9,7 +9,7 @@
     provider: '{{ palo_provider }}'
     cmd: 'show'
     xpath: |
-      /config/devices/entry[@name='localhost.localdomain']
+      /config/devices/entry[@name='fw1.chg1.inap-lab']
       /vsys/entry[@name='vsys1']
       /authentication-profile
 #   register: hi
