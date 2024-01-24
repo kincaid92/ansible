@@ -13,4 +13,4 @@
 
 - name: show user db
   debug:
-    msg: '{{ hi.stdout_lines }}'
+    var: '{{ hi }}'
