@@ -9,8 +9,10 @@
     provider: '{{ palo_provider }}'
     cmd: 'show'
     xpath: |
-      /devices/entry[@name='localhost.localdomain']
-      /vsys/entry[@name='vsys1']/config/shared/local-user-database
+      /config/devices/entry[@name='localhost.localdomain']
+      /vsys/entry[@name='vsys1']/local-user-database
+      /user-group/entry[@name='RAVPN-USERS']/user
+    element: "<member>testuser</member>"
 #   register: hi
 
 
