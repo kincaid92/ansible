@@ -21,7 +21,7 @@
 
 - name: show hash
   debug:
-    msg: '{{ user_pw.stdout }}'
+    msg: '{{ user_pw.stdout.response }}'
 
 # - name: Show the address object.
 #   paloaltonetworks.panos.panos_type_cmd:
