@@ -6,7 +6,7 @@
 
 
 - name: gather zones
-  paloaltonetworks.panos.panos_interface:
+  paloaltonetworks.panos.panos_zone:
     provider: '{{ palo_provider }}'
     gathered_filter: true
     state: 'gathered'
