@@ -8,7 +8,7 @@
   paloaltonetworks.panos.panos_type_cmd:
     provider: '{{ palo_provider }}'
     xpath: |
-      /config/devices/entry[@name='fw1.chg1.inap-lab']
+      /config/devices/entry[@name='localhost.localdomain']
       /vsys/entry[@name='vsys1']
       /address
     element: |
