@@ -7,9 +7,13 @@
 - name: get user db.
   paloaltonetworks.panos.panos_type_cmd:
     provider: '{{ palo_provider }}'
-    cmd: 'show shared local-user-database'
-    register: hi
+    cmd: 'show'
+    xpath: |
+      /config/devices/entry[@name='localhost.localdomain']
+      /vsys/entry[@name='vsys1']
+      /users
+#   register: hi
 
-- name: show user db
-  debug:
-    msg: '{{ hi.stdout_lines }}'
+# - name: show user db
+#   debug:
+#     msg: '{{ hi.stdout_lines }}'
