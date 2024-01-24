@@ -14,7 +14,7 @@
 #   register: hi
 
 - name: request password hash
-  panos_op:
+  paloaltonetworks.panos.panos_op:
     cmd: request password-hash password '{{ password }}'
   register: user_pw
 
