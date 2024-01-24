@@ -13,43 +13,32 @@
 #       /config/shared/local-user-database
 #   register: hi
 
+
+
 - name: request password hash
   paloaltonetworks.panos.panos_op:
     provider: '{{ palo_provider }}'
     cmd: 'request password-hash password {{password}}'
   register: user_pw
 
-- name: parsing
-  copy:
-    content: "{{ user_pw.stdout_lines[0].split()[5] | regex_replace('[,\"}]', '') }}"
-    dest: "/tmp/fwdata.json"
-  delegate_to: 172.16.101.182
-
-- name: cat hash
-  shell: cat /tmp/fwdata.json
-  register: phash
-  delegate_to: 172.16.101.182
+- name: Store host-specific data
+  set_fact:
+    host_data: 
+      hash: "{{ user_pw.stdout_lines[0].split()[5] | regex_replace('[,\"}]', '') }}"
 
 - name: Show phash value
   debug:
-    msg: "{{ user_pw.stdout_lines[0].split()[5] | regex_replace('[,\"}]', '') }}"
+    msg: "{{ host_data.hash }}"
 
-- name: Show phash value
-  debug:
-    msg: "{{ phash }}"
 
-- name: set phash for user
-  paloaltonetworks.panos.panos_op:
+
+- name: Show the address object.
+  paloaltonetworks.panos.panos_type_cmd:
     provider: '{{ palo_provider }}'
-    cmd: set shared local-user-database user testuser phash {{ '%s' | format(phash.stdout) }}
-
-# - name: Show the address object.
-#   paloaltonetworks.panos.panos_type_cmd:
-#     provider: '{{ palo_provider }}'
-#     cmd: 'set'
-#     xpath: |
-#       /config/shared/local-user-database/user/entry[@name='testuser']
-#     element: <phash> {{phash.stdout}} </phash>
+    cmd: 'set'
+    xpath: |
+      /config/shared/local-user-database/user/entry[@name='testuser']
+    element: <phash> {{host_data.hash}} </phash>
 
 
 
