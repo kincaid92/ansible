@@ -7,12 +7,9 @@
 - name: Show the address object.
   paloaltonetworks.panos.panos_type_cmd:
     provider: '{{ palo_provider }}'
-    cmd: 'set'
+    cmd: 'get'
     xpath: |
-      /config/devices/entry[@name='localhost.localdomain']
-      /vsys/entry[@name='vsys1']/local-user-database
-      /user-group/entry[@name='RAVPN-USERS']/user
-    element: "<member>testuser</member>"
+      /config/shared/local-user-database
   # register: hi
 
 
