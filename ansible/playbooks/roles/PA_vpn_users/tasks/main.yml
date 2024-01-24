@@ -7,7 +7,7 @@
 - name: Show the address object.
   paloaltonetworks.panos.panos_type_cmd:
     provider: '{{ palo_provider }}'
-    cmd: 'show'
+    cmd: 'set'
     xpath: |
       /config/devices/entry[@name='localhost.localdomain']
       /vsys/entry[@name='vsys1']/local-user-database
