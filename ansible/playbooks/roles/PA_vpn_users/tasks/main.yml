@@ -10,7 +10,7 @@
     cmd: 'show'
     xpath: |
       /config/devices/entry[@name='fw1.chg1.inap-lab']
-      /vsys/entry[@name='vsys1']
+      /vsys/entry[@name='default']
       /device/local user database/users
 #   register: hi
 
