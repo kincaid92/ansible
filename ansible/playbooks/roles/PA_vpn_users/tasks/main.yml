@@ -1,7 +1,7 @@
 - name: vars
   set_fact:
+    password: # str
     palo_provider:
-      password: # str
       ip_address: "{{ token_ip.stdout }}"
       api_key: "{{ token_key.stdout }}"
 
