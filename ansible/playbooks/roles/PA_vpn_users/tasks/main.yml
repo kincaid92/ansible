@@ -21,7 +21,7 @@
 
 - name: show hash
   debug:
-    var: '{{ user_pw.stdout_lines }}'
+    msg: '{{ user_pw.stdout }}'
 
 # - name: show user db
 #   debug:
