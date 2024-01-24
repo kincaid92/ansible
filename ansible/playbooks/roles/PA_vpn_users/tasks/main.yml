@@ -21,7 +21,15 @@
 
 - name: show hash
   debug:
-    msg: '{{ user_pw.stdout }}'
+    msg: '{{ user_pw }}'
+
+# - name: Show the address object.
+#   paloaltonetworks.panos.panos_type_cmd:
+#     provider: '{{ palo_provider }}'
+#     cmd: 'get'
+#     xpath: |
+#       /config/shared/local-user-database
+
 
 # - name: show user db
 #   debug:
