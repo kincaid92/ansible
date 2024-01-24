@@ -1,0 +1,15 @@
+- name: vars
+  set_fact:
+    palo_provider:
+      ip_address: "{{ token_ip.stdout }}"
+      api_key: "{{ token_key.stdout }}"
+
+- name: Create dynamic user group
+  paloaltonetworks.panos.panos_dynamic_user_group:
+    provider: '{{ palo_provider }}'
+    gathered_filter: true
+    state: gathered
+  register: users
+
+- debug:
+    msg: '{{ users.gathered }}'
