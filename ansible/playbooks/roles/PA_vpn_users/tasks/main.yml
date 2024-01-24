@@ -5,13 +5,9 @@
       api_key: "{{ token_key.stdout }}"
 
 - name: Show the address object.
-  paloaltonetworks.panos.panos_type_cmd:
+  paloaltonetworks.panos.panos_op:
     provider: '{{ palo_provider }}'
-    cmd: 'show'
-    xpath: |
-      /config/devices/entry[@name='fw1.chg1.inap-lab']
-      /vsys/entry[@name='vsys1']
-      /device/local user database/users
+    cmd: 'show shared local-user-database'
 #   register: hi
 
 # - name: show user db
