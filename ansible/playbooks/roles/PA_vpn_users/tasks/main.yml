@@ -1,32 +1,27 @@
 - name: vars
   set_fact:
     palo_provider:
+      password: # str
       ip_address: "{{ token_ip.stdout }}"
       api_key: "{{ token_key.stdout }}"
 
-- name: Show the address object.
-  paloaltonetworks.panos.panos_type_cmd:
-    provider: '{{ palo_provider }}'
-    cmd: 'get'
-    xpath: |
-      /config/shared/local-user-database
-  register: hi
-
-
-# - name: Create an address object using set.
+# - name: Show the address object.
 #   paloaltonetworks.panos.panos_type_cmd:
 #     provider: '{{ palo_provider }}'
+#     cmd: 'get'
 #     xpath: |
-#       /config/devices/entry[@name='localhost.localdomain']
-#       /vsys/entry[@name='vsys1']
-#       /address
-#     element: |
-#       <entry name="sales-block">
-#         <ip-netmask>192.168.55.0/24</ip-netmask>
-#         <description>Address CIDR for sales org</description>
-#       </entry>
+#       /config/shared/local-user-database
+#   register: hi
 
+- name: request password hash
+  panos_op:
+    cmd: request password-hash password '{{ password }}'
+  register: user_pw
 
-- name: show user db
+- name: show hash
   debug:
-    msg: '{{ hi.stdout }}'
+    var: '{{ user_pw.stdout }}'
+
+# - name: show user db
+#   debug:
+#     msg: '{{ hi.stdout }}'
