@@ -1,6 +1,5 @@
 - name: vars
   set_fact:
-    password: # str
     palo_provider:
       ip_address: "{{ token_ip.stdout }}"
       api_key: "{{ token_key.stdout }}"
@@ -8,7 +7,7 @@
 
 - name: delete the DMZ zone
   paloaltonetworks.panos.panos_interface:
-    provider: '{{ provider }}'
+    provider: '{{ palo_provider }}'
     gathered_filter: true
     state: 'gathered'
   register: zone_gathered
