@@ -4,12 +4,12 @@
       ip_address: "{{ token_ip.stdout }}"
       api_key: "{{ token_key.stdout }}"
 
-- name: Create dynamic user group
-  paloaltonetworks.panos.panos_dynamic_user_group:
+- name: get user db.
+  paloaltonetworks.panos.panos_type_cmd:
     provider: '{{ palo_provider }}'
-    gathered_filter: true
-    state: gathered
-  register: users
+    cmd: 'show shared local-user-database'
+    register: hi
 
-- debug:
-    msg: '{{ users.gathered }}'
+- name: show user db
+  debug:
+    msg: '{{ hi.stdout_lines }}'
