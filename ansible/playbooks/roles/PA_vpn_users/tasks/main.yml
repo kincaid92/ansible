@@ -4,18 +4,14 @@
       ip_address: "{{ token_ip.stdout }}"
       api_key: "{{ token_key.stdout }}"
 
-- name: get user db.
+- name: Show the address object.
   paloaltonetworks.panos.panos_type_cmd:
     provider: '{{ palo_provider }}'
+    cmd: 'show'
     xpath: |
       /config/devices/entry[@name='fw1.chg1.inap-lab']
       /vsys/entry[@name='vsys1']
-      /address
-    element: |
-      <entry name="sales-block">
-        <ip-netmask>192.168.55.0/24</ip-netmask>
-        <description>Address CIDR for sales org</description>
-      </entry>
+      /address/entry[@name='PA-INSIDE-203']
 #   register: hi
 
 # - name: show user db
