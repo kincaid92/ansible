@@ -4,15 +4,31 @@
       ip_address: "{{ token_ip.stdout }}"
       api_key: "{{ token_key.stdout }}"
 
-- name: Create an address object using set.
+- name: Show the address object.
   paloaltonetworks.panos.panos_type_cmd:
     provider: '{{ palo_provider }}'
+    cmd: 'show'
     xpath: |
       /config/devices/entry[@name='localhost.localdomain']
       /vsys/entry[@name='vsys1']
-      /address
-    element: |
-      <entry name="sales-block">
-        <ip-netmask>192.168.55.0/24</ip-netmask>
-        <description>Address CIDR for sales org</description>
-      </entry>
+      /device/local user database/users
+#   register: hi
+
+
+# - name: Create an address object using set.
+#   paloaltonetworks.panos.panos_type_cmd:
+#     provider: '{{ palo_provider }}'
+#     xpath: |
+#       /config/devices/entry[@name='localhost.localdomain']
+#       /vsys/entry[@name='vsys1']
+#       /address
+#     element: |
+#       <entry name="sales-block">
+#         <ip-netmask>192.168.55.0/24</ip-netmask>
+#         <description>Address CIDR for sales org</description>
+#       </entry>
+
+
+# - name: show user db
+#   debug:
+#     msg: '{{ hi.stdout_lines }}'
