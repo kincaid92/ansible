@@ -11,7 +11,7 @@
     xpath: |
       /config/devices/entry[@name='localhost.localdomain']
       /vsys/entry[@name='vsys1']/local-user-database
-      /user/entry[1]
+      /user-group
 #   register: hi
 
 
