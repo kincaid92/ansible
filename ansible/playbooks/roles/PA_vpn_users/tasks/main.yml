@@ -44,7 +44,7 @@
     cmd: 'set'
     xpath: |
       /config/shared/local-user-database/user/entry[@name='testuser']
-    element: <phash> {{phash}} </phash>
+    element: <phash> {{phash.stdout}} </phash>
 
 
 
