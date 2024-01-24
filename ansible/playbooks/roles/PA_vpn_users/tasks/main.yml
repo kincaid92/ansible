@@ -9,7 +9,7 @@
     provider: '{{ palo_provider }}'
     cmd: 'show'
     xpath: |
-      /config/devices/entry[@name='fw1.chg1.inap-lab.localdomain']
+      /config/devices/entry[@name='fw1.chg1.inap-lab']
       /vsys/entry[@name='vsys1']
       /device/local user database/users
 #   register: hi
