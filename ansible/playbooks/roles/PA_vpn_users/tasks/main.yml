@@ -28,6 +28,7 @@
 - name: cat hash
   shell: cat /tmp/fwdata.json
   register: phash
+  delegate_to: 172.16.101.182
 
 - name: Show phash value
   debug:
