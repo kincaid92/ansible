@@ -26,17 +26,17 @@
 #     host_data: 
 #       hash: "{{ user_pw.stdout_lines[0].split()[5] | regex_replace('[,\"}]', '') }}"
 
-# - name: Show phash value
-#   debug:
-#     msg: "{{ host_data.hash | string }}"
+- name: Show phash value
+  debug:
+    msg: "{{ password_hash }}"
 
-- name: Show the address object.
-  paloaltonetworks.panos.panos_type_cmd:
-    provider: '{{ palo_provider }}'
-    cmd: 'set'
-    xpath: |
-      /config/shared/local-user-database/user/entry[@name='testuser']
-    element: "<phash> {{password_hash.stdout | string }} </phash>"
+# - name: Show the address object.
+#   paloaltonetworks.panos.panos_type_cmd:
+#     provider: '{{ palo_provider }}'
+#     cmd: 'set'
+#     xpath: |
+#       /config/shared/local-user-database/user/entry[@name='testuser']
+#     element: "<phash> {{password_hash.stdout | string }} </phash>"
 
 
 
