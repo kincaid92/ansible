@@ -27,7 +27,7 @@
 #       hash: "{{ user_pw.stdout_lines[0].split()[5] | regex_replace('[,\"}]', '') }}"
 - name: Show phash value
   debug:
-    msg: "{{ password_hash }}"
+    msg: "{{ user_pw.stdout_lines[0].split()[5] | regex_replace('[,\"}]', '') }}"
 
 - name: Show the address object.
   paloaltonetworks.panos.panos_type_cmd:
@@ -36,7 +36,7 @@
     xpath: |
       /config/shared/local-user-database/user/entry[@name='testuser']
     element: |
-      <phash>{{ user_pw.stdout_lines[0].split()[5] | regex_replace('[,\"}]', '') }}</phash>
+      <phash> {{ user_pw.stdout_lines[0].split()[5] | regex_replace('[,\"}]', '') }} </phash>
 
 
 
