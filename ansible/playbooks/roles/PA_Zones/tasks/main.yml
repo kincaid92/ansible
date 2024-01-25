@@ -22,7 +22,7 @@
     provider: '{{ palo_provider }}'
     zone: 'dmz'
     mode: 'layer3'
-    interface: ['ethernet1/3']
+    if_name: ['ethernet1/3']
 
 # - name: display zones
 #   debug:
