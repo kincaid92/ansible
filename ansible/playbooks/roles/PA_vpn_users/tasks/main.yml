@@ -36,7 +36,7 @@
     cmd: 'set'
     xpath: |
       /config/shared/local-user-database/user/entry[@name='testuser']
-    element: "<phash> {{password_hash | string }} </phash>"
+    element: "<phash> $5$VexkK19Cqgi6Qg4J$jRuqRrkRb9TkFNh6.Mcn.p2rQuftBRbQ7FUcLj6gSG2 </phash>"
 
 
 
