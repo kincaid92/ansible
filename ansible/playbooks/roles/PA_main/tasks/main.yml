@@ -13,7 +13,7 @@
     name: PA_create_vpn_user
   when: create_vpn_user == true
 
-- name: Create VPN User
+- name: disable VPN User
   include_role:
     name: PA_delete_vpn_user
   when: disable_user == true
