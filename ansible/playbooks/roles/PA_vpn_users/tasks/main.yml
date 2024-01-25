@@ -1,6 +1,6 @@
 - name: vars
   set_fact:
-    password: # str
+    password_hash: # str
     palo_provider:
       ip_address: "{{ token_ip.stdout }}"
       api_key: "{{ token_key.stdout }}"
@@ -15,20 +15,20 @@
 
 
 
-- name: request password hash
-  paloaltonetworks.panos.panos_op:
-    provider: '{{ palo_provider }}'
-    cmd: 'request password-hash password {{password}}'
-  register: user_pw
+# - name: request password hash
+#   paloaltonetworks.panos.panos_op:
+#     provider: '{{ palo_provider }}'
+#     cmd: 'request password-hash password {{password}}'
+#   register: user_pw
 
-- name: Store host-specific data
-  set_fact:
-    host_data: 
-      hash: "{{ user_pw.stdout_lines[0].split()[5] | regex_replace('[,\"}]', '') }}"
+# - name: Store host-specific data
+#   set_fact:
+#     host_data: 
+#       hash: "{{ user_pw.stdout_lines[0].split()[5] | regex_replace('[,\"}]', '') }}"
 
-- name: Show phash value
-  debug:
-    msg: "{{ host_data.hash | string }}"
+# - name: Show phash value
+#   debug:
+#     msg: "{{ host_data.hash | string }}"
 
 - name: Show the address object.
   paloaltonetworks.panos.panos_type_cmd:
@@ -36,7 +36,7 @@
     cmd: 'set'
     xpath: |
       /config/shared/local-user-database/user/entry[@name='testuser']
-    element: "<phash> {{host_data.hash | string }} </phash>"
+    element: "<phash> {{password_hash.stdout | string }} </phash>"
 
 
 
