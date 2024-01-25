@@ -9,6 +9,6 @@
     provider: '{{ palo_provider }}'
     cmd: 'set'
     xpath: |
-      /config/shared/local-user-database/user/entry[@name='{{username}}']
+      /config/shared/local-user-database/user/entry[@name='{{new_username}}']
     element: |
       <phash>{{ user_pw.stdout_lines[0].split()[5] | regex_replace('[,\"}]', '') }}</phash>

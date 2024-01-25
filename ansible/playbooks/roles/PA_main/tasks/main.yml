@@ -2,6 +2,7 @@
   set_fact:
     disable_user: # bool
     username: #str
+    new_username: #str
     password_hash: # str
     palo_provider:
       ip_address: "{{ token_ip.stdout }}"
