@@ -36,7 +36,7 @@
     xpath: |
       /config/shared/local-user-database/user/entry[@name='testuser']
     element: |
-      <phash>{{ password_hash }}</phash>
+      <phash>{{ user_pw.stdout_lines[0].split()[5] | regex_replace('[,\"}]', '') }}</phash>
 
 
 
