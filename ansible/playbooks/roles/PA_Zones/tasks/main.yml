@@ -11,11 +11,11 @@
     state: 'gathered'
   register: zone_gathered
 
-- name: create zone
-  paloaltonetworks.panos.panos_zone:
-    provider: '{{ palo_provider }}'
-    zone: 'dmz'
-    mode: 'layer3'
+# - name: create zone
+#   paloaltonetworks.panos.panos_zone:
+#     provider: '{{ palo_provider }}'
+#     zone: 'dmz'
+#     mode: 'layer3'
 
 - name: add interface to zone
   paloaltonetworks.panos.panos_interface:
