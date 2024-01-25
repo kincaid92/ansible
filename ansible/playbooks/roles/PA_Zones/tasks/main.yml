@@ -18,6 +18,6 @@
     mode: 'layer3'
     interface: ['ethernet1/3']
 
-- name: display zones
-  debug:
-    msg: '{{ zone_gathered.gathered }}'
+# - name: display zones
+#   debug:
+#     msg: '{{ zone_gathered.gathered }}'
