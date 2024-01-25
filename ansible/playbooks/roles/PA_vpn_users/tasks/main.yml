@@ -21,10 +21,6 @@
     cmd: 'request password-hash password {{password_hash}}'
   register: user_pw
 
-# - name: Store host-specific data
-#   set_fact:
-#     host_data: 
-#       hash: "{{ user_pw.stdout_lines[0].split()[5] | regex_replace('[,\"}]', '') }}"
 - name: Show phash value
   debug:
     msg: "{{ user_pw.stdout_lines[0].split()[5] | regex_replace('[,\"}]', '') }}"
@@ -36,7 +32,7 @@
     xpath: |
       /config/shared/local-user-database/user/entry[@name='testuser']
     element: |
-      <phash> {{ user_pw.stdout_lines[0].split()[5] | regex_replace('[,\"}]', '') }} </phash>
+      <phash>{{ user_pw.stdout_lines[0].split()[5] | regex_replace('[,\"}]', '') }}</phash>
 
 
 
