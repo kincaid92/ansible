@@ -16,6 +16,14 @@
     provider: '{{ palo_provider }}'
     zone: 'dmz'
     mode: 'layer3'
+    interface: ['ethernet1/2']
+
+- name: add interface to zone
+  paloaltonetworks.panos.panos_zone:
+    provider: '{{ palo_provider }}'
+    zone: 'dmz'
+    mode: 'layer3'
+    interface: ['ethernet1/3']
 
 # - name: display zones
 #   debug:
