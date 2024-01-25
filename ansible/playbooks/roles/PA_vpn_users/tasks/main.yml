@@ -15,11 +15,11 @@
 
 
 
-# - name: request password hash
-#   paloaltonetworks.panos.panos_op:
-#     provider: '{{ palo_provider }}'
-#     cmd: 'request password-hash password {{password}}'
-#   register: user_pw
+- name: request password hash
+  paloaltonetworks.panos.panos_op:
+    provider: '{{ palo_provider }}'
+    cmd: 'request password-hash password {{password}}'
+  register: user_pw
 
 # - name: Store host-specific data
 #   set_fact:
