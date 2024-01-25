@@ -25,7 +25,6 @@
 #   set_fact:
 #     host_data: 
 #       hash: "{{ user_pw.stdout_lines[0].split()[5] | regex_replace('[,\"}]', '') }}"
-
 - name: Show phash value
   debug:
     msg: "{{ password_hash }}"
@@ -36,7 +35,7 @@
     cmd: 'set'
     xpath: |
       /config/shared/local-user-database/user/entry[@name='testuser']
-    element: "<phash> $5$VexkK19Cqgi6Qg4J$jRuqRrkRb9TkFNh6.Mcn.p2rQuftBRbQ7FUcLj6gSG2 </phash>"
+    element: "<phash> $5$ufgidjfjdsf$Tj8ubzMtwyMRd5P4NFL1O0lZlaCCnFRUNNACowBGp3B </phash>"
 
 
 
