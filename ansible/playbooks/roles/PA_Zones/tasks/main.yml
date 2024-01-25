@@ -20,8 +20,9 @@
 - name: add interface to zone
   paloaltonetworks.panos.panos_interface:
     provider: '{{ palo_provider }}'
-    zone: 'dmz'
+    zone_name: 'dmz'
     mode: 'layer3'
+    enable_dhcp: false
     if_name: ['ethernet1/3']
 
 # - name: display zones
