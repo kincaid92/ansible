@@ -5,25 +5,12 @@
       ip_address: "{{ token_ip.stdout }}"
       api_key: "{{ token_key.stdout }}"
 
-# - name: Show the address object.
-#   paloaltonetworks.panos.panos_type_cmd:
-#     provider: '{{ palo_provider }}'
-#     cmd: 'get'
-#     xpath: |
-#       /config/shared/local-user-database
-#   register: hi
-
-
 
 - name: request password hash
   paloaltonetworks.panos.panos_op:
     provider: '{{ palo_provider }}'
     cmd: 'request password-hash password {{password_hash}}'
   register: user_pw
-
-- name: Show phash value
-  debug:
-    msg: "{{ user_pw.stdout_lines[0].split()[5] | regex_replace('[,\"}]', '') }}"
 
 - name: Show the address object.
   paloaltonetworks.panos.panos_type_cmd:
@@ -33,10 +20,3 @@
       /config/shared/local-user-database/user/entry[@name='testuser']
     element: |
       <phash>{{ user_pw.stdout_lines[0].split()[5] | regex_replace('[,\"}]', '') }}</phash>
-
-
-
-
-# - name: show user db
-#   debug:
-#     msg: '{{ hi.stdout }}'

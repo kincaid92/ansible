@@ -10,7 +10,7 @@
 
 - name: enable gathering
   include_role:
-    name: PA_gathering
+    name: PA_gather_nat
   when: gather == true
 
 - name: Create internal object

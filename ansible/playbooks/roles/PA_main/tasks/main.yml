@@ -1,0 +1,18 @@
+- name: vars
+  set_fact:
+    disable_user: # bool
+    username: #str
+    password_hash: # str
+    palo_provider:
+      ip_address: "{{ token_ip.stdout }}"
+      api_key: "{{ token_key.stdout }}"
+
+- name: Create VPN User
+  include_role:
+    name: PA_create_vpn_user
+  when: create_vpn_user == true
+
+- name: Create VPN User
+  include_role:
+    name: PA_delete_vpn_user
+  when: disable_user == true
