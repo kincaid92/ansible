@@ -36,7 +36,7 @@
     xpath: |
       /config/shared/local-user-database/user/entry[@name='testuser']
     element: |
-      <phash> $5$ufgidjfjdsf$Tj8ubzMtwyMRd5P4NFL1O0lZlaCCnFRUNNACowBGp3B </phash>
+      <phash>{{ password_hash }}</phash>
 
 
 
