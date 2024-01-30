@@ -1,10 +1,9 @@
 - name: vars
   set_fact:
-    create_interface: # bool
-    disable_user: # bool
-    username: #str
-    new_username: #str
-    password_hash: # str
+    create_vpn_user:  #bool
+    disable_user:     #bool
+    create_interface: #bool
+
     palo_provider:
       ip_address: "{{ token_ip.stdout }}"
       api_key: "{{ token_key.stdout }}"
@@ -16,7 +15,7 @@
 
 - name: Disable VPN User
   include_role:
-    name: PA_delete_vpn_user
+    name: PA_disable_vpn_user
   when: disable_user == true
 
 - name: Create Interface

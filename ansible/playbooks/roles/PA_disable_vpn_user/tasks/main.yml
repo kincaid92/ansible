@@ -1,3 +1,8 @@
+- name: vars
+  set_fact:
+    username: #str
+
+
 - name: Disable Local User
   paloaltonetworks.panos.panos_type_cmd:
     provider: '{{ palo_provider }}'
@@ -6,4 +11,3 @@
       /config/shared/local-user-database/user/entry[@name='{{username}}']
     element: |
       <disabled>yes</disabled>
-  when: disable_user == true

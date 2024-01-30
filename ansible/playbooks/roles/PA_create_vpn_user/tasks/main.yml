@@ -1,3 +1,8 @@
+- name: vars
+  set_fact:
+    new_username: #str
+    password_hash: # str
+
 - name: request password hash
   paloaltonetworks.panos.panos_op:
     provider: '{{ palo_provider }}'
