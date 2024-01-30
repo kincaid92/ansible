@@ -1,5 +1,12 @@
 ---
 
+- name: Create Remote Peer
+  paloaltonetworks.panos.panos_address_object:
+    provider: '{{ palo_provider }}'
+    name: 'test vpn'
+    value: '1.1.1.1'
+    description: 'made by ansible'
+
 - name: create tunnel
   paloaltonetworks.panos.panos_tunnel:
     provider: '{{ palo_provider }}'
@@ -22,7 +29,6 @@
     pre_shared_key: 'CHANGEME'
     ikev2_crypto_profile: 'default'
 
-
 - name: Add IPSec tunnel to IKE gateway profile
   paloaltonetworks.panos.panos_ipsec_tunnel:
     provider: '{{ palo_provider }}'
@@ -30,3 +36,11 @@
     tunnel_interface: 'tunnel.1'
     ak_ike_gateway: 'IKEGW-Ansible'
     ak_ipsec_crypto_profile: 'default'
+
+
+# - name: Create route 'Test-One'
+#   paloaltonetworks.panos.panos_static_route:
+#     provider: '{{ provider }}'
+#     name: 'Test-One'
+#     destination: 'IPSecTunnel-Ansible'
+#     nexthop_type: 'none'
