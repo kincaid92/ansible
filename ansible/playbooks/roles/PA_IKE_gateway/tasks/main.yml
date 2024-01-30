@@ -4,7 +4,7 @@
   paloaltonetworks.panos.panos_tunnel:
     provider: '{{ palo_provider }}'
     if_name: "tunnel.1"
-    ip: ["10.1.1.1/32"]
+    ip: 
     zone_name: 'dmz'
     management_profile: 'allow-ping'
 
