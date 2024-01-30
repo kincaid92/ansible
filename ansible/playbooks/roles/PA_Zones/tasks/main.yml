@@ -25,10 +25,10 @@
   paloaltonetworks.panos.panos_l3_subinterface:
     provider: '{{ palo_provider }}'
     name: "{{interface}}.{{vlan_tag}}"
-    tag: {{vlan_tag}}
+    tag: '{{vlan_tag}}'
     enable_dhcp: false
     ip: '{{subinterface_ip}}'
-    zone_name: "subinterface_zone"
+    zone_name: "{{subinterface_zone}}"
   when: create_l3_subinterface == true
 
 
