@@ -16,6 +16,8 @@
     IKE_gateway_PSK:
     IKE_gateway_crypto_profile:
 
+    IPSec_tunnel_name:
+
 - name: Create Remote Peer
   paloaltonetworks.panos.panos_address_object:
     provider: '{{ palo_provider }}'
@@ -49,7 +51,7 @@
 - name: Add IPSec tunnel to IKE gateway profile
   paloaltonetworks.panos.panos_ipsec_tunnel:
     provider: '{{ palo_provider }}'
-    name: 'IPSecTunnel-Ansible'
+    name: '{{IPSec_tunnel_name}}'
     tunnel_interface: 'tunnel.{{tunnel_ID}}'
     ak_ike_gateway: '{{IKE_gateway_name}}'
     ak_ipsec_crypto_profile: '{{IKE_gateway_crypto_profile}}'
