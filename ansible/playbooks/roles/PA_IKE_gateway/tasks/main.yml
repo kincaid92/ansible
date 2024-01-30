@@ -1,47 +1,63 @@
 ---
 
+- name: vars
+  set_fact:
+    remote_address_object_name:
+    remote_address_object_ip:
+
+    tunnel_ID:
+    tunnel_IP:
+    tunnel_security_zone:
+    
+    IKE_gateway_name:
+    IKE_gateway_interface:
+    IKE_gateway_passive:
+    IKE_gateway_peer_ip:
+    IKE_gateway_PSK:
+    IKE_gateway_crypto_profile:
+
 - name: Create Remote Peer
   paloaltonetworks.panos.panos_address_object:
     provider: '{{ palo_provider }}'
-    name: 'test vpn'
-    value: '1.1.1.1'
+    name: '{{remote_address_object_name}}'
+    value: '{{remote_address_object_ip}}'
     description: 'made by ansible'
 
 - name: create tunnel
   paloaltonetworks.panos.panos_tunnel:
     provider: '{{ palo_provider }}'
-    if_name: "tunnel.1"
-    ip:
+    if_name: "tunnel.{{tunnel_ID}}"
+    ip: '{{tunnel_IP}}'
     vr_name: 'default'
-    zone_name: 'dmz'
+    zone_name: '{{tunnel_security_zone}}'
     management_profile: 'allow-ping'
 
 - name: Add IKE gateway config to the firewall
   paloaltonetworks.panos.panos_ike_gateway:
     provider: '{{ palo_provider }}'
-    name: 'IKEGW-Ansible'
+    name: '{{IKE_gateway_name}}'
     version: 'ikev2'
     ikev1_exchange_mode: 'main'
-    interface: 'ethernet1/1'
-    enable_passive_mode: false
+    interface: '{{IKE_gateway_interface}}'
+    enable_passive_mode: '{{IKE_gateway_passive}}'
     enable_liveness_check: true
     liveness_check_interval: '5'
-    peer_ip_value: '1.2.3.5'
-    pre_shared_key: 'CHANGEME'
-    ikev2_crypto_profile: 'default'
+    peer_ip_value: '{{IKE_gateway_peer_ip}}'
+    pre_shared_key: '{{IKE_gateway_PSK}}'
+    ikev2_crypto_profile: '{{IKE_gateway_crypto_profile}}'
 
 - name: Add IPSec tunnel to IKE gateway profile
   paloaltonetworks.panos.panos_ipsec_tunnel:
     provider: '{{ palo_provider }}'
     name: 'IPSecTunnel-Ansible'
-    tunnel_interface: 'tunnel.1'
-    ak_ike_gateway: 'IKEGW-Ansible'
-    ak_ipsec_crypto_profile: 'default'
+    tunnel_interface: 'tunnel.{{tunnel_ID}}'
+    ak_ike_gateway: '{{IKE_gateway_name}}'
+    ak_ipsec_crypto_profile: '{{IKE_gateway_crypto_profile}}'
 
 - name: Create route 'Test-One'
   paloaltonetworks.panos.panos_static_route:
     provider: '{{ palo_provider }}'
     name: 'Test-One'
-    destination: 'test vpn'
-    interface: 'tunnel.1'
+    destination: '{{remote_address_object_name}}'
+    interface: 'tunnel.{{tunnel_ID}}'
     nexthop_type: 'none'
