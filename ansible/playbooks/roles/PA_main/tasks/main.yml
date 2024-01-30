@@ -17,12 +17,12 @@
 
 - name: Create VPN User
   include_role:
-    name: PA_create_vpn_user
+    name: PA_vpn_create_user
   when: create_vpn_user == true
 
 - name: Disable VPN User
   include_role:
-    name: PA_disable_vpn_user
+    name: PA_vpn_disable_user
   when: disable_user == true
 
 - name: Create Interface
