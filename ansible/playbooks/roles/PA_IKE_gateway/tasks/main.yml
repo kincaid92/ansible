@@ -11,6 +11,7 @@
     
     IKE_gateway_name:
     IKE_gateway_interface:
+    IKE_gateway_local_IP:
     IKE_gateway_passive:
     IKE_gateway_peer_ip:
     IKE_gateway_PSK:
@@ -41,6 +42,7 @@
     version: 'ikev2'
     ikev1_exchange_mode: 'main'
     interface: '{{IKE_gateway_interface}}'
+    local_ip_address: '{{IKE_gateway_local_IP}}'
     enable_passive_mode: '{{IKE_gateway_passive}}'
     enable_liveness_check: true
     liveness_check_interval: '5'
