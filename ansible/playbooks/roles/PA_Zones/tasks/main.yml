@@ -29,7 +29,6 @@
     provider: '{{ palo_provider }}'
     name: "ethernet1/3.301"
     tag: 301
-    create_default_route: true
     zone_name: "dmz"
 
 
