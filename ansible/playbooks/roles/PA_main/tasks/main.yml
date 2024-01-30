@@ -27,15 +27,15 @@
 
 - name: Create Interface
   include_role:
-    name: PA_Zones
+    name: PA_create_zones
   when: create_interface == true
 
 - name: Create NAT
   include_role:
-    name: PA_Zones
+    name: PA_create_nat
   when: create_NAT == true
 
-- name: Create NAT
+- name: Commit Changes
   include_role:
     name: PA_commit
   when: commit_changes == true
