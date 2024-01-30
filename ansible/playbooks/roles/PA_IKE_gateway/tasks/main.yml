@@ -39,7 +39,8 @@
 
 - name: Create route 'Test-One'
   paloaltonetworks.panos.panos_static_route:
-    provider: '{{ provider }}'
+    provider: '{{ palo_provider }}'
     name: 'Test-One'
-    destination: 'IPSecTunnel-Ansible'
+    destination: 'test vpn'
+    interface: 'tunnel.1'
     nexthop_type: 'none'
