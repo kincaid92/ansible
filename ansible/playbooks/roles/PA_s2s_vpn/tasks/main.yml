@@ -19,6 +19,7 @@
 
     IPSec_tunnel_name:
 
+    Proxy_ID_Name:
     Proxy_ID_Local_IP:
     Proxy_ID_Remote_IP:
 
@@ -65,8 +66,8 @@
 - name: Add IPSec IPv4 Proxy ID
   paloaltonetworks.panos.panos_ipsec_ipv4_proxyid:
     provider: '{{ palo_provider }}'
-    name: 'IPSec-ProxyId'
-    tunnel_name: 'tunnel.{{tunnel_ID}}'
+    name: '{{Proxy_ID_Name}}'
+    tunnel_name: '{{IPSec_tunnel_name}}'
     local: '{{Proxy_ID_Local_IP}}'
     remote: '{{Proxy_ID_Remote_IP}}'
 
