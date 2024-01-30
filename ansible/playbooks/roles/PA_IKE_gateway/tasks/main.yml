@@ -6,7 +6,7 @@
     if_name: "tunnel.1"
     ip: ["10.1.1.1/32"]
     zone_name: 'dmz'
-    management_profile: 'allow ping'
+    management_profile: 'allow-ping'
 
 - name: Add IKE gateway config to the firewall
   paloaltonetworks.panos.panos_ike_gateway:
