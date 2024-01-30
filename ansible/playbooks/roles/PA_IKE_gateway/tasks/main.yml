@@ -43,6 +43,7 @@
     ikev1_exchange_mode: 'main'
     interface: '{{IKE_gateway_interface}}'
     local_ip_address: '{{IKE_gateway_local_IP}}'
+    local_ip_address_type: 'ip'
     enable_passive_mode: '{{IKE_gateway_passive}}'
     enable_liveness_check: true
     liveness_check_interval: '5'
