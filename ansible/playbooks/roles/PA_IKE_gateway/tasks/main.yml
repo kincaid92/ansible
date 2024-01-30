@@ -21,3 +21,12 @@
     peer_ip_value: '1.2.3.5'
     pre_shared_key: 'CHANGEME'
     ikev2_crypto_profile: 'default'
+
+
+- name: Add IPSec tunnel to IKE gateway profile
+  paloaltonetworks.panos.panos_ipsec_tunnel:
+    provider: '{{ palo_provider }}'
+    name: 'IPSecTunnel-Ansible'
+    tunnel_interface: 'tunnel.1'
+    ak_ike_gateway: 'IKEGW-Ansible'
+    ak_ipsec_crypto_profile: 'default'
