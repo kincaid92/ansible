@@ -4,8 +4,8 @@
     disable_user:     #bool
     create_interface: #bool
     create_NAT:       #bool
-    create_IKE_gateway:   #bool
-    
+    create_s2s_vpn:   #bool
+
     gather_users:     #bool
     gather_nat:       #bool
     gather_zones:     #bool
@@ -38,8 +38,8 @@
 
 - name: Create IKE Gateway
   include_role:
-    name: PA_IKE_gateway
-  when: create_IKE_gateway == true
+    name: PA_s2s_vpn
+  when: create_s2s_vpn == true
 
 - name: Commit Changes
   include_role:
