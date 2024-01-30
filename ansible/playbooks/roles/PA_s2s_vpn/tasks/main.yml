@@ -19,6 +19,9 @@
 
     IPSec_tunnel_name:
 
+    Proxy_ID_Local_IP:
+    Proxy_ID_Remote_IP:
+
 - name: Create Remote Peer
   paloaltonetworks.panos.panos_address_object:
     provider: '{{ palo_provider }}'
@@ -58,6 +61,14 @@
     tunnel_interface: 'tunnel.{{tunnel_ID}}'
     ak_ike_gateway: '{{IKE_gateway_name}}'
     ak_ipsec_crypto_profile: '{{IKE_gateway_crypto_profile}}'
+
+- name: Add IPSec IPv4 Proxy ID
+  paloaltonetworks.panos.panos_ipsec_ipv4_proxyid:
+    provider: '{{ palo_provider }}'
+    name: 'IPSec-ProxyId'
+    tunnel_name: 'tunnel.{{tunnel_ID}}'
+    local: '{{Proxy_ID_Local_IP}}'
+    remote: '{{Proxy_ID_Remote_IP}}'
 
 - name: Create route 'Test-One'
   paloaltonetworks.panos.panos_static_route:
