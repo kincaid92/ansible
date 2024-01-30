@@ -1,9 +1,1 @@
-- name: Disable Local User
-  paloaltonetworks.panos.panos_type_cmd:
-    provider: '{{ palo_provider }}'
-    cmd: 'set'
-    xpath: |
-      /config/shared/local-user-database/user/entry[@name='{{username}}']
-    element: |
-      <disabled>yes</disabled>
-  when: disable_user == true
+placeholder file
