@@ -2,16 +2,12 @@
 
 - name: vars
   set_fact:
-    commit: false
-    gather: true
-    palo_provider:
-      ip_address: "{{ token_ip.stdout }}"
-      api_key: "{{ token_key.stdout }}"
+    object_name:         #Name of your address-object
+    source_ip:           #Source-IP of your address-object to be created
+    NAT_ip:              #Translated-IP
+    source_zone:         #Source zone
+    dest_zone:           #Destination zone
 
-- name: enable gathering
-  include_role:
-    name: PA_gather_nat
-  when: gather == true
 
 - name: Create internal object
   paloaltonetworks.panos.panos_address_object:
@@ -19,7 +15,6 @@
     name: '{{ object_name }}'
     value: '{{ source_ip }}'
     description: 'made by ansible'
-  when: gather == false
 
 - name: Create translated object
   paloaltonetworks.panos.panos_address_object:
@@ -27,7 +22,6 @@
     name: '{{ object_name }}-NAT'
     value: '{{ NAT_ip }}'
     description: 'made by ansible'
-  when: gather == false
   
 - name: add a nat rule
   paloaltonetworks.panos.panos_nat_rule2:
@@ -44,10 +38,4 @@
     source_translation_type: 'static-ip'
     source_translation_static_translated_address: '{{ object_name }}-NAT'
     source_translation_static_bi_directional: true
-  when: gather == false
   
-- name: commit changes on PA
-  paloaltonetworks.panos.panos_commit_firewall:
-    provider: '{{ palo_provider }}'
-    admins: ['admin']
-  when: commit == true and gather == false

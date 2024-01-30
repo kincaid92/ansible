@@ -1,0 +1,6 @@
+---
+
+- name: commit changes on PA
+  paloaltonetworks.panos.panos_commit_firewall:
+    provider: '{{ palo_provider }}'
+    admins: ['admin']

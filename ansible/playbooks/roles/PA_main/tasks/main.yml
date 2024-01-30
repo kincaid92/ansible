@@ -3,7 +3,9 @@
     create_vpn_user:  #bool
     disable_user:     #bool
     create_interface: #bool
-
+    create_NAT:       #bool
+    commit_changes:   #bool
+    
     palo_provider:
       ip_address: "{{ token_ip.stdout }}"
       api_key: "{{ token_key.stdout }}"
@@ -22,3 +24,13 @@
   include_role:
     name: PA_Zones
   when: create_interface == true
+
+- name: Create NAT
+  include_role:
+    name: PA_Zones
+  when: create_NAT == true
+
+- name: Create NAT
+  include_role:
+    name: PA_commit
+  when: commit_changes == true
