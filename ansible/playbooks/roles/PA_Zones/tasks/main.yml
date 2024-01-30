@@ -29,7 +29,7 @@
     provider: '{{ palo_provider }}'
     name: "ethernet1/3.301"
     tag: 301
-    ip: '[1.1.1.0/24]'
+    ip: '1.1.1.0/24'
     zone_name: "dmz"
 
 
