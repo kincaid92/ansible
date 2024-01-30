@@ -1,0 +1,15 @@
+---
+
+- name: Add IKE gateway config to the firewall
+  paloaltonetworks.panos.panos_ike_gateway:
+    provider: '{{ palo_provider }}'
+    name: 'IKEGW-Ansible'
+    version: 'ikev2'
+    ikev1_exchange_mode: 'main'
+    interface: 'ethernet1/1'
+    enable_passive_mode: false
+    enable_liveness_check: true
+    liveness_check_interval: '5'
+    peer_ip_value: '1.2.3.4'
+    pre_shared_key: 'CHANGEME'
+    ikev2_crypto_profile: 'default'
