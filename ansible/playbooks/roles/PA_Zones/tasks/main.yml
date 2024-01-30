@@ -24,6 +24,15 @@
     zone_name: 'dmz'
     enable_dhcp: false
 
+- name: Create sub L3 interface
+  paloaltonetworks.panos.panos_l3_subinterface:
+    provider: '{{ palo_provider }}'
+    name: "ethernet1/3.301"
+    tag: 301
+    create_default_route: true
+    zone_name: "dmz"
+
+
 # - name: display zones
 #   debug:
 #     msg: '{{ zone_gathered.gathered }}'
