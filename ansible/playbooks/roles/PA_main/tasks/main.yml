@@ -4,8 +4,13 @@
     disable_user:     #bool
     create_interface: #bool
     create_NAT:       #bool
-    commit_changes:   #bool
     
+    gather_users:     #bool
+    gather_nat:       #bool
+    gather_zones:     #bool
+
+    commit_changes:   #bool
+
     palo_provider:
       ip_address: "{{ token_ip.stdout }}"
       api_key: "{{ token_key.stdout }}"
@@ -34,3 +39,18 @@
   include_role:
     name: PA_commit
   when: commit_changes == true
+
+- name: List Users
+  include_role:
+    name: PA_gather_users
+  when: gather_users == true
+
+- name: List NATs
+  include_role:
+    name: PA_gather_nat
+  when: gather_nat == true
+
+- name: List Zones
+  include_role:
+    name: PA_gather_zones
+  when: gather_zones == true

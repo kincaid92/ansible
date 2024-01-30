@@ -8,7 +8,6 @@
     source_zone:         #Source zone
     dest_zone:           #Destination zone
 
-
 - name: Create internal object
   paloaltonetworks.panos.panos_address_object:
     provider: '{{ palo_provider }}'

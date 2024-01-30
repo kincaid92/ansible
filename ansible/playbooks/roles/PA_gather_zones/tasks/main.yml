@@ -1,0 +1,12 @@
+---
+
+- name: gather zones
+  paloaltonetworks.panos.panos_zone:
+    provider: '{{ palo_provider }}'
+    gathered_filter: true
+    state: 'gathered'
+  register: zone_gathered
+
+- name: display zones
+  debug:
+    msg: '{{ zone_gathered.gathered }}'
