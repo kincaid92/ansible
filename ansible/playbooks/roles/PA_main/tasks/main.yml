@@ -4,6 +4,7 @@
     disable_user:     #bool
     create_interface: #bool
     create_NAT:       #bool
+    create_IKE_gateway:   #bool
     
     gather_users:     #bool
     gather_nat:       #bool
@@ -34,6 +35,11 @@
   include_role:
     name: PA_create_nat
   when: create_NAT == true
+
+- name: Create IKE Gateway
+  include_role:
+    name: PA_IKE_gateway
+  when: create_IKE_gateway == true
 
 - name: Commit Changes
   include_role:
