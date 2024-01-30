@@ -37,10 +37,9 @@
     ak_ike_gateway: 'IKEGW-Ansible'
     ak_ipsec_crypto_profile: 'default'
 
-
-# - name: Create route 'Test-One'
-#   paloaltonetworks.panos.panos_static_route:
-#     provider: '{{ provider }}'
-#     name: 'Test-One'
-#     destination: 'IPSecTunnel-Ansible'
-#     nexthop_type: 'none'
+- name: Create route 'Test-One'
+  paloaltonetworks.panos.panos_static_route:
+    provider: '{{ provider }}'
+    name: 'Test-One'
+    destination: 'IPSecTunnel-Ansible'
+    nexthop_type: 'none'
