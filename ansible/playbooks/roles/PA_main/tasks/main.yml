@@ -1,5 +1,6 @@
 - name: vars
   set_fact:
+    create_interface: # bool
     disable_user: # bool
     username: #str
     new_username: #str
@@ -13,7 +14,12 @@
     name: PA_create_vpn_user
   when: create_vpn_user == true
 
-- name: disable VPN User
+- name: Disable VPN User
   include_role:
     name: PA_delete_vpn_user
   when: disable_user == true
+
+- name: Create Interface
+  include_role:
+    name: PA_Zones
+  when: create_interface == true

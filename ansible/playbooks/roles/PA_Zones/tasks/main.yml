@@ -1,8 +1,11 @@
 - name: vars
   set_fact:
-    palo_provider:
-      ip_address: "{{ token_ip.stdout }}"
-      api_key: "{{ token_key.stdout }}"
+    create_l3_subinterface: # bool
+    interface: #str
+    vlan_tag: #int
+    zone_name: #str
+    subinterface_ip: #int
+    subinterface_zone: #str
 
 - name: gather zones
   paloaltonetworks.panos.panos_zone:
@@ -11,27 +14,22 @@
     state: 'gathered'
   register: zone_gathered
 
-# - name: create zone
-#   paloaltonetworks.panos.panos_zone:
-#     provider: '{{ palo_provider }}'
-#     zone: 'dmz'
-#     mode: 'layer3'
-
 - name: add interface to zone
   paloaltonetworks.panos.panos_interface:
     provider: '{{ palo_provider }}'
-    if_name: 'ethernet1/3'
-    zone_name: 'dmz'
+    if_name: '{{interface}}'
+    zone_name: '{{zone_name}}'
     enable_dhcp: false
 
 - name: Create sub L3 interface
   paloaltonetworks.panos.panos_l3_subinterface:
     provider: '{{ palo_provider }}'
-    name: "ethernet1/3.301"
-    tag: 301
+    name: "{{interface}}.{{vlan_tag}}"
+    tag: {{vlan_tag}}
     enable_dhcp: false
-    ip: '1.1.1.0/24'
-    zone_name: "dmz"
+    ip: '{{subinterface_ip}}'
+    zone_name: "subinterface_zone"
+  when: create_l3_subinterface == true
 
 
 # - name: display zones
