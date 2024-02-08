@@ -1,12 +1,7 @@
 - name: vars
   set_fact:
-    create_l3_subinterface: # bool
     interface: #str
-    parent_interface: #str
-    vlan_tag: #int
     zone_name: #str
-    subinterface_ip: #int
-    subinterface_zone: #str
 
 - name: add interface to zone
   paloaltonetworks.panos.panos_interface:
@@ -14,13 +9,3 @@
     if_name: '{{interface}}'
     zone_name: '{{zone_name}}'
     enable_dhcp: false
-
-- name: Create sub L3 interface
-  paloaltonetworks.panos.panos_l3_subinterface:
-    provider: '{{ palo_provider }}'
-    name: "{{parent_interface}}.{{vlan_tag}}"
-    tag: '{{vlan_tag}}'
-    enable_dhcp: false
-    ip: '{{subinterface_ip}}'
-    zone_name: "{{subinterface_zone}}"
-  when: create_l3_subinterface == true

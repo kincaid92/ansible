@@ -31,6 +31,11 @@
     name: PA_create_zones
   when: create_interface == true
 
+- name: Create Sub-Interface
+  include_role:
+    name: PA_create_subint
+  when: create_l3_subinterface == true
+
 - name: Create NAT
   include_role:
     name: PA_create_nat
