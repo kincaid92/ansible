@@ -71,7 +71,7 @@
     local: '{{Proxy_ID_Local_IP}}'
     remote: '{{Proxy_ID_Remote_IP}}'
 
-- name: Create route 'Test-One'
+- name: Create static route
   paloaltonetworks.panos.panos_static_route:
     provider: '{{ palo_provider }}'
     name: 'Test-One'
