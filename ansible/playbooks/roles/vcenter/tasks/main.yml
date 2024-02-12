@@ -1,7 +1,7 @@
 ---
 
 - name: Perform Patch Dryrun
-  vmware_cluster_info module:
+  community.vmware.vmware_cluster_info:
     hostname: '{{ vcenter_hostname }}'
     username: '{{ vcenter_username }}'
     password: '{{ vcenter_password }}'
