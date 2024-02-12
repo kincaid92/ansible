@@ -8,4 +8,5 @@
   register: out
 
 - name: print
-  msg: '{{ out }}'
+  debug:
+    msg: '{{ out }}'
