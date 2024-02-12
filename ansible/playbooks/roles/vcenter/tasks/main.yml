@@ -1,5 +1,14 @@
 ---
 
-  - name: Perform Patch Dryrun
-    debug:
-      var: ansible_facts
+- name: Perform Patch Dryrun
+  community.vmware.vmware_cluster_info module:
+    hostname: '{{ vcenter_hostname }}'
+    username: '{{ vcenter_username }}'
+    password: '{{ vcenter_password }}'
+    datacenter: CHG1
+  delegate_to: localhost
+  register: cluster_info
+
+- name: debug
+  debug: cluster_info.stdout
+

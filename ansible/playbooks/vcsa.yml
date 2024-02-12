@@ -1,7 +1,7 @@
 ---
 
  - hosts: all
-   gather_facts: true
+   gather_facts: false
    roles:
     - vcenter
 
