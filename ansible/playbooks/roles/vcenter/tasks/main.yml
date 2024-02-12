@@ -12,5 +12,5 @@
 
 - name: debug
   debug:
-    var: cluster_info.stdout
+    var: cluster_info
 
