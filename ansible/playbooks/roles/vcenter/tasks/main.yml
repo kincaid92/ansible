@@ -6,7 +6,7 @@
     username: '{{ vcenter_username }}'
     password: '{{ vcenter_password }}'
     datacenter: CHG1
-  validate_certs: false
+    validate_certs: false
   delegate_to: localhost
   register: cluster_info
 
