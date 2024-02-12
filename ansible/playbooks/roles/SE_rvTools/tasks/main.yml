@@ -6,4 +6,4 @@
 
 - name: print
   debug:
-    var: print
+    var: print.stdout
