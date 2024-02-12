@@ -10,5 +10,6 @@
   register: cluster_info
 
 - name: debug
-  debug: cluster_info.stdout
+  debug:
+    var: cluster_info.stdout
 
