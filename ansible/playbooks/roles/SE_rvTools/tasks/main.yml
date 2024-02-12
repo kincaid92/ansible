@@ -1,0 +1,4 @@
+---
+
+- name: test
+  ansible.windows.win_ping:

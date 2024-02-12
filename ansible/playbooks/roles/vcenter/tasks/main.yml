@@ -12,5 +12,4 @@
 
 - name: debug
   debug:
-    var: cluster_info
-
+    var: cluster_info.clusters
