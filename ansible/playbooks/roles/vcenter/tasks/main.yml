@@ -1,9 +1,5 @@
 ---
 
   - name: Perform Patch Dryrun
-    shell: 'esxcli software vib update -d /vmfs/volumes/{{datastore}}/VMware-Tools-12.3.0-core-offline-depot-ESXi-all-22234872.zip --dry-run'
-    register: dryoutput
-
-  - name: Print dry run results
     debug:
-      var: dryoutput.stdout_lines
+      var: ansible_facts
