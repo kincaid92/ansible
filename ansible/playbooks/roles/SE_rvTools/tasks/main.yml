@@ -5,3 +5,7 @@
 
 - name: test
   win_shell: c:\test.ps1 -MyVar "{{ MyVar }}"
+  register: out
+
+- name: print
+  msg: '{{ out }}'
