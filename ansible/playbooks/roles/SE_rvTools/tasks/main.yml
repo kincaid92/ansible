@@ -15,7 +15,7 @@
   set_fact:
     dropdown_opt: #str == client
     TrainingVCSA:
-      vc_name: 
+      vc_name: "{{response.secret.vc_name}}"
       user: "{{response.secret.user}}"
       pass: "{{response.secret.pass}}"
 
