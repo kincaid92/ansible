@@ -30,5 +30,6 @@
 - name: Display the results
   ansible.builtin.debug:
     msg:
+      - "{{ TrainingVCSA.vc_name }}"
       - "{{ TrainingVCSA.user }}"
       - "{{ TrainingVCSA.pass }}"
