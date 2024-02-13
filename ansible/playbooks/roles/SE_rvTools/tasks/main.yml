@@ -10,7 +10,7 @@
 
 - name: create dynamic selector
   set_fact:
-    dropdown_opt: "creds" #str == client
+    dropdown_opt: #str == client
 
 - name: gather secret from vault
   set_fact:
