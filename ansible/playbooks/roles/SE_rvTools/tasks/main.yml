@@ -8,13 +8,16 @@
   register: login_data
   delegate_to: 172.16.101.183
 
+- name: create dynamic selector
+  set_fact:
+    dropdown_opt: #str == client
+
 - name: gather secret from vault
   set_fact:
-    response: "{{ lookup('community.hashi_vault.vault_kv2_get', 'creds', url='http://172.16.101.183:8200', token=login_data.login.auth.client_token) }}"
+    response: "{{ lookup('community.hashi_vault.vault_kv2_get', dropdown_opt, url='http://172.16.101.183:8200', token=login_data.login.auth.client_token) }}"
 
 - name: vars
   set_fact:
-    dropdown_opt: #str == client
     TrainingVCSA:
       vc_name: "{{response.secret.vc_name}}"
       user: "{{response.secret.user}}"
