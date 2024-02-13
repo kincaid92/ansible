@@ -20,8 +20,8 @@
       user: "{{response.secret.user}}"
       pass: "{{response.secret.pass}}"
 
-# - name: run rvtools
-#   win_shell: C:\Scripts\rvtools.ps1 -VCServer "{{ TrainingVCSA.vc_name }}" -User "{{ TrainingVCSA.user }}" -securepwd "{{ TrainingVCSA.pass }}"
+- name: run rvtools
+  win_shell: C:\Scripts\rvtools.ps1 -VCServer "{{ TrainingVCSA.vc_name }}" -User "{{ TrainingVCSA.user }}" -securepwd "{{ TrainingVCSA.pass }}"
 
 
 
