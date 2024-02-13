@@ -18,10 +18,10 @@
 
 - name: Store vault results
   set_fact:
-    TrainingVCSA:
+    Client:
       vc_name: "{{response.secret.vc_name}}"
       user: "{{response.secret.user}}"
       pass: "{{response.secret.pass}}"
 
 - name: run rvtools
-  win_shell: C:\Scripts\rvtoolsps1.ps1 -VCServer "{{TrainingVCSA.vc_name}}" -User "{{TrainingVCSA.user}}" -password '{{TrainingVCSA.pass}}'
+  win_shell: C:\Scripts\rvtoolsps1.ps1 -VCServer "{{Client.vc_name}}" -User "{{Client.user}}" -password '{{Client.pass}}'
