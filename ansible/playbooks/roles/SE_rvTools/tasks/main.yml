@@ -13,8 +13,8 @@
     dropdown_opt: #str == client
     TrainingVCSA:
       vc_name: 
-      user: 
-      pass: 
+      user: "{{response.secret.user}}"
+      pass: "{{response.secret.pass}}"
 
 # - name: run rvtools
 #   win_shell: rvtools -S '{{ dropdown_opt[vc_name] -u dropdown_opt[user] -p dropdown_opt[pass] }}' -c ExportAll2csv -f /path/to/whatever.csv
@@ -27,5 +27,5 @@
 - name: Display the results
   ansible.builtin.debug:
     msg:
-      - "{{ response.secret.user }}"
-      - "{{ response.secret.pass }}"
+      - "{{ TrainingVCSA.user }}"
+      - "{{ TrainingVCSA.pass }}"
