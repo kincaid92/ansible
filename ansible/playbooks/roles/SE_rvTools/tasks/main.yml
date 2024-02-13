@@ -1,12 +1,18 @@
 ---
 - name: vars
   set_fact:
-    MyVar: 'yooo' #str
+    response: "{{ lookup('community.hashi_vault.vault_kv2_get', 'trainingCred', url='https://172.16.101.183:8200') }}"
+    dropdown_opt: #str == client
+    TrainingVCSA:
+      vc_name: 
+      user: 
+      pass: 
 
-- name: test
-  win_shell: c:\test.ps1 -MyVar "{{ MyVar }}"
-  register: out
+# - name: run rvtools
+#   win_shell: rvtools -S '{{ dropdown_opt[vc_name] -u dropdown_opt[user] -p dropdown_opt[pass] }}' -c ExportAll2csv -f /path/to/whatever.csv
 
-- name: print
-  debug:
-    msg: '{{ out }}'
+
+- name: Display the results
+  ansible.builtin.debug:
+    msg:
+      - "Secret: {{ response.secret }}"
