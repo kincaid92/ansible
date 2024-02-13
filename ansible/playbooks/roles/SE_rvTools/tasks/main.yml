@@ -10,11 +10,11 @@
 
 - name: create dynamic selector
   set_fact:
-    dropdown_opt: #str == client
+    dropdown_opt: "creds" #str == client
 
 - name: gather secret from vault
   set_fact:
-    response: "{{ lookup('community.hashi_vault.vault_kv2_get', 'dropdown_opt', url='http://172.16.101.183:8200', token=login_data.login.auth.client_token) }}"
+    response: "{{ lookup('community.hashi_vault.vault_kv2_get', dropdown_opt, url='http://172.16.101.183:8200', token=login_data.login.auth.client_token) }}"
 
 - name: vars
   set_fact:
