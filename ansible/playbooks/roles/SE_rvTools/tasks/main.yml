@@ -19,8 +19,8 @@
       user: "{{response.secret.user}}"
       pass: "{{response.secret.pass}}"
 
-# - name: run rvtools
-#   win_shell: rvtools -S '{{ dropdown_opt[vc_name] -u dropdown_opt[user] -p dropdown_opt[pass] }}' -c ExportAll2csv -f /path/to/whatever.csv
+- name: run rvtools
+  win_shell: C:\Scripts\rvtools.ps1 -VCServer "{{ TrainingVCSA.vc_name }}" -User "{{ TrainingVCSA.user }}" -securepwd "{{ TrainingVCSA.pass }}"
 
 
 
