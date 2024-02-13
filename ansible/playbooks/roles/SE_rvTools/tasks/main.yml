@@ -9,7 +9,7 @@
 
 - name: vars
   set_fact:
-    response: "{{ lookup('community.hashi_vault.vault_kv2_get', 'trainingCred', url='http://172.16.101.183:8200', token=login_data.login.auth.client_token) }}"
+    response: "{{ lookup('community.hashi_vault.vault_kv2_get', 'secret=cubbyhole/trainingCred', url='http://172.16.101.183:8200', token=login_data.login.auth.client_token) }}"
     dropdown_opt: #str == client
     TrainingVCSA:
       vc_name: 
