@@ -1,6 +1,7 @@
 ---
 - name: vars
   set_fact:
+    response: "{{ lookup('community.hashi_vault.vault_kv2_get', 'trainingCred', url='http://172.16.101.183:8200') }}"
     dropdown_opt: #str == client
     TrainingVCSA:
       vc_name: 
@@ -11,16 +12,16 @@
 #   win_shell: rvtools -S '{{ dropdown_opt[vc_name] -u dropdown_opt[user] -p dropdown_opt[pass] }}' -c ExportAll2csv -f /path/to/whatever.csv
 
 
-- name: login to vault
-  community.hashi_vault.vault_login:
-    url: http://172.16.101.183:8200
-    auth_method: token
-    token_file: /root/token
-  register: login_data
+# - name: login to vault
+#   community.hashi_vault.vault_login:
+#     url: http://172.16.101.183:8200
+#     auth_method: token
+#     token_file: /root/token
+#   register: login_data
 
 
 
 - name: Display the results
   ansible.builtin.debug:
     msg:
-      - "Secret: {{ login_data }}"
+      - "Secret: {{ response.secret }}"
