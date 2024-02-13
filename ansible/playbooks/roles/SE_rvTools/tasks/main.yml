@@ -4,7 +4,7 @@
   community.hashi_vault.vault_login:
     url: http://172.16.101.183:8200
     auth_method: token
-    token_file: /root/token
+    token_file: /home/Administrator/token
   register: login_data
   delegate_to: 172.16.101.183
 
