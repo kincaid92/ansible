@@ -27,5 +27,5 @@
 - name: Display the results
   ansible.builtin.debug:
     msg:
-      - "Secret: {{ response.secret.user }}"
-      - "Secret: {{ response.secret.pass }}"
+      - "{{ response.secret.user }}"
+      - "{{ response.secret.pass }}"
