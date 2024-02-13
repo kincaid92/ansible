@@ -21,7 +21,7 @@
       pass: "{{response.secret.pass}}"
 
 - name: run rvtools
-  win_shell: C:\Scripts\rvtoolsps1.ps1 -VCServer "{{ TrainingVCSA.vc_name }}" -User "{{ TrainingVCSA.user }}" -password "{{ TrainingVCSA.pass }}"
+  win_shell: C:\Scripts\rvtoolsps1.ps1 -VCServer "{{TrainingVCSA.vc_name}}" -User "{{TrainingVCSA.user}}" -password "{{TrainingVCSA.pass}}"
 
 - name: Display the results
   ansible.builtin.debug:
