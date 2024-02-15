@@ -3,6 +3,10 @@
     new_username: #str
     password_hash: # str
 
+    palo_provider:
+      ip_address: "{{ token_ip.stdout }}"
+      api_key: "{{ token_key.stdout }}"
+
 - name: request password hash
   paloaltonetworks.panos.panos_op:
     provider: '{{ palo_provider }}'
