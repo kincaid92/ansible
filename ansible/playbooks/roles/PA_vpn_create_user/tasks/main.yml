@@ -1,23 +1,19 @@
 - name: vars
   set_fact:
     new_username: #str
-    password_hash: # str
-
-    palo_provider:
-      ip_address: "{{ token_ip.stdout }}"
-      api_key: "{{ token_key.stdout }}"
+    new_password: # str
 
 - name: request password hash
   paloaltonetworks.panos.panos_op:
     provider: '{{ palo_provider }}'
-    cmd: 'request password-hash password {{password_hash}}'
-  register: user_pw
+    cmd: 'request password-hash password {{new_password}}'
+  register: password_hash
 
-- name: Show the address object.
+- name: Create User & set password hash.
   paloaltonetworks.panos.panos_type_cmd:
     provider: '{{ palo_provider }}'
     cmd: 'set'
     xpath: |
       /config/shared/local-user-database/user/entry[@name='{{new_username}}']
     element: |
-      <phash>{{ user_pw.stdout_lines[0].split()[5] | regex_replace('[,\"}]', '') }}</phash>
+      <phash>{{ password_hash.stdout_lines[0].split()[5] | regex_replace('[,\"}]', '') }}</phash>
