@@ -23,3 +23,5 @@
     destination_ip: ['any']
     application: ['any']
     action: 'drop'
+    location: top
+    log_end: true
