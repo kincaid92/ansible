@@ -1,10 +1,14 @@
-- name: Get a list of all security rules
-  paloaltonetworks.panos.panos_security_rule_facts:
+- name: Create address object
+  paloaltonetworks.panos.panos_security_rule:
     provider: '{{ palo_provider }}'
-  register: sec_rules
+    state: gathered
+    gathered_filter: '*'
+  register: security_rules
 
-- debug:
-    msg: '{{ sec_rules.rules }}'
+
+- name: list every address-object
+  debug:
+    msg: '{{ security_rules.gathered }}'
 
 # - name: Create address object
 #   paloaltonetworks.panos.panos_address_object:
