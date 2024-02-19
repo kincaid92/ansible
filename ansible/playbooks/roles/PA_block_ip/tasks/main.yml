@@ -1,5 +1,5 @@
 - name: Get a list of all security rules
-  panos_security_rule_facts:
+  paloaltonetworks.panos.panos_security_rule_facts:
     provider: '{{ palo_provider }}'
   register: sec_rules
 
