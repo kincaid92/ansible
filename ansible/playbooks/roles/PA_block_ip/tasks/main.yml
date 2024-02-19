@@ -10,3 +10,4 @@
     provider: '{{ palo_provider }}'
     name: 'Block_from_outside'
     static_value: ['{{object_name}}']
+    state: merged
