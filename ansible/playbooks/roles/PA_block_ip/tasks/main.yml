@@ -1,27 +1,35 @@
-- name: Create address object
-  paloaltonetworks.panos.panos_address_object:
+- name: Get a list of all security rules
+  panos_security_rule_facts:
     provider: '{{ palo_provider }}'
-    name: '{{ object_name }}'
-    value: '{{ source_ip }}'
-    description: 'made by ansible'
+  register: sec_rules
 
-- name: Create object group 'block_from_outside'
-  paloaltonetworks.panos.panos_address_group:
-    provider: '{{ palo_provider }}'
-    name: 'Block_from_outside'
-    static_value: ['{{object_name}}']
-    state: merged
+- debug:
+    msg: '{{ sec_rules.rules }}'
 
-- name: drop from outside
-  paloaltonetworks.panos.panos_security_rule:
-    provider: '{{ palo_provider }}'
-    rule_name: 'BLOCK_FROM_OUTSIDE'
-    description: 'Made by AWX'
-    source_zone: ['OUTSIDE']
-    source_ip: ['Block_from_outside']
-    destination_zone: ['any']
-    destination_ip: ['any']
-    application: ['any']
-    action: 'drop'
-    location: top
-    log_end: true
+# - name: Create address object
+#   paloaltonetworks.panos.panos_address_object:
+#     provider: '{{ palo_provider }}'
+#     name: '{{ object_name }}'
+#     value: '{{ source_ip }}'
+#     description: 'made by ansible'
+
+# - name: Create object group 'block_from_outside'
+#   paloaltonetworks.panos.panos_address_group:
+#     provider: '{{ palo_provider }}'
+#     name: 'Block_from_outside'
+#     static_value: ['{{object_name}}']
+#     state: merged
+
+# - name: drop from outside
+#   paloaltonetworks.panos.panos_security_rule:
+#     provider: '{{ palo_provider }}'
+#     rule_name: 'BLOCK_FROM_OUTSIDE'
+#     description: 'Made by AWX'
+#     source_zone: ['OUTSIDE']
+#     source_ip: ['Block_from_outside']
+#     destination_zone: ['any']
+#     destination_ip: ['any']
+#     application: ['any']
+#     action: 'drop'
+#     location: top
+#     log_end: true
