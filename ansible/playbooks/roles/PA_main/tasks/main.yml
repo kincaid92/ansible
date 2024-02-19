@@ -12,10 +12,6 @@
 
     commit_changes:   #bool
 
-    palo_provider:
-      ip_address: "{{ token_ip.stdout }}"
-      api_key: "{{ token_key.stdout }}"
-
 - name: Create VPN User
   include_role:
     name: PA_vpn_create_user

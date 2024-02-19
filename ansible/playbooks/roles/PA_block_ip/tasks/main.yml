@@ -7,6 +7,6 @@
 
 - name: Create object group 'Prod'
   paloaltonetworks.panos.panos_address_group:
-    provider: '{{ provider }}'
+    provider: '{{ palo_provider }}'
     name: 'Block_from_outside'
     static_value: ['{{object_name}}']
