@@ -9,7 +9,7 @@
   paloaltonetworks.panos.panos_address_group:
     provider: '{{ palo_provider }}'
     name: 'Block_from_outside'
-    static_value: ['{{object_name}}']
+    static_value: '{{object_name}}'
     state: merged
 
 - name: drop from outside
