@@ -16,10 +16,6 @@
   set_fact:
     parsed_response: "{{ login.content | ansible.utils.from_xml }}"
 
-- name: Debug parsed XML
-  debug:
-    var: parsed_response
-
 - name: Extract key
   set_fact:
     api_key: "{{ parsed_response['response']['result']['key'] }}"
