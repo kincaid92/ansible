@@ -26,6 +26,6 @@
       ip_address: "{{ IP_address }}"
       api_key: "{{ api_key }}"
 
-# - name: Print key
-#   debug:
-#     var: api_key
+- name: Print key
+  debug:
+    var: palo_provider
