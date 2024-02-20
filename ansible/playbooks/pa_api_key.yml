@@ -3,5 +3,5 @@
 - hosts: localhost
   gather_facts: true
   roles:
-    - PA_secrets
     - PA_create_API_key
+    - PA_gather_users

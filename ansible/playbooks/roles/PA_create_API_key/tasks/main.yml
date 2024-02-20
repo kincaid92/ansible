@@ -20,6 +20,12 @@
   set_fact:
     api_key: "{{ parsed_response['response']['result']['key'] }}"
 
-- name: Print key
-  debug:
-    var: api_key
+- name: create provider
+  set_fact:
+    palo_provider:
+      ip_address: "{{ IP_address }}"
+      api_key: "{{ api_key }}"
+
+# - name: Print key
+#   debug:
+#     var: api_key
