@@ -14,4 +14,4 @@
 
 - name: print key
   debug:
-    var: '{{ login.content }}'
+    var: '{{ login.stdout_lines }}'
