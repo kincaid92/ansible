@@ -8,17 +8,17 @@
 - name: Create object group 'block_from_outside'
   paloaltonetworks.panos.panos_address_group:
     provider: '{{ palo_provider }}'
-    name: 'Block_from_outside'
+    name: 'Client_managed_Block_Group'
     static_value: ['{{object_name}}']
     state: merged
 
 - name: drop from outside
   paloaltonetworks.panos.panos_security_rule:
     provider: '{{ palo_provider }}'
-    rule_name: 'BLOCK_FROM_OUTSIDE'
+    rule_name: 'Client Managed Block List'
     description: 'Made by AWX'
     source_zone: ['OUTSIDE']
-    source_ip: ['Block_from_outside']
+    source_ip: ['Client_managed_Block_Group']
     destination_zone: ['any']
     destination_ip: ['any']
     application: ['any']
