@@ -12,6 +12,10 @@
     return_content: true
   register: login
 
-- name: print key
+- name: Parse key from XML response
+  set_fact:
+    api_key: "{{ login.content | ansible.utils.from_xml | json_query('response.result.key') }}"
+
+- name: Print key
   debug:
-    var: '{{ login.content }}'
+    var: api_key
