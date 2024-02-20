@@ -2,7 +2,7 @@
 
 - name: Create PA APi Key
   ansible.builtin.uri:
-    url: https://198.20.64.216/api/\?type\=keygen
+    url: "https://{{ IP_address }}/api/?type=keygen"
     method: POST
     body_format: form-urlencoded
     body:
