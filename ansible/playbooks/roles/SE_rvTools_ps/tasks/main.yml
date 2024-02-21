@@ -3,12 +3,12 @@
   set_fact:
     dropdown_opt: #str == client
 
-- name: Gather secret from Vault
-  community.hashi_vault.vault_kv2_get:
-    url: http://172.16.101.183:8200
-    path: '{{ dropdown_opt }}'
-    auth_method: approle
-  register: response
+# - name: Gather secret from Vault
+#   community.hashi_vault.vault_kv2_get:
+#     url: http://172.16.101.183:8200
+#     path: '{{ dropdown_opt }}'
+#     auth_method: approle
+#   register: response
 
 # - name: gather secret from vault
 #   set_fact:
