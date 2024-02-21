@@ -1,5 +1,5 @@
 ---
-- name: create dynamic selector
+- name: create client selector
   set_fact:
     dropdown_opt: #str == client
 
