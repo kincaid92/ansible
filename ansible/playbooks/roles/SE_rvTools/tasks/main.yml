@@ -1,20 +1,33 @@
 ---
 
-- name: login to vault
-  community.hashi_vault.vault_login:
-    url: http://172.16.101.183:8200
-    auth_method: token
-    token_file: C:\Users\Administrator\Documents\token.txt
-  register: login_data
-  #delegate_to: 172.16.101.183
-
+# - name: login to vault
+#   community.hashi_vault.vault_login:
+#     url: http://172.16.101.183:8200
+#     auth_method: token
+#     token_file: /home/Administrator/token
+#   register: login_data
+#   delegate_to: 172.16.101.183
 - name: create dynamic selector
   set_fact:
     dropdown_opt: #str == client
 
-- name: gather secret from vault
-  set_fact:
-    response: "{{ lookup('community.hashi_vault.vault_kv2_get', dropdown_opt, url='http://172.16.101.183:8200', token=login_data.login.auth.client_token) }}"
+
+- name: Read the latest version of a kv2 secret from Vault via the remote host with userpass auth
+  community.hashi_vault.vault_kv2_get:
+    url: http://172.16.101.183:8200
+    path: '{{ dropdown_opt }}'
+    auth_method: token
+    token_file: /home/Administrator/token
+  register: response
+  delegate_to: 172.16.101.183
+
+
+
+
+
+# - name: gather secret from vault
+#   set_fact:
+#     response: "{{ lookup('community.hashi_vault.vault_kv2_get', dropdown_opt, url='http://172.16.101.183:8200', token=login_data.login.auth.client_token) }}"
 
 - name: Store vault results
   set_fact:
