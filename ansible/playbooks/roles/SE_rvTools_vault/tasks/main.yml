@@ -12,7 +12,7 @@
   register: response
 
 - name: Store vault results
-  set_fact:
+  set_stats:
     Client:
       vc_name: "{{response.secret.vc_name}}"
       user: "{{response.secret.user}}"
