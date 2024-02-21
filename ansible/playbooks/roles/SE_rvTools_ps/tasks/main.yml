@@ -15,12 +15,11 @@
 #     response: "{{ lookup('community.hashi_vault.vault_kv2_get', dropdown_opt, url='http://172.16.101.183:8200', token=login_data.login.auth.client_token) }}"
 
 - name: Store vault results
-  set_stats:
-    data:
-      Client:
-        vc_name: "{{response.secret.vc_name}}"
-        user: "{{response.secret.user}}"
-        pass: "{{response.secret.pass}}"
+  set_fact:
+    Client:
+      vc_name: "{{response.secret.vc_name}}"
+      user: "{{response.secret.user}}"
+      pass: "{{response.secret.pass}}"
   no_log: true
 
 - name: run rvtools
