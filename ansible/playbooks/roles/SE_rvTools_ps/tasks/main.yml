@@ -1,4 +1,3 @@
 ---
-
 - name: run rvtools
   win_shell: C:\Scripts\rvtoolsps1.ps1 -VCServer "{{Client.vc_name}}" -User "{{Client.user}}" -password '{{Client.pass}}'

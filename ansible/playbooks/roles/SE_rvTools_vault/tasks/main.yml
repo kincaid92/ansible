@@ -8,7 +8,6 @@
     url: http://172.16.101.183:8200
     path: '{{ dropdown_opt }}'
     auth_method: token
-    token_file: /root/.token
   register: response
 
 - name: Store vault results
