@@ -13,7 +13,8 @@
 
 - name: Store vault results
   set_stats:
-    Client:
-      vc_name: "{{response.secret.vc_name}}"
-      user: "{{response.secret.user}}"
-      pass: "{{response.secret.pass}}"
+    data:
+      Client:
+        vc_name: "{{response.secret.vc_name}}"
+        user: "{{response.secret.user}}"
+        pass: "{{response.secret.pass}}"
