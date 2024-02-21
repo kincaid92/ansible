@@ -6,8 +6,8 @@
     method: POST
     body_format: form-urlencoded
     body:
-    - [ user, '{{username}}']
-    - [ password, '{{pass}}']
+    - [ user, '{{ username }}' ]
+    - [ password, '{{ pass }}' ]
     validate_certs: false
     return_content: true
   register: login
