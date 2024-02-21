@@ -1,34 +1,5 @@
 ---
-- name: create client selector
-  set_fact:
-    dropdown_opt: #str == client
 
-- name: Gather secret from Vault
-  community.hashi_vault.vault_kv2_get:
-    url: '{{ ansible_hashi_vault_addr }}'
-    path: '{{ dropdown_opt }}'
-    auth_method: approle
-    role_id: '{{ ansible_hashi_vault_role_id }}'
-    secret_id: '{{ ansible_hashi_vault_secret_id }}'
-  register: response
-
-# - name: gather secret from vault
-#   set_fact:
-#     response: "{{ lookup('community.hashi_vault.vault_kv2_get', dropdown_opt, url='http://172.16.101.183:8200', token=login_data.login.auth.client_token) }}"
-
-- name: Store vault results
-  set_fact:
-    Client:
-      vc_name: "{{response.secret.vc_name}}"
-      user: "{{response.secret.user}}"
-      pass: "{{response.secret.pass}}"
-
-- name: print
-  debug:
-    msg:
-      - '{{Client.vc_name}}'
-      - '{{Client.user}}'
-      - '{{Client.pass}}'
-# - name: run rvtools
-#   no_log: true
-#   win_shell: C:\Scripts\rvtoolsps1.ps1 -VCServer "{{Client.vc_name}}" -User "{{Client.user}}" -password '{{Client.pass}}'
+- name: run rvtools
+  no_log: true
+  win_shell: C:\Scripts\rvtoolsps1.ps1 -VCServer "{{Client.vc_name}}" -User "{{Client.user}}" -password '{{Client.pass}}'
