@@ -24,10 +24,11 @@
       pass: "{{response.secret.pass}}"
 
 - name: print
-  msg:
-    - '{{Client.vc_name}}'
-    - '{{Client.user}}'
-    - '{{Client.pass}}'
+  debug:
+    msg:
+      - '{{Client.vc_name}}'
+      - '{{Client.user}}'
+      - '{{Client.pass}}'
 # - name: run rvtools
 #   no_log: true
 #   win_shell: C:\Scripts\rvtoolsps1.ps1 -VCServer "{{Client.vc_name}}" -User "{{Client.user}}" -password '{{Client.pass}}'
