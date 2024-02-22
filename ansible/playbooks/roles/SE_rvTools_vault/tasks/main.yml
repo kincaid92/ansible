@@ -9,8 +9,8 @@
     url: '{{ ansible_hashi_vault_addr }}'
     path: '{{ dropdown_opt }}'
     auth_method: '{{ ansible_hashi_vault_auth_method }}'
-    role_id: '{{ ansible_hashi_vault_role_id }}'
-    secret_id: '{{ ansible_hashi_vault_secret_id }}'
+    # role_id: '{{ ansible_hashi_vault_role_id }}'
+    # secret_id: '{{ ansible_hashi_vault_secret_id }}'
   register: response
 
 - name: Store vault results
