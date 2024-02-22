@@ -15,14 +15,12 @@
   delegate_to: localhost
 
 - name: Store vault results
-  set_stats:
-    data:
-      Client:
-        vc_name: "{{response.secret.vc_name}}"
-        user: "{{response.secret.user}}"
-        pass: "{{response.secret.pass}}"
+  set_fact:
+    Client:
+      vc_name: "{{response.secret.vc_name}}"
+      user: "{{response.secret.user}}"
+      pass: "{{response.secret.pass}}"
   no_log: true
 
 - name: run rvtools
-  no_log: true
   win_shell: C:\Scripts\rvtoolsps1.ps1 -VCServer "{{Client.vc_name}}" -User "{{Client.user}}" -password '{{Client.pass}}'
