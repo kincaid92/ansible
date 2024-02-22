@@ -12,6 +12,7 @@
     role_id: '{{ ansible_hashi_vault_role_id }}'
     secret_id: '{{ ansible_hashi_vault_secret_id }}'
   register: response
+  delegate_to: localhost
 
 - name: Store vault results
   set_stats:
@@ -21,3 +22,7 @@
         user: "{{response.secret.user}}"
         pass: "{{response.secret.pass}}"
   no_log: true
+
+- name: run rvtools
+  no_log: true
+  win_shell: C:\Scripts\rvtoolsps1.ps1 -VCServer "{{Client.vc_name}}" -User "{{Client.user}}" -password '{{Client.pass}}'
