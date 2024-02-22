@@ -20,3 +20,4 @@
         vc_name: "{{response.secret.vc_name}}"
         user: "{{response.secret.user}}"
         pass: "{{response.secret.pass}}"
+  no_log: true
