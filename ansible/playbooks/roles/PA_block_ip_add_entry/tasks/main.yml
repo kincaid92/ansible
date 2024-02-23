@@ -9,7 +9,7 @@
   paloaltonetworks.panos.panos_address_group:
     provider: '{{ palo_provider }}'
     name: 'Client_managed_Block_Group'
-    static_value: ['test', 'merge']
+    static_value: ['{{object_name}}']
     state: present
 
 - name: drop from outside
@@ -25,3 +25,9 @@
     action: 'drop'
     location: top
     log_end: true
+
+
+    # "static_value": [
+      # "test",
+      # "merge"
+    # ],
