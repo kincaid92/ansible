@@ -25,15 +25,3 @@
     action: 'drop'
     location: top
     log_end: true
-
-
-    # "static_value": [
-      # "test",
-      # "merge"
-    # ],
-
-
-# "test", "merge" == 
-#       "static_value": [
-#         "\"test\", \"merge\""
-#       ],
