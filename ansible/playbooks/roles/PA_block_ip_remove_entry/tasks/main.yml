@@ -16,9 +16,12 @@
 #       /address-group/entry[@name='Client_managed_Block_Group']/static
 #     element: |
 #       <member>text()='{{ object_name }}'</member>
+- name: elevate
+  paloaltonetworks.panos.panos_op:
+    provider: '{{ palo_provider }}'
+    cmd: 'configure'
 
-
-- name: request password hash
+- name: delete object
   paloaltonetworks.panos.panos_op:
     provider: '{{ palo_provider }}'
     cmd: 'delete address-group Client_managed_Block_Group static {{object_name}}'
