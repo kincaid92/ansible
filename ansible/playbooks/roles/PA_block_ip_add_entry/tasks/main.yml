@@ -9,7 +9,7 @@
   paloaltonetworks.panos.panos_address_group:
     provider: '{{ palo_provider }}'
     name: 'Client_managed_Block_Group'
-    static_value: ["{{object_name}}"]
+    static_value: "{{object_name}}"
     state: present
 
 - name: drop from outside
