@@ -1,13 +1,13 @@
 - name: drop from outside
   paloaltonetworks.panos.panos_security_rule:
     provider: '{{ palo_provider }}'
-    rule_name: 'Client Managed Block List'
+    rule_name: '{{ ACL_rule_name }}'
     description: 'Made by AWX'
-    source_zone: ['OUTSIDE']
-    source_ip: ['Client_managed_Block_Group']
-    destination_zone: ['any']
-    destination_ip: ['any']
-    application: ['any']
-    action: 'drop'
+    source_zone: ['{{ Source_Zone }}']
+    source_ip: ['{{ ACL_source_ip }}']
+    destination_zone: ['{{ ACL_dest_zone }}']
+    destination_ip: ['{{ ACL_dest_IP }}']
+    application: ['{{ ACL_application }}']
+    action: '{{ ACL_action }}'
     location: top
     log_end: true

@@ -1,6 +1,6 @@
-- name: Create object group 'block_from_outside'
+- name: Create object group
   paloaltonetworks.panos.panos_address_group:
     provider: '{{ palo_provider }}'
-    name: 'Client_managed_Block_Group'
+    name: '{{address_group_name}}'
     static_value: "{{object_name}}"
     state: present
