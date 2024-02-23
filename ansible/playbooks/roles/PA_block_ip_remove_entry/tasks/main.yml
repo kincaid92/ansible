@@ -22,5 +22,4 @@
   paloaltonetworks.panos.panos_op:
     provider: '{{ palo_provider }}'
     cmd: 
-      - 'configure'
       - 'delete address-group Client_managed_Block_Group static {{ object_name }}'
