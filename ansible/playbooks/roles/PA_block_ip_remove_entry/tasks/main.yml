@@ -8,4 +8,4 @@
 
 - name: djsaio
   debug:
-    msg: '{{ out.gathered.static_value}}'
+    msg: '{{ out.gathered}}'
