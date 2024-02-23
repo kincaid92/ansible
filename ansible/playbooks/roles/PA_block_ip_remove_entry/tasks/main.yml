@@ -1,27 +1,11 @@
-# - name: Create object group 'block_from_outside'
-#   paloaltonetworks.panos.panos_address_group:
-#     provider: '{{ palo_provider }}'
-#     name: 'Client_managed_Block_Group'
-#     static_value: ['{{object_name}}']
-#     state: deleted
-
-
-# - name: Create User & set password hash.
-#   paloaltonetworks.panos.panos_type_cmd:
-#     provider: '{{ palo_provider }}'
-#     cmd: 'delete'
-#     xpath: |
-#       /config/devices/entry[@name='localhost.localdomain']
-#       /vsys/entry[@name='vsys1']
-#       /address-group/entry[@name='Client_managed_Block_Group']/static
-#     element: |
-#       <member>text()='{{ object_name }}'</member>
-- name: elevate
-  paloaltonetworks.panos.panos_op:
+- name: Create object group 'block_from_outside'
+  paloaltonetworks.panos.panos_address_group:
     provider: '{{ palo_provider }}'
-    cmd: 'configure'
+    name: 'Client_managed_Block_Group'
+    gathered_filter: true
+    state: gathered
+    register: out
 
-- name: delete object
-  paloaltonetworks.panos.panos_op:
-    provider: '{{ palo_provider }}'
-    cmd: 'delete address-group Client_managed_Block_Group static {{object_name}}'
+- name: djsaio
+  debug:
+    msg: '{{ out.gathered}}'
