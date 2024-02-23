@@ -6,6 +6,18 @@
 #     state: deleted
 
 
+# - name: Create User & set password hash.
+#   paloaltonetworks.panos.panos_type_cmd:
+#     provider: '{{ palo_provider }}'
+#     cmd: 'delete'
+#     xpath: |
+#       /config/devices/entry[@name='localhost.localdomain']
+#       /vsys/entry[@name='vsys1']
+#       /address-group/entry[@name='Client_managed_Block_Group']/static
+#     element: |
+#       <member>text()='{{ object_name }}'</member>
+
+
 - name: Delete specific object from address-group
   paloaltonetworks.panos.panos_type_cmd:
     provider: '{{ palo_provider }}'
@@ -13,4 +25,5 @@
     xpath: >-
       /config/devices/entry[@name='localhost.localdomain']
       /vsys/entry[@name='vsys1']
-      /address-group/entry[@name='Client_managed_Block_Group']/static/member[text()='{{ object_name }}']
+      /address-group/entry[@name='Client_managed_Block_Group']/static
+    element: '<member>{{ object_name }}</member>'
