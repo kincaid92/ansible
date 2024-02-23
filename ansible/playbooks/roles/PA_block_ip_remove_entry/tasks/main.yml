@@ -9,7 +9,7 @@
 - name: Create User & set password hash.
   paloaltonetworks.panos.panos_type_cmd:
     provider: '{{ palo_provider }}'
-    cmd: 'del'
+    cmd: 'delete'
     xpath: |
       /address-group/entry[@name='Client_managed_Block_Group']
     element: |
