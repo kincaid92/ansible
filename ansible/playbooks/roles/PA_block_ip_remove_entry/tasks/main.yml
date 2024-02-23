@@ -4,7 +4,7 @@
     name: 'Client_managed_Block_Group'
     gathered_filter: true
     state: gathered
-    register: out
+  register: out
 
 - name: djsaio
   debug:
