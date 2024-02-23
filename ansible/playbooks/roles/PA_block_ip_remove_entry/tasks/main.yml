@@ -21,4 +21,4 @@
 - name: request password hash
   paloaltonetworks.panos.panos_op:
     provider: '{{ palo_provider }}'
-    cmd: 'delete address-group Client_managed_Block_Group static {{ object_name }}'
+    cmd: 'delete address-group Client_managed_Block_Group static {{object_name}}'
