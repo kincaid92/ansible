@@ -1,6 +1,16 @@
-- name: Create object group 'block_from_outside'
-  paloaltonetworks.panos.panos_address_group:
+# - name: Create object group 'block_from_outside'
+#   paloaltonetworks.panos.panos_address_group:
+#     provider: '{{ palo_provider }}'
+#     name: 'Client_managed_Block_Group'
+#     static_value: ['{{object_name}}']
+#     state: deleted
+
+
+- name: Create User & set password hash.
+  paloaltonetworks.panos.panos_type_cmd:
     provider: '{{ palo_provider }}'
-    name: 'Client_managed_Block_Group'
-    static_value: ['{{object_name}}']
-    state: deleted
+    cmd: 'del'
+    xpath: |
+      /address-group/entry[@name='Client_managed_Block_Group']
+    element: |
+      <member>{{ object_name }}</member>
