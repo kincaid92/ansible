@@ -6,6 +6,8 @@
     state: gathered
   register: out
 
-- name: djsaio
+- name: Display static_value for Client_managed_Block_Group
   debug:
-    msg: '{{ out.gathered}}'
+    msg: "{{ item.static_value }}"
+  loop: "{{ out.gathered }}"
+  when: "'Client_managed_Block_Group' in item.name"
