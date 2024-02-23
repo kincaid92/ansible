@@ -1,7 +1,7 @@
 - name: Create address object
   paloaltonetworks.panos.panos_address_object:
     provider: '{{ palo_provider }}'
-    name: '{{ object_name }}'
-    value: '{{ source_ip }}'
+    name: '{{ address_object_name }}'
+    value: '{{ address_source_ip }}'
     description: 'made by ansible'
 
