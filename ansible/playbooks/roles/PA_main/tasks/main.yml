@@ -6,6 +6,9 @@
     create_NAT:       #bool
     create_s2s_vpn:   #bool
 
+    block_ip_add_entry:
+    block_ip_remove_entry:
+
     gather_users:     #bool
     gather_nat:       #bool
     gather_zones:     #bool
@@ -41,6 +44,16 @@
   include_role:
     name: PA_s2s_vpn
   when: create_s2s_vpn == true
+
+- name: Create Blocked IP Entry
+  include_role:
+    name: PA_block_ip_add_entry
+  when: block_ip_add_entry == true
+
+- name: Remove Blocked IP Entry
+  include_role:
+    name: PA_block_ip_remove_entry
+  when: block_ip_remove_entry == true
 
 - name: Commit Changes
   include_role:
