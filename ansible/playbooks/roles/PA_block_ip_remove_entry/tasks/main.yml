@@ -11,6 +11,6 @@
     provider: '{{ palo_provider }}'
     cmd: 'delete'
     xpath: |
-      /address-group/entry[@name='Client_managed_Block_Group']
+      /address-group/entry[@name='Client_managed_Block_Group']/static
     element: |
       <member>{{ object_name }}</member>
