@@ -1,40 +1,18 @@
----
-
-- name: vars
-  set_fact:
-    object_name:         #Name of your address-object
-    source_ip:           #Source-IP of your address-object to be created
-    NAT_ip:              #Translated-IP
-    source_zone:         #Source zone
-    dest_zone:           #Destination zone
-
-- name: Create internal object
-  paloaltonetworks.panos.panos_address_object:
-    provider: '{{ palo_provider }}'
-    name: '{{ object_name }}'
-    value: '{{ source_ip }}'
-    description: 'made by ansible'
-
-- name: Create translated object
-  paloaltonetworks.panos.panos_address_object:
-    provider: '{{ palo_provider }}'
-    name: '{{ object_name }}-NAT'
-    value: '{{ NAT_ip }}'
-    description: 'made by ansible'
-  
 - name: add a nat rule
   paloaltonetworks.panos.panos_nat_rule2:
     provider: '{{ palo_provider }}'
-    name: '{{ object_name }} OUTSIDE'
+    name: '{{ NAT_rule_name }}'
     description: 'Made by Ansible'
     nat_type: 'ipv4'
-    from_zones: ['{{ source_zone }}']
-    to_zones: ['{{ dest_zone }}']
+    from_zones: ['{{ NAT_source_zone }}']
+    to_zones: ['{{ NAT_dest_zone }}']
     to_interface: 'any'
     service: 'any'
-    source_addresses: ['{{ object_name }}']
+    source_addresses: ['{{ NAT_source_object_name }}']
     destination_addresses: ['any']
     source_translation_type: 'static-ip'
-    source_translation_static_translated_address: '{{ object_name }}-NAT'
+    source_translation_static_translated_address: '{{ NAT_translated_object_name }}'
     source_translation_static_bi_directional: true
   
+
+
