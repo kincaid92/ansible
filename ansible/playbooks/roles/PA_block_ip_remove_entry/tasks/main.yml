@@ -18,11 +18,9 @@
 #       <member>text()='{{ object_name }}'</member>
 
 
-- name: Remove object from address-group using set command
-  paloaltonetworks.panos.panos_type_cmd:
+- name: request password hash
+  paloaltonetworks.panos.panos_op:
     provider: '{{ palo_provider }}'
-    cmd: 'set'
-    xpath: >-
-      /config/devices/entry[@name='localhost.localdomain']/vsys/entry[@name='vsys1']/address-group/entry[@name='Client_managed_Block_Group']/static
-    element: '<member operation="delete">{{ object_name }}</member>'
-
+    cmd: 
+      - 'configure'
+      - 'delete address-group Client_managed_Block_Group static {{ object_name }}'
