@@ -10,7 +10,7 @@
     provider: '{{ palo_provider }}'
     name: 'Client_managed_Block_Group'
     static_value: ['{{object_name}}']
-    state: merged
+    state: present
 
 - name: drop from outside
   paloaltonetworks.panos.panos_security_rule:
