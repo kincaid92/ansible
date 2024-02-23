@@ -26,4 +26,5 @@
       /config/devices/entry[@name='localhost.localdomain']
       /vsys/entry[@name='vsys1']
       /address-group/entry[@name='Client_managed_Block_Group']/static
-    element: '<member>{{ object_name }}</member>'
+    element: |
+      <member>{{ object_name }}</member>
