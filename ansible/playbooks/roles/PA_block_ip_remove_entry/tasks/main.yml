@@ -11,6 +11,8 @@
     provider: '{{ palo_provider }}'
     cmd: 'delete'
     xpath: |
+      /config/devices/entry[@name='localhost.localdomain']
+      /vsys/entry[@name='vsys1']
       /address-group/entry[@name='Client_managed_Block_Group']/static
     element: |
       <member>text()='{{ object_name }}'</member>
