@@ -22,7 +22,7 @@
   paloaltonetworks.panos.panos_type_cmd:
     provider: '{{ palo_provider }}'
     cmd: 'delete'
-    xpath: >-
+    xpath: |
       /config/devices/entry[@name='localhost.localdomain']
       /vsys/entry[@name='vsys1']
       /address-group/entry[@name='Client_managed_Block_Group']/static
