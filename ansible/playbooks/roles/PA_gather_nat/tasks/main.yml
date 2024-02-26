@@ -14,4 +14,5 @@
     - 'Source Addresses: {{ item.source_addresses }}'
     - 'Destination Zone: {{ item.to_zones }}'
     - 'Destination Addresses: {{ item.destination_addresses }}'
+    - 'Description: {{ item.description }}'
   loop: '{{ nat_result.gathered }}'
