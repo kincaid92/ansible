@@ -1,9 +1,9 @@
-- name: Create ACL
+- name: drop from outside
   paloaltonetworks.panos.panos_security_rule:
     provider: '{{ palo_provider }}'
-    rule_name: '{{ ACL_edit_rule_name }}'
+    rule_name: '{{ ACL_rule_name }}'
     description: 'Made by AWX'
-    source_zone: ['{{ ACL_source_Zone }}']
+    source_zone: ['{{ ACL_Source_Zone }}']
     source_ip: ['{{ ACL_source_ip }}']
     destination_zone: ['{{ ACL_dest_zone }}']
     destination_ip: ['{{ ACL_dest_IP }}']
