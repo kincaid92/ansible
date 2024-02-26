@@ -8,11 +8,11 @@
 - name: print acl
   debug:
     msg: 
-    - '{{ item.rule_name }}'
-    - '{{ item.application }}'
-    - '{{ item.action }}'
-    - '{{ item.source_zone }}'
-    - '{{ item.source_ip }}'
-    - '{{ item.destination_zone }}'
-    - '{{ item.destination_ip }}'
+    - 'Rule: {{ item.rule_name }}'
+    - 'Application: {{ item.application }}'
+    - 'Action: {{ item.action }}'
+    - 'Source Zone: {{ item.source_zone }}'
+    - 'Source IP: {{ item.source_ip }}'
+    - 'Destination Zone: {{ item.destination_zone }}'
+    - 'Destination IP: {{ item.destination_ip }}'
   loop: '{{ acl.gathered }}'
