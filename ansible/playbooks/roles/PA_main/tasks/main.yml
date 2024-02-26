@@ -86,5 +86,5 @@
 
 - name: List ACL
   include_role:
-    name: PA_gather_ACL
+    name: PA_gather_ACLs
   when: gather_ACL == true
