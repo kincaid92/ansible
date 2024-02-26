@@ -1,0 +1,11 @@
+---
+- name: gather address groups
+  paloaltonetworks.panos.panos_address_group:
+    provider: '{{ palo_provider }}'
+    gathered_filter: true
+    state: gathered
+  register: address_group
+
+- name: list results
+  debug:
+    msg: '{{ address_group.gathered }}'

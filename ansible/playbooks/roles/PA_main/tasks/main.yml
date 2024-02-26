@@ -16,6 +16,7 @@
     gather_nat:       #bool
     gather_zones:     #bool
     gather_ACL:
+    gather_address_group:
 
     commit_changes:   #bool
 
@@ -88,3 +89,8 @@
   include_role:
     name: PA_gather_ACLs
   when: gather_ACL == true
+
+- name: List Address Groups
+  include_role:
+    name: PA_gather_add_group
+  when: gather_address_group == true
