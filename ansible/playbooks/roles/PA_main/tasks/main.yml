@@ -82,3 +82,8 @@
   include_role:
     name: PA_gather_zones
   when: gather_zones == true
+
+- name: List ACL
+  include_role:
+    name: PA_gather_ACL
+  when: gather_ACL == true
