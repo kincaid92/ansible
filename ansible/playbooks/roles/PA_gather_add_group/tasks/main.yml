@@ -18,4 +18,4 @@
   debug:
     msg: 'There are no configured address-groups.'
   loop: '{{ address_group.gathered }}'
-  when: item == ""
+  when: item | length <=0
