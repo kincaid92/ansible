@@ -10,9 +10,9 @@
     msg: 
     - 'Rule: {{ item.rule_name }}'
     - 'Application: {{ item.application }}'
-    - 'Action: {{ item.action }}'
     - 'Source Zone: {{ item.source_zone }}'
     - 'Source IP: {{ item.source_ip }}'
     - 'Destination Zone: {{ item.destination_zone }}'
     - 'Destination IP: {{ item.destination_ip }}'
+    - 'Action: {{ item.action }}'
   loop: '{{ acl.gathered }}'
