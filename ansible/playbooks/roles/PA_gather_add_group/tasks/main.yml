@@ -8,4 +8,7 @@
 
 - name: list results
   debug:
-    msg: '{{ address_group.gathered }}'
+    msg: 
+    - 'Name: {{ item.name }}'
+    - 'Value: {{ item.static_value }}'
+  loop: '{{ address_group.gathered }}'
