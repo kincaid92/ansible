@@ -9,4 +9,7 @@
 - name: list every NAT policy
   debug:
     msg: 
-      - '{{ address_obj_result.gathered }}'
+      - 'Name: {{ item.name }}'
+      - 'Address-type: {{ item.address_type }}'
+      - 'Value: {{ item.value }}'
+  loop: '{{ address_obj_result.gathered }}'
