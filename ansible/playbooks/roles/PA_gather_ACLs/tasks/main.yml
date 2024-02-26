@@ -7,4 +7,5 @@
 
 - name: print acl
   debug:
-    msg: '{{ acl.gathered }}'
+    msg: '{{ item.rule_name }}'
+  loop: '{{ acl.gathered }}'
