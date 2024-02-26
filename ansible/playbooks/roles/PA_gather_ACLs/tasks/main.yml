@@ -1,0 +1,10 @@
+- name: drop from outside
+  paloaltonetworks.panos.panos_security_rule:
+    provider: '{{ palo_provider }}'
+    gathered_filter: true
+    state: gathered
+  register: acl
+
+- name: print acl
+  debug:
+    msg: '{{ acl.gathered }}'
