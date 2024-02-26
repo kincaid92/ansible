@@ -17,5 +17,5 @@
 - name: list results
   debug:
     msg: 'There are no configured address-groups.'
-  loop: '{{ address_group.gathered }}'
   when: item | length <=0
+  loop: '{{ address_group.gathered }}'
