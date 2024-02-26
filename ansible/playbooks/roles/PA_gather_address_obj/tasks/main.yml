@@ -13,11 +13,3 @@
       - 'Address-type: {{ item.address_type }}'
       - 'Value: {{ item.value }}'
   loop: '{{ address_obj_result.gathered }}'
-  register: desired_out
-
-
-- name: write data locally
-  copy:
-    content: '{{ desired_out }}'
-    dest: "~/values.txt"
-  delegate_to: 172.16.101.183
