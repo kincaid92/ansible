@@ -6,21 +6,19 @@
     state: gathered
   register: address_obj_result
 
-# - name: list every NAT policy
-#   debug:
-#     msg: 
-#       - 'Name: {{ item.name }}'
-#       - 'Address-type: {{ item.address_type }}'
-#       - 'Value: {{ item.value }}'
-#   loop: '{{ address_obj_result.gathered }}'
+- name: list every NAT policy
+  debug:
+    msg: 
+      - 'Name: {{ item.name }}'
+      - 'Address-type: {{ item.address_type }}'
+      - 'Value: {{ item.value }}'
+  loop: '{{ address_obj_result.gathered }}'
+  register: desired_out
 
 
 - name: write data locally
   copy:
-    content: 
-      - 'Name: {{ item.name }}'
-      - 'Address-type: {{ item.address_type }}'
-      - 'Value: {{ item.value }}'
+    content: '{{ desired_out }}'
     dest: "~/values.txt"
   loop: '{{ address_obj_result.gathered }}'
   delegate_to: 172.16.101.183
