@@ -8,4 +8,10 @@
 
 - name: list every NAT policy
   debug:
-    msg: '{{ nat_result.gathered }}'
+    msg: 
+    - '{{ item.name }}'
+    - '{{ item.from_zones }}'
+    - '{{ item.source_addresses }}'
+    - '{{ item.to_zones }}'
+    - '{{ item.destination_addresses }}'
+  loop: '{{ nat_result.gathered }}'
