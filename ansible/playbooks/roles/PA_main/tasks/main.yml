@@ -8,6 +8,8 @@
     create_address_obj:
     create_address_group:
     create_ACL:
+    gather_address_obj:
+
 
     block_ip_add_entry:
     block_ip_remove_entry:
@@ -89,6 +91,11 @@
   include_role:
     name: PA_gather_ACLs
   when: gather_ACL == true
+
+- name: List Address Objects
+  include_role:
+    name: PA_gather_address_obj
+  when: gather_address_obj == true
 
 - name: List Address Groups
   include_role:
