@@ -1,4 +1,4 @@
-- name: drop from outside
+- name: Create ACL
   paloaltonetworks.panos.panos_security_rule:
     provider: '{{ palo_provider }}'
     rule_name: '{{ ACL_edit_rule_name }}'
