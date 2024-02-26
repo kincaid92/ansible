@@ -9,5 +9,6 @@
     destination_ip: ['{{ ACL_dest_IP }}']
     application: ['{{ ACL_application }}']
     action: '{{ ACL_action }}'
-    location: top
+    location: '{{ ACL_location }}'
+    existing_rule: top
     log_end: true
