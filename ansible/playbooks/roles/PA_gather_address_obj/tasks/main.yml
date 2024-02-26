@@ -20,5 +20,4 @@
   copy:
     content: '{{ desired_out }}'
     dest: "~/values.txt"
-  loop: '{{ address_obj_result.gathered }}'
   delegate_to: 172.16.101.183
