@@ -7,5 +7,12 @@
 
 - name: print acl
   debug:
-    msg: '{{ item.rule_name }}'
+    msg: 
+    - '{{ item.rule_name }}'
+    - '{{ item.application }}'
+    - '{{ item.action }}'
+    - '{{ item.source_zone }}'
+    - '{{ item.source_ip }}'
+    - '{{ item.destination_zone }}'
+    - '{{ item.destination_ip }}'
   loop: '{{ acl.gathered }}'

@@ -1,22 +1,10 @@
 ---
-
-- name: gather every address-object
-  paloaltonetworks.panos.panos_address_object:
-    provider: '{{ palo_provider }}'
-    gathered_filter: true
-    state: gathered
-  register: address_result
-
 - name: gather every NAT policy
   paloaltonetworks.panos.panos_nat_rule2:
     provider: '{{ palo_provider }}'
     gathered_filter: true
     state: gathered
   register: nat_result
-
-- name: list every address-object
-  debug:
-    msg: '{{ address_result.gathered }}'
 
 - name: list every NAT policy
   debug:
