@@ -12,10 +12,3 @@
     - 'Name: {{ item.name }}'
     - 'Value: {{ item.static_value }}'
   loop: '{{ address_group.gathered }}'
-
-
-- name: list results
-  debug:
-    msg: 'There are no configured address-groups.'
-  when: item.name | length == 0
-  loop: '{{ address_group.gathered }}'
