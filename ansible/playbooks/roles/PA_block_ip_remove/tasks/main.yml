@@ -1,7 +1,6 @@
 - name: Gather ACL Facts
   paloaltonetworks.panos.panos_security_rule:
     provider: '{{ palo_provider }}'
-    rule_name: 'Blacklisted IPs'
     state: gathered
     gather_filter: true
   register: acl
