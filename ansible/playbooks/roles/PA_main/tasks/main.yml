@@ -72,6 +72,11 @@
     name: PA_block_ip
   when: block_ip == true
 
+- name: Remove IP from Blocklist
+  include_role:
+    name: PA_block_ip_remove
+  when: block_ip_remove == true
+
 - name: Commit Changes
   include_role:
     name: PA_commit
