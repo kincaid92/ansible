@@ -10,6 +10,9 @@
     create_ACL:
     gather_address_obj:
 
+    block_ip:
+    block_ip_remove:
+
 
     block_ip_add_entry:
     block_ip_remove_entry:
