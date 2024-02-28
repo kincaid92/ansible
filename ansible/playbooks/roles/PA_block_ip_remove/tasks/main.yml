@@ -7,6 +7,5 @@
 
 - name: print
   debug:
-    msg: '{{ item }}'
-  loop: '{{ acl.gathered }}'
+    msg: '{{ acl.gathered.source_ip }}'
 
