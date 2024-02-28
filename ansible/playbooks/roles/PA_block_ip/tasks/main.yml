@@ -2,7 +2,7 @@
   paloaltonetworks.panos.panos_address_object:
     provider: '{{ palo_provider }}'
     name: '{{ blocked_IP }}-Blacklisted'
-    value: '{{ blocked_IP }}'
+    value: '{{ blocked_IP }}/32'
     description: 'made by ansible'
 
 - name: drop from outside
