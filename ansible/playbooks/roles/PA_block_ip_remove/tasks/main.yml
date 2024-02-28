@@ -7,7 +7,7 @@
 
 - name: new list
   set_fact:
-    value: "{{ acl.gathered.source_ip | reject('search', '{{blocked_IP}}-Blacklisted') }}"
+    value: "{{ acl.gathered.source_ip | reject('search', blocked_IP ~ '-Blacklisted') }}"
 
 - name: print
   debug:
