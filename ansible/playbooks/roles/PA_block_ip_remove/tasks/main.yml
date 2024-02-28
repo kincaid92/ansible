@@ -5,11 +5,11 @@
     state: gathered
   register: acl
 
-- name: new list
+- name: New List
   set_fact:
     value: "{{ acl.gathered.source_ip | reject('search', blocked_IP ~ '-Blacklisted') }}"
 
-- name: drop from outside
+- name: Apply new ACL
   paloaltonetworks.panos.panos_security_rule:
     provider: '{{ palo_provider }}'
     rule_name: 'Blacklisted IPs'
@@ -23,3 +23,10 @@
     location: top
     log_end: true
     state: present
+
+- name: Cleanup removed Object
+  paloaltonetworks.panos.panos_address_object:
+    provider: '{{ palo_provider }}'
+    name: '{{ blocked_IP }}-Blacklisted'
+    state: absent
+
