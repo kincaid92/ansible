@@ -1,10 +1,11 @@
-- name: Create User & set password hash.
-  paloaltonetworks.panos.panos_type_cmd:
+- name: Gather ACL Facts
+  paloaltonetworks.panos.panos_security_rule:
     provider: '{{ palo_provider }}'
-    cmd: 'delete'
-    xpath: |
-      /config/devices/entry[@name='localhost.localdomain']
-      /vsys/entry[@name='vsys1']
-      /rulebase/security/rules/entry[@name='Blacklisted IPs']
-    element: |
-      <source>{{ blocked_IP }}-Blacklisted</source>
+    rule_name: 'Blacklisted IPs'
+    state: gathered
+    gather_filter: true
+  register: acl
+
+- name: print
+  debug:
+    msg: '{{acl.gathered}}'
