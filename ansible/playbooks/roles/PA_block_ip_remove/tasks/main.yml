@@ -3,9 +3,10 @@
     provider: '{{ palo_provider }}'
     rule_name: 'Blacklisted IPs'
     state: gathered
-    # gather_filter: true
   register: acl
 
 - name: print
   debug:
-    msg: '{{acl.gathered}}'
+    msg: '{{ item.source_ip }}'
+  loop: '{{ acl.gathered }}'
+
