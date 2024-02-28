@@ -13,3 +13,17 @@
   debug:
     msg: '{{ value }}'
 
+- name: drop from outside
+  paloaltonetworks.panos.panos_security_rule:
+    provider: '{{ palo_provider }}'
+    rule_name: 'Blacklisted IPs'
+    description: 'Made by AWX'
+    source_zone: ['OUTSIDE']
+    source_ip: '{{ value }}'
+    destination_zone: ['any']
+    destination_ip: ['any']
+    application: ['any']
+    action: 'drop'
+    location: top
+    log_end: true
+    state: merged
