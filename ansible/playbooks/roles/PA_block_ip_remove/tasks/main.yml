@@ -9,10 +9,6 @@
   set_fact:
     value: "{{ acl.gathered.source_ip | reject('search', blocked_IP ~ '-Blacklisted') }}"
 
-- name: print
-  debug:
-    msg: '{{ value }}'
-
 - name: drop from outside
   paloaltonetworks.panos.panos_security_rule:
     provider: '{{ palo_provider }}'
