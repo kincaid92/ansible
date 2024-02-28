@@ -22,6 +22,7 @@
     gather_zones:     #bool
     gather_ACL:
     gather_address_group:
+    gather_blocked_ips:
 
     commit_changes:   #bool
 
@@ -114,3 +115,8 @@
   include_role:
     name: PA_gather_add_group
   when: gather_address_group == true
+
+- name: List Blocked IPs
+  include_role:
+    name: PA_block_ip_get
+  when: gather_blocked_ips == true
