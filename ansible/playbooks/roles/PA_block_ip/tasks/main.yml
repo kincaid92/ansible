@@ -3,7 +3,7 @@
     provider: '{{ palo_provider }}'
     name: '{{ blocked_IP }}-Blacklisted'
     value: '{{ blocked_IP }}/32'
-    description: 'made by ansible'
+    description: 'Made by AWX'
 
 - name: drop from outside
   paloaltonetworks.panos.panos_security_rule:
