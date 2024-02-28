@@ -1,21 +1,28 @@
-- name: Create address object
-  paloaltonetworks.panos.panos_address_object:
-    provider: '{{ palo_provider }}'
-    name: '{{ blocked_IP }}-Blacklisted'
-    value: '{{ blocked_IP }}/32'
-    description: 'made by ansible'
+# - name: Create address object
+#   paloaltonetworks.panos.panos_address_object:
+#     provider: '{{ palo_provider }}'
+#     name: '{{ blocked_IP }}-Blacklisted'
+#     value: '{{ blocked_IP }}/32'
+#     description: 'made by ansible'
+
+# - name: drop from outside
+#   paloaltonetworks.panos.panos_security_rule:
+#     provider: '{{ palo_provider }}'
+#     rule_name: 'Blacklisted IPs'
+#     description: 'Made by AWX'
+#     source_zone: ['OUTSIDE']
+#     source_ip: ['{{ blocked_IP }}-Blacklisted']
+#     destination_zone: ['any']
+#     destination_ip: ['any']
+#     application: ['any']
+#     action: 'drop'
+#     location: top
+#     log_end: true
+#     state: merged
 
 - name: drop from outside
   paloaltonetworks.panos.panos_security_rule:
     provider: '{{ palo_provider }}'
     rule_name: 'Blacklisted IPs'
-    description: 'Made by AWX'
-    source_zone: ['OUTSIDE']
     source_ip: ['{{ blocked_IP }}-Blacklisted']
-    destination_zone: ['any']
-    destination_ip: ['any']
-    application: ['any']
-    action: 'drop'
-    location: top
-    log_end: true
-    state: merged
+    state: deleted
