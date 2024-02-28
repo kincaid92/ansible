@@ -5,7 +5,11 @@
     state: gathered
   register: acl
 
+- name: new list
+  set_fact:
+    value: "{{ acl.gathered.source_ip | reject('search', '1.1.1.1-Blacklisted') }}"
+
 - name: print
   debug:
-    msg: "{{ acl.gathered.source_ip | reject('search', '1.1.1.1-Blacklisted') }}"
+    msg: '{{ value }}'
 
