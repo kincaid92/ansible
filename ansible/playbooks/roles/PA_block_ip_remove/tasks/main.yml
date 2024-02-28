@@ -26,4 +26,4 @@
     action: 'drop'
     location: top
     log_end: true
-    state: merged
+    state: edit
