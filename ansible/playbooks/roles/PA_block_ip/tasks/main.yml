@@ -1,7 +1,7 @@
 - name: Create address object
   paloaltonetworks.panos.panos_address_object:
     provider: '{{ palo_provider }}'
-    name: '{{ blocked_IP }} - Blacklisted'
+    name: '{{ blocked_IP }}-Blacklisted'
     value: '{{ blocked_IP }}'
     description: 'made by ansible'
 
@@ -11,7 +11,7 @@
     rule_name: 'Blacklisted IPs'
     description: 'Made by AWX'
     source_zone: ['OUTSIDE']
-    source_ip: ['{{ blocked_IP }} - Blacklisted']
+    source_ip: ['{{ blocked_IP }}-Blacklisted']
     destination_zone: ['any']
     destination_ip: ['any']
     application: ['any']
