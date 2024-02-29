@@ -2,7 +2,7 @@
   paloaltonetworks.panos.panos_nat_rule2:
     provider: '{{ palo_provider }}'
     name: '{{ NAT_rule_name }}'
-    description: 'Made by Ansible'
+    description: 'Made by AWX'
     nat_type: 'ipv4'
     from_zones: ['{{ NAT_source_zone }}']
     to_zones: ['{{ NAT_dest_zone }}']
@@ -13,6 +13,3 @@
     source_translation_type: 'static-ip'
     source_translation_static_translated_address: '{{ NAT_translated_object_name }}'
     source_translation_static_bi_directional: true
-  
-
-

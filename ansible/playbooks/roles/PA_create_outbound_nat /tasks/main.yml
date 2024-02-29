@@ -1,0 +1,29 @@
+- name: Create internal address object
+  paloaltonetworks.panos.panos_address_object:
+    provider: '{{ palo_provider }}'
+    name: '{{ NAT_internal_IP }}-Internal'
+    value: '{{ NAT_internal_IP }}/32'
+    description: 'Made by AWX'
+
+- name: Create external address object
+  paloaltonetworks.panos.panos_address_object:
+    provider: '{{ palo_provider }}'
+    name: '{{ NAT_external_IP }}-External'
+    value: '{{ NAT_external_IP }}/32'
+    description: 'Made by AWX'
+
+- name: add a outbound nat rule
+  paloaltonetworks.panos.panos_nat_rule2:
+    provider: '{{ palo_provider }}'
+    name: '{{ NAT_internal_IP }}-NAT'
+    description: 'Made by AWX'
+    nat_type: 'ipv4'
+    from_zones: ['INSIDE-PA-203']
+    to_zones: ['OUTSIDE']
+    to_interface: 'any'
+    service: 'any'
+    source_addresses: ['{{ NAT_internal_IP }}-Internal']
+    destination_addresses: ['any']
+    source_translation_type: 'static-ip'
+    source_translation_static_translated_address: '{{ NAT_external_IP }}-External'
+    source_translation_static_bi_directional: true

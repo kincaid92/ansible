@@ -8,14 +8,10 @@
     create_address_obj:
     create_address_group:
     create_ACL:
-    gather_address_obj:
+    create_outbound_NAT:
 
     block_ip:
     block_ip_remove:
-
-
-    block_ip_add_entry:
-    block_ip_remove_entry:
 
     gather_users:     #bool
     gather_nat:       #bool
@@ -23,6 +19,7 @@
     gather_ACL:
     gather_address_group:
     gather_blocked_ips:
+    gather_address_obj:
 
     commit_changes:   #bool
 
@@ -50,6 +47,11 @@
   include_role:
     name: PA_create_nat
   when: create_NAT == true
+
+- name: Create Outbound NAT
+  include_role:
+    name: PA_create_outbound_nat
+  when: create_outbound_NAT == true
 
 - name: Create IKE Gateway
   include_role:
