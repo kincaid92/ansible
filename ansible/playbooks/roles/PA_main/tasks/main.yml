@@ -23,100 +23,100 @@
 
     commit_changes:   #bool
 
-# - name: Create VPN User
-#   include_role:
-#     name: PA_vpn_create_user
-#   when: create_vpn_user == true
+- name: Create VPN User
+  include_role:
+    name: PA_vpn_create_user
+  when: create_vpn_user == true
 
-# - name: Disable VPN User
-#   include_role:
-#     name: PA_vpn_disable_user
-#   when: disable_user == true
+- name: Disable VPN User
+  include_role:
+    name: PA_vpn_disable_user
+  when: disable_user == true
 
-# - name: Create Interface
-#   include_role:
-#     name: PA_create_zones
-#   when: create_interface == true
+- name: Create Interface
+  include_role:
+    name: PA_create_zones
+  when: create_interface == true
 
-# - name: Create Sub-Interface
-#   include_role:
-#     name: PA_create_subint
-#   when: create_l3_subinterface == true
+- name: Create Sub-Interface
+  include_role:
+    name: PA_create_subint
+  when: create_l3_subinterface == true
 
-# - name: Create NAT
-#   include_role:
-#     name: PA_create_nat
-#   when: create_NAT == true
+- name: Create NAT
+  include_role:
+    name: PA_create_nat
+  when: create_NAT == true
 
-# - name: Create Outbound NAT
-#   include_role:
-#     name: PA_create_outbound_nat
-#   when: create_outbound_NAT == true
+- name: Create Outbound NAT
+  include_role:
+    name: PA_create_outbound_nat
+  when: create_outbound_NAT == true
 
-# - name: Create IKE Gateway
-#   include_role:
-#     name: PA_s2s_vpn
-#   when: create_s2s_vpn == true
+- name: Create IKE Gateway
+  include_role:
+    name: PA_s2s_vpn
+  when: create_s2s_vpn == true
 
-# - name: Create Address Object
-#   include_role:
-#     name: PA_create_address_obj
-#   when: create_address_obj == true
+- name: Create Address Object
+  include_role:
+    name: PA_create_address_obj
+  when: create_address_obj == true
 
-# - name: Create Address Group
-#   include_role:
-#     name: PA_create_address_group
-#   when: create_address_group == true
+- name: Create Address Group
+  include_role:
+    name: PA_create_address_group
+  when: create_address_group == true
 
-# - name: Create ACL
-#   include_role:
-#     name: PA_create_ACL
-#   when: create_ACL == true
+- name: Create ACL
+  include_role:
+    name: PA_create_ACL
+  when: create_ACL == true
 
-# - name: Block an IP
-#   include_role:
-#     name: PA_block_ip
-#   when: block_ip == true
+- name: Block an IP
+  include_role:
+    name: PA_block_ip
+  when: block_ip == true
 
-# - name: Remove IP from Blocklist
-#   include_role:
-#     name: PA_block_ip_remove
-#   when: block_ip_remove == true
+- name: Remove IP from Blocklist
+  include_role:
+    name: PA_block_ip_remove
+  when: block_ip_remove == true
 
-# - name: Commit Changes
-#   include_role:
-#     name: PA_commit
-#   when: commit_changes == true
+- name: Commit Changes
+  include_role:
+    name: PA_commit
+  when: commit_changes == true
 
-# - name: List Users
-#   include_role:
-#     name: PA_gather_users
-#   when: gather_users == true
+- name: List Users
+  include_role:
+    name: PA_gather_users
+  when: gather_users == true
 
-# - name: List NATs
-#   include_role:
-#     name: PA_gather_nat
-#   when: gather_nat == true
+- name: List NATs
+  include_role:
+    name: PA_gather_nat
+  when: gather_nat == true
 
-# - name: List Zones
-#   include_role:
-#     name: PA_gather_zones
-#   when: gather_zones == true
+- name: List Zones
+  include_role:
+    name: PA_gather_zones
+  when: gather_zones == true
 
-# - name: List ACL
-#   include_role:
-#     name: PA_gather_ACLs
-#   when: gather_ACL == true
+- name: List ACL
+  include_role:
+    name: PA_gather_ACLs
+  when: gather_ACL == true
 
-# - name: List Address Objects
-#   include_role:
-#     name: PA_gather_address_obj
-#   when: gather_address_obj == true
+- name: List Address Objects
+  include_role:
+    name: PA_gather_address_obj
+  when: gather_address_obj == true
 
-# - name: List Address Groups
-#   include_role:
-#     name: PA_gather_add_group
-#   when: gather_address_group == true
+- name: List Address Groups
+  include_role:
+    name: PA_gather_add_group
+  when: gather_address_group == true
 
 - name: List Blocked IPs
   include_role:
