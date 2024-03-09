@@ -5,10 +5,6 @@
     state: gathered
   register: acl
 
-- name: Form output
-  set_fact:
-    acls: "{{ acl.gathered.source_ip | rejectattr('search', 'match', '-Blacklisted') }}"
-
 - name: print blocked IP's
   debug:
-    msg: '{{ acls }}'
+    msg: '{{ acl.gathered.source_ip }}'
