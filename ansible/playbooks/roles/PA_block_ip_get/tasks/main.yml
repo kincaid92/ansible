@@ -7,4 +7,4 @@
 
 - name: print blocked IP's
   debug:
-    msg: '{{ acl.gathered.source_ip }}
+    msg: '{{ acl.gathered.source_ip }}'
