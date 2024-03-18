@@ -10,7 +10,7 @@
     - [ password, '{{ pass }}' ]
     validate_certs: false
     return_content: true
-  no_log: true
+  no_log: false
   register: login
 
 - name: Parse key from XML response
