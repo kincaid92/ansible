@@ -1,7 +1,7 @@
 - name: Gather IKE Gateway Facts
   paloaltonetworks.panos.panos_ike_gateway:
     provider: '{{ palo_provider }}'
-    name: 'test'
+    # name: 'test'
     state: gathered
   register: ike_mode
 
