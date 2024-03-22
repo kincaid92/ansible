@@ -1,6 +1,7 @@
 - name: Gather IKE Gateway Facts
   paloaltonetworks.panos.panos_ike_gateway:
     provider: '{{ palo_provider }}'
+    gathered_filter: true
     state: gathered
   register: ike_mode
 
@@ -13,6 +14,6 @@
       - 'Peer IP Value: {{ item.peer_ip_value }}'
       - 'Mode: {{ item.ikev1_exchange_mode }}'
       - 'Crypto Profile: {{ item.ikev2_crypto_profile }}'
-  loop: '[{{ ike_mode.gathered }}]'
+  loop: '{{ ike_mode.gathered }}'
   loop_control:
     label: "{{ item.name }}"
