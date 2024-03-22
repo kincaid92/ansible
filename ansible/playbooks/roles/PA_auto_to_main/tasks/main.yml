@@ -3,18 +3,22 @@
     provider: '{{ palo_provider }}'
     name: 'test'
     state: gathered
-  register: ike_mode
+  register: ike_mode | dict2items
 
-- name: Print IKE Gateway Facts
+# - name: Print IKE Gateway Facts
+#   debug:
+#     msg:
+#       - 'Name: {{ item.gathered.name }}'
+#       - 'Version: {{ item.gathered.version }}'
+#       - 'Interface: {{ item.gathered.interface }}'
+#       - 'Peer IP Value: {{ item.gathered.peer_ip_value }}'
+#       - 'Mode: {{ item.gathered.ikev1_exchange_mode }}'
+#       - 'Crypto Profile: {{ item.gathered.ikev2_crypto_profile }}'
+#   loop: '{{ ike_mode.gathered }}'
+
+- name: hi
   debug:
-    msg:
-      - 'Name: {{ item.gathered.name }}'
-      - 'Version: {{ item.gathered.version }}'
-      - 'Interface: {{ item.gathered.interface }}'
-      - 'Peer IP Value: {{ item.gathered.peer_ip_value }}'
-      - 'Mode: {{ item.gathered.ikev1_exchange_mode }}'
-      - 'Crypto Profile: {{ item.gathered.ikev2_crypto_profile }}'
-  loop: '{{ ike_mode.gathered | dict2items }}'
+    msg: '{{ike_mode}}'
 
 # - name: Add IKE gateway config to the firewall
 #   paloaltonetworks.panos.panos_ike_gateway:
