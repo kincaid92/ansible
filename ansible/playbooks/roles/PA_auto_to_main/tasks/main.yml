@@ -14,7 +14,7 @@
       - 'Peer IP Value: {{ item.gathered.peer_ip_value }}'
       - 'Mode: {{ item.gathered.ikev1_exchange_mode }}'
       - 'Crypto Profile: {{ item.gathered.ikev2_crypto_profile }}'
-  loop: '{{ike_mode.gathered}}'
+  loop: '{{ ike_mode.gathered | dict2items }}'
 
 # - name: Add IKE gateway config to the firewall
 #   paloaltonetworks.panos.panos_ike_gateway:
