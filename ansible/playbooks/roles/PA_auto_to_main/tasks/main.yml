@@ -1,18 +1,14 @@
 - name: Add IKE gateway config to the firewall
   paloaltonetworks.panos.panos_ike_gateway:
     provider: '{{ palo_provider }}'
-    name: 'test'
+    name: '{{ gateway }}'
     state: gathered
   register: ike_mode
-
-- name: New List
-  debug:
-    var: ike_mode.gathered.peer_ip_value
 
 - name: Add IKE gateway config to the firewall
   paloaltonetworks.panos.panos_ike_gateway:
     provider: '{{ palo_provider }}'
-    name: 'test'
+    name: '{{ gateway }}'
     peer_ip_value: "{{ ike_mode.gathered.peer_ip_value }}"
-    ikev1_exchange_mode: 'auto'
+    ikev1_exchange_mode: '{{ mode }}'
     state: merged
