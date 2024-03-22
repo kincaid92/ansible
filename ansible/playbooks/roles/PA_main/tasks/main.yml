@@ -48,6 +48,11 @@
     name: PA_create_nat
   when: create_NAT == true
 
+- name: Change VPN Mode
+  include_role:
+    name: PA_auto_to_main
+  when: auto_to_main == true
+
 - name: Create Outbound NAT
   include_role:
     name: PA_create_outbound_nat
