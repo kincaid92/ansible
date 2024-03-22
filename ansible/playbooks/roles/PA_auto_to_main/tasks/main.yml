@@ -2,6 +2,7 @@
   paloaltonetworks.panos.panos_ike_gateway:
     provider: '{{ palo_provider }}'
     # name: 'test'
+    gathered_filter: true
     state: gathered
   register: ike_mode
 
