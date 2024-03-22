@@ -14,5 +14,5 @@
     provider: '{{ palo_provider }}'
     name: 'test'
     peer_ip_value: "{{ ike_mode.gathered.peer_ip_value }}"
-    ikev1_exchange_mode: 'main'
+    ikev1_exchange_mode: 'auto'
     state: merged
