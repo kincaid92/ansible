@@ -1,11 +1,11 @@
-- name: Add IKE gateway config to the firewall
+- name: Gather facts about IKE Gateway
   paloaltonetworks.panos.panos_ike_gateway:
     provider: '{{ palo_provider }}'
     name: '{{ gateway }}'
     state: gathered
   register: ike_mode
 
-- name: Add IKE gateway config to the firewall
+- name: Change VPN Mode of Gateway
   paloaltonetworks.panos.panos_ike_gateway:
     provider: '{{ palo_provider }}'
     name: '{{ gateway }}'
