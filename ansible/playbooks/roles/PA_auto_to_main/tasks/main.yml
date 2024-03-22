@@ -9,9 +9,10 @@
   debug:
     var: ike_mode.gathered.peer_ip_value
 
-# - name: Add IKE gateway config to the firewall
-#   paloaltonetworks.panos.panos_ike_gateway:
-#     provider: '{{ palo_provider }}'
-#     name: 'test'
-#     ikev1_exchange_mode: 'main'
-#     state: merged
+- name: Add IKE gateway config to the firewall
+  paloaltonetworks.panos.panos_ike_gateway:
+    provider: '{{ palo_provider }}'
+    name: 'test'
+    peer_ip_value: "{{ ike_mode.gathered.peer_ip_value }}"
+    ikev1_exchange_mode: 'main'
+    state: merged
