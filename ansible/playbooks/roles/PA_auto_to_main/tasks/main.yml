@@ -7,7 +7,7 @@
 
 - name: New List
   debug:
-    var: "{{ ike_mode }}"
+    var: ike_mode.gathered
 
 # - name: Add IKE gateway config to the firewall
 #   paloaltonetworks.panos.panos_ike_gateway:
