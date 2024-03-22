@@ -1,0 +1,7 @@
+- name: Upgrade PA and sync to peer
+  paloaltonetworks.panos.panos_software:
+    provider: '{{ provider }}'
+    version: '{{ version }}'
+    sync_to_peer: true
+    install: true
+    restart: true

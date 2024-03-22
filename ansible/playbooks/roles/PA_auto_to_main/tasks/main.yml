@@ -1,0 +1,6 @@
+- name: Add IKE gateway config to the firewall
+  paloaltonetworks.panos.panos_ike_gateway:
+    provider: '{{ palo_provider }}'
+    name: 'test'
+    ikev1_exchange_mode: 'main'
+    state: merged
