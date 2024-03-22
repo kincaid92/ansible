@@ -9,16 +9,16 @@
   set_fact:
     new: '{{ ike_mode }} | dict2items'
 
-# - name: Print IKE Gateway Facts
-#   debug:
-#     msg:
-#       - 'Name: {{ item.gathered.name }}'
-#       - 'Version: {{ item.gathered.version }}'
-#       - 'Interface: {{ item.gathered.interface }}'
-#       - 'Peer IP Value: {{ item.gathered.peer_ip_value }}'
-#       - 'Mode: {{ item.gathered.ikev1_exchange_mode }}'
-#       - 'Crypto Profile: {{ item.gathered.ikev2_crypto_profile }}'
-#   loop: '{{ ike_mode.gathered }}'
+- name: Print IKE Gateway Facts
+  debug:
+    msg:
+      - 'Name: {{ item.gathered.name }}'
+      - 'Version: {{ item.gathered.version }}'
+      - 'Interface: {{ item.gathered.interface }}'
+      - 'Peer IP Value: {{ item.gathered.peer_ip_value }}'
+      - 'Mode: {{ item.gathered.ikev1_exchange_mode }}'
+      - 'Crypto Profile: {{ item.gathered.ikev2_crypto_profile }}'
+  loop: '{{ new }}'
 
 - name: hi
   debug:
