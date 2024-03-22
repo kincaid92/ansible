@@ -3,7 +3,11 @@
     provider: '{{ palo_provider }}'
     name: 'test'
     state: gathered
-  register: ike_mode | dict2items
+  register: ike_mode
+
+- name: new var
+  set_fact:
+    new: '{{ ike_mode }} | dict2items'
 
 # - name: Print IKE Gateway Facts
 #   debug:
@@ -18,7 +22,7 @@
 
 - name: hi
   debug:
-    msg: '{{ike_mode}}'
+    msg: '{{new}}'
 
 # - name: Add IKE gateway config to the firewall
 #   paloaltonetworks.panos.panos_ike_gateway:
