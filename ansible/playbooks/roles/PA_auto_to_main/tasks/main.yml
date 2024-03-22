@@ -17,7 +17,6 @@
   loop: '[{{ ike_mode.gathered }}]'
   loop_control:
     label: "{{ item.name }}"
-    skip: true
 
 
 # - name: Add IKE gateway config to the firewall
