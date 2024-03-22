@@ -22,7 +22,7 @@
 
 - name: hi
   debug:
-    msg: '{{new}}'
+    var: new
 
 # - name: Add IKE gateway config to the firewall
 #   paloaltonetworks.panos.panos_ike_gateway:
