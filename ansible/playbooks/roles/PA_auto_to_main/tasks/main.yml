@@ -20,8 +20,8 @@
       - 'Mode: {{ item.ikev1_exchange_mode }}'
       - 'Crypto Profile: {{ item.ikev2_crypto_profile }}'
   loop: '{{ ike_mode.gathered }}'
-  loop_control:
-    label: "{{ item.name }}"
+  # loop_control:
+  #   label: "{{ item.name }}"
 
 
 # - name: Add IKE gateway config to the firewall
