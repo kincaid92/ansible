@@ -58,7 +58,7 @@
     name: PA_create_outbound_nat
   when: create_outbound_NAT == true
 
-- name: Create IKE Gateway
+- name: Create S2S VPN
   include_role:
     name: PA_s2s_vpn
   when: create_s2s_vpn == true
@@ -127,3 +127,8 @@
   include_role:
     name: PA_block_ip_get
   when: gather_blocked_ips == true
+
+- name: List IKE Facts
+  include_role:
+    name: PA_gather_IKE
+  when: gather_IKE == true
