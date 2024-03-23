@@ -1,5 +1,4 @@
 ---
-test
 ## ANCHOR Create vars
 - name: declare some vars
   set_fact:
