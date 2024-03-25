@@ -133,5 +133,5 @@
 
 - name: List IKE Facts
   include_role:
-    name: PA_gather_IKE
+    name: PA_gather_ike
   when: gather_IKE == true
