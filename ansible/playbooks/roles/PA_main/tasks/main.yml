@@ -10,6 +10,8 @@
     create_ACL:
     create_outbound_NAT:
 
+    auto_to_main:
+
     block_ip:
     block_ip_remove:
 
@@ -20,6 +22,7 @@
     gather_address_group:
     gather_blocked_ips:
     gather_address_obj:
+    gather_IKE:
 
     commit_changes:   #bool
 
