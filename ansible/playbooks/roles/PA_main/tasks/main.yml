@@ -10,6 +10,7 @@
     create_ACL:
     create_outbound_NAT:
     create_zone:
+    create_l3_subinterface:
 
     auto_to_main:
 
