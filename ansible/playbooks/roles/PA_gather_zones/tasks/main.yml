@@ -9,4 +9,8 @@
 
 - name: display zones
   debug:
-    msg: '{{ zone_gathered.gathered }}'
+    msg: 
+    - 'Zone: {{item.Zone}}'
+    - 'Mode: {{item.Mode}}'
+    - 'Interface: {{item.Interface}}'
+  loop: '{{ zone_gathered.gathered }}'
