@@ -4,11 +4,15 @@
     cmd: 'request password-hash password {{new_password}}'
   register: password_hash
 
-- name: Create User & set password hash.
-  paloaltonetworks.panos.panos_type_cmd:
-    provider: '{{ palo_provider }}'
-    cmd: 'set'
-    xpath: |
-      /config/shared/local-user-database/user/entry[@name='{{new_username}}']
-    element: |
-      <phash>{{ password_hash.stdout_lines[0].split()[5] | regex_replace('[,\"}]', '') }}</phash>
+- name: test
+  debug:
+    var: password_hash.stdout_lines
+
+# - name: Create User & set password hash.
+#   paloaltonetworks.panos.panos_type_cmd:
+#     provider: '{{ palo_provider }}'
+#     cmd: 'set'
+#     xpath: |
+#       /config/shared/local-user-database/user/entry[@name='{{new_username}}']
+#     element: |
+#       <phash>{{ password_hash.stdout_lines[0].split()[5] | regex_replace('[,\"}]', '') }}</phash>
