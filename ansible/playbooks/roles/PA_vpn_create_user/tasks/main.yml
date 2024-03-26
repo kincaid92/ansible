@@ -11,7 +11,7 @@
 
 - name: test
   debug:
-    var: password_hash
+    msg: '{{password_hash}}'
 
 # - name: Create User & set password hash.
 #   paloaltonetworks.panos.panos_type_cmd:
