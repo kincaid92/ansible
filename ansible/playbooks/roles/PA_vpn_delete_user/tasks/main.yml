@@ -1,4 +1,4 @@
-- name: Disable Local User
+- name: Delete Local User
   paloaltonetworks.panos.panos_type_cmd:
     provider: '{{ palo_provider }}'
     cmd: 'delete'
