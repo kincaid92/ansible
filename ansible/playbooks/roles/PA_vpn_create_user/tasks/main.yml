@@ -1,6 +1,7 @@
 - name: vars
   set_fact:
     new_username:
+    new_password:
 
 - name: request password hash
   paloaltonetworks.panos.panos_op:
