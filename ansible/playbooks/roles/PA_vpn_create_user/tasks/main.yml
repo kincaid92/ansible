@@ -1,8 +1,3 @@
-- name: vars
-  set_fact:
-    new_username:
-    new_password:
-
 - name: request password hash
   paloaltonetworks.panos.panos_op:
     provider: '{{ palo_provider }}'
@@ -11,7 +6,7 @@
 
 - name: test
   debug:
-    msg: '{{password_hash}}'
+    msg: '{{password_hash.stdout[0]}}'
 
 # - name: Create User & set password hash.
 #   paloaltonetworks.panos.panos_type_cmd:
