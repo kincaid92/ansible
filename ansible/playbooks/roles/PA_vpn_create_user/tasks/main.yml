@@ -6,7 +6,7 @@
 
 - name: test
   debug:
-    msg: '{{password_hash.stdout[0]}}'
+    msg: '{{password_hash.stdout_lines[0]}}'
 
 # - name: Create User & set password hash.
 #   paloaltonetworks.panos.panos_type_cmd:
