@@ -9,11 +9,14 @@
     create_address_group:
     create_ACL:
     create_outbound_NAT:
+    create_zone:
 
     auto_to_main:
 
     block_ip:
     block_ip_remove:
+
+    upgrade:
 
     gather_users:     #bool
     gather_nat:       #bool
@@ -63,8 +66,8 @@
 
 - name: Create S2S VPN
   include_role:
-    name: PA_s2s_vpn
-  when: create_s2s_vpn == true
+    name: PA_create_zones
+  when: create_zone == true
 
 - name: Create Address Object
   include_role:
@@ -80,6 +83,11 @@
   include_role:
     name: PA_create_ACL
   when: create_ACL == true
+
+- name: Upgrade PA
+  include_role:
+    name: PA_upgrade
+  when: upgrade == true
 
 - name: Block an IP
   include_role:
