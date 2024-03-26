@@ -3,6 +3,6 @@
     provider: '{{ palo_provider }}'
     cmd: 'set'
     xpath: |
-      /config/shared/local-user-database/user/entry[@name='{{username}}']
+      /config/shared/local-user-database/user/entry[@name='{{VPN_user_disabled_username}}']
     element: |
       <disabled>yes</disabled>

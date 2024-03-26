@@ -1,7 +1,7 @@
 - name: request password hash
   paloaltonetworks.panos.panos_op:
     provider: '{{ palo_provider }}'
-    cmd: 'request password-hash password {{new_password}}'
+    cmd: 'request password-hash password {{VPN_user_new_password}}'
   register: password_hash
 
 - name: Create User & set password hash.
@@ -9,6 +9,6 @@
     provider: '{{ palo_provider }}'
     cmd: 'set'
     xpath: |
-      /config/shared/local-user-database/user/entry[@name='{{new_username}}']
+      /config/shared/local-user-database/user/entry[@name='{{VPN_user_new_username}}']
     element: |
       <phash>{{ password_hash.stdout_lines[0].split()[5] | regex_replace('[,\"}]', '') }}</phash>

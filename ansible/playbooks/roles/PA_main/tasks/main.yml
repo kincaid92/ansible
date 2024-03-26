@@ -2,6 +2,7 @@
   set_fact:
     create_vpn_user:  #bool
     disable_user:     #bool
+    delete_user:
     create_interface: #bool
     create_NAT:       #bool
     create_s2s_vpn:   #bool
@@ -39,6 +40,11 @@
   include_role:
     name: PA_vpn_disable_user
   when: disable_user == true
+
+- name: Delete VPN User
+  include_role:
+    name: PA_vpn_delete_user
+  when: delete_user == true
 
 - name: Create Interface
   include_role:

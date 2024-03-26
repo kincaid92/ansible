@@ -1,1 +1,6 @@
-placeholder file
+- name: Disable Local User
+  paloaltonetworks.panos.panos_type_cmd:
+    provider: '{{ palo_provider }}'
+    cmd: 'delete'
+    xpath: |
+      /config/shared/local-user-database/user/entry[@name='{{VPN_user_deleted_username}}']
