@@ -3,6 +3,27 @@
     provider: '{{ palo_provider }}'
     cmd_is_xml: true
     cmd: '<show><config><running/></config></show>'
+  register: running
+
+- name: Get Config Diff 
+  paloaltonetworks.panos.panos_op:
+    provider: '{{ palo_provider }}'
+    cmd_is_xml: true
+    cmd: '<show><config><condidate/></config></show>'
+  register: candidate
+
+- name: write running to file
+  copy:
+    content: '{{ running.stdout }}'
+    dest: '~/running.txt'
+
+- name: write running to file
+  copy:
+    content: '{{ candidate.stdout }}'
+    dest: '~/candidate.txt'
+
+- name: get diff
+  shell: diff running.txt candidate.txt
   register: diff
 
 - name: test diff
