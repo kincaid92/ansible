@@ -28,11 +28,11 @@
   shell: diff running.txt candidate.txt
   register: diff
   delegate_to: 172.16.101.183
+  ignore_errors: true
 
 - name: test diff
   debug:
     msg: '{{diff.stdout_lines}}'
-  ignore_errors: true
 
 - name: temp cleanup
   shell: rm -f '{{ item }}'
