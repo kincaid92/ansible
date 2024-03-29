@@ -30,6 +30,7 @@
     gather_IKE:
 
     commit_changes:   #bool
+    config_diff:
 
 - name: Create VPN User
   include_role:
@@ -150,3 +151,8 @@
   include_role:
     name: PA_gather_ike
   when: gather_IKE == true
+
+- name: Config Diff
+  include_role:
+    name: PA_gather_config_diff
+  when: config_diff == true
