@@ -7,4 +7,4 @@
 
 - name: test diff
   debug:
-    msg: '{{ diff.stdout_lines }}'
+    var: diff.stdout_lines
