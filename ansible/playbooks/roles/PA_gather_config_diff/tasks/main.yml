@@ -3,8 +3,8 @@
     provider: '{{ palo_provider }}'
     cmd_is_xml: true
     cmd: '<show><system><info/></system></show>'
-  register: config_diff
+  register: diff
 
 - name: test diff
   debug:
-    msg: '{{ config_diff }}'
+    msg: '{{ diff }}'
