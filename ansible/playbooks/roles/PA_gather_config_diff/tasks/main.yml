@@ -1,7 +1,7 @@
 - name: Get Config Diff 
   paloaltonetworks.panos.panos_op:
     provider: '{{ palo_provider }}'
-    cmd: '<show><config><running/></config></show>'
+    cmd: '<show><system><info/></system></show>'
     cmd_is_xml: true
   register: config_diff
 
