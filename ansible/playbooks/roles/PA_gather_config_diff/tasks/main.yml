@@ -2,7 +2,7 @@
   paloaltonetworks.panos.panos_op:
     provider: '{{ palo_provider }}'
     cmd_is_xml: true
-    cmd: '<show><system><info/></system></show>'
+    cmd: '<show><config><running/></config></show>'
   register: diff
 
 - name: test diff
