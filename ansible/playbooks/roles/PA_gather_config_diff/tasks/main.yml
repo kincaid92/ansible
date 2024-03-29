@@ -31,4 +31,12 @@
 
 - name: test diff
   debug:
-    msg: '{{diff}}'
+    msg: '{{diff.stdout_lines}}'
+
+- name: temp cleanup
+  shell: rm -f '{{ item }}'
+  loop:
+    - '~/candidate.txt'
+    - '~/running.txt'
+  delegate_to: 172.16.101.183
+  
