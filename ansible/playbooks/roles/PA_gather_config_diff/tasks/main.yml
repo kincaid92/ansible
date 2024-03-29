@@ -14,13 +14,13 @@
 
 - name: write running to file
   copy:
-    content: '{{ running.stdout }}'
+    content: '{{ running.stdout | to_nice_json}}'
     dest: '~/running.txt'
   delegate_to: 172.16.101.183
 
 - name: write running to file
   copy:
-    content: '{{ candidate.stdout }}'
+    content: '{{ candidate.stdout | to_nice_json }}'
     dest: '~/candidate.txt'
   delegate_to: 172.16.101.183
 
