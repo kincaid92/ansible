@@ -9,7 +9,7 @@
   paloaltonetworks.panos.panos_op:
     provider: '{{ palo_provider }}'
     cmd_is_xml: true
-    cmd: '<show><config><condidate/></config></show>'
+    cmd: '<show><config><candidate/></config></show>'
   register: candidate
 
 - name: write running to file
