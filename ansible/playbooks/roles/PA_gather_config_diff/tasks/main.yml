@@ -6,4 +6,4 @@
 
 - name: test diff
   debug:
-    msg: '{{ config_diff.stdout_lines }}'
+    msg: '{{ config_diff }}'
