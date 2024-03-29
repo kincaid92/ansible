@@ -16,15 +16,18 @@
   copy:
     content: '{{ running.stdout }}'
     dest: '~/running.txt'
+  delegate_to: 172.16.101.183
 
 - name: write running to file
   copy:
     content: '{{ candidate.stdout }}'
     dest: '~/candidate.txt'
+  delegate_to: 172.16.101.183
 
 - name: get diff
   shell: diff running.txt candidate.txt
   register: diff
+  delegate_to: 172.16.101.183
 
 - name: test diff
   debug:
