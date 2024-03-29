@@ -32,6 +32,7 @@
 - name: test diff
   debug:
     msg: '{{diff.stdout_lines}}'
+  ignore_errors: true
 
 - name: temp cleanup
   shell: rm -f '{{ item }}'
