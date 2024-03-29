@@ -14,21 +14,21 @@
 
 - name: write running to file
   copy:
-    content: '{{ running.stdout_lines}}'
+    content: '{{ running}}'
     dest: '~/running.txt'
   delegate_to: 172.16.101.183
 
 - name: write running to file
   copy:
-    content: '{{ candidate.stdout_lines }}'
+    content: '{{ candidate }}'
     dest: '~/candidate.txt'
   delegate_to: 172.16.101.183
 
-- name: get diff
-  shell: diff running.txt candidate.txt
-  register: diff
-  delegate_to: 172.16.101.183
+# - name: get diff
+#   shell: diff running.txt candidate.txt
+#   register: diff
+#   delegate_to: 172.16.101.183
 
 - name: test diff
   debug:
-    var: diff.stdout_lines
+    var: candidate
