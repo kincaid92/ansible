@@ -2,5 +2,5 @@
   paloaltonetworks.panos.panos_interface:
     provider: '{{ palo_provider }}'
     if_name: '{{interface}}'
-    zone_name: '{{zone_name}}'
+    zone_name: '{{zone_create_name}}'
     enable_dhcp: false
