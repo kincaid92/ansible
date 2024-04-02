@@ -32,7 +32,7 @@
 
 - name: test diff
   debug:
-    msg: '{{diff.stdout_lines}}'
+    msg: "{% for line in diff.stdout_lines %}{{ line | replace('>', '+') }}{% endfor %}"
 
 - name: temp cleanup
   shell: rm -f '{{ item }}'
