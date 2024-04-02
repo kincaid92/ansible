@@ -34,10 +34,9 @@
   debug:
     msg: '{{diff.stdout_lines}}'
 
-# - name: temp cleanup
-#   shell: rm -f '{{ item }}'
-#   loop:
-#     - '/root/candidate.txt'
-#     - '/root/running.txt'
-#   delegate_to: 172.16.101.183
-  
+- name: temp cleanup
+  shell: rm -f '{{ item }}'
+  loop:
+    - '/root/candidate.txt'
+    - '/root/running.txt'
+  delegate_to: 172.16.101.183
