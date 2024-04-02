@@ -1,8 +1,8 @@
 - name: pwd
-  shell: touch /root/pwd.txt
+  shell: touch /runner/pwd.txt
 
 - name: test
-  shell: ls /root/
+  shell: ls /runner/
   register: pwd  
 
 - name: output
