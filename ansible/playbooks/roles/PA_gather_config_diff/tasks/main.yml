@@ -1,6 +1,9 @@
 - name: pwd
-  shell: pwd
-  register: pwd
+  shell: touch /root/pwd.txt
+
+- name: test
+  shell: ls /root/
+  register: pwd  
 
 - name: output
   debug:
