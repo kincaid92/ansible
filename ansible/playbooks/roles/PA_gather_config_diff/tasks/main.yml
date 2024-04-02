@@ -15,17 +15,17 @@
 - name: write running to file
   copy:
     content: '{{ running.stdout_xml}}'
-    dest: '{{ ansible_user_dir }}/running.txt'
+    dest: '~/running.txt'
   delegate_to: 172.16.101.183
 
 - name: write running to file
   copy:
     content: '{{ candidate.stdout_xml }}'
-    dest: '{{ ansible_user_dir }}/candidate.txt'
+    dest: '~/candidate.txt'
   delegate_to: 172.16.101.183
 
 - name: get diff
-  shell: diff {{ ansible_user_dir }}/running.txt {{ ansible_user_dir }}/candidate.txt
+  shell: diff running.txt candidate.txt
   register: diff
   delegate_to: 172.16.101.183
   ignore_errors: true
@@ -37,7 +37,7 @@
 - name: temp cleanup
   shell: rm -f '{{ item }}'
   loop:
-    - '{{ ansible_user_dir }}/candidate.txt'
-    - '{{ ansible_user_dir }}/running.txt'
+    - '/root/candidate.txt'
+    - '/root/running.txt'
   delegate_to: 172.16.101.183
   
