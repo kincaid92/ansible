@@ -25,7 +25,7 @@
   delegate_to: 172.16.101.183
 
 - name: get diff
-  shell: diff running.txt candidate.txt
+  shell: diff -u running.txt candidate.txt | grep -E "^\+|^-|^ " | sed -e 's/^+/+/; s/^-/-/'
   register: diff
   delegate_to: 172.16.101.183
   ignore_errors: true
