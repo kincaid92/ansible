@@ -1,43 +1,51 @@
-- name: Get Config Diff 
-  paloaltonetworks.panos.panos_op:
-    provider: '{{ palo_provider }}'
-    cmd_is_xml: true
-    cmd: '<show><config><running/></config></show>'
-  register: running
+- name: pwd
+  shell: pwd
+  register: pwd
 
-- name: Get Config Diff 
-  paloaltonetworks.panos.panos_op:
-    provider: '{{ palo_provider }}'
-    cmd_is_xml: true
-    cmd: '<show><config><candidate/></config></show>'
-  register: candidate
-
-- name: write running to file
-  copy:
-    content: '{{ running.stdout_xml}}'
-    dest: '{{ ansible_user_dir }}/running.txt'
-  # delegate_to: 172.16.101.183
-
-- name: write running to file
-  copy:
-    content: '{{ candidate.stdout_xml }}'
-    dest: '{{ ansible_user_dir }}/candidate.txt'
-  # delegate_to: 172.16.101.183
-
-- name: get diff
-  shell: diff {{ ansible_user_dir }}/running.txt {{ ansible_user_dir }}/candidate.txt
-  register: diff
-  # delegate_to: 172.16.101.183
-  ignore_errors: true
-
-- name: test diff
+- name: output
   debug:
-    msg: '{{diff.stdout_lines}}'
+    var: pwd
 
-- name: temp cleanup
-  shell: rm -f '{{ item }}'
-  loop:
-    - '{{ ansible_user_dir }}/candidate.txt'
-    - '{{ ansible_user_dir }}/running.txt'
+# - name: Get Config Diff 
+#   paloaltonetworks.panos.panos_op:
+#     provider: '{{ palo_provider }}'
+#     cmd_is_xml: true
+#     cmd: '<show><config><running/></config></show>'
+#   register: running
+
+# - name: Get Config Diff 
+#   paloaltonetworks.panos.panos_op:
+#     provider: '{{ palo_provider }}'
+#     cmd_is_xml: true
+#     cmd: '<show><config><candidate/></config></show>'
+#   register: candidate
+
+# - name: write running to file
+#   copy:
+#     content: '{{ running.stdout_xml}}'
+#     dest: '{{ ansible_user_dir }}/running.txt'
+#   # delegate_to: 172.16.101.183
+
+# - name: write running to file
+#   copy:
+#     content: '{{ candidate.stdout_xml }}'
+#     dest: '{{ ansible_user_dir }}/candidate.txt'
+#   # delegate_to: 172.16.101.183
+
+# - name: get diff
+#   shell: diff {{ ansible_user_dir }}/running.txt {{ ansible_user_dir }}/candidate.txt
+#   register: diff
+#   # delegate_to: 172.16.101.183
+#   ignore_errors: true
+
+# - name: test diff
+#   debug:
+#     msg: '{{diff.stdout_lines}}'
+
+# - name: temp cleanup
+#   shell: rm -f '{{ item }}'
+#   loop:
+#     - '{{ ansible_user_dir }}/candidate.txt'
+#     - '{{ ansible_user_dir }}/running.txt'
   # delegate_to: 172.16.101.183
   
