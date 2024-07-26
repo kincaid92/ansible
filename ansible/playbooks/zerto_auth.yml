@@ -3,5 +3,5 @@
  - hosts: all
    gather_facts: false
    roles:
-    - zerto_auth
+    - Zerto_auth
 
