@@ -52,7 +52,7 @@
 
 - name: Set threshold time (24 hours ago)
   set_fact:
-    threshold_time: "{{ '%Y-%m-%dT%H:%M:%SZ' | strftime(ansible_date_time.epoch - 24*60*60) }}"
+    threshold_time: "{{ '%Y-%m-%dT%H:%M:%SZ' | strftime((ansible_date_time.epoch | int) - (24 * 60 * 60)) }}"
 
 - name: Filter alarms older than 24 hours
   set_fact:
