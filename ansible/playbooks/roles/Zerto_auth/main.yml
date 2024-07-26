@@ -25,6 +25,7 @@
   debug:
     var: host.stdout
 
+
 # - name: Parse key from XML response
 #   set_fact:
 #     parsed_response: "{{ login.content | ansible.utils.from_xml }}"
