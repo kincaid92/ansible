@@ -68,3 +68,7 @@
     content: "{{ formatted_alarms }}"
     dest: "~/alarms.txt"
   delegate_to: 172.16.101.183
+
+- name: test date
+  debug:
+    var: ansible_date_time
