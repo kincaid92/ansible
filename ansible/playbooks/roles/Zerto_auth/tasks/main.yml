@@ -19,10 +19,34 @@
 - name: Create location mapping
   set_fact:
     location_mapping: {
-      "Singlehop CHI3": Shared ZVM,
+      # dpc to dpc
       "DAL006 vSphere 6.5 INAP Manage Hosting": 194116,
-      "ORNL Federal Credit Union": 18273,
-      "Other Location": 3
+      "SIS - NYJ - Production": 194116,
+      "RAF-DAL-DRAAS": 21937,
+      "RAF-NYJ-PROD": 21937,
+      "AAP-CHG1": 188292,
+      "AAP-PHX01": 188292,
+      "DAL006 (Dallas)": 20621,
+      "ACS (Atlanta)": 20621,
+      "Falcone CHI": 193525,
+      #dpc to shared
+      "APTA": 191900,
+      "D and A Service LLC": 186423,
+      "DAL DPC": 191569,
+      "Gmount": 193421,
+      #offsite to dpc
+      "CHI-DRaaS": 188955,
+      "USSRVDRDPC": 193605,
+      #offsite to shared
+      "tpvcntr": 193893 Shared PHX ZVM,
+      "Wells": 193567 Shared PHX ZVM,
+      "dlusa": 191349 Shared PHX ZVM,
+      "lsg_NJ": 189646 Shared PHX ZVM,
+      "MLRT": 191969 Shared PHX ZVM,
+      "Gibney NYC Office VM7.15": 191966 Shared PHX ZVM,
+      "ORNL Federal Credit Union": 18273 Shared PHX ZVM,
+      "Singlehop CHI3": Shared CHI ZVM,
+      "GAL Site": 194012 Shared PHX ZVM,
     }
 
 - name: Format filtered alarms into a single string
@@ -30,7 +54,6 @@
     formatted_alarms: |
       {%- for alarm in filtered_alarms %}
       Issue appeared on: {{ alarm.collectionTime }}
-      Alarm ID: {{ alarm.type }}
       Severity: {{ alarm.severity }}
       Description: {{ alarm.description }}
       Location: {{ alarm.site.name }} ({{ location_mapping[alarm.site.name] | default('Unknown') }}) {{ alarm.affectedZorgs }}
