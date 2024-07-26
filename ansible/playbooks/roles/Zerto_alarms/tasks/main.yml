@@ -52,13 +52,13 @@
 
 - name: Set threshold time (24 hours ago)
   set_fact:
-    threshold_time: "{{ (ansible_date_time.iso8601 | to_datetime('%Y-%m-%dT%H:%M:%SZ')) | to_datetime | regex_replace('Z', '') | to_datetime - timedelta(hours=24) }}"
+    threshold_time: "{{ (ansible_date_time.iso8601 | to_datetime) - (24 * 60 * 60) }}"
 
 - name: Filter alarms older than 24 hours
   set_fact:
     old_alarms: >-
       {{
-        filtered_alarms | selectattr('collectionTime', 'lt', threshold_time.isoformat()) | list
+        filtered_alarms | selectattr('collectionTime', 'lt', threshold_time | to_datetime('%Y-%m-%dT%H:%M:%SZ').isoformat()) | list
       }}
 
 - name: Format filtered alarms into a single string
