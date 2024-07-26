@@ -2,71 +2,17 @@
 
 - name: Get Zerto Alarms
   ansible.builtin.uri:
-    url: "https://analytics.api.zerto.com/v2/monitoring/alerts"
-    method: GET
+    url: "https://analytics.api.zerto.com/v2/auth/token"
+    method: POST
     headers:
       Content-Type: application/json
-      Authorization: "Bearer {{ token }}"
+    user: '{{ username }}'
+    password: '{{ password }}'
     validate_certs: false
     force_basic_auth: yes
     return_content: true
   register: login
 
 - name: Filter alarms with type VPG0010
-  set_fact:
-    filtered_alarms: "{{ login.json | json_query('[?type==`VPG0010`]') }}"
-
-- name: Create location mapping
-  set_fact:
-    location_mapping: {
-      # dpc to dpc
-      "DAL006 vSphere 6.5 INAP Manage Hosting": 194116,
-      "SIS - NYJ - Production": 194116,
-      "RAF-DAL-DRAAS": 21937,
-      "RAF-NYJ-PROD": 21937,
-      "AAP-CHG1": 188292,
-      "AAP-PHX01": 188292,
-      "DAL006 (Dallas)": 20621,
-      "ACS (Atlanta)": 20621,
-      "Falcone CHI": 193525,
-      #dpc to shared
-      "APTA": 191900,
-      "D and A Service LLC": 186423,
-      "DAL DPC": 191569,
-      "Gmount": 193421,
-      #offsite to dpc
-      "CHI-DRaaS": 188955,
-      "USSRVDRDPC": 193605,
-      #offsite to shared
-      "tpvcntr": 193893 Shared CHI ZVM,
-      "Wells": 193567 Shared CHI ZVM,
-      "dlusa": 191349 Shared CHI ZVM,
-      "lsg_NJ": 189646 Shared CHI ZVM,
-      "MLRT": 191969 Shared CHI ZVM,
-      "Gibney NYC Office VM7.15": 191966 Shared CHI ZVM,
-      "ORNL Federal Credit Union": 18273 Shared CHI ZVM,
-      "Singlehop CHI3": Shared CHI ZVM,
-      "GAL Site": 194012 Shared CHI ZVM,
-    }
-
-- name: Format filtered alarms into a single string
-  set_fact:
-    formatted_alarms: |
-      {%- for alarm in filtered_alarms %}
-      Issue appeared on: {{ alarm.collectionTime }}
-      Severity: {{ alarm.severity }}
-      Description: {{ alarm.description }}
-      Client ID: {{ location_mapping[alarm.site.name] | default('Unknown') }}
-      Site Name | Zorg Identifier: {{ alarm.site.name }} | {{ alarm.affectedZorgs }}
-
-      {% endfor %}
-
-- name: Print formatted alarms
   debug:
-    var: formatted_alarms
-
-- name: Write results to file
-  copy:
-    content: "{{ formatted_alarms }}"
-    dest: "~/alarms.txt"
-  delegate_to: 172.16.101.183
+    var: login.stdout
