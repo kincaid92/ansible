@@ -66,7 +66,7 @@
 - name: Write results to file
   copy:
     content: "{{ formatted_alarms }}"
-    dest: "~/alarms{{ansible_date_time.date}}.txt"
+    dest: "~/zerto_alarms-{{ansible_date_time.date}}.txt"
   delegate_to: 172.16.101.183
 
 - name: test date
