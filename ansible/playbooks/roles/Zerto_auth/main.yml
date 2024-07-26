@@ -20,6 +20,7 @@
 - name: print content
   shell: hostname
   register: ls
+  delegate_to: 172.16.101.183
 
 - name: wtf
   debug:
