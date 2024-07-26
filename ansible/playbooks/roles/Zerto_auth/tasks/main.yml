@@ -2,7 +2,7 @@
 
 - name: Create zerto API Key
   ansible.builtin.uri:
-    url: "https://analytics.api.zerto.com/v2/monitoring/alerts"
+    url: "https://analytics.api.zerto.com/v2/monitoring/alerts/d9a9b260-51d1-4a8e-8a0b-5c4ca3776301"
     method: GET
     headers:
       Content-Type: application/json
