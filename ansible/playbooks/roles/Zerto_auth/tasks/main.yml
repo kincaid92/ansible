@@ -20,6 +20,7 @@
   set_fact:
     formatted_alarms: |
       {%- for alarm in filtered_alarms %}
+      Client ID: TODO make array of site to CIDs
       Issue appeared on: {{ alarm.collectionTime }}
       URL: idk how to do this yet
       Severity: {{ alarm.severity }}
