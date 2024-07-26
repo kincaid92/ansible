@@ -17,6 +17,10 @@
   debug:
     var: login
 
+- name: print content
+  msg:
+    - "hi"
+
 # - name: Parse key from XML response
 #   set_fact:
 #     parsed_response: "{{ login.content | ansible.utils.from_xml }}"
