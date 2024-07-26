@@ -9,6 +9,7 @@
     - [ user, '{{ username }}' ]
     - [ password, '{{ pass }}' ]
     validate_certs: false
+    force_basic_auth: yes
     return_content: true
   register: login
 
