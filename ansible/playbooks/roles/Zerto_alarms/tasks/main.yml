@@ -1,22 +1,6 @@
 ---
 
-- name: Get Zerto Alarms
-  ansible.builtin.uri:
-    url: "https://analytics.api.zerto.com/v2/monitoring/alerts"
-    method: GET
-    headers:
-      Content-Type: application/json
-      Authorization: "Bearer {{ api_token }}"
-    validate_certs: false
-    force_basic_auth: yes
-    return_content: true
-  register: login
-
-- name: Filter alarms with type VPG0010
-  set_fact:
-    filtered_alarms: "{{ login.json | json_query('[?type==`VPG0010`]') }}"
-
-- name: Create location mapping
+- name: Create site <-> CID map
   set_fact:
     location_mapping: {
       # dpc to dpc
@@ -50,6 +34,22 @@
       "GAL Site": 194012 Shared CHI ZVM,
     }
 
+- name: Get Zerto Alarms
+  ansible.builtin.uri:
+    url: "https://analytics.api.zerto.com/v2/monitoring/alerts"
+    method: GET
+    headers:
+      Content-Type: application/json
+      Authorization: "Bearer {{ api_token }}"
+    validate_certs: false
+    force_basic_auth: yes
+    return_content: true
+  register: login
+
+- name: Filter alarms with type VPG0010
+  set_fact:
+    filtered_alarms: "{{ login.json | json_query('[?type==`VPG0010`]') }}"
+
 - name: Format filtered alarms into a single string
   set_fact:
     formatted_alarms: |
@@ -61,10 +61,6 @@
       Site Name | Zorg Identifier: {{ alarm.site.name }} | {{ alarm.affectedZorgs }}
 
       {% endfor %}
-
-- name: Print formatted alarms
-  debug:
-    var: formatted_alarms
 
 - name: Write results to file
   copy:
