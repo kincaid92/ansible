@@ -9,8 +9,8 @@
       Content-Type: application/json
     body_format: json
     body:
-      username: '{{ username }}'
-      password: '{{ password }}'
+      username: '{{ awx_zerto_user }}'
+      password: '{{ awx_zerto_pw }}'
     validate_certs: false
     force_basic_auth: yes
     return_content: true
