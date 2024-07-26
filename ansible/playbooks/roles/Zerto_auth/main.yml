@@ -17,13 +17,9 @@
 #   debug:
 #     var: login
 
-- name: print content
-  shell: hostname
-  register: host
-
-- name: wtf
+- name: ill kill myself
   debug:
-    var: host.stdout
+    msg: cum
 
 
 # - name: Parse key from XML response
