@@ -16,10 +16,6 @@
   set_fact:
     filtered_alarms: "{{ login.json | json_query('[?type==`VPG0010`]') }}"
 
-- name: Ensure filtered_alarms is set
-  debug:
-    var: filtered_alarms
-
 - name: Format filtered alarms into a single string
   set_fact:
     formatted_alarms: |
@@ -38,6 +34,6 @@
 
 - name: Write results to file
   copy:
-    content: '{{ formatted_alarms | regex_replace("\n\n$", "\n") }}'
+    content: '{{ formatted_alarms }}'
     dest: '~/alarms.txt'
   delegate_to: 172.16.101.183
