@@ -20,7 +20,6 @@
 - name: print content
   debug:
     msg: hello world
-  delegate_to: 172.16.101.183
 
 # - name: Parse key from XML response
 #   set_fact:
