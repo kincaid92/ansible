@@ -56,7 +56,8 @@
       Issue appeared on: {{ alarm.collectionTime }}
       Severity: {{ alarm.severity }}
       Description: {{ alarm.description }}
-      Location: {{ alarm.site.name }} ({{ location_mapping[alarm.site.name] | default('Unknown') }}) {{ alarm.affectedZorgs }}
+      Client ID: ({{ location_mapping[alarm.site.name] | default('Unknown') }})
+      Site Name: {{ alarm.site.name }}  {{ alarm.affectedZorgs }}
 
       {% endfor %}
 
