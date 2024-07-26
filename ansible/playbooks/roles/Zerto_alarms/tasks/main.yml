@@ -52,7 +52,7 @@
 
 - name: Set threshold time (24 hours ago)
   set_fact:
-    threshold_time: "{{ (ansible_date_time.iso8601 | to_datetime) - timedelta(hours=24) }}"
+    threshold_time: "{{ (ansible_date_time.iso8601 | to_datetime('%Y-%m-%dT%H:%M:%SZ')) - timedelta(hours=24) }}"
 
 - name: Filter alarms older than 24 hours
   set_fact:
@@ -81,5 +81,5 @@
 - name: Write results to file
   copy:
     content: "{{ formatted_alarms }}"
-    dest: "~/zerto_alarms-{{ansible_date_time.date}}.txt"
+    dest: "~/zerto_alarms-{{ ansible_date_time.date }}.txt"
   delegate_to: 172.16.101.183
