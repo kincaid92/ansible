@@ -19,8 +19,8 @@
 - name: Create location mapping
   set_fact:
     location_mapping: {
-      "Singlehop CHI3": 1,
-      "DAL006 vSphere 6.5 INAP Manage Hosting": 2,
+      "Singlehop CHI3": Shared ZVM,
+      "DAL006 vSphere 6.5 INAP Manage Hosting": 194116,
       "ORNL Federal Credit Union": 18273,
       "Other Location": 3
     }
@@ -33,7 +33,7 @@
       Alarm ID: {{ alarm.type }}
       Severity: {{ alarm.severity }}
       Description: {{ alarm.description }}
-      Location: {{ alarm.site.name }} ({{ location_mapping[alarm.site.name] | default('Unknown') }})
+      Location: {{ alarm.site.name }} ({{ location_mapping[alarm.site.name] | default('Unknown') }}) {{ alarm.affectedZorgs }}
 
       {% endfor %}
 
