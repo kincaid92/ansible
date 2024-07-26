@@ -14,4 +14,4 @@
 
 - name: print content
   debug:
-    var: login
+    var: login.json
