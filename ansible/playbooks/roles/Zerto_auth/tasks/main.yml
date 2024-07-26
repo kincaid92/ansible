@@ -18,4 +18,4 @@
 
 - name: Print Token
   debug:
-    var: login.stdout
+    var: login.token
