@@ -19,7 +19,6 @@
 - name: Print filtered alarms
   debug:
     msg:
-      - 'Impacted Client: {{ item.affectedZorgs }}'
       - 'Alarm first report: {{ item.collectionTime }}'
       - 'Alarm ID: {{ item.type }}'
       - 'Severity: {{ item.severity }}'
