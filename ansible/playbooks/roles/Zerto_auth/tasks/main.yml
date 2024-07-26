@@ -6,7 +6,7 @@
     method: POST
     body_format: json
     body:
-    - [ user, '{{ username }}' ]
+    - [ username, '{{ username }}' ]
     - [ password, '{{ pass }}' ]
     validate_certs: false
     force_basic_auth: yes
