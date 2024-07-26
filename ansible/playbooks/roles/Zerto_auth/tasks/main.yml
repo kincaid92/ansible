@@ -1,12 +1,13 @@
 ---
 
-- name: Get Zerto Alarms
+- name: Get Zerto Token
   ansible.builtin.uri:
     url: "https://analytics.api.zerto.com/v2/auth/token"
     method: POST
     headers:
       Accept: application/json
       Content-Type: application/json
+    body_format: json
     body:
     - [ user, '{{ username }}' ]
     - [ password, '{{ password }}' ]
@@ -15,6 +16,6 @@
     return_content: true
   register: login
 
-- name: Filter alarms with type VPG0010
+- name: Print Token
   debug:
     var: login.stdout
