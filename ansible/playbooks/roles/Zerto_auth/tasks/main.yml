@@ -16,20 +16,24 @@
   set_fact:
     filtered_alarms: "{{ login.json | json_query('[?type==`VPG0010`]') }}"
 
-- name: all info
-  debug:
-    var: filtered_alarms
+- name: Create location mapping
+  set_fact:
+    location_mapping: {
+      "Singlehop CHI3": 1,
+      "DAL006 vSphere 6.5 INAP Manage Hosting": 2,
+      "ORNL Federal Credit Union": 18273,
+      "Other Location": 3
+    }
 
 - name: Format filtered alarms into a single string
   set_fact:
     formatted_alarms: |
       {%- for alarm in filtered_alarms %}
-      Client ID: TODO make array of site to CIDs
       Issue appeared on: {{ alarm.collectionTime }}
-      URL: https://analytics.zerto.com/vpgs/VPG_INDENTIFIER
+      Alarm ID: {{ alarm.type }}
       Severity: {{ alarm.severity }}
       Description: {{ alarm.description }}
-      Location: {{ alarm.site.name }}, {{ alarm.affectedZorgs }}
+      Location: {{ alarm.site.name }} ({{ location_mapping[alarm.site.name] | default('Unknown') }})
 
       {% endfor %}
 
