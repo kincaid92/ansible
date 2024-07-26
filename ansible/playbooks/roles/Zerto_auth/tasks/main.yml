@@ -10,7 +10,6 @@
     - [ password, '{{ pass }}' ]
     validate_certs: false
     return_content: true
-  no_log: true
   register: login
 
 - name: print content
