@@ -1,26 +1,25 @@
 ---
 
-- name: Create zerto APi Key
-  ansible.builtin.uri:
-    url: "https://analytics.api.zerto.com/v2/auth/token"
-    method: POST
-    body_format: json
-    body:
-    - [ user, '{{ username }}' ]
-    - [ password, '{{ pass }}' ]
-    validate_certs: false
-    return_content: true
-  no_log: true
-  register: login
+# - name: Create zerto API Key
+#   ansible.builtin.uri:
+#     url: "https://analytics.api.zerto.com/v2/auth/token"
+#     method: POST
+#     body_format: json
+#     body:
+#     - [ user, '{{ username }}' ]
+#     - [ password, '{{ pass }}' ]
+#     validate_certs: false
+#     return_content: true
+#   no_log: true
+#   register: login
+
+# - name: print content
+#   debug:
+#     var: login
 
 - name: print content
   debug:
-    var: login
-
-- name: print content
-  debug:
-    msg:
-      - "hi"
+    msg: 'hello world'
 
 # - name: Parse key from XML response
 #   set_fact:
