@@ -83,3 +83,14 @@
     content: "{{ formatted_alarms }}"
     dest: "~/zerto_alarms-{{ ansible_date_time.date }}.txt"
   delegate_to: 172.16.101.183
+
+
+- name: Sending an e-mail to ticket queue
+  community.general.mail:
+    host: smtp.gmail.com
+    port: 587
+    username: '{{ gmail_smtp_user }}'
+    password: '{{ gmail_smtp_pw }}'
+    to: <ms-support@inap.com>
+    subject: Daily Zerto RPO Breaches
+    body: '{{ formatted_alarms }}'
