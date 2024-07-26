@@ -21,7 +21,7 @@
     formatted_alarms: |
       {%- for alarm in filtered_alarms %}
       Issue appeared on: {{ alarm.collectionTime }}
-      Link: idk how to do this yet
+      URL: idk how to do this yet
       Severity: {{ alarm.severity }}
       Description: {{ alarm.description }}
       Location: {{ alarm.site.name }}
