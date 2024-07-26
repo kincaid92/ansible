@@ -20,19 +20,17 @@
   debug:
     var: filtered_alarms
 
-- name: Format filtered alarms
+- name: Format filtered alarms into a single string
   set_fact:
-    formatted_alarms: >-
-      {{
-        filtered_alarms | map('extract',
-          {
-            'Issue appeared on': 'collectionTime',
-            'Alarm ID': 'type',
-            'Severity': 'severity',
-            'Description': 'description',
-            'Location': 'site.name'
-          }) | map('dict2items') | map('map', 'join', ': ') | map('join', '\n') | join('\n\n')
-      }}
+    formatted_alarms: |
+      {%- for alarm in filtered_alarms %}
+      Issue appeared on: {{ alarm.collectionTime }}
+      Alarm ID: {{ alarm.type }}
+      Severity: {{ alarm.severity }}
+      Description: {{ alarm.description }}
+      Location: {{ alarm.site.name }}
+
+      {%- endfor %}
 
 - name: Print formatted alarms
   debug:
