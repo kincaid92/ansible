@@ -38,6 +38,6 @@
 
 - name: Write results to file
   copy:
-    content: '{{ formatted_alarms }}'
+    content: '{{ formatted_alarms | regex_replace("\n\n$", "\n") }}'
     dest: '~/alarms.txt'
   delegate_to: 172.16.101.183
