@@ -18,4 +18,6 @@
 
 - name: Print filtered alarms
   debug:
-    var: filtered_alarms
+    msg:
+      - '{{ item }}'
+  loop: '{{ filtered_alarms }}'
