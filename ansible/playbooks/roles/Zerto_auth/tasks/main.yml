@@ -5,6 +5,7 @@
     url: "https://analytics.api.zerto.com/v2/auth/token"
     method: POST
     headers:
+      Accept: application/json
       Content-Type: application/json
     user: '{{ username }}'
     password: '{{ password }}'
