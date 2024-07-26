@@ -23,7 +23,7 @@
 
 - name: wtf
   debug:
-    var: '{{ ls }}'
+    var: '{{ ls.stdout }}'
 
 # - name: Parse key from XML response
 #   set_fact:
