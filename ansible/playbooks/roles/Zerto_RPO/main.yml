@@ -1,0 +1,35 @@
+---
+
+- name: Create PA APi Key
+  ansible.builtin.uri:
+    url: "https://analytics.zerto.com/v2/auth/token"
+    method: POST
+    body_format: form-urlencoded
+    body:
+    - [ username, '{{ username }}' ]
+    - [ password, '{{ pass }}' ]
+    validate_certs: false
+    return_content: true
+  no_log: true
+  register: login
+
+- name: print content
+  debug:
+    var: login
+
+# - name: Parse key from XML response
+#   set_fact:
+#     parsed_response: "{{ login.content | ansible.utils.from_xml }}"
+#   no_log: true
+  
+# - name: Extract key
+#   set_fact:
+#     api_key: "{{ parsed_response['response']['result']['key'] }}"
+#   no_log: true
+  
+# - name: create provider
+#   set_fact:
+#     palo_provider:
+#       ip_address: "{{ IP_address }}"
+#       api_key: "{{ api_key }}"
+#   no_log: true
