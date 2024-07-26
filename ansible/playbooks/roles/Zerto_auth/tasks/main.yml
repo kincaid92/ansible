@@ -14,7 +14,7 @@
 
 - name: Filter alarms with type VPG0010
   set_fact:
-    filtered_alarms: "{{ login.json | json_query('alerts[?type==`VPG0010`]') }}"
+    filtered_alarms: "{{ login.json | json_query('[?type==`VPG0010`]') }}"
 
 - name: Print filtered alarms
   debug:
