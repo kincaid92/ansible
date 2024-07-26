@@ -21,7 +21,6 @@
     formatted_alarms: |
       {%- for alarm in filtered_alarms %}
       Issue appeared on: {{ alarm.collectionTime }}
-      Alarm ID: {{ alarm.type }}
       Severity: {{ alarm.severity }}
       Description: {{ alarm.description }}
       Location: {{ alarm.site.name }}
