@@ -4,34 +4,34 @@
   set_fact:
     location_mapping: {
       # dpc to dpc
-      "DAL006 vSphere 6.5 INAP Manage Hosting": 194116,
-      "SIS - NYJ - Production": 194116,
-      "RAF-DAL-DRAAS": 21937,
-      "RAF-NYJ-PROD": 21937,
-      "AAP-CHG1": 188292,
-      "AAP-PHX01": 188292,
-      "DAL006 (Dallas)": 20621,
-      "ACS (Atlanta)": 20621,
-      "Falcone CHI": 193525,
-      "Falcone PHX": 193525,
+      "DAL006 vSphere 6.5 INAP Manage Hosting": Superior Integrated Solutions - 194116,
+      "SIS - NYJ - Production": Superior Integrated Solutions - 194116,
+      "RAF-DAL-DRAAS": Radiologic Associates of Fredericksburg - 21937,
+      "RAF-NYJ-PROD": Radiologic Associates of Fredericksburg - 21937,
+      "AAP-CHG1": American Academy of Pediatrics - 188292,
+      "AAP-PHX01": American Academy of Pediatrics - 188292,
+      "DAL006 (Dallas)": Velocitor - 20621,
+      "ACS (Atlanta)": Velocitor - 20621,
+      "Falcone CHI": Falcone - 193525,
+      "Falcone PHX": Falcone - 193525,
       #dpc to shared
-      "APTA": 191900,
-      "D and A Service LLC": 186423,
-      "DAL DPC": 191569,
-      "Gmount": 193421,
+      "APTA": American Physical Therapy Association - 191900,
+      "D and A Service LLC": D&A Services - 186423,
+      "DAL DPC": P.E.O. International - 191569,
+      "Gmount": Glass Mountain Holdings LLC - 193421,
       #offsite to dpc
-      "CHI-DRaaS": 188955,
-      "USSRVDRDPC": 193605,
+      "CHI-DRaaS": AquaFinance - 188955,
+      "USSRVDRDPC": US Services - 193605,
       #offsite to shared
-      "tpvcntr": 193893 Shared CHI ZVM,
-      "Wells": 193567 Shared CHI ZVM,
-      "dlusa": 191349 Shared CHI ZVM,
-      "lsg_NJ": 189646 Shared CHI ZVM,
-      "MLRT": 191969 Shared CHI ZVM,
-      "Gibney NYC Office VM7.15": 191966 Shared CHI ZVM,
-      "ORNL Federal Credit Union": 18273 Shared CHI ZVM,
+      "tpvcntr": Total Power Limited - 193893 - hared CHI ZVM,
+      "dlusa": Deutsche Leasing USA - 191349 - Shared CHI ZVM,
+      "Wells": Spancrete - 193567 - Shared CHI ZVM,
+      "lsg_NJ": Lightstone Group - 189646 - Shared CHI ZVM,
+      "MLRT": McElroy Truck Lines - 191969 - Shared CHI ZVM,
+      "Gibney NYC Office VM7.15": Gibney, Anthony & Flaherty, LLP - 191966 - Shared CHI ZVM,
+      "ORNL Federal Credit Union": ORNL Federal Credit Union - 18273 - Shared CHI ZVM,
       "Singlehop CHI3": Shared CHI ZVM,
-      "GAL Site": 194012 Shared CHI ZVM,
+      "GAL Site": Canada Ltd - 194012 - Shared CHI ZVM,
     }
 
 - name: Get Zerto Alarms
@@ -57,7 +57,8 @@
       Issue appeared on: {{ alarm.collectionTime }}
       Severity: {{ alarm.severity }}
       Description: {{ alarm.description }}
-      Client ID: {{ location_mapping[alarm.site.name] | default('Unknown') }}
+      Zerto Analytics: https://analytics.zerto.com/dashboard
+      Client: {{ location_mapping[alarm.site.name] | default('Unknown') }}
       Site Name | Zorg Identifier: {{ alarm.site.name }} | {{ alarm.affectedZorgs }}
 
       {% endfor %}
