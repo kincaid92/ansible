@@ -2,11 +2,11 @@
 
 - name: Create zerto API Key
   ansible.builtin.uri:
-    url: "https://analytics.api.zerto.com/v2/auth/token"
-    method: POST
-    body_format: json
-    user: "{{ username }}"
-    password: "{{ password }}"
+    url: "https://analytics.api.zerto.com/v2/monitoring/zorgs"
+    method: GET
+    headers:
+      Content-Type: application/json
+      authentication: "Bearer {{ token }}"
     validate_certs: false
     force_basic_auth: yes
     return_content: true
