@@ -26,7 +26,7 @@
       Description: {{ alarm.description }}
       Location: {{ alarm.site.name }}
 
-      {%- endfor %}
+      {% endfor %}
 
 - name: Print formatted alarms
   debug:
@@ -34,6 +34,6 @@
 
 - name: Write results to file
   copy:
-    content: '{{ formatted_alarms }}'
-    dest: '~/alarms.txt'
+    content: "{{ formatted_alarms }}"
+    dest: "~/alarms.txt"
   delegate_to: 172.16.101.183
