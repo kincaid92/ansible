@@ -1,6 +1,6 @@
 ---
 
-- name: Create zerto API Key
+- name: Get Zerto Alarms
   ansible.builtin.uri:
     url: "https://analytics.api.zerto.com/v2/monitoring/alerts"
     method: GET
@@ -25,3 +25,10 @@
       - 'Description: {{ item.description }}'
       - 'Locaiton: {{ item.site }}'
   loop: '{{ filtered_alarms }}'
+  register: file_content
+
+- name: write results to file
+  copy:
+    content: '{{ file_content.stdout}}'
+    dest: '~/alarms.txt'
+  delegate_to: 172.16.101.183
