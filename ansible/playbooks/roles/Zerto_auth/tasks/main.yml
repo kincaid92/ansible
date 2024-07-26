@@ -38,15 +38,15 @@
       "CHI-DRaaS": 188955,
       "USSRVDRDPC": 193605,
       #offsite to shared
-      "tpvcntr": 193893 Shared PHX ZVM,
-      "Wells": 193567 Shared PHX ZVM,
-      "dlusa": 191349 Shared PHX ZVM,
-      "lsg_NJ": 189646 Shared PHX ZVM,
-      "MLRT": 191969 Shared PHX ZVM,
-      "Gibney NYC Office VM7.15": 191966 Shared PHX ZVM,
-      "ORNL Federal Credit Union": 18273 Shared PHX ZVM,
+      "tpvcntr": 193893 Shared CHI ZVM,
+      "Wells": 193567 Shared CHI ZVM,
+      "dlusa": 191349 Shared CHI ZVM,
+      "lsg_NJ": 189646 Shared CHI ZVM,
+      "MLRT": 191969 Shared CHI ZVM,
+      "Gibney NYC Office VM7.15": 191966 Shared CHI ZVM,
+      "ORNL Federal Credit Union": 18273 Shared CHI ZVM,
       "Singlehop CHI3": Shared CHI ZVM,
-      "GAL Site": 194012 Shared PHX ZVM,
+      "GAL Site": 194012 Shared CHI ZVM,
     }
 
 - name: Format filtered alarms into a single string
