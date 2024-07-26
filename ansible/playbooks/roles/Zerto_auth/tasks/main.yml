@@ -12,6 +12,10 @@
     return_content: true
   register: login
 
-- name: print content
+- name: Filter alarms with type VPG0010
+  set_fact:
+    filtered_alarms: "{{ login.json | json_query('alerts[?type==`VPG0010`]') }}"
+
+- name: Print filtered alarms
   debug:
-    var: login.json
+    var: filtered_alarms
