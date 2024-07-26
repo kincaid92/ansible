@@ -17,5 +17,5 @@
   register: login
 
 - name: Print Token
-  debug:
-    var: login.json.token
+  set_fact:
+    api_token: '{{ login.json.token }}'

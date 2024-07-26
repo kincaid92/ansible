@@ -6,7 +6,7 @@
     method: GET
     headers:
       Content-Type: application/json
-      Authorization: "Bearer {{ token }}"
+      Authorization: "Bearer {{ api_token }}"
     validate_certs: false
     force_basic_auth: yes
     return_content: true
