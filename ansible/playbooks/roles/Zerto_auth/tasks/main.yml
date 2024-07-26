@@ -7,8 +7,9 @@
     headers:
       Accept: application/json
       Content-Type: application/json
-    user: '{{ username }}'
-    password: '{{ password }}'
+    body:
+    - [ user, '{{ username }}' ]
+    - [ password, '{{ password }}' ]
     validate_certs: false
     force_basic_auth: yes
     return_content: true
