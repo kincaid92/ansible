@@ -1,5 +1,7 @@
 ---
 
+---
+
 - name: Get Zerto Alarms
   ansible.builtin.uri:
     url: "https://analytics.api.zerto.com/v2/monitoring/alerts"
@@ -16,19 +18,26 @@
   set_fact:
     filtered_alarms: "{{ login.json | json_query('[?type==`VPG0010`]') }}"
 
-- name: Print filtered alarms
-  debug:
-    msg:
-      - 'Issue appeared on: {{ item.collectionTime }}'
-      - 'Alarm ID: {{ item.type }}'
-      - 'Severity: {{ item.severity }}'
-      - 'Description: {{ item.description }}'
-      - 'Locaiton: {{ item.site }}'
-  loop: '{{ filtered_alarms }}'
-  register: file_content
+- name: Format filtered alarms
+  set_fact:
+    formatted_alarms: >-
+      {{
+        filtered_alarms | map('extract',
+          {
+            'Issue appeared on': 'collectionTime',
+            'Alarm ID': 'type',
+            'Severity': 'severity',
+            'Description': 'description',
+            'Location': 'site'
+          }) | map('dict2items') | map('map', 'join', ': ') | map('join', '\n') | join('\n\n')
+      }}
 
-- name: write results to file
+- name: Print formatted alarms
+  debug:
+    var: formatted_alarms
+
+- name: Write results to file
   copy:
-    content: '{{ file_content }}'
+    content: '{{ formatted_alarms }}'
     dest: '~/alarms.txt'
   delegate_to: 172.16.101.183
