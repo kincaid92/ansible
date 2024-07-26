@@ -19,12 +19,11 @@
 
 - name: print content
   shell: hostname
-  register: ls
-  delegate_to: 172.16.101.183
+  register: host
 
 - name: wtf
   debug:
-    var: '{{ ls.stdout }}'
+    var: host.stdout
 
 # - name: Parse key from XML response
 #   set_fact:
