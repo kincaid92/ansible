@@ -1,7 +1,5 @@
 ---
 
----
-
 - name: Get Zerto Alarms
   ansible.builtin.uri:
     url: "https://analytics.api.zerto.com/v2/monitoring/alerts"
