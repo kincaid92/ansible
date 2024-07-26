@@ -16,6 +16,10 @@
   set_fact:
     filtered_alarms: "{{ login.json | json_query('[?type==`VPG0010`]') }}"
 
+- name: Ensure filtered_alarms is set
+  debug:
+    var: filtered_alarms
+
 - name: Format filtered alarms
   set_fact:
     formatted_alarms: >-
