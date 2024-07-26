@@ -5,9 +5,8 @@
     url: "https://analytics.api.zerto.com/v2/auth/token"
     method: POST
     body_format: json
-    body:
-    - [ username, '{{ username }}' ]
-    - [ password, '{{ pass }}' ]
+    user: "{{ username }}"
+    password: "{{ password }}"
     validate_certs: false
     force_basic_auth: yes
     return_content: true
