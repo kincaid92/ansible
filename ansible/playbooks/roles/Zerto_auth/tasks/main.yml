@@ -20,14 +20,13 @@
   set_fact:
     formatted_alarms: >-
       {{
-        filtered_alarms | map('extract',
-          {
-            'Issue appeared on': 'collectionTime',
-            'Alarm ID': 'type',
-            'Severity': 'severity',
-            'Description': 'description',
-            'Location': 'site'
-          }) | map('dict2items') | map('map', 'join', ': ') | map('join', '\n') | join('\n\n')
+        filtered_alarms | map('combine', {
+          'Issue appeared on': 'collectionTime',
+          'Alarm ID': 'type',
+          'Severity': 'severity',
+          'Description': 'description',
+          'Location': 'site.name'
+        }) | map('dict2items') | map('map', 'join', ': ') | map('join', '\n') | join('\n\n')
       }}
 
 - name: Print formatted alarms
