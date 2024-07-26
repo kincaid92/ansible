@@ -29,6 +29,6 @@
 
 - name: write results to file
   copy:
-    content: '{{ file_content.stdout}}'
+    content: '{{ file_content }}'
     dest: '~/alarms.txt'
   delegate_to: 172.16.101.183
