@@ -25,7 +25,7 @@
       URL: idk how to do this yet
       Severity: {{ alarm.severity }}
       Description: {{ alarm.description }}
-      Location: {{ alarm.site.name }}
+      Location: {{ alarm.site.name, alarm.affectedZorgs }}
 
       {% endfor %}
 
