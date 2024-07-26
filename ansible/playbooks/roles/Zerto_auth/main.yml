@@ -4,7 +4,7 @@
   ansible.builtin.uri:
     url: "https://analytics.api.zerto.com/v2/auth/token"
     method: POST
-    body_format: form-urlencoded
+    body_format: json
     body:
     - [ user, '{{ username }}' ]
     - [ password, '{{ pass }}' ]
@@ -18,8 +18,9 @@
     var: login
 
 - name: print content
-  msg:
-    - "hi"
+  debug:
+    msg:
+      - "hi"
 
 # - name: Parse key from XML response
 #   set_fact:
