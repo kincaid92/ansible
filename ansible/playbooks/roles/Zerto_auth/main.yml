@@ -2,7 +2,7 @@
 
 - name: Create PA APi Key
   ansible.builtin.uri:
-    url: "https://analytics.zerto.com/v2/auth/token"
+    url: "https://analytics.api.zerto.com/v2/auth/token"
     method: POST
     body_format: form-urlencoded
     body:
