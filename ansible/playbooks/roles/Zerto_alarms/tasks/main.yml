@@ -93,7 +93,6 @@
     subject: Daily Zerto RPO Breaches
     body: | 
       Please review the below RPO alarms as they have been active for over 24 consistent hours.
-      
       https://analytics.zerto.com/dashboard
 
       '{{ formatted_alarms }}'
