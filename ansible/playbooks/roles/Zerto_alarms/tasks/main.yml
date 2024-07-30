@@ -73,10 +73,6 @@
 
       {% endfor %}
 
-# - name: Print formatted alarms
-#   debug:
-#     var: formatted_alarms
-
 # - name: Write results to file
 #   copy:
 #     content: "{{ formatted_alarms }}"
