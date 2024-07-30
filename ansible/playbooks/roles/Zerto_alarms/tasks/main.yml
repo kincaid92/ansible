@@ -73,9 +73,9 @@
 
       {% endfor %}
 
-- name: Print formatted alarms
-  debug:
-    var: formatted_alarms
+# - name: Print formatted alarms
+#   debug:
+#     var: formatted_alarms
 
 # - name: Write results to file
 #   copy:
@@ -91,6 +91,4 @@
     password: '{{ gmail_smtp_pw }}'
     to: <ms-support@inap.com>
     subject: Daily Zerto RPO Breaches
-    body: 
-      - Please review the below RPO alarms as they have been active for over 24 consistent hours.
-      - '{{ formatted_alarms }}'
+    body: Please review the below RPO alarms as they have been active for over 24 consistent hours.\n '{{ formatted_alarms }}'
