@@ -68,7 +68,6 @@
       Issue appeared on: {{ alarm.collectionTime }}
       Severity: {{ alarm.severity }}
       Description: {{ alarm.description }}
-      Zerto Analytics: https://analytics.zerto.com/dashboard
       Client: {{ location_mapping[alarm.site.name] | default('Unknown') }}
       Site Name | Zorg Identifier: {{ alarm.site.name }} | {{ alarm.affectedZorgs }}
 
@@ -78,12 +77,11 @@
   debug:
     var: formatted_alarms
 
-- name: Write results to file
-  copy:
-    content: "{{ formatted_alarms }}"
-    dest: "~/zerto_alarms-{{ ansible_date_time.date }}.txt"
-  delegate_to: 172.16.101.183
-
+# - name: Write results to file
+#   copy:
+#     content: "{{ formatted_alarms }}"
+#     dest: "~/zerto_alarms-{{ ansible_date_time.date }}.txt"
+#   delegate_to: 172.16.101.183
 
 - name: Sending an e-mail to ticket queue
   community.general.mail:
@@ -93,4 +91,6 @@
     password: '{{ gmail_smtp_pw }}'
     to: <ms-support@inap.com>
     subject: Daily Zerto RPO Breaches
-    body: '{{ formatted_alarms }}'
+    body: 
+      - Please review the below RPO alarms as they have been active for over 24 consistent hours.
+      - '{{ formatted_alarms }}'

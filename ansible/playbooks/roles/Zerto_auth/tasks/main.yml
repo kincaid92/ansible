@@ -16,6 +16,6 @@
     return_content: true
   register: login
 
-- name: Print Token
+- name: Save Token
   set_fact:
     api_token: '{{ login.json.token }}'
